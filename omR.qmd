@@ -1,0 +1,48 @@
+# Om R
+
+Noen forskjeller på det å jobbe i R vs. Excel og SPSS.
+
+R et et kodespråk. Vi laster ned R i form av en versjon. Per nå er siste versjon vi har tilgang til på byplankontoret:
+
+```{r}
+sessionInfo()
+```
+
+Fra dette ser vi at jeg har installert R versjon 4.2.2
+
+## SPSS
+
+R er mest likt SPSS, og spesielt SPSS' syntaks. Til forskjell fra SPSS er ikke det grafiske brukergrensesnittet (GUI) noe særlig nyttig i R.
+
+Man kan kjøre R i et GUI som følger med R når man laster programmet, som heter R *hva enn versjonsnummeret er*, f.eks. `R 4.2.2`. Men det er bedre å bruke Rstudio til å arbeide med R i. Her får du et bra GUI som blant annet fullfører kodeforslag og har mange andre støttende funksjoner.
+
+Vi arbeider vanligvis i skript, som har forkortelsen `.R`. Dette er likt SPSS' syntaksfiler (`.sps`). Du kan kjøre hele skriptet, eller kun deler av skriptet av gangen. Kjør deler av skriptet ved å enten ha markøren i den linja eller marker flere linjer og trykk `ctrl + enter`. 
+
+Til motsetning fra SPSS er Rs kodespråk lettere å lese og forstå (personlig mening). Man vil så klart aldri huske alle koder i R, men etter hvert vil en del av dem sitte fordi man bruker dem så ofte. Typiske eksempler på dette er `%>%`, `filter()` og `mutate()`. Se mer om disse i seinere kapitler.
+
+<!-- lenke -->
+
+## Excel
+
+Det er større forskjell på R og Excel. Excel er bygd rundt det grafiske grensesnittet. Det du ser er det du får (WYSIWYG). Dette har sine fordeler og bakdeler. Den største bakdelen, slik jeg ser det, er at Excel lar deg gjøre dumme ting. F.eks. hoppe over rader, forflytte en kolonne uten å mene det, glemme å markere alle felter, og det verste av alt: slå sammen celler. 
+
+Likevel, det er mange ganger det er bedre å bruke Excel. 
+
+Vi kan importere excel-filer til R, hvilket er veldig nyttig. Den største utfordringa med dette er at vi må kjempe mot de bakdelene jeg nevnte over. 
+
+<!-- lenke -->
+
+I motsetning til både Excel og SPSS så lagrer R dataene bare i internt minne mens du arbeider med dem. Dvs. at du ikke er avhengig av å mellomlagre alt som en `.sav`, `.xlsx.`, eller `.csv`-fil. Dette kan bidra til å redusere behovet for mange versjoner av samme fil på ulike tidspunkter.
+
+## Hvorfor skal jeg bruke R?
+
+En typisk tilbakemelding:
+
+> Det tar tid å lære, det er en bratt læringskurve, og jeg får feilmeldinger hele tida.
+
+Det er noen fordeler med R som er attraktive for oss:
+
+- Når du har laga et skript kan du, uten særlig mange endringer, kjøre skriptet på nytt gang etter gang. Dette sparer deg for mye tid istedenfor å måtte starte på nytt hver gang.
+  - Dette er delvis mulig i SPSS-syntaks alt. R oppfordrer i større grad til dette via funksjonene sine, og måten den håndterer data på.
+- Man kan bruke R til alt. Fra før av kan vi spleise data i SPSS, lage tabeller i Excel, gjøre dem interaktive i Infogram, dele dem via Google sheets, etc. R kan gjøre alt dette i samme programvare/GUI. 
+- R lese og skrive til de fleste vanlige programmer. Dvs. at vi kan starte en prosess i Excel og så fortsette den i R. Eller vi kan importere en Stata-fil til R, gjøre noen pivots og lagre den som en SPSS-fil. Dermed kan R relativt sømløst puttes inn i arbeidsprosessen. (Enklest blir det så klart å gjøre alt i R.)

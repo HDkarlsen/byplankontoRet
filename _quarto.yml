@@ -1,0 +1,24 @@
+project:
+  type: book
+
+book:
+  title: "R for Byplankontoret"
+  author: "Håvard Karlsen"
+  date: "20.3.2023"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - omR.qmd
+    - pakker.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+editor: source
+

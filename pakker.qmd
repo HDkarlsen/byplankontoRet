@@ -1,0 +1,104 @@
+---
+title: "Pakker og funksjoner"
+author: "Håvard Karlsen"
+---
+
+En av de store trekkplastra til R er det enorme biblioteket med utvidelser de har. Disse kommer i form av pakker (*packages* på engelsk). Egentlig er alt i R pakker. Når vi starter R får vi noen få pakker, hvor den viktigste er `base`. Vi kan se hvilke pakker vi har lasta inn slik
+
+```{r}
+sessionInfo()[6]
+```
+Legg merke til at `base` er inkludert i denne lista. Dette er kjernen av `R`. Vi kommer til å supplere med masse andre pakker etter hvert som vi arbeider med ting. Pakkene er stort sett sentrert rundt å løse et eller annet problem. Her er noen eksempler:
+
+- `haven`: importere og eksportere til andre statistikkprogrammer som SPSS, Stata, SAS
+- `openxlsx`: lese og skrive excelfiler.
+- `lubridate`: håndtere datovariabler på en bedre måte
+
+Noen pakker bruker vi mer en andre. Et eksempel er `tidyverse`, men den diskuterer vi under. 
+
+Første gang du bruker en pakke må den installeres.
+
+```{r, eval = FALSE, echo = TRUE}
+install.packages("RColorBrewer")
+```
+
+Vi laster vanligvis inn alle pakkene våre i toppen av skriptet.
+
+```{r}
+library(RColorBrewer)
+```
+
+Legg merke til at vi angir pakka som en streng (ved å bruke \") når vi installerer, men som et object (ved å ikke bruke \") når vi laster inn pakka. Det er en god grunn til det, men ikke en vi har tid å gå inn på nå. 
+
+En pakke trengs bare å *installeres* én gang, men den må *lastes inn* på nytt hver gang du starter en ny **session** i R. Du starter en ny session hver du starter programmet på nytt.
+
+Du må laste inn pakka for å kunne ta i bruk funksjonene fra den. Her viser vi funksjonene til pakka `RColorBrewer` som kan brukes for finne komplementære farger.
+
+```{r}
+display.brewer.all(colorblindFriendly = TRUE)
+```
+Det siste jeg sa er forresten ikke helt sant. Du kan kjøre en funksjon fra en pakke uten å ha lasta den inn. Da skriver du navnet på pakka, etterfult av to kolon og så navnet på funksjonen. 
+
+```{r}
+RColorBrewer::display.brewer.pal(n = 8, name = 'Dark2')
+```
+Så lenge pakka er lasta inn kan jeg bruke alle funksjonene fra pakka. Noen ganger trenger jeg bare én funksjon fra en pakke, og da benytter jeg meg av det over istedenfor å laste inn hele pakka. 
+
+## Tidyverse
+
+Tidyverse refererer til 
+
+- en designfilosofi
+- en stor gruppe med pakker
+- en spesifikk pakke som grupperer et lite antall pakker
+
+Du kan lese mer om [Tidyverse på nettsida deres](https://www.tidyverse.org/). Det er også en lærebok som går grundigere gjennom alle funksjonene deres, [R for Data Science](https://r4ds.had.co.nz/).
+
+Når man kjører `library(tidyverse)` vil den laste inn alle pakkene nevnt [her](https://www.tidyverse.org/packages/). Blant annet `dplyr`, `ggplot2`, etc. I tillegg laster den inn enkeltfunksjoner fra andre pakker. F.eks. laster den inn pipe operatoren ( ` %>% `) fra `magrittr`. Mer om den seinere. Dermed er dette egentlig en snarvei for å slippe å laste inn flere pakker.
+
+Tidyverse-pakkene er designa for å harmonisere med hverandre, og det gjør dem veldig sterke. Den underliggende filosofien gir også et bra rammeverk for andre pakker. Vinn-vinn. 
+
+Reint praktisk er det sånn at mange av funksjonene i `tidyverse` allerede eksisterer i `base R`. F.eks. filtrering, mutering, og etter `R v.4.1.`, pipe-funksjonen. Jeg bruker likevel `tidyverse`-variantene fordi disse er så mye lettere å forstå, skrive, og lese. De er utvikla for folk som jobber som oss, med tabeller og datasett. Som nybegynner er det ikke bare bare å forstå forskjellen mellom `base R` og `tidyverse`, så her er det viktigste:
+
+- Når dere søker opp løsninger vil det ofte presenteres løsninger både i `base R` og i `tidyverse`. Dette skjer ofte på StackOverflow.
+- De fleste `tidyverse`-funksjoner har et datasett som første argument i funksjonen. Dette gjør at vi lett kan *pipe* funksjoner etter hverandre.
+
+### Piper
+
+Hvorfor er piper så nyttig? De lar oss flette sammen en serie operasjoner uten å måtte mellomlagre objekter. La oss si at vi har et datasett med biler og deres egenskaper. Vi vil
+
+- filtrere ut dem som har under seks sylindre
+- gjøre om vekta fra lbs. til kg.
+- gruppere etter antall gir
+- vise snitt av miles/gallon (mpg).
+
+### Uten pipa blir det noe slikt
+
+```{r}
+library(tidyverse)
+mtcars <- mtcars
+cars_filtered <- filter(mtcars, cyl >= 6)
+cars_filtered_kg <- mutate(cars_filtered, wt = wt * 0.45359237)
+cars_filtered_kg_grouped <- group_by(cars_filtered_kg, gear)
+cars_filtered_kg_grouped_mean <- summarise(cars_filtered_kg_grouped, snitt = mean(mpg))
+
+cars_filtered_kg_grouped_mean
+```
+
+### Med pipa
+
+```{r}
+library(tidyverse)
+cars_filtered_kg_group_mean <- mtcars %>% 
+  filter(cyl >= 6) %>% 
+  mutate(wt = wt * 0.45359237) %>% 
+  group_by(gear) %>% 
+  summarise(snitt = mean(mpg))
+
+cars_filtered_kg_grouped_mean
+```
+
+
+---
+
+Forresten, noen ganger vil dere kanskje se pakker omtalt som online bibliotek (*library*). Og vi bruker jo funksjonen `library()` for å laste inn en pakke. Hva er forskjellen på en pakke og et bibliotek? I R er det den mappa hvor alle pakkene som er installert blir lagra som kalles **bibliotek**. Sjølve funksjonssamlinga kalles en **pakke**.

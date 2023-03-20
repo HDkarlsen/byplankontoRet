@@ -1,0 +1,5 @@
+# Introduksjon
+
+Dette er en omfattende dokumentasjon av det jeg har gjort i R på Byplankontoret. I tillegg er det et forsøk på å vise de funksjonene man trenger for å arbeide i R. Det er ufattelig mange muligheter når det kommer til R. Dette er bare et lite utvalg, basert på det jeg har brukt mest.
+
+<!-- Fyll på mer her -->

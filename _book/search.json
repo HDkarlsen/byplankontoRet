@@ -1,0 +1,65 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "R for Byplankontoret",
+    "section": "",
+    "text": "Forord\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "1  Introduksjon",
+    "section": "",
+    "text": "Dette er en omfattende dokumentasjon av det jeg har gjort i R på Byplankontoret. I tillegg er det et forsøk på å vise de funksjonene man trenger for å arbeide i R. Det er ufattelig mange muligheter når det kommer til R. Dette er bare et lite utvalg, basert på det jeg har brukt mest."
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "3  Summary",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "omR.html#spss",
+    "href": "omR.html#spss",
+    "title": "2  Om R",
+    "section": "2.1 SPSS",
+    "text": "2.1 SPSS\nR er mest likt SPSS, og spesielt SPSS’ syntaks. Til forskjell fra SPSS er ikke det grafiske brukergrensesnittet (GUI) noe særlig nyttig i R.\nMan kan kjøre R i et GUI som følger med R når man laster programmet, som heter R hva enn versjonsnummeret er, f.eks. R 4.2.2. Men det er bedre å bruke Rstudio til å arbeide med R i. Her får du et bra GUI som blant annet fullfører kodeforslag og har mange andre støttende funksjoner.\nVi arbeider vanligvis i skript, som har forkortelsen .R. Dette er likt SPSS’ syntaksfiler (.sps). Du kan kjøre hele skriptet, eller kun deler av skriptet av gangen. Kjør deler av skriptet ved å enten ha markøren i den linja eller marker flere linjer og trykk ctrl + enter.\nTil motsetning fra SPSS er Rs kodespråk lettere å lese og forstå (personlig mening). Man vil så klart aldri huske alle koder i R, men etter hvert vil en del av dem sitte fordi man bruker dem så ofte. Typiske eksempler på dette er %>%, filter() og mutate(). Se mer om disse i seinere kapitler."
+  },
+  {
+    "objectID": "omR.html#excel",
+    "href": "omR.html#excel",
+    "title": "2  Om R",
+    "section": "2.2 Excel",
+    "text": "2.2 Excel\nDet er større forskjell på R og Excel. Excel er bygd rundt det grafiske grensesnittet. Det du ser er det du får (WYSIWYG). Dette har sine fordeler og bakdeler. Den største bakdelen, slik jeg ser det, er at Excel lar deg gjøre dumme ting. F.eks. hoppe over rader, forflytte en kolonne uten å mene det, glemme å markere alle felter, og det verste av alt: slå sammen celler.\nLikevel, det er mange ganger det er bedre å bruke Excel.\nVi kan importere excel-filer til R, hvilket er veldig nyttig. Den største utfordringa med dette er at vi må kjempe mot de bakdelene jeg nevnte over.\n\nI motsetning til både Excel og SPSS så lagrer R dataene bare i internt minne mens du arbeider med dem. Dvs. at du ikke er avhengig av å mellomlagre alt som en .sav, .xlsx., eller .csv-fil. Dette kan bidra til å redusere behovet for mange versjoner av samme fil på ulike tidspunkter."
+  },
+  {
+    "objectID": "omR.html#hvorfor-skal-jeg-bruke-r",
+    "href": "omR.html#hvorfor-skal-jeg-bruke-r",
+    "title": "2  Om R",
+    "section": "2.3 Hvorfor skal jeg bruke R?",
+    "text": "2.3 Hvorfor skal jeg bruke R?\nEn typisk tilbakemelding:\n\nDet tar tid å lære, det er en bratt læringskurve, og jeg får feilmeldinger hele tida.\n\nDet er noen fordeler med R som er attraktive for oss:\n\nNår du har laga et skript kan du, uten særlig mange endringer, kjøre skriptet på nytt gang etter gang. Dette sparer deg for mye tid istedenfor å måtte starte på nytt hver gang.\n\nDette er delvis mulig i SPSS-syntaks alt. R oppfordrer i større grad til dette via funksjonene sine, og måten den håndterer data på.\n\nMan kan bruke R til alt. Fra før av kan vi spleise data i SPSS, lage tabeller i Excel, gjøre dem interaktive i Infogram, dele dem via Google sheets, etc. R kan gjøre alt dette i samme programvare/GUI.\nR lese og skrive til de fleste vanlige programmer. Dvs. at vi kan starte en prosess i Excel og så fortsette den i R. Eller vi kan importere en Stata-fil til R, gjøre noen pivots og lagre den som en SPSS-fil. Dermed kan R relativt sømløst puttes inn i arbeidsprosessen. (Enklest blir det så klart å gjøre alt i R.)"
+  },
+  {
+    "objectID": "pakker.html#tidyverse",
+    "href": "pakker.html#tidyverse",
+    "title": "3  Pakker og funksjoner",
+    "section": "3.1 Tidyverse",
+    "text": "3.1 Tidyverse\nTidyverse refererer til\n\nen designfilosofi\nen stor gruppe med pakker\nen spesifikk pakke som grupperer et lite antall pakker\n\nDu kan lese mer om Tidyverse på nettsida deres. Det er også en lærebok som går grundigere gjennom alle funksjonene deres, R for Data Science.\nNår man kjører library(tidyverse) vil den laste inn alle pakkene nevnt her. Blant annet dplyr, ggplot2, etc. I tillegg laster den inn enkeltfunksjoner fra andre pakker. F.eks. laster den inn pipe operatoren ( %>%) fra magrittr. Mer om den seinere. Dermed er dette egentlig en snarvei for å slippe å laste inn flere pakker.\nTidyverse-pakkene er designa for å harmonisere med hverandre, og det gjør dem veldig sterke. Den underliggende filosofien gir også et bra rammeverk for andre pakker. Vinn-vinn.\nReint praktisk er det sånn at mange av funksjonene i tidyverse allerede eksisterer i base R. F.eks. filtrering, mutering, og etter R v.4.1., pipe-funksjonen. Jeg bruker likevel tidyverse-variantene fordi disse er så mye lettere å forstå, skrive, og lese. De er utvikla for folk som jobber som oss, med tabeller og datasett. Som nybegynner er det ikke bare bare å forstå forskjellen mellom base R og tidyverse, så her er det viktigste:\n\nNår dere søker opp løsninger vil det ofte presenteres løsninger både i base R og i tidyverse. Dette skjer ofte på StackOverflow.\nDe fleste tidyverse-funksjoner har et datasett som første argument i funksjonen. Dette gjør at vi lett kan pipe funksjoner etter hverandre.\n\n\n3.1.1 Piper\nHvorfor er piper så nyttig? De lar oss flette sammen en serie operasjoner uten å måtte mellomlagre objekter. La oss si at vi har et datasett med biler og deres egenskaper. Vi vil\n\nfiltrere ut dem som har under seks sylindre\ngjøre om vekta fra lbs. til kg.\ngruppere etter antall gir\nvise snitt av miles/gallon (mpg).\n\n\n\n3.1.2 Uten pipa blir det noe slikt\n\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──\n✔ ggplot2 3.3.6      ✔ purrr   0.3.5 \n✔ tibble  3.1.8      ✔ dplyr   1.0.10\n✔ tidyr   1.2.1      ✔ stringr 1.4.1 \n✔ readr   2.1.3      ✔ forcats 0.5.2 \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n\nmtcars <- mtcars\ncars_filtered <- filter(mtcars, cyl >= 6)\ncars_filtered_kg <- mutate(cars_filtered, wt = wt * 0.45359237)\ncars_filtered_kg_grouped <- group_by(cars_filtered_kg, gear)\ncars_filtered_kg_grouped_mean <- summarise(cars_filtered_kg_grouped, snitt = mean(mpg))\n\ncars_filtered_kg_grouped_mean\n\n# A tibble: 3 × 2\n   gear snitt\n  <dbl> <dbl>\n1     3  15.7\n2     4  19.8\n3     5  16.8\n\n\n\n\n3.1.3 Med pipa\n\nlibrary(tidyverse)\ncars_filtered_kg_group_mean <- mtcars %>% \n  filter(cyl >= 6) %>% \n  mutate(wt = wt * 0.45359237) %>% \n  group_by(gear) %>% \n  summarise(snitt = mean(mpg))\n\ncars_filtered_kg_grouped_mean\n\n# A tibble: 3 × 2\n   gear snitt\n  <dbl> <dbl>\n1     3  15.7\n2     4  19.8\n3     5  16.8\n\n\n\nForresten, noen ganger vil dere kanskje se pakker omtalt som online bibliotek (library). Og vi bruker jo funksjonen library() for å laste inn en pakke. Hva er forskjellen på en pakke og et bibliotek? I R er det den mappa hvor alle pakkene som er installert blir lagra som kalles bibliotek. Sjølve funksjonssamlinga kalles en pakke."
+  },
+  {
+    "objectID": "references.html#ressurser",
+    "href": "references.html#ressurser",
+    "title": "Referanser",
+    "section": "Ressurser",
+    "text": "Ressurser"
+  }
+]
