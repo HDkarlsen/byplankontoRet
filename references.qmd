@@ -2,5 +2,18 @@
 
 En serie med nyttig ressurser og sider å drive produktiv prokrastinering.
 
-## Ressurser
+## Ressurser for å lære R
 
+R for data science
+
+Advanced R
+
+Swirl
+
+## Produktiv prokrastinering
+
+Brodrigues
+
+Rweekly
+
+Rbloggers

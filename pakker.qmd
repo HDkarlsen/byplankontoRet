@@ -1,7 +1,5 @@
----
-title: "Pakker og funksjoner"
-author: "Håvard Karlsen"
----
+
+# Pakker og funksjoner {#pakker}
 
 En av de store trekkplastra til R er det enorme biblioteket med utvidelser de har. Disse kommer i form av pakker (*packages* på engelsk). Egentlig er alt i R pakker. Når vi starter R får vi noen få pakker, hvor den viktigste er `base`. Vi kan se hvilke pakker vi har lasta inn slik
 
@@ -63,7 +61,7 @@ Reint praktisk er det sånn at mange av funksjonene i `tidyverse` allerede eksis
 - Når dere søker opp løsninger vil det ofte presenteres løsninger både i `base R` og i `tidyverse`. Dette skjer ofte på StackOverflow.
 - De fleste `tidyverse`-funksjoner har et datasett som første argument i funksjonen. Dette gjør at vi lett kan *pipe* funksjoner etter hverandre.
 
-### Piper
+## Piper
 
 Hvorfor er piper så nyttig? De lar oss flette sammen en serie operasjoner uten å måtte mellomlagre objekter. La oss si at vi har et datasett med biler og deres egenskaper. Vi vil
 
@@ -72,7 +70,7 @@ Hvorfor er piper så nyttig? De lar oss flette sammen en serie operasjoner uten 
 - gruppere etter antall gir
 - vise snitt av miles/gallon (mpg).
 
-### Uten pipa blir det noe slikt
+### Uten pipa {#uten-pipe}
 
 ```{r}
 library(tidyverse)
@@ -85,7 +83,7 @@ cars_filtered_kg_grouped_mean <- summarise(cars_filtered_kg_grouped, snitt = mea
 cars_filtered_kg_grouped_mean
 ```
 
-### Med pipa
+### Med pipa {#med-pipe}
 
 ```{r}
 library(tidyverse)
@@ -98,6 +96,34 @@ cars_filtered_kg_group_mean <- mtcars %>%
 cars_filtered_kg_grouped_mean
 ```
 
+Det andre eksemplet er 
+
+1. mer lesbart
+2. mindre stappfult av midlertidige objekter som vi seinere må slette
+
+Jeg kommer til å bruke piper en god del både her og i alle skriptene mine. Så det er greit å vite hva det går ut på. Syntaksen `x %>% y` kan leses som `y får x`. Vi tar `x` og sender det til `y` som tar det inn som sitt første *argument*. Tidyverse-funksjonene er bygd rundt ideen om at det første argumentet til funksjonene er et datasett. Legg merke til at det er et datasett som er det første objektet i alle funksjonen jeg bruker i eksemplet uten pipe. 
+
+Noen funksjoner, som `base::sum()` har ikke data som sitt første argument, men en vektor. Hvis man sender et datasett til `sum()` vil man få en feilmelding.
+
+```{r, error = TRUE}
+mtcars %>% sum(wt)
+```
+
+For å få slike funksjoner til å funkere med ei pipe, kan man ofte bruke en funksjon fra `magrittr`:
+
+```{r}
+mtcars %>% sum(.$wt)
+```
+
+`.` blir her et alias for det aktuelle datasett, og dette er det samme som å skrive:
+
+```{r}
+sum(mtcars$wt)
+```
+
+Da jeg lærte R var det `%>%` fra `magrittr` som var den gjeldende pipa. Den var så nyttig at ei pipe til slutt blei inkorporert i `base R`. Dette skjedde i `R 4.1.0`. `Base R`s pipe ser slik ut: `|>`. Den fungerer i hovedsak lik `%>%`. Når jeg fortsetter å bruke den gamle `magrittr`-pipa er det bare fordi jeg er gammel og ikke liker å endre på ting som funker. Dessuten har Rstudio en flott snarvei til `%>%` via `ctrl + shift + M`. 
+
+Dere velger altså sjøl om dere går for `%>%` eller `|>`. Husk bare at for å bruke `%>%` så må `tidyverse` eller `magrittr` lastes inn først. (`tidyverse` låner noen av funksjonene fra `magrittr`, men laster ikke inn *alle* funksjonene fra den pakka).
 
 ---
 

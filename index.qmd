@@ -1,9 +1,4 @@
 # Forord {.unnumbered}
 
-This is a Quarto book.
+Dette er en pamflet skrevet for Byplankontorets statistikere, for å gi en kort introduksjon til R. Teksten er skrevet i [Quarto](https://quarto.org/docs/books).
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
-
-```{r}
-1 + 1
-```

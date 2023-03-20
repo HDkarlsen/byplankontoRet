@@ -1,0 +1,74 @@
+# Det grunnleggende {#grunnleggende}
+
+Vi starter gradvis på bunnen og arbeider oss kjapt opp til den avanserte arbeidsflyten vi er vant med. Det vil si at vi starter med enkle lister og datasett. Så forlater vi dette og jobber kun med datasett.
+
+## Vektor
+
+Det grunnleggende elementet i R er en **vektor**. En vektor kan forstås som en liste av elementer med samme type. Vi kan ha vektorer av tall, bokstaver, faktorer. De tre siste er eksempler på klasser. Det er noen forskjellige klasser, men vi bryr oss mest om disse tre.
+
+
+La oss lage en vektor
+```{r}
+c(1, 2, 3)
+```
+Funksjonen `c()` kombinerer verdier til en vektor. 
+
+Når vi skriver en kommando vil R alltid returnere noe til oss. Det blir vanligvis printa til skjermen. Hvis vi heller vi lagre det som et objekt som vi kan henvise til seinere, bruker vi `assignment` for å **gi** verdien(e) til et objekt vi navngir. 
+
+Slik:
+
+```{r}
+vektor1 <- c(1, 2, 3)
+vektor1
+```
+
+Når man gir en verdi bruker man en av to operatorer: enten `<-` eller `=`. Det er generelt ansett at man bør bruke pila istedenfor likhetstegn. Årsakene er 
+
+1. `=` (*assignment*) er lett å forveksle med `==` (*comparison*). Det er enklere å unngå dette med pila
+2. pila er anvendelig. Du kan faktisk skrive den motsatt vei, slik: `c(1, 2, 3) -> vektor1`. Når det er sagt, lov meg at du aldri gjør dette med mindre du har en utrolig god grunn. Enkelte konvensjoner er smart å beholde. 
+
+Tall kan man, som vi ser, bare skrive rett ut. Bokstaver, derimot, må deklareres som en **streng**. Dette gjøres ved å omkranse dem i hermetegn:
+
+```{r}
+vektor2 <- c("A", "B", "C")
+vektor2
+```
+
+En vektor som består av bokstaver eller ord kalles en *character vector* eller en *string*.
+
+Vi kommer oss langt med numeriske vektorer og strengvektorer. Her er det verdt å merke at det er forskjellige varianter av numeriske vektorer: De kan være `Int`, `double`, eller `float`. Forskjellen er sjelden viktig for oss, så jeg går ikke inn på det. 
+
+Det er også verdt å være oppmerksom på logiske vektorer. Elementer i disse vektorene kan kun være *enten* `TRUE` (sann) eller `FALSE` (usann). De brukes mye i filtrering og testing.
+
+Faktorer (*factors*) må også nevnes. Disse er nyttige for grupperinger, og noen funksjoner kan merke seg hvilke variabler som er faktorer og utføre heuristikker basert på det. Sjøl syns jeg faktorer er knotete å forholde seg til, så jeg foretrekker å bare bruke strengvektorer. 
+
+Mer inngående info om vektorer og klasser [kan finnes her](https://r02pro.github.io/vector.html). 
+
+En vektor kan bestå av alt fra ett til mange elementer. **Men den kan bare bestå av elementer av samme klasse**
+
+## Liste
+
+En liste er som en vektor på stereoider. Den kan består av elementer av ulik klasse. I tillegg kan en liste bestå av *andre lister*. Det gjør dem kraftig, og anvendbar.
+
+```{r}
+# En liste bestående av fem tall. Dette kunne like gjerne vært en vektor
+liste1 <- list(1, 2, 3, 4, 5)
+liste1
+
+# En liste bestående av flere vektorer eller lister
+
+liste2 <- list(
+  vektorA = c(1, 2, 3, 4),
+  vektorB = c("ET", "IJ", "SW"), 
+  liste1 = list(3, 4, 5)
+)
+liste2
+```
+
+<!-- fortsett her 
+hente ut elementer med [] og [[]].
+lister av lister
+data frames og tibbles.
+$ operator
+funksjoner
+-->
