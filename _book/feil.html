@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>feil</title>
+<title>R for Byplankontoret - 6&nbsp; Typiske feil vi (jeg) gjør og hvordan fikse dem</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -86,30 +86,155 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
-<script src="feil_files/libs/clipboard/clipboard.min.js"></script>
-<script src="feil_files/libs/quarto-html/quarto.js"></script>
-<script src="feil_files/libs/quarto-html/popper.min.js"></script>
-<script src="feil_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="feil_files/libs/quarto-html/anchor.min.js"></script>
-<link href="feil_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="feil_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="feil_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="feil_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="feil_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./import-export.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
 
 
 </head>
 
-<body class="fullcontent">
+<body class="nav-sidebar floating">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R for Byplankontoret</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Forord</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduksjon</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./omR.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Om R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pakker.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pakker</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./grunnleggende.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Det grunnleggende</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./import-export.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Import og eksport av data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./feil.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">Referanser</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#glemt-å-laste-inn-en-pakke" id="toc-glemt-å-laste-inn-en-pakke" class="nav-link active" data-scroll-target="#glemt-å-laste-inn-en-pakke"><span class="toc-section-number">6.1</span>  Glemt å laste inn en pakke</a></li>
+  <li><a href="#laster-inn-pakker-i-feil-rekkefølge" id="toc-laster-inn-pakker-i-feil-rekkefølge" class="nav-link" data-scroll-target="#laster-inn-pakker-i-feil-rekkefølge"><span class="toc-section-number">6.2</span>  Laster inn pakker i feil rekkefølge</a></li>
+  <li><a href="#jeg-har-ikke-gjort-noen-endringer-men-plutselig-funker-ikke-koden-min" id="toc-jeg-har-ikke-gjort-noen-endringer-men-plutselig-funker-ikke-koden-min" class="nav-link" data-scroll-target="#jeg-har-ikke-gjort-noen-endringer-men-plutselig-funker-ikke-koden-min"><span class="toc-section-number">6.3</span>  “Jeg har ikke gjort noen endringer, men plutselig funker ikke koden min!”</a></li>
+  <li><a href="#sender-et-objekt-via-pipe-til-en-funksjon-som-ikke-er-pipevennlig" id="toc-sender-et-objekt-via-pipe-til-en-funksjon-som-ikke-er-pipevennlig" class="nav-link" data-scroll-target="#sender-et-objekt-via-pipe-til-en-funksjon-som-ikke-er-pipevennlig"><span class="toc-section-number">6.4</span>  Sender et objekt via pipe til en funksjon som ikke er pipevennlig</a></li>
+  <li><a href="#glemmer-å-bruke-hermetegn-bruker-hermetegn-når-vi-ikke-trenger-hermetegn" id="toc-glemmer-å-bruke-hermetegn-bruker-hermetegn-når-vi-ikke-trenger-hermetegn" class="nav-link" data-scroll-target="#glemmer-å-bruke-hermetegn-bruker-hermetegn-når-vi-ikke-trenger-hermetegn"><span class="toc-section-number">6.5</span>  Glemmer å bruke hermetegn / bruker hermetegn når vi ikke trenger hermetegn</a></li>
+  <li><a href="#feil-skråstrek" id="toc-feil-skråstrek" class="nav-link" data-scroll-target="#feil-skråstrek"><span class="toc-section-number">6.6</span>  Feil skråstrek</a></li>
+  <li><a href="#tegnkode" id="toc-tegnkode" class="nav-link" data-scroll-target="#tegnkode"><span class="toc-section-number">6.7</span>  Tegnkode</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></h1>
+</div>
 
 
-<section id="typiske-feil-vi-jeg-gjør-og-hvordan-fikse-dem" class="level1">
-<h1>Typiske feil vi (jeg) gjør og hvordan fikse dem</h1>
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
 <p>Det er uendelig mange måter å gjøre noe feil på. Dette gjelder egentlig uansett hvilket program du arbeider i. Noe som er fint i R er at du vanligvis får en klar feilmelding når noe går galt. Noe som er mindre fint er at denne feilmeldinga ikke alltid er så enkel å tolke. Likevel, se alltid på meldinga først. Her får du en tydlige pekepinn på hva som gikk galt. Man lærer seg etter hvert hvordan å lese disse meldingene, skjønt de kan virke gresk i starten.</p>
 <p>Her har jeg samla noen av de feila som jeg enten gjør oftest, eller som jeg tenker mange gjør feil. Hvis ingenting av dette hjelper, kan man alltids spørre om hjelp online. Mitt foretrukne nettsted for dette er <a href="https://stackoverflow.com/">StackOverlow</a>. Undersida deres, <a href="https://stats.stackexchange.com/">CrossValidated</a>, kan også brukes. Kvaliteten på meldingene her er høy, men det går tidvis på bekostning av normal høflighet. Hvis man følger reglene deres og gir et <a href="https://reprex.tidyverse.org/">representativt eksempel</a> vil de vanligvis være greie. Dette er forøvrig en bra måte å be om hjelp på uansett.</p>
 <ol type="1">
@@ -118,27 +243,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Gi eksempeldatasett slik at hjelperne kan bruke det når de gir råd</li>
 </ol>
 <p>Uansett, her er min liste over typiske feil</p>
-<section id="glemt-å-laste-inn-en-pakke" class="level2">
-<h2 class="anchored" data-anchor-id="glemt-å-laste-inn-en-pakke">Glemt å laste inn en pakke</h2>
+<section id="glemt-å-laste-inn-en-pakke" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="glemt-å-laste-inn-en-pakke"><span class="header-section-number">6.1</span> Glemt å laste inn en pakke</h2>
 <p>Jeg starter alle R-sesjoner med å laste inn pakker, og jeg laster nesten alltid inn <code>tidyverse</code>. Hvis jeg glemmer det, vil funksjoner fra denne pakka ikke være tilgjengelig.</p>
 </section>
-<section id="laster-inn-pakker-i-feil-rekkefølge" class="level2">
-<h2 class="anchored" data-anchor-id="laster-inn-pakker-i-feil-rekkefølge">Laster inn pakker i feil rekkefølge</h2>
+<section id="laster-inn-pakker-i-feil-rekkefølge" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="laster-inn-pakker-i-feil-rekkefølge"><span class="header-section-number">6.2</span> Laster inn pakker i feil rekkefølge</h2>
 <p>Det lønner seg å laste inn pakker i omvendt prioritert rekkefølge. Dette er fordi en del pakker inneholder funksjoner med samme navn, men <em>ulik bruksområde</em>. Da vil den <em>siste</em> pakka du laster inn <em>maskere</em> den tidligere funksjonen. For eksempel inneholder <code>stats</code> funksjonen <code>filter()</code>. Denne blir erstatte med <code>dplyr</code>s <code>filter()</code> når vi laster inn den pakka (often via <code>tidyverse</code>). Jeg pleier dermed ofte å laste inn <code>tidyverse</code> sist. Denne feilen er vanskelig å feilsøke, fordi du kan få en feilmelding uten å ha gjort noe som helst endring i koden. (Les: jeg har kasta bort mye tid på å feilsøke når det viste seg at det eneste jeg hadde gjort var å endre rekkefølgene pakkene blei lasta inn på, slik an funksjon jeg var avhengig av fra pakke1 blei bytta ut med en annen funksjon med samme navn fra pakke2.)</p>
 <p>Husk at det går an å bruke en pakkes funksjon uten å laste den inn ved å bruke <code>::</code>, slik som i <code>dplyr::filter()</code>. Det bidrar til at å unngå at du får lasta inn for mange pakker som overskriver hverandres funksjoner. Spesielt hvis du bare bruker få funksjoner noen få ganger, kan dette lønne seg. Jeg gjør vanligvis dette når jeg importerer datasett, siden dette er noe jeg kun gjør én gang per prosjekt. Hvis jeg derimot skal eksportere mange filer, vil det spare tastaturet mitt å bare laste inn pakka.</p>
 <p>Forøvrig har vi en liknende feil</p>
 </section>
-<section id="jeg-har-ikke-gjort-noen-endringer-men-plutselig-funker-ikke-koden-min" class="level2">
-<h2 class="anchored" data-anchor-id="jeg-har-ikke-gjort-noen-endringer-men-plutselig-funker-ikke-koden-min">“Jeg har ikke gjort noen endringer, men plutselig funker ikke koden min!”</h2>
+<section id="jeg-har-ikke-gjort-noen-endringer-men-plutselig-funker-ikke-koden-min" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="jeg-har-ikke-gjort-noen-endringer-men-plutselig-funker-ikke-koden-min"><span class="header-section-number">6.3</span> “Jeg har ikke gjort noen endringer, men plutselig funker ikke koden min!”</h2>
 <p>Dette er i prinsippet umulig å feilsøke. Heldigvis kan vi benytte oss av et smertelig nyttig prinsipp: Årsaken er alltid at du har gjort en feil.</p>
 <p>Dette skjer typisk dersom du har arbeida lenga i en sesjon uten å restarte R. Første gang du restarter R og kjører koden på nytt får du feilmelding. Da er ofte problemet at du på et tidspunkt har lagra noe i miljøet (<em>environment</em>), som ikke lengre er tilstede i koden. Hvis andre deler av koden er avhengig av dette objektet, vil de feile nå som objektet ikke lengre er tilstede. Du må rett og slett finne ut hvor bruddet skjer, og fikse det.</p>
 <p>En måte å forebygge dette på er ved å ta i bruke <em>functional programming</em>. Det vil si at vi bruker funksjoner i stor grad og sjelden lagrer objekter direkte i miljøet. <a href="https://www.brodrigues.co/blog/2022-05-26-safer_programs/">Brodrigues</a> forklarer det bedre.</p>
 </section>
-<section id="sender-et-objekt-via-pipe-til-en-funksjon-som-ikke-er-pipevennlig" class="level2">
-<h2 class="anchored" data-anchor-id="sender-et-objekt-via-pipe-til-en-funksjon-som-ikke-er-pipevennlig">Sender et objekt via pipe til en funksjon som ikke er pipevennlig</h2>
+<section id="sender-et-objekt-via-pipe-til-en-funksjon-som-ikke-er-pipevennlig" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="sender-et-objekt-via-pipe-til-en-funksjon-som-ikke-er-pipevennlig"><span class="header-section-number">6.4</span> Sender et objekt via pipe til en funksjon som ikke er pipevennlig</h2>
 </section>
-<section id="glemmer-å-bruke-hermetegn-bruker-hermetegn-når-vi-ikke-trenger-hermetegn" class="level2">
-<h2 class="anchored" data-anchor-id="glemmer-å-bruke-hermetegn-bruker-hermetegn-når-vi-ikke-trenger-hermetegn">Glemmer å bruke hermetegn / bruker hermetegn når vi ikke trenger hermetegn</h2>
+<section id="glemmer-å-bruke-hermetegn-bruker-hermetegn-når-vi-ikke-trenger-hermetegn" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="glemmer-å-bruke-hermetegn-bruker-hermetegn-når-vi-ikke-trenger-hermetegn"><span class="header-section-number">6.5</span> Glemmer å bruke hermetegn / bruker hermetegn når vi ikke trenger hermetegn</h2>
 <p>Her varierer det nok ut ifra hvor god man er på å forstå strukturer. Jeg gjør denne feilen stadig. Har ikke noe bedre råd enn å alltid prøve begge veier. Det er så klart smart å finne ut av <em>hvorfor</em> man noen ganger bruker hermetegn rundt noe og andre ganger ikke. Essensielt handler det om: Når du bruker hermetegn rundt noe viser du at det er en tekststreng. Når du ikke bruker hermetegn rundt tekst viser du at et er et objekt. Da må objektet finnes i miljøet for at det skal kunne tas i bruk. <code>tidyverse</code> kompliserer dette litt ved at de lar oss henvise til f.eks. kolonnenavn som om de er objekter, f.eks. i:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -197,10 +322,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Denne kompliseringa godtar vi, for det er så mange fordeler med at <code>tidyverse</code> lar oss henvise direkte til kolonner i datasett som om de var objekter.</p>
 </section>
+<section id="feil-skråstrek" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="feil-skråstrek"><span class="header-section-number">6.6</span> Feil skråstrek</h2>
+<p>Windows vs.&nbsp;mac <!-- se import-export --></p>
+</section>
+<section id="tegnkode" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="tegnkode"><span class="header-section-number">6.7</span> Tegnkode</h2>
+<!-- se import-export -->
+<p>Ofte hjelper det å restarte R-sesjonen.</p>
+
+
 </section>
 
-</main>
-<!-- /main column -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -334,6 +468,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./import-export.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Import og eksport av data</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">Referanser</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 
 

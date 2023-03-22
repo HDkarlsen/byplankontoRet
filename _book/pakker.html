@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R for Byplankontoret - 3&nbsp; Pakker og funksjoner</title>
+<title>R for Byplankontoret - 3&nbsp; Pakker</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,7 +93,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./grunnleggende.html" rel="next">
 <link href="./omR.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -133,7 +133,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pakker og funksjoner</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pakker</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -173,7 +173,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pakker.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pakker og funksjoner</span></a>
+  <a href="./pakker.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pakker</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./grunnleggende.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Det grunnleggende</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./feil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -204,7 +214,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="pakker" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pakker og funksjoner</span></span></h1>
+<h1 class="title"><span id="pakker" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pakker</span></span></h1>
 </div>
 
 
@@ -219,7 +229,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>En av de store trekkplastra til R er det enorme biblioteket med utvidelser de har. Disse kommer i form av pakker (<em>packages</em> på engelsk). Egentlig er alt i R pakker. Når vi starter R får vi noen få pakker, hvor den viktigste er <code>base</code>. Vi kan se hvilke pakker vi har lasta inn slik</p>
+<p>En av de store trekkplastra til R er det enorme biblioteket med utvidelser de har. Disse kommer i form av pakker<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> (<em>packages</em> på engelsk). Egentlig er alt i R pakker. Når vi starter R får vi noen få pakker, hvor den viktigste er <code>base</code>. Vi kan se hvilke pakker vi har lasta inn slik</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()[<span class="dv">6</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -269,6 +279,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>en spesifikk pakke som grupperer et lite antall pakker</li>
 </ul>
 <p>Du kan lese mer om <a href="https://www.tidyverse.org/">Tidyverse på nettsida deres</a>. Det er også en lærebok som går grundigere gjennom alle funksjonene deres, <a href="https://r4ds.had.co.nz/">R for Data Science</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/tidy_workflow.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption class="figure-caption">Tidyverse. Fra http://www.seec.uct.ac.za/r-tidyverse</figcaption><p></p>
+</figure>
+</div>
 <p>Når man kjører <code>library(tidyverse)</code> vil den laste inn alle pakkene nevnt <a href="https://www.tidyverse.org/packages/">her</a>. Blant annet <code>dplyr</code>, <code>ggplot2</code>, etc. I tillegg laster den inn enkeltfunksjoner fra andre pakker. F.eks. laster den inn pipe operatoren ( <code>%&gt;%</code>) fra <code>magrittr</code>. Mer om den seinere. Dermed er dette egentlig en snarvei for å slippe å laste inn flere pakker.</p>
 <p>Tidyverse-pakkene er designa for å harmonisere med hverandre, og det gjør dem veldig sterke. Den underliggende filosofien gir også et bra rammeverk for andre pakker. Vinn-vinn.</p>
 <p>Reint praktisk er det sånn at mange av funksjonene i <code>tidyverse</code> allerede eksisterer i <code>base R</code>. F.eks. filtrering, mutering, og etter <code>R v.4.1.</code>, pipe-funksjonen. Jeg bruker likevel <code>tidyverse</code>-variantene fordi disse er så mye lettere å forstå, skrive, og lese. De er utvikla for folk som jobber som oss, med tabeller og datasett. Som nybegynner er det ikke bare bare å forstå forskjellen mellom <code>base R</code> og <code>tidyverse</code>, så her er det viktigste:</p>
@@ -366,11 +382,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Da jeg lærte R var det <code>%&gt;%</code> fra <code>magrittr</code> som var den gjeldende pipa. Den var så nyttig at ei pipe til slutt blei inkorporert i <code>base R</code>. Dette skjedde i <code>R 4.1.0</code>. <code>Base R</code>s pipe ser slik ut: <code>|&gt;</code>. Den fungerer i hovedsak lik <code>%&gt;%</code>. Når jeg fortsetter å bruke den gamle <code>magrittr</code>-pipa er det bare fordi jeg er gammel og ikke liker å endre på ting som funker. Dessuten har Rstudio en flott snarvei til <code>%&gt;%</code> via <code>ctrl + shift + M</code>.</p>
 <p>Dere velger altså sjøl om dere går for <code>%&gt;%</code> eller <code>|&gt;</code>. Husk bare at for å bruke <code>%&gt;%</code> så må <code>tidyverse</code> eller <code>magrittr</code> lastes inn først. (<code>tidyverse</code> låner noen av funksjonene fra <code>magrittr</code>, men laster ikke inn <em>alle</em> funksjonene fra den pakka).</p>
-<hr>
-<p>Forresten, noen ganger vil dere kanskje se pakker omtalt som online bibliotek (<em>library</em>). Og vi bruker jo funksjonen <code>library()</code> for å laste inn en pakke. Hva er forskjellen på en pakke og et bibliotek? I R er det den mappa hvor alle pakkene som er installert blir lagra som kalles <strong>bibliotek</strong>. Sjølve funksjonssamlinga kalles en <strong>pakke</strong>.</p>
 
 
 </section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Noen ganger vil dere kanskje se pakker omtalt som online bibliotek (<em>library</em>). Og vi bruker jo funksjonen <code>library()</code> for å laste inn en pakke. Hva er forskjellen på en pakke og et bibliotek? I R er det den mappa hvor alle pakkene som er installert blir lagra som kalles <strong>bibliotek</strong>. Sjølve funksjonssamlinga kalles en <strong>pakke</strong>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
@@ -514,8 +534,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link">
-        <span class="nav-page-text">Referanser</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./grunnleggende.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Det grunnleggende</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

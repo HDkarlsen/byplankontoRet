@@ -50,3 +50,14 @@ starwars[name]
 starwars["name"]
 ```
 Denne kompliseringa godtar vi, for det er så mange fordeler med at `tidyverse` lar oss henvise direkte til kolonner i datasett som om de var objekter.
+
+## Feil skråstrek
+
+Windows vs. mac <!-- se import-export -->
+
+## Tegnkode
+<!-- se import-export -->
+
+Ofte hjelper det å restarte R-sesjonen.
+
+

@@ -1,0 +1,159 @@
+# Import og eksport av data
+
+Vi har en god del muligheter når det kommer til å laste inn data. Det er bra, for dataene våre finnes i mange formater:
+
+- `.csv`: et kommaseparert dokument. En tekstfil som vi kan lese med det blotte øye. Rader atskilles med linjeskift, kolonner med komma. I Norge bruker vi komma som desimalseparator, hvilket forkludrer `.csv`-filer. Derfor har vi ofte `.tsv`-filer istedenfor. Disse er tab-separerte. Noen ganger får de også forkortelsen `.csv`. Andre ganger bruker man semikolon istedenfor komma for å separere en `.csv`-fil. En `.csv`-fil er et vakkert monument til en ydmyk minimalisme og nøkternhet, og burde hvis gudene var sanne hadde dette vært det eneste dataformatet vi hadde trengt å bry oss om.
+- `.xlsx`: Microsoft Office Excels filformat. Disse filene jobber doble skift med å både lagre data og "transformasjonene" vi har gjort på det. De fungerer ut fra sin egen logikk. Dette gjør det noe utfordrende for oss å hente ut data fra dem. Hvor utfordrende det er kommer mye an på hvor konsekvent personen som har laga fila har vært. Her er vi ofre for en av Excels svakheter: den tillater deg å gjøre dumme ting. Excel er ikke et standard filformat. Kildekoden er proprietær og kan endres når som helst. Vi burde dermed ikke gjøre det til en vane å dele data i dette formatet. Likevel er det en kjensgjerning at mye data ligger lagra som Excel-filer, nettopp fordi Excel er mye brukt og det er lettvint.
+- `.xls`: Microsoft Office Excels gamle filformat. Funker likt som Excels nye filformat bortsett fra når det ikke gjør det. Hvis bare det hadde fantes et mer universelt datalagringsformat som holdt seg konstant over tid og sted. Akk ja.
+- `.sav`: SPSS' filformat.
+- `.dta`: Statas filformat.
+
+La oss bli filosofiske et øyeblikk: hva er egentlig en datafil?
+
+Det varierer ut fra hvilket filformat vi prater om. Hvis vi tenker oss om, vil et svar kunne dreie seg om følgende punkter: Vi er interessert i **datapunkter** lagra i celler. Vi kan identifisere cellene ut fra hvilken **rad** og **kolonne** de står i. Det er fint å få med **variabelnavn/kolonnenavn**.
+
+Felles for mange av filformata på lista over er at de gjør mye mer enn dette. Excel inneholder fargeformateringer på celler, funksjoner som regner ut innhold i celler, og djevelens verste verk: den sammenslåtte cella. SPSS kan gi oss filer med både en verdi og en merkelapp. 
+
+Den beskjedne `.csv`-fila gir oss kun det vi trenger og frister oss ikke ut i uføre ved å la oss bli mer avanserte enn dette. Den holder oss ærlig ved at vi ikke kan gjøre dumme ting som ødelegger for oss seinere. 
+
+Når det er sagt, det er ikke alltid `.csv` strekker til. Når vi jobber med kart-data trenger vi geoinformasjon, og da må vi si farvel til fordel for [formater som](https://r.geocompx.org/read-write.html#data-output) `.gpkg`.
+
+---
+
+## Felles mønstre
+
+Importering og eksportering henger sammen, så vi kan omtale dem samtidig. Det er større forskjell på de ulike formatene vi håndterer, så vi organiserer oss etter dem. Imidlertid er det noen grunnleggende mønstre vi kan diskutere felles.
+
+De fleste importeringsfunksjoner kalles noe med *read*, fordi de leser inn filer. Dermed blir eksporteringsfunksjoner *write*, fordi de skriver filer til disken. 
+
+### Filnavn
+
+Vi må ofte definere et navn på fila vi skal skrive eller lese. Når vi leser filer, vil navnet ofte bety både
+
+1. hva heter fila og
+2. hvor ligger fila lagra
+
+Dette er fordi et filnavn strengt tatt inkludere hele *filstien* til fila. Den fila jeg arbeider på nå heter f.eks. `import-export.qmd`. Den ligger på dette filområdet på datamaskina mi: `C:/Users/HK2Q/Documents/r/dokumentasjon`. Dermed blir det *egentlige* navnet på fila: `C:/Users/HK2Q/Documents/r/dokumentasjon/import-export.qmd`. Husk at også filtutvidelsen (det som kommer ettter `.`) er en del av filnavnet! Når en funksjon ber om `file` eller `path` betyr dette ofte at de vil ha hele det fulle filnavnet inkludert filsti. 
+
+### Relative fillokasjoner
+
+Man kan alltids henvise til konkrete områder på maskina, men dette er optimalt fordi det gjør at du aldri kan flytte noen filer igjen. Dessuten vil ikke koden funke på en annen persons PC med mindre de har 100 % likt oppsett på deres maskin. Derfor er det nyttig med **relative** filstier. Når du arbeider i Rstudio (og du er ikke en gærning som arbeider i R GUI, er du vel?) forventes det at du arbeider i såkalte **prosjekter**. Alle mine prosjekter ligger kopiert på `M:`-disken. Et prosjekt er en mappe med visse filer i seg, hvorav den viktige fila er `prosjekt_navn.Rproj`. Denne opprettes automatisk når du lager et prosjekt via Rstudio. Det er mange flotte ting med prosjekter, og en av dem er at alle filstier defineres ut fra prosjektets **rotmappe**. Rotmappa er den mappa hvor `.Rproj`-filer ligger, og der du putter alle mapper og filer assosiert med prosjektet. Når du arbeider i prosjekter trenger du ikke definere hele filstien til en fil, bare *hvor den ligger i forhold til rotmappa*. F.eks. har jeg for denne boka lagt alle bilder i en mappe som heter `img`. Hvis jeg vil henvise til et bilde skrive jeg bare `img/bilde.png`. Gjør det til en vane å bruke relative filstier når du kan! 
+
+Det går så klart ikke alltid. Når noe ligger på f.eks. `M:`-disken må jeg lage en full filsti. Fordelen er at `M:` er en delt disk, så jeg kan anta at filstien vil se likt ut for andre. 
+
+Merk at i noen tilfeller brytes antakelsen om at filstien alltid er relativt til rotmappa. I disse tilfellene er pakka `here` svært nyttig. Den er også nyttig på grunn av noe annet, nemlig skråstrekproblematikken
+
+<!-- gjerne mer kodeeksempler her -->
+
+### Skråstreker til besvær
+
+I Windows brukes denne skråstreket `\` til å indikere ei mappe. I alle UNIX-baserte operativsystemet og programmer brukes `/`. Eksempler på sistnevnte er Ubuntu, macOS, og R. Når vi arbeider med R på Windows skjer det dermed en del arbeid i kulissene når vi henviser til en filplassering. Dette blir åpenbart for oss når vi for eksempel forsøker å lime inn en filsti fra Windows explorer (filutforskeren). R godtar ikke uten videre "feil" skråstrek. Det er to løsninger på dette:
+
+1. endre skråstrekene så de går andre vei
+2. *escape* skråstrekene
+
+Det siste innebærer å bruke det som kalles *escape characters*. En del tegn har meninger i koden. F.eks. betyr `#` kommentar i et R-skript. Hvis jeg vil skrive ut emneknaggen, må jeg legge på en escape character så R skjønner at dette tegnet skal ikke skal tolkes slik det vanligvis tolkes. Hva er escape-tegnet? Det er nettopp `\`. For å escape `#` skriver vi dermed `\#`, og for å escape `\` skriver vi altså `\\`. 
+<!-- sjekk at # ikke blir til noe annet og må escapes -->
+
+```{r, error = TRUE, eval = FALSE}
+# Ok
+"C:/Users/HK2Q/Documents/r/dokumentasjon"
+
+# Ikke ok
+"C:\Users\HK2Q\Documents\r\dokumentasjon"
+
+# Ok
+"C:\\Users\\HK2Q\\Documents\\r\\dokumentasjon"
+```
+
+En kjapp måte å få skråstrekene etter å ha kopiert en filsti i Windows er følgende
+
+```{r, eval = FALSE}
+# Skriver ut filsti med esaped `\` til konsollen. Funksjonen leser 
+# innholdet i utklippstavla og limer det inn i konsollen.
+paste0(readClipboard())
+```
+
+Alt dette for å si: `here` pakka løser en del av problema våre. Les mer om den på [Ode to the here package](https://github.com/jennybc/here_here).
+
+
+### Tegnkoding
+
+Spesielt når det kommer til norske `.csv`-filer hender det vi får et problem med tegnkodinga (*character encoding*). En full gjennomgang blir for omfattende. Det holder å si at, igjen, dette er hovedsaklig et Windows-problem. Ideelt sett vil vi ha alt over i unicode (UTF-8). Noen filer er lagra i et annet format. Gjerne ISO8859-1 som er en av standardene som gir oss skandinaviske tegn. En forkludrende faktor er at det tidvis (og inntil ganske nylig, per 2023-03) har vært problemer med R og/eller Rstudio når det kommer til tegnkoding. Disse blir fiksa med tida og er kanskje allerede fiksa. Du ser problemet dukke opp dersom du forventer å se en æ. ø eller å i outputen og istedet får noe sånt som `"\xe6\xf8\xe5"`, `Ã¦Ã¸Ã¥` eller `<U+00C6>`. Der er mange ulike faktorer som kan være årsak til dette problemet. En av dem kan være at du må sette tegnkoden spesifikt når du leser en fil. I noen av eksemplene mine vil du set at jeg har spesifisert *encoding*, og da er det derfor. 
+
+## Tekstfiler (csv med familie)
+
+Vi kan bruke `read.csv()` fra `utils`, en av pakkene som lastes når vi starter R. Det finnes også noen funksjoner fra `readr`, en del av, 100 poeng til den som gjetter rett, `tidyverse`. Herfra får vi `read_csv()`, `read_csv2()`, `read_tsv()` og `read_delim()`. Les dokumentasjon for å finne mer informasjon om dem. Kort fortalt er forskjellen at alle tre er implementeringer av den mer generelle `_delim()`. La oss skrive en fil og deretter last den inn.
+
+```{r}
+library(here)
+library(haven)
+library(tidyverse)
+```
+
+
+```{r, eval  = FALSE}
+# Dette datasettet ligger klart når vi laster inn R.
+mtcars
+
+# La oss lagre det som en csv-fil
+mtcars %>% 
+  write_csv(file = here("data", "mtcars.csv"))
+```
+
+```{r}
+# Og så laster vi den inn igjen
+biler <- read_csv(file = here("data", "mtcars.csv"), name_repair = "universal")
+biler
+```
+
+Jeg foretrekker `readr`s funksjoner fordi de har mange nyttige alternativer slik som `name_repair = "universal"`. Denne passer på at navna i datasettet er på et format som R tolererer. F.eks. at de ikke har mellomrom i seg. Veldig nyttig. Med `na = ` kan du fortelle R hvordan missing er lagra i fila du importerer. 
+
+## SPSS
+
+For SPSS-filer bruker vi pakka `haven`. Denne pakka er en del av ... ja, du skjønner. 
+
+```{r}
+# Lagrer en fil som en spss-fil. (Jeg lagrer bare de første fire kolonnene).
+starwars %>% 
+  select(1:4) %>% 
+  write_sav(here("data", "starwars.sav"))
+```
+
+```{r}
+# Les inn en spss-fil
+stjernekrig <- read_sav(here("data", "starwars.sav"), .name_repair = "universal")
+stjernekrig %>% head()
+```
+Legger du merke til noe med fila over? Hva om jeg printer ut de tilsvarende kolonner fra det opprinnelige datasettet vårt?
+
+```{r}
+starwars %>% 
+  select(1:4) %>% 
+  head()
+```
+Hårfarge har mista `NA`-designasjonen. Nå er de som før var missing bare tomme. Dette kan skape hodebry for oss seinere, så det er bra vi oppdaga det nå. 
+
+For å være helt ærlig er jeg ikke sikker på hvordan man løser dette direkte. Feilen oppstår enten når vi eksporterer til `.sav` eller importerer tilbake til R. Kanskje finnes det et svar i [Havens dokumentasjon](https://haven.tidyverse.org/articles/semantics.html#tagged-missing-values). Imidlertid er det lett å omgå problemet i ettertid:
+
+```{r}
+# Lag ny versjon av hårfarge. Hvis hårfarge er tom (""), bli missing. Ellers, 
+# bli det du allerede er. 
+stjernekrig <- stjernekrig %>% 
+  mutate(
+    hair_color = if_else(
+      hair_color == "", 
+      NA_character_, 
+      hair_color)
+    )
+stjernekrig %>% head()
+```
+Hvorfor `NA_character_` og ikke bare `NA`? `if_else` forventer at alle argumentene skal være av samme type/klasse. Derfor må til og med NA være en spesiell type NA. Siden *hair_color* er en strengvektor, må NA være en streng-NA.
+
+Når vi laster inn SPSS-filer vil vi ofte få med merkelappene (*labels*) derfra også, i form av attributter. `tidyverse`-pakker talker ofte dette og viser dem når vi printer objektene. Noen ganger har jeg opplevd, med andre pakker, at attributtene ikke kan leses. I så fall kan man bare fjerne dem.
+
+## Excel
+
+The beast.
+
+<!-- To pakker -->

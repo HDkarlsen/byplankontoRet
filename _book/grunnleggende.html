@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>grunnleggende</title>
+<title>R for Byplankontoret - 4&nbsp; Det grunnleggende</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -86,30 +86,167 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
-<script src="grunnleggende_files/libs/clipboard/clipboard.min.js"></script>
-<script src="grunnleggende_files/libs/quarto-html/quarto.js"></script>
-<script src="grunnleggende_files/libs/quarto-html/popper.min.js"></script>
-<script src="grunnleggende_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="grunnleggende_files/libs/quarto-html/anchor.min.js"></script>
-<link href="grunnleggende_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="grunnleggende_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="grunnleggende_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="grunnleggende_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="grunnleggende_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./import-export.html" rel="next">
+<link href="./pakker.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
 
 
 </head>
 
-<body class="fullcontent">
+<body class="nav-sidebar floating">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Det grunnleggende</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R for Byplankontoret</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Forord</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduksjon</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./omR.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Om R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pakker.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pakker</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./grunnleggende.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Det grunnleggende</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./import-export.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Import og eksport av data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./feil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">Referanser</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#vektor" id="toc-vektor" class="nav-link active" data-scroll-target="#vektor"><span class="toc-section-number">4.1</span>  Vektor</a>
+  <ul class="collapse">
+  <li><a href="#datoer" id="toc-datoer" class="nav-link" data-scroll-target="#datoer"><span class="toc-section-number">4.1.1</span>  Datoer</a></li>
+  <li><a href="#logiske-verdier" id="toc-logiske-verdier" class="nav-link" data-scroll-target="#logiske-verdier"><span class="toc-section-number">4.1.2</span>  Logiske verdier</a></li>
+  <li><a href="#missing-na" id="toc-missing-na" class="nav-link" data-scroll-target="#missing-na"><span class="toc-section-number">4.1.3</span>  Missing (NA)</a></li>
+  <li><a href="#faktor" id="toc-faktor" class="nav-link" data-scroll-target="#faktor"><span class="toc-section-number">4.1.4</span>  Faktor</a></li>
+  <li><a href="#tilbake-til-vektorer" id="toc-tilbake-til-vektorer" class="nav-link" data-scroll-target="#tilbake-til-vektorer"><span class="toc-section-number">4.1.5</span>  Tilbake til vektorer</a></li>
+  </ul></li>
+  <li><a href="#liste" id="toc-liste" class="nav-link" data-scroll-target="#liste"><span class="toc-section-number">4.2</span>  Liste</a></li>
+  <li><a href="#data-frame" id="toc-data-frame" class="nav-link" data-scroll-target="#data-frame"><span class="toc-section-number">5</span>  Data frame</a>
+  <ul class="collapse">
+  <li><a href="#tibble" id="toc-tibble" class="nav-link" data-scroll-target="#tibble"><span class="toc-section-number">5.0.1</span>  Tibble</a></li>
+  <li><a href="#tilbake-til-elementer" id="toc-tilbake-til-elementer" class="nav-link" data-scroll-target="#tilbake-til-elementer"><span class="toc-section-number">5.1</span>  Tilbake til elementer</a></li>
+  <li><a href="#digresjoner" id="toc-digresjoner" class="nav-link" data-scroll-target="#digresjoner"><span class="toc-section-number">5.2</span>  Digresjoner</a>
+  <ul class="collapse">
+  <li><a href="#navngitte-listervektorer" id="toc-navngitte-listervektorer" class="nav-link" data-scroll-target="#navngitte-listervektorer"><span class="toc-section-number">5.2.1</span>  Navngitte lister/vektorer</a></li>
+  <li><a href="#assignment-og--" id="toc-assignment-og--" class="nav-link" data-scroll-target="#assignment-og--"><span class="toc-section-number">5.2.2</span>  Assignment (<code>=</code> og <code>&lt;-</code>)</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="grunnleggende" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Det grunnleggende</span></span></h1>
+</div>
 
 
-<section id="grunnleggende" class="level1">
-<h1>Det grunnleggende</h1>
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
 <p>Vi starter gradvis på bunnen og arbeider oss kjapt opp til den avanserte arbeidsflyten vi er vant med. Det vil si at vi starter med enkle lister og datasett. Så forlater vi dette og jobber kun med datasett.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Laster inn tidyverse, som vi alltid bruker</span></span>
@@ -125,8 +262,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 </div>
 </div>
-<section id="vektor" class="level2">
-<h2 class="anchored" data-anchor-id="vektor">Vektor</h2>
+<section id="vektor" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="vektor"><span class="header-section-number">4.1</span> Vektor</h2>
 <p>Det grunnleggende elementet i R er en <strong>vektor</strong>. En vektor kan forstås som en liste av elementer med samme type. Vi kan ha vektorer av tall, bokstaver, faktorer. De tre siste er eksempler på klasser. Det er noen forskjellige klasser, men vi bryr oss mest om disse tre.</p>
 <p>La oss lage en vektor</p>
 <div class="cell">
@@ -161,9 +298,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>En vektor som består av bokstaver eller ord kalles en <em>character vector</em> eller en <em>string</em>.</p>
 <p>Vi kommer oss langt med numeriske vektorer og strengvektorer. Her er det verdt å merke at det er forskjellige varianter av numeriske vektorer: De kan være <code>Int</code>, <code>double</code>, eller <code>float</code>. Forskjellen er sjelden viktig for oss, så jeg går ikke inn på det.</p>
+<section id="datoer" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="datoer"><span class="header-section-number">4.1.1</span> Datoer</h3>
+<p>Datoer er spesielle verdier i R. Dette lar oss gjøre spesielle ting som å regne ut tidsdifferansen mellom to datoer i dager, måneder eller år, og mange andre nyttige ting. Pakka <code>lubridate</code> inneholder mange nyttige funksjoner som utvider de som ligger i <code>base R</code>. Er <code>lubridate</code> en del av <code>tidyverse</code>? Så klart.</p>
+</section>
+<section id="logiske-verdier" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="logiske-verdier"><span class="header-section-number">4.1.2</span> Logiske verdier</h3>
 <p>Det er også verdt å være oppmerksom på logiske vektorer. Elementer i disse vektorene kan kun være <em>enten</em> <code>TRUE</code> (sann) eller <code>FALSE</code> (usann). De brukes mye i filtrering og testing.</p>
-<section id="missing-na" class="level3">
-<h3 class="anchored" data-anchor-id="missing-na">Missing (NA)</h3>
+</section>
+<section id="missing-na" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="missing-na"><span class="header-section-number">4.1.3</span> Missing (NA)</h3>
 <p>Det siste typen element vi må huske på er missing. Alle dataprogrammer har ulik måte å lagre såkalte <em>missing data</em> på. I R vises de som <code>NA</code>. Det er masse vi kunne sagt om <code>NA</code>, mer enn jeg rekker her. Jeg nevner kjapt: En del funksjoner, spesielt i <code>base R</code> liker ikke missing. Blant annet <code>sum()</code>. Den vil gi <code>NA</code> som svar dersom det er missing tilstede i datasettet, hvilket aldri er det vi forventer oss. Disse funksjonene har alltid mulighet til å <em>ignorere</em> missing ved å sette et spesielt argument. F.eks. <code>na.rm = TRUE</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># En tilfeldig vektor med missing</span></span>
@@ -182,18 +326,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Når vi importerer filer fra andre programmer hender det vi får med oss deres definisjon av missing. F.eks. er missing noen ganger koda som <code>-999</code> i SPSS-filer. Her kan det skje feil slik at disse verdiene blir til <code>999</code> i R. Det skjer sjelden, men det er verdt å være oppmerksom på muligheten for at det skjer.</p>
 </section>
-<section id="faktor" class="level3">
-<h3 class="anchored" data-anchor-id="faktor">Faktor</h3>
+<section id="faktor" class="level3" data-number="4.1.4">
+<h3 data-number="4.1.4" class="anchored" data-anchor-id="faktor"><span class="header-section-number">4.1.4</span> Faktor</h3>
 <p>Faktorer (<em>factors</em>) må også nevnes. Disse er nyttige for grupperinger, og noen funksjoner kan merke seg hvilke variabler som er faktorer og utføre heuristikker basert på det. Sjøl syns jeg faktorer er knotete å forholde seg til, så jeg foretrekker å bare bruke strengvektorer.</p>
 </section>
-<section id="tilbake-til-vektorer" class="level3">
-<h3 class="anchored" data-anchor-id="tilbake-til-vektorer">Tilbake til vektorer</h3>
+<section id="tilbake-til-vektorer" class="level3" data-number="4.1.5">
+<h3 data-number="4.1.5" class="anchored" data-anchor-id="tilbake-til-vektorer"><span class="header-section-number">4.1.5</span> Tilbake til vektorer</h3>
 <p>Mer inngående info om vektorer og klasser <a href="https://r02pro.github.io/vector.html">kan finnes her</a>.</p>
 <p>En vektor kan bestå av alt fra ett til mange elementer. <strong>Men den kan bare bestå av elementer av samme klasse</strong></p>
 </section>
 </section>
-<section id="liste" class="level2">
-<h2 class="anchored" data-anchor-id="liste">Liste</h2>
+<section id="liste" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="liste"><span class="header-section-number">4.2</span> Liste</h2>
 <p>En liste er som en vektor på stereoider. Den kan består av elementer av <em>ulik klasse</em>. I tillegg kan en liste bestå av <em>andre lister</em>. Det gjør dem kraftig, og anvendbar.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># En liste bestående av fem tall. Dette kunne like gjerne vært en vektor</span></span>
@@ -298,14 +442,13 @@ $liste1[[3]]
 <p>Vi bruker ikke så ofte lister direkte, men de er viktige av årsaker som straks blir klart. Det siste jeg vil påpeke om lister er at de er rekursive, det vil si at du kan ha ei liste som et element av ei liste. Dermed følger det at vi kan ha ei liste som er et element av ei liste som er et element av ei liste som …</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="img/spiral-robin-schreiner-d8OiIdAdKNA-unsplash.jpg" class="img-fluid figure-img"></p>
+<p><img src="img/spiral-robin-schreiner-d8OiIdAdKNA-unsplash.jpg" class="img-fluid figure-img" style="width:60.0%"></p>
 <p></p><figcaption class="figure-caption">Og så videre</figcaption><p></p>
 </figure>
 </div>
 </section>
-</section>
-<section id="data-frame" class="level1">
-<h1>Data frame</h1>
+<section id="data-frame" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Data frame</h1>
 <p>Vi arbeider mest med datasett, og disse har en egen klasse i R, nemlig <em>data frame</em>. Jeg kommer ikke på noen god norsk oversettelse av <em>data frame</em>, så jeg bruker det engelske ordet. Dette fordi jeg på engelsk ville skilt mellom <em>datasets</em>, altså et datasett som kunne finnes i ulike dataformater (<code>.sav</code>, <code>.csv</code>, <code>.xlsx</code>) og <em>data frames</em>, altså en datastruktur i R.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># En enkel data frame.</span></span>
@@ -391,8 +534,8 @@ $liste1[[3]]
 <pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
 </div>
 </div>
-<section id="tibble" class="level3">
-<h3 class="anchored" data-anchor-id="tibble">Tibble</h3>
+<section id="tibble" class="level3" data-number="5.0.1">
+<h3 data-number="5.0.1" class="anchored" data-anchor-id="tibble"><span class="header-section-number">5.0.1</span> Tibble</h3>
 <p>Som vi ser av sjekken over, har starwars tre klasser, hvor én av dem er en <code>data.frame</code>. Til sammenlikning har de data framene vi lagde tidligere bare én klasse:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>dat1 <span class="sc">%&gt;%</span> <span class="fu">class</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -403,8 +546,8 @@ $liste1[[3]]
 <p>Så hva er en <code>tibble</code>? Kort fortalt er en tibble en forbedra versjon av et data frame. Tibbles kommer fra pakka <code>tibble</code> som, du gjetta riktig, er en del av <code>tidyverse</code>. En fordel med tibbles er at de <em>printer bedre til konsollen</em>. Spesielt store datasett (vår spesialitet) blir mer leselig i tibbles. Når vi arbeider med <code>tidyverse</code> vil mange av data framene våre bli til tibbles via funksjonene deres. Vi trenger altså sjelden tenke mye på dette. Tibbles arver også klassen <code>data.frame</code> som vi så over, så de fleste funksjoner som ikke har hørt om tibbles vil også funke på dem. Flere fordeler forklares i <a href="https://tibble.tidyverse.org/">dokumentasjonen til pakka</a>.</p>
 <p>For å oppsummere: du trenger sjelden bry deg om du jobber med tibbles eller data frames. Jeg nevner det her fordi du kanskje vil lure på hvorfor vi noen får <code>tibble</code>-objekter.</p>
 </section>
-<section id="tilbake-til-elementer" class="level2">
-<h2 class="anchored" data-anchor-id="tilbake-til-elementer">Tilbake til elementer</h2>
+<section id="tilbake-til-elementer" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="tilbake-til-elementer"><span class="header-section-number">5.1</span> Tilbake til elementer</h2>
 <p>Nå som vi har tilgang til et større datasett kan vi utforske litt mer hvordan vi arbeider med, nettopp, større datasett. Datasettet <code>starwars</code> inneholder informasjon om dokumentarserien <em>Star Wars</em>, som omhandla livet i gamle dager, i en galakse langt, langt vekk.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>starwars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -611,13 +754,12 @@ $liste1[[3]]
 </div>
 <p>Dette er noe knotete: Du må gjengi datasettnavnet inni klamma, og du må huske på kommaet for å implisitt velge alle rader. Dessuten vil du bare få treff på nøyaktig det samme. Hvis noen har en <code>species</code> som er skrevet f.eks. <code>human</code> eller <code>human/alien</code> vil vi ikke få treff. Hvis det bare hadde fantes en smartere implementering av dette filteret …</p>
 <p>Og det gjør det! I, nettopp, <code>tidyverse</code>! <img src="img/tidyverse-logo.png" class="img-fluid" style="width:30.0%"></p>
-<p>Men før det, noen kjappe digresjoner</p>
+<p>På tampen, noen nyttige digresjoner.</p>
 </section>
-</section>
-<section id="digresjoner" class="level1">
-<h1>Digresjoner</h1>
-<section id="navngitte-listervektorer" class="level2">
-<h2 class="anchored" data-anchor-id="navngitte-listervektorer">Navngitte lister/vektorer</h2>
+<section id="digresjoner" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="digresjoner"><span class="header-section-number">5.2</span> Digresjoner</h2>
+<section id="navngitte-listervektorer" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="navngitte-listervektorer"><span class="header-section-number">5.2.1</span> Navngitte lister/vektorer</h3>
 <p>Vi returnerer til lister og vektorer. Tenk på de vi lagde tidligere:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>vektor1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -682,20 +824,10 @@ $liste1[[3]]
 </div>
 </div>
 <p>Hvorfor er det nyttig? Navngitte vektorer og lister er nyttig fordi det er mange funskjoner i spesielt <code>tidyverse</code> som nyttiggjør seg av dem. Når man for eksempel bruker <code>rename()</code> til å endre navn på variabler kan man sende en navngitt vektor for å endre mange navn på en gang. Dette gjør at vi mer programmatisk kan endre navn istedenfor å skrive hvert ledd. Når vi har mange ledd, slik som i navn på plansoner og kommunenummer, blir dette svært nyttig.</p>
-<!-- fortsett her 
--x hente ut elementer med [] og [[]].
--x lister av lister
--x data frames og tibbles.
-- environment
--x $ operator
--x named lists og etc.
--x vise en rekke av elementer
--x hvorfor bruker vi her noen ganger = istedenfor <-?
-- funksjoner
--->
+<p>Forresten, her er en ting jeg ofte brenner meg på: Når du bruker <code>setNames()</code> kommer elementnavna <em>etter</em> elementene. Når du navngir elementene mens du lager vektoren/lista, kommer elemtnnavna <em>først</em>. Du ser det i eksemplene over.</p>
 </section>
-<section id="assignment-og--" class="level2">
-<h2 class="anchored" data-anchor-id="assignment-og--">Assignment (<code>=</code> og <code>&lt;-</code>)</h2>
+<section id="assignment-og--" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="assignment-og--"><span class="header-section-number">5.2.2</span> Assignment (<code>=</code> og <code>&lt;-</code>)</h3>
 <p>Kanskje dere føler dere lurt av noe jeg så tidligere.</p>
 <blockquote class="blockquote">
 <p>Derfor bruker jeg alltid <code>&lt;-</code>, og anbefaler deg det også.</p>
@@ -741,17 +873,19 @@ $liste1[[3]]
 </div>
 </div>
 <p>Hvis vi sammenlikner de to datasetta ser vi at det funker … på en måte. Oppsettet blir likt, men vi mister navnet på kolonnene.</p>
+
+
 </section>
 </section>
-
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
 <ol>
 <li id="fn1"><p>Når vi seinere definerer våre egne funksjoner vil du se at det jeg sier her ikke er helt korrekt, men det er en grei heuristikk fram til da.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-</section></div></main>
-<!-- /main column -->
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -885,6 +1019,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./pakker.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pakker</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./import-export.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Import og eksport av data</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 
 

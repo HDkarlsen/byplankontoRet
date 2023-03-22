@@ -1,11 +1,14 @@
 
 # Pakker {#pakker}
 
-En av de store trekkplastra til R er det enorme biblioteket med utvidelser de har. Disse kommer i form av pakker (*packages* på engelsk). Egentlig er alt i R pakker. Når vi starter R får vi noen få pakker, hvor den viktigste er `base`. Vi kan se hvilke pakker vi har lasta inn slik
+En av de store trekkplastra til R er det enorme biblioteket med utvidelser de har. Disse kommer i form av pakker[^1] (*packages* på engelsk). Egentlig er alt i R pakker. Når vi starter R får vi noen få pakker, hvor den viktigste er `base`. Vi kan se hvilke pakker vi har lasta inn slik
+
+[^1]: Noen ganger vil dere kanskje se pakker omtalt som online bibliotek (*library*). Og vi bruker jo funksjonen `library()` for å laste inn en pakke. Hva er forskjellen på en pakke og et bibliotek? I R er det den mappa hvor alle pakkene som er installert blir lagra som kalles **bibliotek**. Sjølve funksjonssamlinga kalles en **pakke**.
 
 ```{r}
 sessionInfo()[6]
 ```
+
 Legg merke til at `base` er inkludert i denne lista. Dette er kjernen av `R`. Vi kommer til å supplere med masse andre pakker etter hvert som vi arbeider med ting. Pakkene er stort sett sentrert rundt å løse et eller annet problem. Her er noen eksempler:
 
 - `haven`: importere og eksportere til andre statistikkprogrammer som SPSS, Stata, SAS
@@ -51,6 +54,8 @@ Tidyverse refererer til
 - en spesifikk pakke som grupperer et lite antall pakker
 
 Du kan lese mer om [Tidyverse på nettsida deres](https://www.tidyverse.org/). Det er også en lærebok som går grundigere gjennom alle funksjonene deres, [R for Data Science](https://r4ds.had.co.nz/).
+
+![Tidyverse. Fra http://www.seec.uct.ac.za/r-tidyverse](img/tidy_workflow.png){width=70%}
 
 Når man kjører `library(tidyverse)` vil den laste inn alle pakkene nevnt [her](https://www.tidyverse.org/packages/). Blant annet `dplyr`, `ggplot2`, etc. I tillegg laster den inn enkeltfunksjoner fra andre pakker. F.eks. laster den inn pipe operatoren ( ` %>% `) fra `magrittr`. Mer om den seinere. Dermed er dette egentlig en snarvei for å slippe å laste inn flere pakker.
 
@@ -125,6 +130,3 @@ Da jeg lærte R var det `%>%` fra `magrittr` som var den gjeldende pipa. Den var
 
 Dere velger altså sjøl om dere går for `%>%` eller `|>`. Husk bare at for å bruke `%>%` så må `tidyverse` eller `magrittr` lastes inn først. (`tidyverse` låner noen av funksjonene fra `magrittr`, men laster ikke inn *alle* funksjonene fra den pakka).
 
----
-
-Forresten, noen ganger vil dere kanskje se pakker omtalt som online bibliotek (*library*). Og vi bruker jo funksjonen `library()` for å laste inn en pakke. Hva er forskjellen på en pakke og et bibliotek? I R er det den mappa hvor alle pakkene som er installert blir lagra som kalles **bibliotek**. Sjølve funksjonssamlinga kalles en **pakke**.

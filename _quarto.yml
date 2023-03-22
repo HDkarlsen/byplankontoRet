@@ -11,6 +11,7 @@ book:
     - omR.qmd
     - pakker.qmd
     - grunnleggende.qmd
+    - import-export.qmd
     - feil.qmd
     - references.qmd
 

@@ -173,7 +173,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pakker.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pakker og funksjoner</span></a>
+  <a href="./pakker.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pakker</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./grunnleggende.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Det grunnleggende</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./feil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -268,15 +278,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="versjonering" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="versjonering"><span class="header-section-number">2.4</span> Versjonering</h2>
-<p>R, Rstudio, og alle pakkene til <code>R</code> kommer i ulike versjoner, f.eks. <code>R v.4.2.2</code>, <code>Rstudio 2023.03.0</code>, etc. Når man installerer en pakke vil den nyeste versjonen som er kompatibel med din versjon av <code>R</code> installeres. Her er noen ting å være oppmerksom på: <!-- cannot get links to work --></p>
+<p>R, Rstudio, og alle pakkene til R kommer i ulike versjoner, f.eks. <code>R v.4.2.2</code>, <code>Rstudio 2023.03.0</code>, etc. Når man installerer en pakke vil den nyeste versjonen som er kompatibel med din versjon av R installeres. Her er noen ting å være oppmerksom på: <!-- cannot get links to work --></p>
 <ul>
-<li>Noen nye pakker funker ikke på gamle versjoner av <code>R</code>.</li>
-<li>Noen gamle pakker funker ikke eller litt annerledes på nye versjoner av <code>R</code>.</li>
+<li>Noen nye pakker funker ikke på gamle versjoner av R.</li>
+<li>Noen gamle pakker funker ikke eller litt annerledes på nye versjoner av R.</li>
 <li>Når pakker oppdateres vil noen ganger funksjonene deres endres.
 <ul>
 <li>Dette er en av bakdelene i <code>tidyverse</code>. De har endra på syntaksen sin slik at <code>tidyverse</code>-syntaks fra 2018 ikke gjelder i 2023. F.eks. pleide man å bruke <code>mutate_at()</code> før i tida for å mutere kun visse rader. Nå bruker man derimot en kombinasjon av <code>mutate()</code> og <code>across()</code> for å oppnå det samme. Dette er irriterende hvis du var vant til den gamle metoden.</li>
 </ul></li>
-<li>Du har <strong>alltid tilgang til eldre versjoner av <code>R</code> og <code>R</code>s pakker</strong>. Dette er et viktig kjennetegn ved FOSS (free, open-source software). Hvis du trenger en funksjon fra en gammel versjon av en pakke, kan du alltids nedgradere R-versjonen og laste inn den versjonen av pakka. Jeg nevner det her, men det er mer for viderekommende, og for Linux-fantaster.</li>
+<li>Du har <strong>alltid tilgang til eldre versjoner av R og Rs pakker</strong>. Dette er et viktig kjennetegn ved FOSS (free, open-source software). Hvis du trenger en funksjon fra en gammel versjon av en pakke, kan du alltids nedgradere R-versjonen og laste inn den versjonen av pakka. Jeg nevner det her, men det er mer for viderekommende, og for Linux-fantaster.</li>
 </ul>
 <p>Per nå er siste versjon vi har tilgang til på byplankontoret <code>4.2.3</code>. Hvilken versjon har jeg?</p>
 <div class="cell">
@@ -303,7 +313,7 @@ loaded via a namespace (and not attached):
 [17] evaluate_0.17    </code></pre>
 </div>
 </div>
-<p>Jeg har forrige versjon, <code>4.2.2</code>. Grunnen er at IT installerte den nye <code>R</code>-versjonen i dag, og jeg ikke vil ta sjansen på at det er små endringer i koden som ødelegger noe jeg har gjort før. Mest sannsynlig vil det går bra. Små endringer, som å gå fra <code>x.x.2</code> til <code>x.x.3</code> vil nok ikke ha noen merkbare endringer.</p>
+<p>Jeg har forrige versjon, <code>4.2.2</code>. Grunnen er at IT installerte den nye R-versjonen i dag, og jeg ikke vil ta sjansen på at det er små endringer i koden som ødelegger noe jeg har gjort før. Mest sannsynlig vil det går bra. Små endringer, som å gå fra <code>x.x.2</code> til <code>x.x.3</code> vil nok ikke ha noen merkbare endringer.</p>
 <p>Tilstedeværelsen av alle disse ulike versjonene av pakker og programvare kan kanskje oppleves som plagsomt. Men det er faktisk en fordel, og en styrke ved R. Det medfører at vi kan garantere at et skript er <em>future proof</em>, at det alltids kan kjøre gitt samme data og datamaskin. Se mer om dette hos <a href="https://www.brodrigues.co/blog/2022-11-16-open_source_repro/">Brodrigues</a>. Vi har for eksempel ingen garanti for at Excel i 2030 lar oss åpne og behandle filene våre fra 2020. Eller at alle funksjonene vi har i cellene forstås likt i begge versjonene av Excel. Dette er ikke overdrivelse. Da Excel gikk over fra <code>.xls</code> til <code>.xlsx</code> medførte det at nye versjoner av Excel ikke alltid greide å åpna de gamle filformatene. I denne situasjonen er du avhengig av at du får tilgang på en eldre versjon av programvaren for å åpna fila di. Det er ikke sikkert man får.</p>
 
 
@@ -451,7 +461,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./pakker.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pakker og funksjoner</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pakker</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -124,7 +124,7 @@ liste2[[2]] %>% class() # character (alstå en tekstvektor)
 Vi bruker ikke så ofte lister direkte, men de er viktige av årsaker som straks blir klart. Det siste jeg vil påpeke om lister er at de er rekursive, det vil si at du kan ha ei liste som et element av ei liste. Dermed følger det at vi kan ha ei liste som er et element av ei liste som er et element av ei liste som ... 
 
 
-![Og så videre](img/spiral-robin-schreiner-d8OiIdAdKNA-unsplash.jpg)
+![Og så videre](img/spiral-robin-schreiner-d8OiIdAdKNA-unsplash.jpg){width=60%}
 
 # Data frame
 
