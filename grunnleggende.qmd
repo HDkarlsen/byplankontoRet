@@ -2,6 +2,12 @@
 
 Vi starter gradvis på bunnen og arbeider oss kjapt opp til den avanserte arbeidsflyten vi er vant med. Det vil si at vi starter med enkle lister og datasett. Så forlater vi dette og jobber kun med datasett.
 
+```{r}
+# Laster inn tidyverse, som vi alltid bruker
+library(tidyverse)
+```
+
+
 ## Vektor
 
 Det grunnleggende elementet i R er en **vektor**. En vektor kan forstås som en liste av elementer med samme type. Vi kan ha vektorer av tall, bokstaver, faktorer. De tre siste er eksempler på klasser. Det er noen forskjellige klasser, men vi bryr oss mest om disse tre.
@@ -27,6 +33,8 @@ Når man gir en verdi bruker man en av to operatorer: enten `<-` eller `=`. Det 
 1. `=` (*assignment*) er lett å forveksle med `==` (*comparison*). Det er enklere å unngå dette med pila
 2. pila er anvendelig. Du kan faktisk skrive den motsatt vei, slik: `c(1, 2, 3) -> vektor1`. Når det er sagt, lov meg at du aldri gjør dette med mindre du har en utrolig god grunn. Enkelte konvensjoner er smart å beholde. 
 
+Derfor bruker jeg alltid `<-`, og anbefaler deg det også.
+
 Tall kan man, som vi ser, bare skrive rett ut. Bokstaver, derimot, må deklareres som en **streng**. Dette gjøres ved å omkranse dem i hermetegn:
 
 ```{r}
@@ -40,7 +48,27 @@ Vi kommer oss langt med numeriske vektorer og strengvektorer. Her er det verdt �
 
 Det er også verdt å være oppmerksom på logiske vektorer. Elementer i disse vektorene kan kun være *enten* `TRUE` (sann) eller `FALSE` (usann). De brukes mye i filtrering og testing.
 
+### Missing (NA)
+
+Det siste typen element vi må huske på er missing. Alle dataprogrammer har ulik måte å lagre såkalte *missing data* på. I R vises de som `NA`. Det er masse vi kunne sagt om `NA`, mer enn jeg rekker her. Jeg nevner kjapt: En del funksjoner, spesielt i `base R` liker ikke missing. Blant annet `sum()`. Den vil gi `NA` som svar dersom det er missing tilstede i datasettet, hvilket aldri er det vi forventer oss. Disse funksjonene har alltid mulighet til å *ignorere* missing ved å sette et spesielt argument. F.eks. `na.rm = TRUE`
+
+```{r}
+# En tilfeldig vektor med missing
+foo <- c(1, 2, 3, NA)
+
+# Forventer 6, får NA.
+sum(foo)
+
+# Slik ber vi sum ignorere missing.
+sum(foo, na.rm = TRUE)
+```
+Når vi importerer filer fra andre programmer hender det vi får med oss deres definisjon av missing. F.eks. er missing noen ganger koda som `-999` i SPSS-filer. Her kan det skje feil slik at disse verdiene blir til `999` i R. Det skjer sjelden, men det er verdt å være oppmerksom på muligheten for at det skjer.
+
+### Faktor
+
 Faktorer (*factors*) må også nevnes. Disse er nyttige for grupperinger, og noen funksjoner kan merke seg hvilke variabler som er faktorer og utføre heuristikker basert på det. Sjøl syns jeg faktorer er knotete å forholde seg til, så jeg foretrekker å bare bruke strengvektorer. 
+
+### Tilbake til vektorer
 
 Mer inngående info om vektorer og klasser [kan finnes her](https://r02pro.github.io/vector.html). 
 
@@ -48,15 +76,18 @@ En vektor kan bestå av alt fra ett til mange elementer. **Men den kan bare best
 
 ## Liste
 
-En liste er som en vektor på stereoider. Den kan består av elementer av ulik klasse. I tillegg kan en liste bestå av *andre lister*. Det gjør dem kraftig, og anvendbar.
+En liste er som en vektor på stereoider. Den kan består av elementer av *ulik klasse*. I tillegg kan en liste bestå av *andre lister*. Det gjør dem kraftig, og anvendbar.
 
 ```{r}
 # En liste bestående av fem tall. Dette kunne like gjerne vært en vektor
 liste1 <- list(1, 2, 3, 4, 5)
 liste1
 
-# En liste bestående av flere vektorer eller lister
+# Denne lista har elementer av ulik klasse.
+liste1 <- list(1, "B", 3, "D", 5)
+liste1
 
+# En liste bestående av flere vektorer og lister. 
 liste2 <- list(
   vektorA = c(1, 2, 3, 4),
   vektorB = c("ET", "IJ", "SW"), 
@@ -64,11 +95,237 @@ liste2 <- list(
 )
 liste2
 ```
+Vi får direkte tilgang på elementene av objekter ved å bruke firkantklammer (`[]`, a.k.a. hakeparentes, *square brackets*, *box brackets*). Da bruker vi *indeksen* til elementet for å henvise til det. Indeksen er rekkefølga til elementet. R er 1-indeksert. Det vil si at indeksen starter på 1. Andre programmeringsspråk, slik som Python, starter på 0. Seinere skal vi se at det går an å henvise til elementer ut fra *navna* deres, men det tar vi når vi kommer til det.
+
+```{r}
+# Hva er det første elementet i vektor1?
+vektor1[1]
+
+# Hva er det andre elementet i liste2?
+liste2[2]
+```
+Spesielt når vi holder på med lister er det verdt å vite om dobbel firkantklammer (`[[]]`). Vanlige firkantklammer gir deg *ei liste med element(ene) på denne indeksen*. Doble firkantklammer gir deg *sjølve element(ene) på denne indeksen*. Du kan se forskjellen her:
+
+```{r}
+# Sjølve det som blir returnert.
+liste2[2] 
+liste2[[2]]
+
+# Det blir tydeligere om vi undersøker klassen til objektene som blir returnert
+liste2[2] %>% class() # liste
+liste2[[2]] %>% class() # character (alstå en tekstvektor)
+```
+Vi bruker ikke så ofte lister direkte, men de er viktige av årsaker som straks blir klart. Det siste jeg vil påpeke om lister er at de er rekursive, det vil si at du kan ha ei liste som et element av ei liste. Dermed følger det at vi kan ha ei liste som er et element av ei liste som er et element av ei liste som ... 
+
+
+![Og så videre](img/spiral-robin-schreiner-d8OiIdAdKNA-unsplash.jpg)
+
+# Data frame
+
+Vi arbeider mest med datasett, og disse har en egen klasse i R, nemlig *data frame*. Jeg kommer ikke på noen god norsk oversettelse av *data frame*, så jeg bruker det engelske ordet. Dette fordi jeg på engelsk ville skilt mellom *datasets*, altså et datasett som kunne finnes i ulike dataformater (`.sav`, `.csv`, `.xlsx`) og *data frames*, altså en datastruktur i R. 
+
+```{r}
+# En enkel data frame.
+dat1 <- data.frame(
+  personer = c("Luke", "Han", "Darth"),
+  moral = c("Bra", "Nja", "Dårlig")
+)
+dat1
+
+# Vi kan lage et data frame via vektorer som er predefinerte,
+# så lenge begge har lik lengde.
+dat2 <- data.frame(
+  colA <- vektor1,
+  colB <- vektor2
+)
+dat2
+```
+
+Det interessante med data frames er at de faktisk bare er **lister**. Det vil si at mye av det vi veit om lister kan brukes på data frames. Et data frame er strengt tatt bare ei liste med vektorer. Hver vektor blir en *kolonne* i data framen. Hva representerer hver **rad**? Det er ikke gitt, men vi kan vanligvis tenke på hver rad som en observasjon. Når vi prater om *tidy data* vil dette bli utdypa.
+
+```{r}
+# Sjekk ut første element av dat1
+dat1[1]
+```
+
+Det er noen begrensninger eller krav ved datasett: hver kolonne må ha lik lengde. Hvis ikke får du feilmelding.
+```{r, error = TRUE}
+dat3 <- data.frame(
+  colA = c(1, 2, 3, 4),
+  colB = c(5, 6, 7)
+)
+```
+R er snill og gir oss tydelig beskjed om hva som er galt i feilmeldinga. 
+
+En ting som er fint med alle disse R-pakkene, er at de ofte inkluderer datasett som vi kan bruke for å illustrere pakkens funksjoner. Disse datasetta ligger tilgjengelig på samme måte som funksjonene: man bare skriver navnet dens for å påkalle den. La oss hente et datasett som kommer fra `dplyr` (som er en del av `tidyverse`).
+
+```{r}
+starwars
+```
+Det kan føles rart å jobbe med data som vi ikke veit hvor ligger. Så jeg kan plassere det explisitt i **miljøet** vårt (*environment*), ved å *assigne* det.
+
+```{r}
+# Hvis du kjører denne koden vil du se at et objekt ved navn `starwars` dukker 
+# opp i det globale miljøet i vinduet til høyre.
+starwars <- starwars
+```
+
+La oss bruke dette datasettet for å vise noen flere egenskaper ved R. Men vent, er dette et *data frame*?
+
+```{r}
+starwars %>% class()
+```
+### Tibble
+
+Som vi ser av sjekken over, har starwars tre klasser, hvor én av dem er en `data.frame`. Til sammenlikning har de data framene vi lagde tidligere bare én klasse:
+
+```{r}
+dat1 %>% class()
+```
+Så hva er en `tibble`? Kort fortalt er en tibble en forbedra versjon av et data frame. Tibbles kommer fra pakka `tibble` som, du gjetta riktig, er en del av `tidyverse`. En fordel med tibbles er at de *printer bedre til konsollen*. Spesielt store datasett (vår spesialitet) blir mer leselig i tibbles. Når vi arbeider med `tidyverse` vil mange av data framene våre bli til tibbles via funksjonene deres. Vi trenger altså sjelden tenke mye på dette. Tibbles arver også klassen `data.frame` som vi så over, så de fleste funksjoner som ikke har hørt om tibbles vil også funke på dem. Flere fordeler forklares i [dokumentasjonen til pakka](https://tibble.tidyverse.org/).
+
+For å oppsummere: du trenger sjelden bry deg om du jobber med tibbles eller data frames. Jeg nevner det her fordi du kanskje vil lure på hvorfor vi noen får `tibble`-objekter.
+
+## Tilbake til elementer
+
+Nå som vi har tilgang til et større datasett kan vi utforske litt mer hvordan vi arbeider med, nettopp, større datasett. Datasettet `starwars` inneholder informasjon om dokumentarserien *Star Wars*, som omhandla livet i gamle dager, i en galakse langt, langt vekk.
+
+```{r}
+starwars
+```
+På tide å utforske. Vi kan henvise til spesifikke celler via x- og y-koordinater. 
+
+```{r}
+# Vi kan finne en nøyaktig celle ved å henvise til x- og y-koordinatene
+starwars[2, 1]
+starwars[5, 4]
+
+# Vi kan få tak i en serie med elementer via `:`
+starwars[1:3]
+
+# Vi kan gjøre et utvalg av celler ved å definere både x og y som en serie
+starwars[2:5, 6:9]
+```
+
+Det er upraktisk å skulle huske indekser til alt. Heldigvis kan vi henvise til kolonner dersom de er navngitt, slik som her:
+
+```{r}
+starwars["eye_color"]
+
+# En nyttig funksjon for å finne navna til alle kolonnene (variablene) er:
+colnames(starwars)
+
+starwars["species"]
+```
+
+Et alterntiv til klammeparantesen er å bruke operatoren `$´. 
+
+```{r}
+# Her trenger man ikke hermetegn, med mindre kolonna har mellomrom.
+starwars$name
+
+starwars$"name"
+```
+Som du begynner å skjønne er det flere veier til Rom. Klammeparantesen og `$` har tildels overlappende funksjoner. De har likevel sine unike bruksområder. De vil vi lære å anerkjenne etter hvert som vi arbeider med dem. En nyttig ting med `[]` er at vi kan bruke det som et enkelt filter.
+
+```{r}
+# Velg kun de karakterene som er menneske
+starwars[starwars$species == "Human", ]
+```
+
+Dette er noe knotete: Du må gjengi datasettnavnet inni klamma, og du må huske på kommaet for å implisitt velge alle rader. Dessuten vil du bare få treff på nøyaktig det samme. Hvis noen har en `species` som er skrevet f.eks. `human` eller `human/alien` vil vi ikke få treff. Hvis det bare hadde fantes en smartere implementering av dette filteret ...
+
+Og det gjør det! I, nettopp, `tidyverse`! 
+![](img/tidyverse-logo.png){width=30%}
+
+Men før det, noen kjappe digresjoner
+
+## Digresjoner
+
+### Navngitte lister/vektorer
+
+Vi returnerer til lister og vektorer. Tenk på de vi lagde tidligere:
+
+```{r}
+vektor1
+liste1
+```
+De er enkle. Kan vi gjøre dem ... mer komplisert? Så klart. Noe som ofte vil være nyttig for oss er det å bruke **navngitte vektorer eller lister** (*named vector/named list*). Hva er det? Det er en vektor eller liste hvor *hvert element har et navn*. La oss se noen eksempler. (Jeg viser bare for vektorer, men det samme gjelder for lister.)
+
+```{r}
+navngitt_vektor <- c("navn" = "Arnold",
+                     "hilsen" = "hey",
+                     "venn" = "Gerald")
+
+# Nå har hvert element i vektoren et navn
+navngitt_vektor
+
+# Sammenlikn med den tidligere, navnløse vektoren. 
+vektor2
+
+# Vi kan også bruke funksjonen `setNames()` til å gi navn. Nyttig hvis vi har
+# navna lagra i en annen vektor/liste
+navn <- c("Første", "Andre", "Tredje")
+
+setNames(vektor2, navn)
+
+# Men --- hvor har navna våre blitt av??
+vektor2
+
+# Vi må huske å bruke *assignment* for å large det vi gjør
+vektor2 <- setNames(vektor2, navn)
+vektor2
+```
+
+Hvorfor er det nyttig? Navngitte vektorer og lister er nyttig fordi det er mange funskjoner i spesielt `tidyverse` som nyttiggjør seg av dem. Når man for eksempel bruker `rename()` til å endre navn på variabler kan man sende en navngitt vektor for å endre mange navn på en gang. Dette gjør at vi mer programmatisk kan endre navn istedenfor å skrive hvert ledd. Når vi har mange ledd, slik som i navn på plansoner og kommunenummer, blir dette svært nyttig.
+
+Forresten, her er en ting jeg ofte brenner meg på: Når du bruker `setNames()` kommer elementnavna *etter* elementene. Når du navngir elementene mens du lager vektoren/lista, kommer elemtnnavna *først*. Du ser det i eksemplene over.
 
 <!-- fortsett her 
-hente ut elementer med [] og [[]].
-lister av lister
-data frames og tibbles.
-$ operator
-funksjoner
+-x hente ut elementer med [] og [[]].
+-x lister av lister
+-x data frames og tibbles.
+- environment
+-x $ operator
+-x named lists og etc.
+-x vise en rekke av elementer
+-x hvorfor bruker vi her noen ganger = istedenfor <-?
+- funksjoner
 -->
+
+### Assignment (`=` og `<-`)
+
+Kanskje dere føler dere lurt av noe jeg så tidligere.
+
+> Derfor bruker jeg alltid `<-`, og anbefaler deg det også.
+
+Og litt lengre ned viser 
+
+```{r}
+# En enkel data frame.
+dat1 <- data.frame(
+  personer = c("Luke", "Han", "Darth"),
+  moral = c("Bra", "Nja", "Dårlig")
+)
+dat1
+```
+
+Men her bruker jeg jo `=` som assignment. Hva skjer? 
+
+Poenget her er at jeg bruker `=` inni funksjonens argumenter. `data.frame()` er en funksjon, og jeg definerer her hva som skal være kolonnene i datasettet mitt. Så bruker jeg `<-` til å *assigne* det som funksjonen `data.frame()` returnerer. Forvirra? På generelt grunnlag kan vi si at vi bruker `=` inni funksjoner, og `<-` utafor[^1].
+
+[^1]: Når vi seinere definerer våre egne funksjoner vil du se at det jeg sier her ikke er helt korrekt, men det er en grei heuristikk fram til da.
+
+Forresten, hvorfor prøver vi ikke bare å bruke `<-` inni funksjonen og ser hva som skjer?
+```{r}
+# Funker ikke
+dat1x <- data.frame(
+  personer <- c("Luke", "Han", "Darth"),
+  moral <- c("Bra", "Nja", "Dårlig")
+)
+
+dat1
+dat1x
+```
+
+Hvis vi sammenlikner de to datasetta ser vi at det funker ... på en måte. Oppsettet blir likt, men vi mister navnet på kolonnene.

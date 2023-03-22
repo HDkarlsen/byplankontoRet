@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -193,6 +193,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#spss" id="toc-spss" class="nav-link active" data-scroll-target="#spss"><span class="toc-section-number">2.1</span>  SPSS</a></li>
   <li><a href="#excel" id="toc-excel" class="nav-link" data-scroll-target="#excel"><span class="toc-section-number">2.2</span>  Excel</a></li>
   <li><a href="#hvorfor-skal-jeg-bruke-r" id="toc-hvorfor-skal-jeg-bruke-r" class="nav-link" data-scroll-target="#hvorfor-skal-jeg-bruke-r"><span class="toc-section-number">2.3</span>  Hvorfor skal jeg bruke R?</a></li>
+  <li><a href="#versjonering" id="toc-versjonering" class="nav-link" data-scroll-target="#versjonering"><span class="toc-section-number">2.4</span>  Versjonering</a></li>
   </ul>
 </nav>
     </div>
@@ -217,32 +218,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 
 <p>Noen forskjeller på det å jobbe i R vs.&nbsp;Excel og SPSS.</p>
-<p>R et et kodespråk. Vi laster ned R i form av en versjon. Per nå er siste versjon vi har tilgang til på byplankontoret:</p>
+<p>R et et kodespråk. Det vil si at vi arbeider gjennom skript fulle av kode. Slik som dette:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.2.2 (2022-10-31 ucrt)
-Platform: x86_64-w64-mingw32/x64 (64-bit)
-Running under: Windows 10 x64 (build 19045)
-
-Matrix products: default
-
-locale:
-[1] LC_COLLATE=nb-NO.UTF-8  LC_CTYPE=nb-NO.UTF-8    LC_MONETARY=nb-NO.UTF-8
-[4] LC_NUMERIC=C            LC_TIME=nb-NO.UTF-8    
-
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
-
-loaded via a namespace (and not attached):
- [1] htmlwidgets_1.5.4 compiler_4.2.2    magrittr_2.0.3    fastmap_1.1.0    
- [5] cli_3.4.1         tools_4.2.2       htmltools_0.5.4   rstudioapi_0.14  
- [9] stringi_1.7.8     rmarkdown_2.17    knitr_1.40        stringr_1.4.1    
-[13] xfun_0.34         digest_0.6.30     jsonlite_1.8.3    rlang_1.0.6      
-[17] evaluate_0.17    </code></pre>
+<pre><code>[1] 4</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Hello world"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Hello world"</code></pre>
 </div>
-<p>Fra dette ser vi at jeg har installert R versjon 4.2.2</p>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">64</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dette er en kommentar og vil ikke leses av kodeleseren.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <section id="spss" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="spss"><span class="header-section-number">2.1</span> SPSS</h2>
 <p>R er mest likt SPSS, og spesielt SPSS’ syntaks. Til forskjell fra SPSS er ikke det grafiske brukergrensesnittet (GUI) noe særlig nyttig i R.</p>
@@ -274,6 +265,46 @@ loaded via a namespace (and not attached):
 <li>Man kan bruke R til alt. Fra før av kan vi spleise data i SPSS, lage tabeller i Excel, gjøre dem interaktive i Infogram, dele dem via Google sheets, etc. R kan gjøre alt dette i samme programvare/GUI.</li>
 <li>R lese og skrive til de fleste vanlige programmer. Dvs. at vi kan starte en prosess i Excel og så fortsette den i R. Eller vi kan importere en Stata-fil til R, gjøre noen pivots og lagre den som en SPSS-fil. Dermed kan R relativt sømløst puttes inn i arbeidsprosessen. (Enklest blir det så klart å gjøre alt i R.)</li>
 </ul>
+</section>
+<section id="versjonering" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="versjonering"><span class="header-section-number">2.4</span> Versjonering</h2>
+<p>R, Rstudio, og alle pakkene til <code>R</code> kommer i ulike versjoner, f.eks. <code>R v.4.2.2</code>, <code>Rstudio 2023.03.0</code>, etc. Når man installerer en pakke vil den nyeste versjonen som er kompatibel med din versjon av <code>R</code> installeres. Her er noen ting å være oppmerksom på: <!-- cannot get links to work --></p>
+<ul>
+<li>Noen nye pakker funker ikke på gamle versjoner av <code>R</code>.</li>
+<li>Noen gamle pakker funker ikke eller litt annerledes på nye versjoner av <code>R</code>.</li>
+<li>Når pakker oppdateres vil noen ganger funksjonene deres endres.
+<ul>
+<li>Dette er en av bakdelene i <code>tidyverse</code>. De har endra på syntaksen sin slik at <code>tidyverse</code>-syntaks fra 2018 ikke gjelder i 2023. F.eks. pleide man å bruke <code>mutate_at()</code> før i tida for å mutere kun visse rader. Nå bruker man derimot en kombinasjon av <code>mutate()</code> og <code>across()</code> for å oppnå det samme. Dette er irriterende hvis du var vant til den gamle metoden.</li>
+</ul></li>
+<li>Du har <strong>alltid tilgang til eldre versjoner av <code>R</code> og <code>R</code>s pakker</strong>. Dette er et viktig kjennetegn ved FOSS (free, open-source software). Hvis du trenger en funksjon fra en gammel versjon av en pakke, kan du alltids nedgradere R-versjonen og laste inn den versjonen av pakka. Jeg nevner det her, men det er mer for viderekommende, og for Linux-fantaster.</li>
+</ul>
+<p>Per nå er siste versjon vi har tilgang til på byplankontoret <code>4.2.3</code>. Hvilken versjon har jeg?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.2.3 (2023-03-15 ucrt)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 19045)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=nb-NO.UTF-8  LC_CTYPE=nb-NO.UTF-8    LC_MONETARY=nb-NO.UTF-8
+[4] LC_NUMERIC=C            LC_TIME=nb-NO.UTF-8    
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+loaded via a namespace (and not attached):
+ [1] htmlwidgets_1.5.4 compiler_4.2.3    magrittr_2.0.3    fastmap_1.1.0    
+ [5] cli_3.4.1         tools_4.2.3       htmltools_0.5.4   rstudioapi_0.14  
+ [9] stringi_1.7.8     rmarkdown_2.17    knitr_1.40        stringr_1.4.1    
+[13] xfun_0.34         digest_0.6.30     jsonlite_1.8.3    rlang_1.0.6      
+[17] evaluate_0.17    </code></pre>
+</div>
+</div>
+<p>Jeg har forrige versjon, <code>4.2.2</code>. Grunnen er at IT installerte den nye <code>R</code>-versjonen i dag, og jeg ikke vil ta sjansen på at det er små endringer i koden som ødelegger noe jeg har gjort før. Mest sannsynlig vil det går bra. Små endringer, som å gå fra <code>x.x.2</code> til <code>x.x.3</code> vil nok ikke ha noen merkbare endringer.</p>
+<p>Tilstedeværelsen av alle disse ulike versjonene av pakker og programvare kan kanskje oppleves som plagsomt. Men det er faktisk en fordel, og en styrke ved R. Det medfører at vi kan garantere at et skript er <em>future proof</em>, at det alltids kan kjøre gitt samme data og datamaskin. Se mer om dette hos <a href="https://www.brodrigues.co/blog/2022-11-16-open_source_repro/">Brodrigues</a>. Vi har for eksempel ingen garanti for at Excel i 2030 lar oss åpne og behandle filene våre fra 2020. Eller at alle funksjonene vi har i cellene forstås likt i begge versjonene av Excel. Dette er ikke overdrivelse. Da Excel gikk over fra <code>.xls</code> til <code>.xlsx</code> medførte det at nye versjoner av Excel ikke alltid greide å åpna de gamle filformatene. I denne situasjonen er du avhengig av at du får tilgang på en eldre versjon av programvaren for å åpna fila di. Det er ikke sikkert man får.</p>
 
 
 </section>

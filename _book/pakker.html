@@ -2,11 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Håvard Karlsen">
 
 <title>R for Byplankontoret - 3&nbsp; Pakker og funksjoner</title>
 <style>
@@ -191,11 +190,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#tidyverse" id="toc-tidyverse" class="nav-link active" data-scroll-target="#tidyverse"><span class="toc-section-number">3.1</span>  Tidyverse</a>
+  <li><a href="#tidyverse" id="toc-tidyverse" class="nav-link active" data-scroll-target="#tidyverse"><span class="toc-section-number">3.1</span>  Tidyverse</a></li>
+  <li><a href="#piper" id="toc-piper" class="nav-link" data-scroll-target="#piper"><span class="toc-section-number">3.2</span>  Piper</a>
   <ul class="collapse">
-  <li><a href="#piper" id="toc-piper" class="nav-link" data-scroll-target="#piper"><span class="toc-section-number">3.1.1</span>  Piper</a></li>
-  <li><a href="#uten-pipa-blir-det-noe-slikt" id="toc-uten-pipa-blir-det-noe-slikt" class="nav-link" data-scroll-target="#uten-pipa-blir-det-noe-slikt"><span class="toc-section-number">3.1.2</span>  Uten pipa blir det noe slikt</a></li>
-  <li><a href="#med-pipa" id="toc-med-pipa" class="nav-link" data-scroll-target="#med-pipa"><span class="toc-section-number">3.1.3</span>  Med pipa</a></li>
+  <li><a href="#uten-pipe" id="toc-uten-pipe" class="nav-link" data-scroll-target="#uten-pipe"><span class="toc-section-number">3.2.1</span>  Uten pipa</a></li>
+  <li><a href="#med-pipe" id="toc-med-pipe" class="nav-link" data-scroll-target="#med-pipe"><span class="toc-section-number">3.2.2</span>  Med pipa</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -205,19 +204,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pakker og funksjoner</span></h1>
+<h1 class="title"><span id="pakker" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pakker og funksjoner</span></span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Håvard Karlsen </p>
-          </div>
-  </div>
     
   
     
@@ -283,8 +276,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Når dere søker opp løsninger vil det ofte presenteres løsninger både i <code>base R</code> og i <code>tidyverse</code>. Dette skjer ofte på StackOverflow.</li>
 <li>De fleste <code>tidyverse</code>-funksjoner har et datasett som første argument i funksjonen. Dette gjør at vi lett kan <em>pipe</em> funksjoner etter hverandre.</li>
 </ul>
-<section id="piper" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="piper"><span class="header-section-number">3.1.1</span> Piper</h3>
+</section>
+<section id="piper" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="piper"><span class="header-section-number">3.2</span> Piper</h2>
 <p>Hvorfor er piper så nyttig? De lar oss flette sammen en serie operasjoner uten å måtte mellomlagre objekter. La oss si at vi har et datasett med biler og deres egenskaper. Vi vil</p>
 <ul>
 <li>filtrere ut dem som har under seks sylindre</li>
@@ -292,9 +286,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>gruppere etter antall gir</li>
 <li>vise snitt av miles/gallon (mpg).</li>
 </ul>
-</section>
-<section id="uten-pipa-blir-det-noe-slikt" class="level3" data-number="3.1.2">
-<h3 data-number="3.1.2" class="anchored" data-anchor-id="uten-pipa-blir-det-noe-slikt"><span class="header-section-number">3.1.2</span> Uten pipa blir det noe slikt</h3>
+<section id="uten-pipe" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="uten-pipe"><span class="header-section-number">3.2.1</span> Uten pipa</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -324,8 +317,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="med-pipa" class="level3" data-number="3.1.3">
-<h3 data-number="3.1.3" class="anchored" data-anchor-id="med-pipa"><span class="header-section-number">3.1.3</span> Med pipa</h3>
+<section id="med-pipe" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="med-pipe"><span class="header-section-number">3.2.2</span> Med pipa</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>cars_filtered_kg_group_mean <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span> </span>
@@ -344,6 +337,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 3     5  16.8</code></pre>
 </div>
 </div>
+<p>Det andre eksemplet er</p>
+<ol type="1">
+<li>mer lesbart</li>
+<li>mindre stappfult av midlertidige objekter som vi seinere må slette</li>
+</ol>
+<p>Jeg kommer til å bruke piper en god del både her og i alle skriptene mine. Så det er greit å vite hva det går ut på. Syntaksen <code>x %&gt;% y</code> kan leses som <code>y får x</code>. Vi tar <code>x</code> og sender det til <code>y</code> som tar det inn som sitt første <em>argument</em>. Tidyverse-funksjonene er bygd rundt ideen om at det første argumentet til funksjonene er et datasett. Legg merke til at det er et datasett som er det første objektet i alle funksjonen jeg bruker i eksemplet uten pipe.</p>
+<p>Noen funksjoner, som <code>base::sum()</code> har ikke data som sitt første argument, men en vektor. Hvis man sender et datasett til <code>sum()</code> vil man få en feilmelding.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">sum</span>(wt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in mtcars %&gt;% sum(wt): object 'wt' not found</code></pre>
+</div>
+</div>
+<p>For å få slike funksjoner til å funkere med ei pipe, kan man ofte bruke en funksjon fra <code>magrittr</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">sum</span>(.<span class="sc">$</span>wt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 14045.15</code></pre>
+</div>
+</div>
+<p><code>.</code> blir her et alias for det aktuelle datasett, og dette er det samme som å skrive:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(mtcars<span class="sc">$</span>wt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 102.952</code></pre>
+</div>
+</div>
+<p>Da jeg lærte R var det <code>%&gt;%</code> fra <code>magrittr</code> som var den gjeldende pipa. Den var så nyttig at ei pipe til slutt blei inkorporert i <code>base R</code>. Dette skjedde i <code>R 4.1.0</code>. <code>Base R</code>s pipe ser slik ut: <code>|&gt;</code>. Den fungerer i hovedsak lik <code>%&gt;%</code>. Når jeg fortsetter å bruke den gamle <code>magrittr</code>-pipa er det bare fordi jeg er gammel og ikke liker å endre på ting som funker. Dessuten har Rstudio en flott snarvei til <code>%&gt;%</code> via <code>ctrl + shift + M</code>.</p>
+<p>Dere velger altså sjøl om dere går for <code>%&gt;%</code> eller <code>|&gt;</code>. Husk bare at for å bruke <code>%&gt;%</code> så må <code>tidyverse</code> eller <code>magrittr</code> lastes inn først. (<code>tidyverse</code> låner noen av funksjonene fra <code>magrittr</code>, men laster ikke inn <em>alle</em> funksjonene fra den pakka).</p>
 <hr>
 <p>Forresten, noen ganger vil dere kanskje se pakker omtalt som online bibliotek (<em>library</em>). Og vi bruker jo funksjonen <code>library()</code> for å laste inn en pakke. Hva er forskjellen på en pakke og et bibliotek? I R er det den mappa hvor alle pakkene som er installert blir lagra som kalles <strong>bibliotek</strong>. Sjølve funksjonssamlinga kalles en <strong>pakke</strong>.</p>
 
