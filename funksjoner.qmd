@@ -1,0 +1,146 @@
+# Funksjoner
+
+Det er først når du lærer deg å ta i bruk funksjoner skikkelig at mulighetene til R virkelig starter å utfolde seg. Her skal vi først se litt på hva en funksjon er, og deretter hvordan vi kan lage våre egne funksjoner. 
+
+Vi har faktisk allerede brukt masse funksjoner! Det meste i R er enten en funksjon eller et objekt. Eksempler på funksjoner vi har brukt er `sum()`, `data.frame()` og til og med `c()`. Funksjoner tar imot *argumenter*, og disse argumentene plasseres mellom de to parentesene. Dermed kan vi kjenne igjen en funksjon ved at den har parenteser etter navnet.[^1] **Merk likevel at en funksjon ikke trenger å ta inn noen argumenter**. Mange av import-funksjonene jeg har skrevet tar ingen argumenter, de bare returnerer objekter.
+
+[^1]: Man kan henvise til en funksjon uten å bruke parenteser når man ikke trenger å spesifisere noen av argumentene. For eksempel i dette tilfellet: `vektor1 %>% sum`. Jeg anbefaler likevel at du er konsekvent og alltid har med parentesene. Dette er også anbefalt i [stilguiden](https://style.tidyverse.org/functions.html) til `tidyverse`.
+
+En viktig ting som funksjoner lar oss gjøre er å abstrahere oppgaver. Vi sparer tid ved å slippe å gjenta oss. Det er et uttrykk som sier at dersom du oppdager at du skriver det samme tre ganger bør du putte det i en funksjon. `tidyverse` gir oss mange funksjoner som er tidbesparende, men ~~noen ganger~~ ofte kan vi gjøre ting lettere ved å lage egne funksjoner. 
+
+<!-- gjerne et eksempel på det her -->
+
+En annen ting funksjoner lar oss gjøre er å skrive bedre koder. Dette kan dere se spesielt i prognoseevlaueringsskriptene mine. Jeg putter alt av koder inn i funksjoner som jeg putter i en skriptfil. Noen av funksjonene påkaller hverandre. Så har jeg et kort, lite *main*-skript som påkaller de viktigste funksjonene. Disse funksjonene har lett-forståelige navn slik at du skjønner hva de gjør. La oss kikke kort på den:
+
+```{r, eval = FALSE}
+prognose <- hent_prognose(prognose_filsti)
+
+folkemengde <- hent_folkemengde(folkemengde_filsti)
+
+folkemengde <- folkemengde %>% 
+  vask_folkemengde() %>% 
+  summer_folkemengde()
+
+prognose <- prognose %>% 
+  vask_prognose()
+
+sammenstilling <- lag_sammenstilling(prog = prognose, folk = folkemengde) %>% 
+  vask_sammenstilling()
+
+sammenlikning <- sammenstilling %>% 
+  lag_differanser(TR2019)
+```
+
+Alle disse funksjonene har jeg skrevet sjøl, og når de står sammen slik får vi en historie:
+
+> Hent to datasett
+> Begge vaskes, folkemengde blir også summert
+> La en sammenstilling, som består av begge datasetta.
+> Vask sammenstilinga
+> Lag differanseskårer
+
+Det er en kunst å lage bra funksjonsnavn og strukturer, og jeg skal ikke late som jeg er en kløpper i det ennå. Men hvis dette sammenliknes med et tidligere skript jeg lagde, som boligflytterate, er det en klar forbedring. Sistnevnte er et svært langt skript bestående av mange objekter og funksjoner histen og pisten. 
+
+## Anatomien til en funksjon
+
+Funksjonen har et *navn* og null eller flere *argumenter*, og den returnerer et *objekt.* Vi lager den ganske likt som et objekt, ved å assigne det en navn med `<-`. Vi bruker funksjonen `function()` for å definere at dette er en funksjon. Og som argument til `function()` skriver vi navnet på eventuelle argumenter funksjonen vår skal ha. Så putter vi det som funksjonen skal gjøre inni sløyfeparenteser (*braces*)[^2]. 
+
+```{r, eval = FALSE}
+min_funksjon <- function(argument1) {
+  # Her skriver vi det funksjonen skal gjøre
+}
+
+# Slik påkaller vi funksjonen
+min_funksjon(et_argument)
+```
+
+[^2]: Jeg nevner det her, fordi det forvirra meg en stund: Sløyfeparentesene er faktisk ikke nødvendig. De gjør at du kan skrive innholdet i funksjonen *over flere linjer*. Og vi har nesten alltid funksjoner som går over flere linjer. Dermed vil du nesten alltid se funksjoner med disse parantesene. Om du derimot har en veldig kort funksjon trenger du ikke sløyfeparenteser, da skriver du det bare på samme linje. F.eks. denne korte funksjonen som multipliserer et tall med seg sjøl: `kort_funksjon <- function(tall) tall * tall`. Når det er sagt, lær deg å assosiser sløyfeparenteser med funksjoner.
+
+```{r}
+# En enkel funksjon:
+# Opphøyer et tall i to.
+opphoy2 <- function(num) {
+  num^2
+}
+opphoy2(4)
+opphoy2(6)
+
+# En funksjon med to argumenter
+summer_to <- function(num1, num2) {
+  num1 + num2
+}
+summer_to(4, 6)
+
+# En funksjon med null argumenter
+hvilken_tid_er_det <- function() {
+  paste("Akkurat nå er tida:", Sys.time())
+}
+hvilken_tid_er_det()
+```
+
+## Avanserte funksjonstips
+
+### Default-verdier
+
+Du kan gi default-verdier til en funksjon. Dette er nyttig der hvor du har en antakelse om hva funksjonen skal brukes til, men du vil ha fleksibilitet til å velge noe annet. Dette vil du se når du bruker andre funksjoner og det gjør at vi slipper å måtte definere alle argumentene i en funksjon. Vi setter en default-verdi slik:
+
+```{r}
+# Sett et argument lik noe for å gi den en default-verdi
+opphoy_i_x <- function(num, x = 2) {
+  num^x
+}
+
+opphoy_i_x(4) # opphøyer 4 i 2
+opphoy_i_x(4, 3) # opphøyer 4 i 3
+```
+
+### Dots (ellipse)
+
+Vi kan bruke en ellipse (...) når vi vil la en funksjon ta inn et hvilket som helst antall argumenter. Dette er nyttig hvis vi ikke helt veit hvor mange ting vi skal sende til funksjonen. Vanligvis hvis vi skal behandle mange variabler. Hvis vi lager funksjoner som håndterer alle årsvariablene i en prognose vil dette i 2019 kunne være `2060 - 2019 =` `r 2060-2019` variabler, mens det i 2023 kan være `2050-2023 =` `r 2050-2023`. Istedenfor å lage to funksjoner som tar imot ulikt antall variabler lager vi én funksjon som tar imot en ellipse:
+
+```{r}
+summer_disse <- function(...) {
+  paste("Summen av alle disse er:",
+        sum(...))
+}
+summer_disse(1, 2, 3, 4)
+summer_disse(4, 5, 6, 7, 8, 9, 10, 11)
+```
+## Scope
+
+For å parafrasere en kjent replikk: 
+
+> What happens in a function, stays in a function
+
+Vi har prata litt om miljøet (*environment*) tidligere. Når vi definerer objekter blir de liggende i miljøet vårt, som vi ser (vanligvis) i vinduet øverst til høyre i R-studio. ![environment](img/environment.png){width=50%}
+
+Når det havner her, kan vi henvise til det så mye vi vil, fra hvor som helst (i den samme sesjonen). Hvis vi restarter R-sesjonen vil alt i miljøet forsvinne, fram til vi definerer det igjen.
+
+Funksjoner er annerledes. Det som defineres *inni* funksjonen vil ikke bli tilgjengelig for miljøet utafor funksjonen. La oss se et eksempel
+
+```{r, error = TRUE}
+foo <- 2
+
+en_funksjon <- function() {
+  bar <- 3 
+  
+  bar * 2
+}
+
+foo # Tilgjengelig
+en_funksjon() # Tilgjengelig
+bar # Ikke tilgjengelig - fordi `bar` bare er definert inni funksjonen.
+
+```
+En måte å dra nytte av denne kunnskapen på, er at du kan holde midlertidige objekter inni funksjonen. Hvis vi ikke trenger den i miljøet vårt kan vi holde den unna, og holde det ryddigere. 
+
+Merk at motsatt vei går an: en funksjon veit hva som er i miljøet, siden funksjonen er en del av miljøet. Så vi kan henvise til objekter som ligger i miljøet fra inni en funksjon.
+
+```{r}
+foo <- 2 
+en_funksjon <- function() {
+  foo * 3
+}
+en_funksjon()
+```
+

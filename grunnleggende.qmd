@@ -46,6 +46,12 @@ En vektor som består av bokstaver eller ord kalles en *character vector* eller 
 
 Vi kommer oss langt med numeriske vektorer og strengvektorer. Her er det verdt å merke at det er forskjellige varianter av numeriske vektorer: De kan være `Int`, `double`, eller `float`. Forskjellen er sjelden viktig for oss, så jeg går ikke inn på det. 
 
+### Datoer
+
+Datoer er spesielle verdier i R. Dette lar oss gjøre spesielle ting som å regne ut tidsdifferansen mellom to datoer i dager, måneder eller år, og mange andre nyttige ting. Pakka `lubridate` inneholder mange nyttige funksjoner som utvider de som ligger i `base R`. Er `lubridate` en del av `tidyverse`? Så klart. 
+
+### Logiske verdier
+
 Det er også verdt å være oppmerksom på logiske vektorer. Elementer i disse vektorene kan kun være *enten* `TRUE` (sann) eller `FALSE` (usann). De brukes mye i filtrering og testing.
 
 ### Missing (NA)
@@ -238,7 +244,7 @@ Dette er noe knotete: Du må gjengi datasettnavnet inni klamma, og du må huske 
 Og det gjør det! I, nettopp, `tidyverse`! 
 ![](img/tidyverse-logo.png){width=30%}
 
-Men før det, noen kjappe digresjoner
+På tampen, noen nyttige digresjoner.
 
 ## Digresjoner
 
@@ -280,18 +286,6 @@ vektor2
 Hvorfor er det nyttig? Navngitte vektorer og lister er nyttig fordi det er mange funskjoner i spesielt `tidyverse` som nyttiggjør seg av dem. Når man for eksempel bruker `rename()` til å endre navn på variabler kan man sende en navngitt vektor for å endre mange navn på en gang. Dette gjør at vi mer programmatisk kan endre navn istedenfor å skrive hvert ledd. Når vi har mange ledd, slik som i navn på plansoner og kommunenummer, blir dette svært nyttig.
 
 Forresten, her er en ting jeg ofte brenner meg på: Når du bruker `setNames()` kommer elementnavna *etter* elementene. Når du navngir elementene mens du lager vektoren/lista, kommer elemtnnavna *først*. Du ser det i eksemplene over.
-
-<!-- fortsett her 
--x hente ut elementer med [] og [[]].
--x lister av lister
--x data frames og tibbles.
-- environment
--x $ operator
--x named lists og etc.
--x vise en rekke av elementer
--x hvorfor bruker vi her noen ganger = istedenfor <-?
-- funksjoner
--->
 
 ### Assignment (`=` og `<-`)
 

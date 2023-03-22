@@ -1,5 +1,5 @@
 
-# Pakker og funksjoner {#pakker}
+# Pakker {#pakker}
 
 En av de store trekkplastra til R er det enorme biblioteket med utvidelser de har. Disse kommer i form av pakker (*packages* på engelsk). Egentlig er alt i R pakker. Når vi starter R får vi noen få pakker, hvor den viktigste er `base`. Vi kan se hvilke pakker vi har lasta inn slik
 

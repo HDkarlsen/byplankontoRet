@@ -10,6 +10,8 @@ book:
     - intro.qmd
     - omR.qmd
     - pakker.qmd
+    - grunnleggende.qmd
+    - feil.qmd
     - references.qmd
 
 bibliography: references.bib

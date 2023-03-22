@@ -1,0 +1,52 @@
+# Typiske feil vi (jeg) gjør og hvordan fikse dem
+
+Det er uendelig mange måter å gjøre noe feil på. Dette gjelder egentlig uansett hvilket program du arbeider i. Noe som er fint i R er at du vanligvis får en klar feilmelding når noe går galt. Noe som er mindre fint er at denne feilmeldinga ikke alltid er så enkel å tolke. Likevel, se alltid på meldinga først. Her får du en tydlige pekepinn på hva som gikk galt. Man lærer seg etter hvert hvordan å lese disse meldingene, skjønt de kan virke gresk i starten. 
+
+Her har jeg samla noen av de feila som jeg enten gjør oftest, eller som jeg tenker mange gjør feil. Hvis ingenting av dette hjelper, kan man alltids spørre om hjelp online. Mitt foretrukne nettsted for dette er [StackOverlow](https://stackoverflow.com/). Undersida deres, [CrossValidated](https://stats.stackexchange.com/), kan også brukes. Kvaliteten på meldingene her er høy, men det går tidvis på bekostning av normal høflighet. Hvis man følger reglene deres og gir et [representativt eksempel](https://reprex.tidyverse.org/) vil de vanligvis være greie. Dette er forøvrig en bra måte å be om hjelp på uansett.
+
+1. Forklar tydlig hva du lurer på: hva ønsker du å få som utfall?
+2. Forklar hva du hva forsøkt
+3. Gi eksempeldatasett slik at hjelperne kan bruke det når de gir råd
+
+Uansett, her er min liste over typiske feil
+
+## Glemt å laste inn en pakke
+
+Jeg starter alle R-sesjoner med å laste inn pakker, og jeg laster nesten alltid inn `tidyverse`. Hvis jeg glemmer det, vil funksjoner fra denne pakka ikke være tilgjengelig.
+
+## Laster inn pakker i feil rekkefølge
+
+Det lønner seg å laste inn pakker i omvendt prioritert rekkefølge. Dette er fordi en del pakker inneholder funksjoner med samme navn, men *ulik bruksområde*. Da vil den *siste* pakka du laster inn *maskere* den tidligere funksjonen. For eksempel inneholder `stats` funksjonen `filter()`. Denne blir erstatte med `dplyr`s `filter()` når vi laster inn den pakka (often via `tidyverse`). Jeg pleier dermed ofte å laste inn `tidyverse` sist. Denne feilen er vanskelig å feilsøke, fordi du kan få en feilmelding uten å ha gjort noe som helst endring i koden. (Les: jeg har kasta bort mye tid på å feilsøke når det viste seg at det eneste jeg hadde gjort var å endre rekkefølgene pakkene blei lasta inn på, slik an funksjon jeg var avhengig av fra pakke1 blei bytta ut med en annen funksjon med samme navn fra pakke2.)
+
+Husk at det går an å bruke en pakkes funksjon uten å laste den inn ved å bruke `::`, slik som i `dplyr::filter()`. Det bidrar til at å unngå at du får lasta inn for mange pakker som overskriver hverandres funksjoner. Spesielt hvis du bare bruker få funksjoner noen få ganger, kan dette lønne seg. Jeg gjør vanligvis dette når jeg importerer datasett, siden dette er noe jeg kun gjør én gang per prosjekt. Hvis jeg derimot skal eksportere mange filer, vil det spare tastaturet mitt å bare laste inn pakka.
+
+Forøvrig har vi en liknende feil
+
+## "Jeg har ikke gjort noen endringer, men plutselig funker ikke koden min!"
+
+Dette er i prinsippet umulig å feilsøke. Heldigvis kan vi benytte oss av et smertelig nyttig prinsipp: Årsaken er alltid at du har gjort en feil.
+
+Dette skjer typisk dersom du har arbeida lenga i en sesjon uten å restarte R. Første gang du restarter R og kjører koden på nytt får du feilmelding. Da er ofte problemet at du på et tidspunkt har lagra noe i miljøet (*environment*), som ikke lengre er tilstede i koden. Hvis andre deler av koden er avhengig av dette objektet, vil de feile nå som objektet ikke lengre er tilstede. Du må rett og slett finne ut hvor bruddet skjer, og fikse det.
+
+En måte å forebygge dette på er ved å ta i bruke *functional programming*. Det vil si at vi bruker funksjoner i stor grad og sjelden lagrer objekter direkte i miljøet. [Brodrigues](https://www.brodrigues.co/blog/2022-05-26-safer_programs/) forklarer det bedre.
+
+## Sender et objekt via pipe til en funksjon som ikke er pipevennlig
+
+## Glemmer å bruke hermetegn / bruker hermetegn når vi ikke trenger hermetegn
+
+Her varierer det nok ut ifra hvor god man er på å forstå strukturer. Jeg gjør denne feilen stadig. Har ikke noe bedre råd enn å alltid prøve begge veier. Det er så klart smart å finne ut av *hvorfor* man noen ganger bruker hermetegn rundt noe og andre ganger ikke. Essensielt handler det om: Når du bruker hermetegn rundt noe viser du at det er en tekststreng. Når du ikke bruker hermetegn rundt tekst viser du at et er et objekt. Da må objektet finnes i miljøet for at det skal kunne tas i bruk. `tidyverse` kompliserer dette litt ved at de lar oss henvise til f.eks. kolonnenavn som om de er objekter, f.eks. i:
+
+```{r, error = TRUE}
+library(tidyverse)
+
+# Ok
+starwars %>% 
+  select(name)
+
+# Feilmelding
+starwars[name]
+
+# OK
+starwars["name"]
+```
+Denne kompliseringa godtar vi, for det er så mange fordeler med at `tidyverse` lar oss henvise direkte til kolonner i datasett som om de var objekter.

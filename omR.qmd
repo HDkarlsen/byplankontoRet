@@ -54,13 +54,13 @@ Det er noen fordeler med R som er attraktive for oss:
 
 ## Versjonering
 
-R, Rstudio, og alle pakkene til `R` kommer i ulike versjoner, f.eks. `R v.4.2.2`, `Rstudio 2023.03.0`, etc. Når man installerer en pakke vil den nyeste versjonen som er kompatibel med din versjon av `R` installeres. Her er noen ting å være oppmerksom på: <!-- cannot get links to work -->
+R, Rstudio, og alle pakkene til R kommer i ulike versjoner, f.eks. `R v.4.2.2`, `Rstudio 2023.03.0`, etc. Når man installerer en pakke vil den nyeste versjonen som er kompatibel med din versjon av R installeres. Her er noen ting å være oppmerksom på: <!-- cannot get links to work -->
 
-- Noen nye pakker funker ikke på gamle versjoner av `R`.
-- Noen gamle pakker funker ikke eller litt annerledes på nye versjoner av `R`.
+- Noen nye pakker funker ikke på gamle versjoner av R.
+- Noen gamle pakker funker ikke eller litt annerledes på nye versjoner av R.
 - Når pakker oppdateres vil noen ganger funksjonene deres endres.
   - Dette er en av bakdelene i `tidyverse`. De har endra på syntaksen sin slik at `tidyverse`-syntaks fra 2018 ikke gjelder i 2023. F.eks. pleide man å bruke `mutate_at()` før i tida for å mutere kun visse rader. Nå bruker man derimot en kombinasjon av `mutate()` og `across()` for å oppnå det samme. Dette er irriterende hvis du var vant til den gamle metoden.
-- Du har **alltid tilgang til eldre versjoner av `R` og `R`s pakker**. Dette er et viktig kjennetegn ved FOSS (free, open-source software). Hvis du trenger en funksjon fra en gammel versjon av en pakke, kan du alltids nedgradere R-versjonen og laste inn den versjonen av pakka. Jeg nevner det her, men det er mer for viderekommende, og for Linux-fantaster.
+- Du har **alltid tilgang til eldre versjoner av R og Rs pakker**. Dette er et viktig kjennetegn ved FOSS (free, open-source software). Hvis du trenger en funksjon fra en gammel versjon av en pakke, kan du alltids nedgradere R-versjonen og laste inn den versjonen av pakka. Jeg nevner det her, men det er mer for viderekommende, og for Linux-fantaster.
 
 Per nå er siste versjon vi har tilgang til på byplankontoret `4.2.3`. Hvilken versjon har jeg?
 
@@ -68,6 +68,6 @@ Per nå er siste versjon vi har tilgang til på byplankontoret `4.2.3`. Hvilken 
 sessionInfo()
 ```
 
-Jeg har forrige versjon, `4.2.2`. Grunnen er at IT installerte den nye `R`-versjonen i dag, og jeg ikke vil ta sjansen på at det er små endringer i koden som ødelegger noe jeg har gjort før. Mest sannsynlig vil det går bra. Små endringer, som å gå fra `x.x.2` til `x.x.3` vil nok ikke ha noen merkbare endringer.
+Jeg har forrige versjon, `4.2.2`. Grunnen er at IT installerte den nye R-versjonen i dag, og jeg ikke vil ta sjansen på at det er små endringer i koden som ødelegger noe jeg har gjort før. Mest sannsynlig vil det går bra. Små endringer, som å gå fra `x.x.2` til `x.x.3` vil nok ikke ha noen merkbare endringer.
 
 Tilstedeværelsen av alle disse ulike versjonene av pakker og programvare kan kanskje oppleves som plagsomt. Men det er faktisk en fordel, og en styrke ved R. Det medfører at vi kan garantere at et skript er *future proof*, at det alltids kan kjøre gitt samme data og datamaskin. Se mer om dette hos [Brodrigues](https://www.brodrigues.co/blog/2022-11-16-open_source_repro/). Vi har for eksempel ingen garanti for at Excel i 2030 lar oss åpne og behandle filene våre fra 2020. Eller at alle funksjonene vi har i cellene forstås likt i begge versjonene av Excel. Dette er ikke overdrivelse. Da Excel gikk over fra `.xls` til `.xlsx` medførte det at nye versjoner av Excel ikke alltid greide å åpna de gamle filformatene. I denne situasjonen er du avhengig av at du får tilgang på en eldre versjon av programvaren for å åpna fila di. Det er ikke sikkert man får. 
