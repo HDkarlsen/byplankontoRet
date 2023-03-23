@@ -10,6 +10,7 @@ Advanced R
 
 Swirl
 
+What They Forgot to Teach You About R
 
 
 ## Produktiv prokrastinering

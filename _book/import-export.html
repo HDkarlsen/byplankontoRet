@@ -214,7 +214,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </ul></li>
   <li><a href="#tekstfiler-csv-med-familie" id="toc-tekstfiler-csv-med-familie" class="nav-link" data-scroll-target="#tekstfiler-csv-med-familie"><span class="toc-section-number">5.2</span>  Tekstfiler (csv med familie)</a></li>
   <li><a href="#spss" id="toc-spss" class="nav-link" data-scroll-target="#spss"><span class="toc-section-number">5.3</span>  SPSS</a></li>
-  <li><a href="#excel" id="toc-excel" class="nav-link" data-scroll-target="#excel"><span class="toc-section-number">5.4</span>  Excel</a></li>
+  <li><a href="#excel" id="toc-excel" class="nav-link" data-scroll-target="#excel"><span class="toc-section-number">5.4</span>  Excel</a>
+  <ul class="collapse">
+  <li><a href="#skrive-til-excel-openxlsx" id="toc-skrive-til-excel-openxlsx" class="nav-link" data-scroll-target="#skrive-til-excel-openxlsx"><span class="toc-section-number">5.4.1</span>  Skrive til Excel: <code>openxlsx</code></a></li>
+  <li><a href="#lese-excel-filer-readxl" id="toc-lese-excel-filer-readxl" class="nav-link" data-scroll-target="#lese-excel-filer-readxl"><span class="toc-section-number">5.4.2</span>  Lese Excel-filer: <code>readxl</code></a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -238,6 +242,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
+✔ ggplot2 3.3.6      ✔ purrr   0.3.5 
+✔ tibble  3.1.8      ✔ dplyr   1.0.10
+✔ tidyr   1.2.1      ✔ stringr 1.4.1 
+✔ readr   2.1.3      ✔ forcats 0.5.2 
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>here() starts at C:/Users/HK2Q/Documents/r/dokumentasjon</code></pre>
+</div>
+</div>
 <p>Vi har en god del muligheter når det kommer til å laste inn data. Det er bra, for dataene våre finnes i mange formater:</p>
 <ul>
 <li><code>.csv</code>: et kommaseparert dokument. En tekstfil som vi kan lese med det blotte øye. Rader atskilles med linjeskift, kolonner med komma. I Norge bruker vi komma som desimalseparator, hvilket forkludrer <code>.csv</code>-filer. Derfor har vi ofte <code>.tsv</code>-filer istedenfor. Disse er tab-separerte. Noen ganger får de også forkortelsen <code>.csv</code>. Andre ganger bruker man semikolon istedenfor komma for å separere en <code>.csv</code>-fil. En <code>.csv</code>-fil er et vakkert monument til en ydmyk minimalisme og nøkternhet, og burde hvis gudene var sanne hadde dette vært det eneste dataformatet vi hadde trengt å bry oss om.</li>
@@ -281,20 +302,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>Det siste innebærer å bruke det som kalles <em>escape characters</em>. En del tegn har meninger i koden. F.eks. betyr <code>#</code> kommentar i et R-skript. Hvis jeg vil skrive ut emneknaggen, må jeg legge på en escape character så R skjønner at dette tegnet skal ikke skal tolkes slik det vanligvis tolkes. Hva er escape-tegnet? Det er nettopp <code>\</code>. For å escape <code>#</code> skriver vi dermed <code>\#</code>, og for å escape <code>\</code> skriver vi altså <code>\\</code>. <!-- sjekk at # ikke blir til noe annet og må escapes --></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ok</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="st">"C:/Users/HK2Q/Documents/r/dokumentasjon"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Ikke ok</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">"C:\Users\HK2Q\Documents</span><span class="sc">\r</span><span class="st">\dokumentasjon"</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Ok</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">"C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">HK2Q</span><span class="sc">\\</span><span class="st">Documents</span><span class="sc">\\</span><span class="st">r</span><span class="sc">\\</span><span class="st">dokumentasjon"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ok</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="st">"C:/Users/HK2Q/Documents/r/dokumentasjon"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Ikke ok</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="st">"C:\Users\HK2Q\Documents</span><span class="sc">\r</span><span class="st">\dokumentasjon"</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Ok</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="st">"C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">HK2Q</span><span class="sc">\\</span><span class="st">Documents</span><span class="sc">\\</span><span class="st">r</span><span class="sc">\\</span><span class="st">dokumentasjon"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>En kjapp måte å få skråstrekene etter å ha kopiert en filsti i Windows er følgende</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Skriver ut filsti med esaped `\` til konsollen. Funksjonen leser </span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># innholdet i utklippstavla og limer det inn i konsollen.</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="fu">readClipboard</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Skriver ut filsti med esaped `\` til konsollen. Funksjonen leser </span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># innholdet i utklippstavla og limer det inn i konsollen.</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="fu">readClipboard</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Alt dette for å si: <code>here</code> pakka løser en del av problema våre. Les mer om den på <a href="https://github.com/jennybc/here_here">Ode to the here package</a>.</p>
 </section>
@@ -307,38 +328,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 data-number="5.2" class="anchored" data-anchor-id="tekstfiler-csv-med-familie"><span class="header-section-number">5.2</span> Tekstfiler (csv med familie)</h2>
 <p>Vi kan bruke <code>read.csv()</code> fra <code>utils</code>, en av pakkene som lastes når vi starter R. Det finnes også noen funksjoner fra <code>readr</code>, en del av, 100 poeng til den som gjetter rett, <code>tidyverse</code>. Herfra får vi <code>read_csv()</code>, <code>read_csv2()</code>, <code>read_tsv()</code> og <code>read_delim()</code>. Les dokumentasjon for å finne mer informasjon om dem. Kort fortalt er forskjellen at alle tre er implementeringer av den mer generelle <code>_delim()</code>. La oss skrive en fil og deretter last den inn.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>here() starts at C:/Users/HK2Q/Documents/r/dokumentasjon</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching packages
-───────────────────────────────────────
-tidyverse 1.3.2 ──</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>✔ ggplot2 3.3.6      ✔ purrr   0.3.5 
-✔ tibble  3.1.8      ✔ dplyr   1.0.10
-✔ tidyr   1.2.1      ✔ stringr 1.4.1 
-✔ readr   2.1.3      ✔ forcats 0.5.2 
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dette datasettet ligger klart når vi laster inn R.</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>mtcars</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># La oss lagre det som en csv-fil</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(<span class="at">file =</span> <span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"mtcars.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dette datasettet ligger klart når vi laster inn R.</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>mtcars</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># La oss lagre det som en csv-fil</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(<span class="at">file =</span> <span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"mtcars.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Og så laster vi den inn igjen</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>biler <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"mtcars.csv"</span>), <span class="at">name_repair =</span> <span class="st">"universal"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Og så laster vi den inn igjen</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>biler <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"mtcars.csv"</span>), <span class="at">name_repair =</span> <span class="st">"universal"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 32 Columns: 11
 ── Column specification ────────────────────────────────────────────────────────
@@ -348,7 +347,7 @@ dbl (11): mpg, cyl, disp, hp, drat, wt, qsec, vs, am, gear, carb
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>biler</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>biler</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 32 × 11
      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
@@ -372,15 +371,16 @@ dbl (11): mpg, cyl, disp, hp, drat, wt, qsec, vs, am, gear, carb
 <h2 data-number="5.3" class="anchored" data-anchor-id="spss"><span class="header-section-number">5.3</span> SPSS</h2>
 <p>For SPSS-filer bruker vi pakka <code>haven</code>. Denne pakka er en del av … ja, du skjønner.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lagrer en fil som en spss-fil. (Jeg lagrer bare de første fire kolonnene).</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_sav</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"starwars.sav"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Lagrer en fil som en spss-fil. (Jeg lagrer bare de første fire kolonnene).</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_sav</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"starwars.sav"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Les inn en spss-fil</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>stjernekrig <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"starwars.sav"</span>), <span class="at">.name_repair =</span> <span class="st">"universal"</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>stjernekrig <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Les inn en spss-fil</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>stjernekrig <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"starwars.sav"</span>), <span class="at">.name_repair =</span> <span class="st">"universal"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>stjernekrig <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
   name           height  mass hair_color   
@@ -395,9 +395,9 @@ dbl (11): mpg, cyl, disp, hp, drat, wt, qsec, vs, am, gear, carb
 </div>
 <p>Legger du merke til noe med fila over? Hva om jeg printer ut de tilsvarende kolonner fra det opprinnelige datasettet vårt?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
   name           height  mass hair_color 
@@ -413,16 +413,16 @@ dbl (11): mpg, cyl, disp, hp, drat, wt, qsec, vs, am, gear, carb
 <p>Hårfarge har mista <code>NA</code>-designasjonen. Nå er de som før var missing bare tomme. Dette kan skape hodebry for oss seinere, så det er bra vi oppdaga det nå.</p>
 <p>For å være helt ærlig er jeg ikke sikker på hvordan man løser dette direkte. Feilen oppstår enten når vi eksporterer til <code>.sav</code> eller importerer tilbake til R. Kanskje finnes det et svar i <a href="https://haven.tidyverse.org/articles/semantics.html#tagged-missing-values">Havens dokumentasjon</a>. Imidlertid er det lett å omgå problemet i ettertid:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lag ny versjon av hårfarge. Hvis hårfarge er tom (""), bli missing. Ellers, </span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># bli det du allerede er. </span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>stjernekrig <span class="ot">&lt;-</span> stjernekrig <span class="sc">%&gt;%</span> </span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">hair_color =</span> <span class="fu">if_else</span>(</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>      hair_color <span class="sc">==</span> <span class="st">""</span>, </span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>      <span class="cn">NA_character_</span>, </span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>      hair_color)</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>stjernekrig <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lag ny versjon av hårfarge. Hvis hårfarge er tom (""), bli missing. Ellers, </span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># bli det du allerede er. </span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>stjernekrig <span class="ot">&lt;-</span> stjernekrig <span class="sc">%&gt;%</span> </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">hair_color =</span> <span class="fu">if_else</span>(</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>      hair_color <span class="sc">==</span> <span class="st">""</span>, </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>      <span class="cn">NA_character_</span>, </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>      hair_color)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>stjernekrig <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
   name           height  mass hair_color 
@@ -440,10 +440,95 @@ dbl (11): mpg, cyl, disp, hp, drat, wt, qsec, vs, am, gear, carb
 </section>
 <section id="excel" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="excel"><span class="header-section-number">5.4</span> Excel</h2>
-<p>The beast.</p>
-<!-- To pakker -->
+<p>Jeg er unødvendig streng mot Excel fordi jeg gjerne vil ha ut en enkel datastruktur fra Excels filer, mens Excel tillater oss kompliserte strukturer som ikke uten videre kan puttes inn en en vanlig tabell. Som sagt er vi her avhengig av den enkelte person som lagde Excelfila når det kommer til hvor lett det er for oss å laste den inn. Det å være konsekvent er viktigere enn å etterlikne en “vanlig tabell”. Til dette arbeidet har vi to pakker som har ulike bruksområder:</p>
+<ul>
+<li><code>openxlsx</code>: <a href="https://ycphs.github.io/openxlsx/">Kilde</a>. Brukes for å skrive Excel-filer.</li>
+<li><code>readxl</code>: <a href="https://readxl.tidyverse.org/">Kilde</a>. Brukes for å lese Excel-filer.</li>
+</ul>
+<section id="skrive-til-excel-openxlsx" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="skrive-til-excel-openxlsx"><span class="header-section-number">5.4.1</span> Skrive til Excel: <code>openxlsx</code></h3>
+<p>Pakkas egen <a href="https://ycphs.github.io/openxlsx/articles/Introduction.html">introduksjon</a> er en god guide til hvordan dette funker. Sjekk den ut. I korte drag:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Kjapp lagring av fil</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">write.xlsx</span>()</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Hvis du vil ha det som en tabell </span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">write.xlsx</span>(<span class="at">asTable =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Her ser vi forøvrig en demonstrasjon av hvordan et argument er valgfritt fordi det er definert en default-verdi. I definisjonen av <code>write.xlsx()</code> står det at argumentet <code>asTable</code> er satt til <code>FALSE</code>. Dermed trenger vi ikke spesifisere dette med mindre vi vil endre den til noe annet, slik vi gjør i siste linje.</p>
+<p>Man kan også bygge opp en excelfil mer gradvis</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Start med å lage et workbook-objekt</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>wb <span class="ot">&lt;-</span> <span class="fu">createWorkbook</span>()</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Legg til (tomme) arkfaner</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">addWorksheet</span>(wb, <span class="at">sheetName =</span> <span class="st">"Motor Trend Car Road Tests"</span>, <span class="at">gridLines =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="fu">addWorksheet</span>(wb, <span class="at">sheetName =</span> <span class="st">"Iris"</span>, <span class="at">gridLines =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Skriv data til disse arkfanene. `mtcars` og `iris` er datasett som ligger i R.</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="fu">writeDataTable</span>(wb, <span class="at">sheet =</span> <span class="dv">1</span>, <span class="at">x =</span> mtcars, <span class="at">colNames =</span> <span class="cn">TRUE</span>, <span class="at">rowNames =</span> <span class="cn">TRUE</span>, <span class="at">tableStyle =</span> <span class="st">"TableStyleLight9"</span>)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="fu">writeDataTable</span>(wb, <span class="at">sheet =</span> <span class="dv">2</span>, iris, <span class="at">startCol =</span> <span class="st">"K"</span>, <span class="at">startRow =</span> <span class="dv">2</span>)</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Lagre fila som excel-fil.</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="fu">saveWorkbook</span>(wb, <span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"basics.xlsx"</span>), <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Dette lar deg spesifisere flere av de grafiske elementa i excel-fila, blant annet.</p>
+<p>En apropos, dersom du har mestra pipa (<code>%&gt;%</code>): Man kan ikke uten videre pipe sammen de forskjellige kommandoene i denne pakka slik man kan med datasett. Dette gir feil:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start med å lage et workbook-objekt</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>wb <span class="ot">&lt;-</span> <span class="fu">createWorkbook</span>()</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Legg til (tomme) arkfaner</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">addWorksheet</span>(wb, <span class="at">sheetName =</span> <span class="st">"Motor Trend Car Road Tests"</span>, <span class="at">gridLines =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addWorksheet</span>(<span class="at">sheetName =</span> <span class="st">"Iris"</span>, <span class="at">gridLines =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error: wb must be a Workbok</code></pre>
+</div>
+</div>
+<p>Her ser vi altså en begrensing ved <code>tidyverse</code>: Når du bruker pakker som ikke er en del av universet deres kan vi måtte gjøre endringer i arbeidsflyten vår.</p>
+</section>
+<section id="lese-excel-filer-readxl" class="level3" data-number="5.4.2">
+<h3 data-number="5.4.2" class="anchored" data-anchor-id="lese-excel-filer-readxl"><span class="header-section-number">5.4.2</span> Lese Excel-filer: <code>readxl</code></h3>
+<p>Denne pakka er en del av <code>tidyverse</code>, så her er det bare å stappe pipa.</p>
+<p>La oss ta et steg tilbake og tenke på vi må gjøre når vi leser inn Excel-filer. Det er en del konsepter i Excel som ikke finnes eller brukes i R:</p>
+<ul>
+<li>tomme rader og kolonner som rammer: Det vi ser som en tom celle i Excel er ikke nødvendigvis at den eksisterer. La oss ikke bli for filosofisk her. Pakkas tekst om <a href="https://readxl.tidyverse.org/articles/sheet-geometry.html">regnearkgeometri</a> forklarer dette bedre enn jeg kan.</li>
+<li>farger som indikerer et eller annet om en rad, kolonne eller celle: Dette pleier jeg se bort fra. Viktig informasjon om rader kan heller lagres i tekstformat, i f.eks. en <code>.Rmd</code>/<code>.qmd</code>-fil.</li>
+<li>funksjoner: i R definerer vi funksjonene og kjører dem en gang. Funksjonene blir liggende som objekter i miljøet/skriptet, mens verdiene de produserer blir putta i datasettet. I Excel blir funksjonen og resultatet liggende i samme celle, oppå hverandre. Når vi laster inn fila er vi bare interessert i sjølve resultatene av funksjonen heller enn funksjonen i seg sjøl.</li>
+<li>sammenslåtte celler: Disse er spesielt vanskelig. Ifg. denne posten på <a href="https://stackoverflow.com/questions/37509886/how-to-read-merged-excel-cells-with-r">StackOverflow</a> kan man bruke <code>openxlsx</code> for å lese slike filer. Hvis det gjelder noen få celler, f.eks. i overskrifter, ville jeg vurdert å heller manuelt gå inn og dele dem opp igjen.</li>
+</ul>
+<p>Vi kan bruke <code>read_excel()</code> fra <code>readxl</code> til å lese inn Excel-filer. Den lar oss definere en hel del nyttige ting. Her har jeg limt inn funksjonen med alle argumentene, så forkalrer jeg i en kommentar hva de gjør</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  path, <span class="co"># Filsti + navn på fila du skal lese</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="cn">NULL</span>, <span class="co"># Hvilke(t) regneark. Enten navn eller indeks</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">range =</span> <span class="cn">NULL</span>, <span class="co"># Celler du vil lese. I Excels format, f.eks. "B3:D87"</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_names =</span> <span class="cn">TRUE</span>, <span class="co"># Er første linje kolonnenavn?</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="cn">NULL</span>, <span class="co"># Definer hvilke klasser/typer hver kolonne skal lagres som</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="st">""</span>, <span class="co"># Hvis NA er lagra som noe annet enn en tom celle, skriv det her</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">trim_ws =</span> <span class="cn">TRUE</span>, <span class="co"># Automatisk fjerning av whitespace</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">skip =</span> <span class="dv">0</span>, </span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_max =</span> <span class="cn">Inf</span>,</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">guess_max =</span> <span class="fu">min</span>(<span class="dv">1000</span>, n_max), <span class="co"># Se ned</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">progress =</span> <span class="fu">readxl_progress</span>(),</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">.name_repair =</span> <span class="st">"unique"</span> </span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Om <code>guess_max</code>: Hvis du ikke definerer <code>col_types</code> vil funksjonen gjette på hvilken type data hver kolonne inneholder. På generelt plan er Excel god på dette. Den sliter hvis:</p>
+<ol type="1">
+<li>ei kolonne inneholder flere enn en type og</li>
+<li>det er mange tomme celler i starten av ei kolonne</li>
+</ol>
+<p>Det står mer om gjettinga i <a href="https://readxl.tidyverse.org/articles/cell-and-column-types.html">Cell and Column Types</a>. Angående punkt 2: dette var et problem i barnehagekapasitetsarbeidet. Her lasta jeg inn noen områder i ei Excel-fil som hadde mange tomme rader før det dukka opp en verdi. I disse tilfellene kunne jeg få feilmelding fordi funksjonen forventa en annen type verdi enn det den fant. Løsninga blei å spesifisere kolonnetypen med <code>col_types</code>.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

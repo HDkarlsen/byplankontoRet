@@ -1,5 +1,11 @@
 # Import og eksport av data
 
+```{r}
+library(tidyverse)
+library(here)
+```
+
+
 Vi har en god del muligheter når det kommer til å laste inn data. Det er bra, for dataene våre finnes i mange formater:
 
 - `.csv`: et kommaseparert dokument. En tekstfil som vi kan lese med det blotte øye. Rader atskilles med linjeskift, kolonner med komma. I Norge bruker vi komma som desimalseparator, hvilket forkludrer `.csv`-filer. Derfor har vi ofte `.tsv`-filer istedenfor. Disse er tab-separerte. Noen ganger får de også forkortelsen `.csv`. Andre ganger bruker man semikolon istedenfor komma for å separere en `.csv`-fil. En `.csv`-fil er et vakkert monument til en ydmyk minimalisme og nøkternhet, og burde hvis gudene var sanne hadde dette vært det eneste dataformatet vi hadde trengt å bry oss om.
@@ -55,7 +61,7 @@ I Windows brukes denne skråstreket `\` til å indikere ei mappe. I alle UNIX-ba
 Det siste innebærer å bruke det som kalles *escape characters*. En del tegn har meninger i koden. F.eks. betyr `#` kommentar i et R-skript. Hvis jeg vil skrive ut emneknaggen, må jeg legge på en escape character så R skjønner at dette tegnet skal ikke skal tolkes slik det vanligvis tolkes. Hva er escape-tegnet? Det er nettopp `\`. For å escape `#` skriver vi dermed `\#`, og for å escape `\` skriver vi altså `\\`. 
 <!-- sjekk at # ikke blir til noe annet og må escapes -->
 
-```{r, error = TRUE, eval = FALSE}
+```{r, eval = FALSE}
 # Ok
 "C:/Users/HK2Q/Documents/r/dokumentasjon"
 
@@ -85,13 +91,6 @@ Spesielt når det kommer til norske `.csv`-filer hender det vi får et problem m
 
 Vi kan bruke `read.csv()` fra `utils`, en av pakkene som lastes når vi starter R. Det finnes også noen funksjoner fra `readr`, en del av, 100 poeng til den som gjetter rett, `tidyverse`. Herfra får vi `read_csv()`, `read_csv2()`, `read_tsv()` og `read_delim()`. Les dokumentasjon for å finne mer informasjon om dem. Kort fortalt er forskjellen at alle tre er implementeringer av den mer generelle `_delim()`. La oss skrive en fil og deretter last den inn.
 
-```{r}
-library(here)
-library(haven)
-library(tidyverse)
-```
-
-
 ```{r, eval  = FALSE}
 # Dette datasettet ligger klart når vi laster inn R.
 mtcars
@@ -114,6 +113,7 @@ Jeg foretrekker `readr`s funksjoner fordi de har mange nyttige alternativer slik
 For SPSS-filer bruker vi pakka `haven`. Denne pakka er en del av ... ja, du skjønner. 
 
 ```{r}
+library(haven)
 # Lagrer en fil som en spss-fil. (Jeg lagrer bare de første fire kolonnene).
 starwars %>% 
   select(1:4) %>% 
@@ -150,10 +150,101 @@ stjernekrig %>% head()
 ```
 Hvorfor `NA_character_` og ikke bare `NA`? `if_else` forventer at alle argumentene skal være av samme type/klasse. Derfor må til og med NA være en spesiell type NA. Siden *hair_color* er en strengvektor, må NA være en streng-NA.
 
-Når vi laster inn SPSS-filer vil vi ofte få med merkelappene (*labels*) derfra også, i form av attributter. `tidyverse`-pakker talker ofte dette og viser dem når vi printer objektene. Noen ganger har jeg opplevd, med andre pakker, at attributtene ikke kan leses. I så fall kan man bare fjerne dem.
+Når vi laster inn SPSS-filer vil vi ofte få med merkelappene (*labels*) derfra også, i form av attributter. `tidyverse`-pakker talker ofte dette og viser dem når vi printer objektene. Noen ganger har jeg opplevd, med andre pakker, at attributtene ikke kan leses. I så fall kan man bare fjerne dem. 
 
 ## Excel
 
-The beast.
+Jeg er unødvendig streng mot Excel fordi jeg gjerne vil ha ut en enkel datastruktur fra Excels filer, mens Excel tillater oss kompliserte strukturer som ikke uten videre kan puttes inn en en vanlig tabell. Som sagt er vi her avhengig av den enkelte person som lagde Excelfila når det kommer til hvor lett det er for oss å laste den inn. Det å være konsekvent er viktigere enn å etterlikne en "vanlig tabell". Til dette arbeidet har vi to pakker som har ulike bruksområder: 
 
-<!-- To pakker -->
+- `openxlsx`: [Kilde](https://ycphs.github.io/openxlsx/). Brukes for å skrive Excel-filer.
+- `readxl`: [Kilde](https://readxl.tidyverse.org/). Brukes for å lese Excel-filer.
+
+### Skrive til Excel: `openxlsx`
+
+Pakkas egen [introduksjon](https://ycphs.github.io/openxlsx/articles/Introduction.html) er en god guide til hvordan dette funker. Sjekk den ut. I korte drag:
+
+```{r, eval = FALSE}
+library(openxlsx)
+
+# Kjapp lagring av fil
+starwars %>% write.xlsx()
+
+# Hvis du vil ha det som en tabell 
+starwars %>% write.xlsx(asTable = TRUE)
+```
+
+Her ser vi forøvrig en demonstrasjon av hvordan et argument er valgfritt fordi det er definert en default-verdi. I definisjonen av `write.xlsx()` står det at argumentet `asTable` er satt til `FALSE`. Dermed trenger vi ikke spesifisere dette med mindre vi vil endre den til noe annet, slik vi gjør i siste linje.
+
+Man kan også bygge opp en excelfil mer gradvis
+
+```{r}
+library(openxlsx)
+
+# Start med å lage et workbook-objekt
+wb <- createWorkbook()
+
+# Legg til (tomme) arkfaner
+addWorksheet(wb, sheetName = "Motor Trend Car Road Tests", gridLines = FALSE)
+addWorksheet(wb, sheetName = "Iris", gridLines = FALSE)
+
+# Skriv data til disse arkfanene. `mtcars` og `iris` er datasett som ligger i R.
+writeDataTable(wb, sheet = 1, x = mtcars, colNames = TRUE, rowNames = TRUE, tableStyle = "TableStyleLight9")
+writeDataTable(wb, sheet = 2, iris, startCol = "K", startRow = 2)
+
+# Lagre fila som excel-fil.
+saveWorkbook(wb, here("data", "basics.xlsx"), overwrite = TRUE)
+```
+
+Dette lar deg spesifisere flere av de grafiske elementa i excel-fila, blant annet. 
+
+En apropos, dersom du har mestra pipa (`%>%`): Man kan ikke uten videre pipe sammen de forskjellige kommandoene i denne pakka slik man kan med datasett. Dette gir feil:
+
+```{r, error = TRUE}
+# Start med å lage et workbook-objekt
+wb <- createWorkbook()
+
+# Legg til (tomme) arkfaner
+addWorksheet(wb, sheetName = "Motor Trend Car Road Tests", gridLines = FALSE) %>% 
+  addWorksheet(sheetName = "Iris", gridLines = FALSE)
+```
+Her ser vi altså en begrensing ved `tidyverse`: Når du bruker pakker som ikke er en del av universet deres kan vi måtte gjøre endringer i arbeidsflyten vår.
+
+### Lese Excel-filer: `readxl`
+
+Denne pakka er en del av `tidyverse`, så her er det bare å stappe pipa. 
+
+La oss ta et steg tilbake og tenke på vi må gjøre når vi leser inn Excel-filer. Det er en del konsepter i Excel som ikke finnes eller brukes i R:
+
+- tomme rader og kolonner som rammer: Det vi ser som en tom celle i Excel er ikke nødvendigvis at den eksisterer. La oss ikke bli for filosofisk her. Pakkas tekst om [regnearkgeometri](https://readxl.tidyverse.org/articles/sheet-geometry.html) forklarer dette bedre enn jeg kan.
+- farger som indikerer et eller annet om en rad, kolonne eller celle: Dette pleier jeg se bort fra. Viktig informasjon om rader kan heller lagres i tekstformat, i f.eks. en `.Rmd`/`.qmd`-fil. 
+- funksjoner: i R definerer vi funksjonene og kjører dem en gang. Funksjonene blir liggende som objekter i miljøet/skriptet, mens verdiene de produserer blir putta i datasettet. I Excel blir funksjonen og resultatet liggende i samme celle, oppå hverandre. Når vi laster inn fila er vi bare interessert i sjølve resultatene av funksjonen heller enn funksjonen i seg sjøl.
+- sammenslåtte celler: Disse er spesielt vanskelig. Ifg. denne posten på [StackOverflow](https://stackoverflow.com/questions/37509886/how-to-read-merged-excel-cells-with-r) kan man bruke `openxlsx` for å lese slike filer. Hvis det gjelder noen få celler, f.eks. i overskrifter, ville jeg vurdert å heller manuelt gå inn og dele dem opp igjen.
+
+Vi kan bruke `read_excel()` fra `readxl` til å lese inn Excel-filer. Den lar oss definere en hel del nyttige ting. Her har jeg limt inn funksjonen med alle argumentene, så forkalrer jeg i en kommentar hva de gjør
+
+```{r, eval = FALSE}
+library(readxl)
+
+read_excel(
+  path, # Filsti + navn på fila du skal lese
+  sheet = NULL, # Hvilke(t) regneark. Enten navn eller indeks
+  range = NULL, # Celler du vil lese. I Excels format, f.eks. "B3:D87"
+  col_names = TRUE, # Er første linje kolonnenavn?
+  col_types = NULL, # Definer hvilke klasser/typer hver kolonne skal lagres som
+  na = "", # Hvis NA er lagra som noe annet enn en tom celle, skriv det her
+  trim_ws = TRUE, # Automatisk fjerning av whitespace
+  skip = 0, 
+  n_max = Inf,
+  guess_max = min(1000, n_max), # Se ned
+  progress = readxl_progress(),
+  .name_repair = "unique" 
+)
+```
+
+Om `guess_max`: Hvis du ikke definerer `col_types` vil funksjonen gjette på hvilken type data hver kolonne inneholder. På generelt plan er Excel god på dette. Den sliter hvis: 
+
+1. ei kolonne inneholder flere enn en type og 
+2. det er mange tomme celler i starten av ei kolonne
+
+Det står mer om gjettinga i [Cell and Column Types](https://readxl.tidyverse.org/articles/cell-and-column-types.html). Angående punkt 2: dette var et problem i barnehagekapasitetsarbeidet. Her lasta jeg inn noen områder i ei Excel-fil som hadde mange tomme rader før det dukka opp en verdi. I disse tilfellene kunne jeg få feilmelding fordi funksjonen forventa en annen type verdi enn det den fant. Løsninga blei å spesifisere kolonnetypen med `col_types`.
+
