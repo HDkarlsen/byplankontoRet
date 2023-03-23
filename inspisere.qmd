@@ -1,0 +1,137 @@
+# Inspisere data
+
+```{r}
+library(tidyverse)
+```
+
+
+Er du vant til å jobbe i programvare som er bygd mer rundt det grafiske brukergrensesnittet vil du nok på dette tidspunktet føle deg noe klaustrofobisk. Hvor er dataene mine? Hvordan ser de ut? Det er bra å inspisere dataene sine jevnlig for å sjekke at antakelsene dine om dem stemmer. Rett som det er kan du oppdaga at det du trodde var et levende datasett egentlig bare er et `NULL`-objekt. Derfor bør vi kjenne til en del ulike måter å inspisere datasetta våre.
+
+## View
+
+Kommandoen `View()` gir deg det nærmeste vi kommer SPSS' *Data view*-vindu. Her kan du se rader, celler og kolonner. Merk at kommandoen har stor forbokstav - noe som er uvanlig. Du bruker det simpelthen slik `View(starwars)`, og et nytt vindu vil dukke opp hvor du kan bivåne data i ro og mak. Har du store mengder data er min erfaring at scrollinga blir litt treig, og det tar litt tid å laste inn hvert nye skjermbilde. Hvis du er lei av å skrive, kan du også dobbeltklikke på et `data.frame`/`tibble`-objekt i miljø-vinduet.
+
+## Del-inspisering
+
+Den enkleste måten å inspisere et datasett på er å bare skrive navnet i konsollen. Da blir (et utdrag) av datasettet skrevet ut.
+
+```{r}
+# For å gjøre disse eksemplene tydligere legger jeg på en rad-ID med 
+# `rowid_to_column()` slik at vi lettere ser hvilken rad vi ser på.
+# Datasettet har biltype som "radnavn", så vi putter disse inn i en egen
+# kolonne først med `rownames_to_column()`.
+biler <- mtcars %>% 
+  rownames_to_column("bil") %>% 
+  rowid_to_column("rowid")
+
+biler
+```
+
+I seg sjøl greit. Men man risikerer å overse noe dersom man alltid bare inspiserer de øverste ti radene. Da er de nyttig å se på et tilfeldig utvalg av rader
+
+```{r}
+biler %>% slice_sample(n = 10)
+```
+
+Denne funksjonen er en avart av `slice()` som gir deg *spesifikke* rader. Hvis du f.eks. vil ha rad 10-20:
+
+```{r}
+biler %>% slice(10:20)
+```
+
+Dette gir oss en mulighet til å se fordelen med å arbeide med tibbles: På noen skjermer blir den forrige tabellen stygg fordi den siste kolonna presses ned til ei ny side. (Jeg kan ikke garantere at det skjer på din side.) Men om vi gjør om *biler* (som arver `data.fram`-klassen fra *mtcars*) til en `tibble`, får den siste kolonna plass på samme linje som resten. (Jeg kan forsåvidt heller ikke garantere at dette vil se helt likt ut på din skjerm.) Og vi får vite kolonnetypen til hver kolonne. Stilig! 
+
+```{r}
+biler %>% 
+  tibble() %>% 
+  slice(10:20)
+```
+
+Noen ganger er det likevel nyttig å kikke på toppen eller bunnen av et datasett. Da kan vi bruke de komplementære funksjonene `head()` og `tail()`.
+
+```{r}
+# `head()` viser toppen
+biler %>% head()
+
+# `tail()` viser bunnen
+biler %>% tail()
+```
+
+Disse er nyttig fordi de kan brukes på mer enn bare datasett.
+
+```{r}
+# Viser de siste kolonnenavna i datasettet
+biler %>% 
+  colnames() %>% 
+  tail()
+
+# Lager en strengvektor på 26 elementer (bokstaver)
+bokstaver <- letters[1:26]
+
+# Viser de siste bokstavene
+bokstaver %>% tail()
+```
+
+## Andre kolonner
+
+På samme måte som det er begrensende å hele tida kikke på de øverste *radene* av et datasett er det begrensende å kikke på de fremste *kolonnene*. Vi kan bruke `select()` for å velge hvilke rader vi vil se på, eller vi kan bruke den nyttige `glimpse()`. Greier du å gjette hvor disse funksjonene kommer fra? De kommer fra `dplyr`!
+
+...
+
+som er en del av `tidyverse`.
+
+### select
+
+`select()` gir oss muligheten til å diskutere en av de fantastiske innovasjonene i `tidyverse`: **tidy evaluation**. Vi dykker ikke dypt i det, men det er greit å vite om **data masking** og **tidy select**. De er diskutert mer inngående i [Programming with Tidyverse](https://dplyr.tidyverse.org/articles/programming.html). *Tidy select*  lar oss velge en kolonne i et datasett *uten å måtte hermetegn*. Tenk på det! Neste gang du velger en kolonne slipper du å strekke lillefingeren til den fjerne shift-tasten og gå i spagat med langefingern til 2-tasten. Faktisk gjør *tidy select*  mye mer enn dette, som vi vil se etter hvert. F.eks. kan du velge kolonner ut fra navn, posisjon, eller *type*. La oss se noen eksempler
+
+```{r}
+# Slik ser starwars-datasettet ut. 
+starwars %>% head()
+
+# Det er 14 kolonner. 
+# Med mindre du har en svær skjerm kan vi ikke se alle på en gang.
+starwars %>% colnames()
+
+# Vi kikker på noen spesifikke kolonner. 
+# Films er ei liste, så den ser vi ikke direkte.
+starwars %>% select(name, species, films)
+
+# Vi vil ha 1, 3, 5, og 7 kolonne
+starwars %>% select(1, 3, 5, 7)
+
+# Alle kolonner som inneholder en viss tekststreng
+starwars %>% select(contains("color"))
+
+# Alle kolonner som er numeriske
+starwars %>% select(where(is.numeric))
+```
+
+### glimpse
+
+Tilbake til det opprinnelige formålet, som bare var å ta en kjapp titt på dataene vi har. Til dette er `glimpse()` utmerka. Den snur rett og slett datasettet 90 grader og skriver ut kolonnenavna *nedover*. Dermed får du med flere. Du får også en oversikt over hva hver kolonne inneholder, skjønt det er mer utydelig hva som er på samme rad. En fordel med `glimpse()` er at den viser oss innholdet i lister som er element av datasettet. Her ser vi f.eks. innholdet i kolonna *films* .
+
+```{r}
+starwars %>% glimpse()
+```
+## Oppsummeringer
+
+Hittil har vi bare prata om måter å set utdrag av data på. Noen ganger er det nyttig å se en *oppsummering* av dataene. Detaljer som snitt, standardavvik, minimum og maksimum-verdier, for eksempel.
+
+`summary()` fra `base R` er nyttig her. Den gir enkelt og greit en oversikt over diverse statistikk for hver numeriske variabel.
+
+```{r}
+biler %>% summary()
+```
+
+Vi kan også sette sammen vår eget sammendrag med `summarise` fra `dplyr`. Her kombinerer vi det med grupperingsfunksjonen `group_by()`. 
+
+```{r}
+mtcars %>% 
+  group_by(cyl) %>% 
+  summarise(
+    mpg_m = mean(mpg),
+    mpg_sd = sd(mpg)
+  )
+```
+
+**Tips**: Jeg bruker både `summary()` og `summarise()` ofte. Og jeg bruker nesten konsekvent den ene når jeg egentlig mener å bruke den andre. Får du feilmelding når du arbeider med disse funksjonene, sjekk først at du ikke egentlig mente å bruke den andre.

@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R for Byplankontoret - 6&nbsp; Inspisere data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./pivot.html" rel="next">
+<link href="./import-export.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inspisere data</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R for Byplankontoret</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Forord</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduksjon</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./omR.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Om R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pakker.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pakker</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./grunnleggende.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Det grunnleggende</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./import-export.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Import og eksport av data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./inspisere.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inspisere data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pivot.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Omstrukturering av data (pivot)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./feil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">Referanser</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#view" id="toc-view" class="nav-link active" data-scroll-target="#view"><span class="toc-section-number">6.1</span>  View</a></li>
+  <li><a href="#del-inspisering" id="toc-del-inspisering" class="nav-link" data-scroll-target="#del-inspisering"><span class="toc-section-number">6.2</span>  Del-inspisering</a></li>
+  <li><a href="#andre-kolonner" id="toc-andre-kolonner" class="nav-link" data-scroll-target="#andre-kolonner"><span class="toc-section-number">6.3</span>  Andre kolonner</a>
+  <ul class="collapse">
+  <li><a href="#select" id="toc-select" class="nav-link" data-scroll-target="#select"><span class="toc-section-number">6.3.1</span>  select</a></li>
+  <li><a href="#glimpse" id="toc-glimpse" class="nav-link" data-scroll-target="#glimpse"><span class="toc-section-number">6.3.2</span>  glimpse</a></li>
+  </ul></li>
+  <li><a href="#oppsummeringer" id="toc-oppsummeringer" class="nav-link" data-scroll-target="#oppsummeringer"><span class="toc-section-number">6.4</span>  Oppsummeringer</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inspisere data</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
+✔ ggplot2 3.3.6      ✔ purrr   0.3.5 
+✔ tibble  3.1.8      ✔ dplyr   1.0.10
+✔ tidyr   1.2.1      ✔ stringr 1.4.1 
+✔ readr   2.1.3      ✔ forcats 0.5.2 
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()</code></pre>
+</div>
+</div>
+<p>Er du vant til å jobbe i programvare som er bygd mer rundt det grafiske brukergrensesnittet vil du nok på dette tidspunktet føle deg noe klaustrofobisk. Hvor er dataene mine? Hvordan ser de ut? Det er bra å inspisere dataene sine jevnlig for å sjekke at antakelsene dine om dem stemmer. Rett som det er kan du oppdaga at det du trodde var et levende datasett egentlig bare er et <code>NULL</code>-objekt. Derfor bør vi kjenne til en del ulike måter å inspisere datasetta våre.</p>
+<section id="view" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="view"><span class="header-section-number">6.1</span> View</h2>
+<p>Kommandoen <code>View()</code> gir deg det nærmeste vi kommer SPSS’ <em>Data view</em>-vindu. Her kan du se rader, celler og kolonner. Merk at kommandoen har stor forbokstav - noe som er uvanlig. Du bruker det simpelthen slik <code>View(starwars)</code>, og et nytt vindu vil dukke opp hvor du kan bivåne data i ro og mak. Har du store mengder data er min erfaring at scrollinga blir litt treig, og det tar litt tid å laste inn hvert nye skjermbilde. Hvis du er lei av å skrive, kan du også dobbeltklikke på et <code>data.frame</code>/<code>tibble</code>-objekt i miljø-vinduet.</p>
+</section>
+<section id="del-inspisering" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="del-inspisering"><span class="header-section-number">6.2</span> Del-inspisering</h2>
+<p>Den enkleste måten å inspisere et datasett på er å bare skrive navnet i konsollen. Da blir (et utdrag) av datasettet skrevet ut.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For å gjøre disse eksemplene tydligere legger jeg på en rad-ID med </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># `rowid_to_column()` slik at vi lettere ser hvilken rad vi ser på.</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Datasettet har biltype som "radnavn", så vi putter disse inn i en egen</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># kolonne først med `rownames_to_column()`.</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>biler <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">"bil"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowid_to_column</span>(<span class="st">"rowid"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>biler</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   rowid                 bil  mpg cyl  disp  hp drat    wt  qsec vs am gear
+1      1           Mazda RX4 21.0   6 160.0 110 3.90 2.620 16.46  0  1    4
+2      2       Mazda RX4 Wag 21.0   6 160.0 110 3.90 2.875 17.02  0  1    4
+3      3          Datsun 710 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4
+4      4      Hornet 4 Drive 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3
+5      5   Hornet Sportabout 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3
+6      6             Valiant 18.1   6 225.0 105 2.76 3.460 20.22  1  0    3
+7      7          Duster 360 14.3   8 360.0 245 3.21 3.570 15.84  0  0    3
+8      8           Merc 240D 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4
+9      9            Merc 230 22.8   4 140.8  95 3.92 3.150 22.90  1  0    4
+10    10            Merc 280 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4
+11    11           Merc 280C 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4
+12    12          Merc 450SE 16.4   8 275.8 180 3.07 4.070 17.40  0  0    3
+13    13          Merc 450SL 17.3   8 275.8 180 3.07 3.730 17.60  0  0    3
+14    14         Merc 450SLC 15.2   8 275.8 180 3.07 3.780 18.00  0  0    3
+15    15  Cadillac Fleetwood 10.4   8 472.0 205 2.93 5.250 17.98  0  0    3
+16    16 Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3
+17    17   Chrysler Imperial 14.7   8 440.0 230 3.23 5.345 17.42  0  0    3
+18    18            Fiat 128 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4
+19    19         Honda Civic 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4
+20    20      Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4
+21    21       Toyota Corona 21.5   4 120.1  97 3.70 2.465 20.01  1  0    3
+22    22    Dodge Challenger 15.5   8 318.0 150 2.76 3.520 16.87  0  0    3
+23    23         AMC Javelin 15.2   8 304.0 150 3.15 3.435 17.30  0  0    3
+24    24          Camaro Z28 13.3   8 350.0 245 3.73 3.840 15.41  0  0    3
+25    25    Pontiac Firebird 19.2   8 400.0 175 3.08 3.845 17.05  0  0    3
+26    26           Fiat X1-9 27.3   4  79.0  66 4.08 1.935 18.90  1  1    4
+27    27       Porsche 914-2 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5
+28    28        Lotus Europa 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5
+29    29      Ford Pantera L 15.8   8 351.0 264 4.22 3.170 14.50  0  1    5
+30    30        Ferrari Dino 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5
+31    31       Maserati Bora 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5
+32    32          Volvo 142E 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4
+   carb
+1     4
+2     4
+3     1
+4     1
+5     2
+6     1
+7     4
+8     2
+9     2
+10    4
+11    4
+12    3
+13    3
+14    3
+15    4
+16    4
+17    4
+18    1
+19    2
+20    1
+21    1
+22    2
+23    2
+24    4
+25    2
+26    1
+27    2
+28    2
+29    4
+30    6
+31    8
+32    2</code></pre>
+</div>
+</div>
+<p>I seg sjøl greit. Men man risikerer å overse noe dersom man alltid bare inspiserer de øverste ti radene. Da er de nyttig å se på et tilfeldig utvalg av rader</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>biler <span class="sc">%&gt;%</span> <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   rowid               bil  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+1     30      Ferrari Dino 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+2     23       AMC Javelin 15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+3     11         Merc 280C 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+4      7        Duster 360 14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+5     26         Fiat X1-9 27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+6     19       Honda Civic 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+7     14       Merc 450SLC 15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+8     18          Fiat 128 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+9     27     Porsche 914-2 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+10     5 Hornet Sportabout 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2</code></pre>
+</div>
+</div>
+<p>Denne funksjonen er en avart av <code>slice()</code> som gir deg <em>spesifikke</em> rader. Hvis du f.eks. vil ha rad 10-20:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>biler <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">10</span><span class="sc">:</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   rowid                 bil  mpg cyl  disp  hp drat    wt  qsec vs am gear
+1     10            Merc 280 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4
+2     11           Merc 280C 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4
+3     12          Merc 450SE 16.4   8 275.8 180 3.07 4.070 17.40  0  0    3
+4     13          Merc 450SL 17.3   8 275.8 180 3.07 3.730 17.60  0  0    3
+5     14         Merc 450SLC 15.2   8 275.8 180 3.07 3.780 18.00  0  0    3
+6     15  Cadillac Fleetwood 10.4   8 472.0 205 2.93 5.250 17.98  0  0    3
+7     16 Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3
+8     17   Chrysler Imperial 14.7   8 440.0 230 3.23 5.345 17.42  0  0    3
+9     18            Fiat 128 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4
+10    19         Honda Civic 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4
+11    20      Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4
+   carb
+1     4
+2     4
+3     3
+4     3
+5     3
+6     4
+7     4
+8     4
+9     1
+10    2
+11    1</code></pre>
+</div>
+</div>
+<p>Dette gir oss en mulighet til å se fordelen med å arbeide med tibbles: På noen skjermer blir den forrige tabellen stygg fordi den siste kolonna presses ned til ei ny side. (Jeg kan ikke garantere at det skjer på din side.) Men om vi gjør om <em>biler</em> (som arver <code>data.fram</code>-klassen fra <em>mtcars</em>) til en <code>tibble</code>, får den siste kolonna plass på samme linje som resten. (Jeg kan forsåvidt heller ikke garantere at dette vil se helt likt ut på din skjerm.) Og vi får vite kolonnetypen til hver kolonne. Stilig!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>biler <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">10</span><span class="sc">:</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 11 × 13
+   rowid bil     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+   &lt;int&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1    10 Merc…  19.2     6 168.    123  3.92  3.44  18.3     1     0     4     4
+ 2    11 Merc…  17.8     6 168.    123  3.92  3.44  18.9     1     0     4     4
+ 3    12 Merc…  16.4     8 276.    180  3.07  4.07  17.4     0     0     3     3
+ 4    13 Merc…  17.3     8 276.    180  3.07  3.73  17.6     0     0     3     3
+ 5    14 Merc…  15.2     8 276.    180  3.07  3.78  18       0     0     3     3
+ 6    15 Cadi…  10.4     8 472     205  2.93  5.25  18.0     0     0     3     4
+ 7    16 Linc…  10.4     8 460     215  3     5.42  17.8     0     0     3     4
+ 8    17 Chry…  14.7     8 440     230  3.23  5.34  17.4     0     0     3     4
+ 9    18 Fiat…  32.4     4  78.7    66  4.08  2.2   19.5     1     1     4     1
+10    19 Hond…  30.4     4  75.7    52  4.93  1.62  18.5     1     1     4     2
+11    20 Toyo…  33.9     4  71.1    65  4.22  1.84  19.9     1     1     4     1</code></pre>
+</div>
+</div>
+<p>Noen ganger er det likevel nyttig å kikke på toppen eller bunnen av et datasett. Da kan vi bruke de komplementære funksjonene <code>head()</code> og <code>tail()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># `head()` viser toppen</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>biler <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  rowid               bil  mpg cyl disp  hp drat    wt  qsec vs am gear carb
+1     1         Mazda RX4 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+2     2     Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+3     3        Datsun 710 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+4     4    Hornet 4 Drive 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+5     5 Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+6     6           Valiant 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># `tail()` viser bunnen</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>biler <span class="sc">%&gt;%</span> <span class="fu">tail</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   rowid            bil  mpg cyl  disp  hp drat    wt qsec vs am gear carb
+27    27  Porsche 914-2 26.0   4 120.3  91 4.43 2.140 16.7  0  1    5    2
+28    28   Lotus Europa 30.4   4  95.1 113 3.77 1.513 16.9  1  1    5    2
+29    29 Ford Pantera L 15.8   8 351.0 264 4.22 3.170 14.5  0  1    5    4
+30    30   Ferrari Dino 19.7   6 145.0 175 3.62 2.770 15.5  0  1    5    6
+31    31  Maserati Bora 15.0   8 301.0 335 3.54 3.570 14.6  0  1    5    8
+32    32     Volvo 142E 21.4   4 121.0 109 4.11 2.780 18.6  1  1    4    2</code></pre>
+</div>
+</div>
+<p>Disse er nyttig fordi de kan brukes på mer enn bare datasett.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Viser de siste kolonnenavna i datasettet</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>biler <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tail</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "wt"   "qsec" "vs"   "am"   "gear" "carb"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lager en strengvektor på 26 elementer (bokstaver)</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>bokstaver <span class="ot">&lt;-</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">26</span>]</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Viser de siste bokstavene</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>bokstaver <span class="sc">%&gt;%</span> <span class="fu">tail</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "u" "v" "w" "x" "y" "z"</code></pre>
+</div>
+</div>
+</section>
+<section id="andre-kolonner" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="andre-kolonner"><span class="header-section-number">6.3</span> Andre kolonner</h2>
+<p>På samme måte som det er begrensende å hele tida kikke på de øverste <em>radene</em> av et datasett er det begrensende å kikke på de fremste <em>kolonnene</em>. Vi kan bruke <code>select()</code> for å velge hvilke rader vi vil se på, eller vi kan bruke den nyttige <code>glimpse()</code>. Greier du å gjette hvor disse funksjonene kommer fra? De kommer fra <code>dplyr</code>!</p>
+<p>…</p>
+<p>som er en del av <code>tidyverse</code>.</p>
+<section id="select" class="level3" data-number="6.3.1">
+<h3 data-number="6.3.1" class="anchored" data-anchor-id="select"><span class="header-section-number">6.3.1</span> select</h3>
+<p><code>select()</code> gir oss muligheten til å diskutere en av de fantastiske innovasjonene i <code>tidyverse</code>: <strong>tidy evaluation</strong>. Vi dykker ikke dypt i det, men det er greit å vite om <strong>data masking</strong> og <strong>tidy select</strong>. De er diskutert mer inngående i <a href="https://dplyr.tidyverse.org/articles/programming.html">Programming with Tidyverse</a>. <em>Tidy select</em> lar oss velge en kolonne i et datasett <em>uten å måtte hermetegn</em>. Tenk på det! Neste gang du velger en kolonne slipper du å strekke lillefingeren til den fjerne shift-tasten og gå i spagat med langefingern til 2-tasten. Faktisk gjør <em>tidy select</em> mye mer enn dette, som vi vil se etter hvert. F.eks. kan du velge kolonner ut fra navn, posisjon, eller <em>type</em>. La oss se noen eksempler</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Slik ser starwars-datasettet ut. </span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 14
+  name         height  mass hair_…¹ skin_…² eye_c…³ birth…⁴ sex   gender homew…⁵
+  &lt;chr&gt;         &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  
+1 Luke Skywal…    172    77 blond   fair    blue       19   male  mascu… Tatooi…
+2 C-3PO           167    75 &lt;NA&gt;    gold    yellow    112   none  mascu… Tatooi…
+3 R2-D2            96    32 &lt;NA&gt;    white,… red        33   none  mascu… Naboo  
+4 Darth Vader     202   136 none    white   yellow     41.9 male  mascu… Tatooi…
+5 Leia Organa     150    49 brown   light   brown      19   fema… femin… Aldera…
+6 Owen Lars       178   120 brown,… light   blue       52   male  mascu… Tatooi…
+# … with 4 more variables: species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;,
+#   starships &lt;list&gt;, and abbreviated variable names ¹​hair_color, ²​skin_color,
+#   ³​eye_color, ⁴​birth_year, ⁵​homeworld</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Det er 14 kolonner. </span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Med mindre du har en svær skjerm kan vi ikke se alle på en gang.</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">colnames</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "name"       "height"     "mass"       "hair_color" "skin_color"
+ [6] "eye_color"  "birth_year" "sex"        "gender"     "homeworld" 
+[11] "species"    "films"      "vehicles"   "starships" </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vi kikker på noen spesifikke kolonner. </span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Films er ei liste, så den ser vi ikke direkte.</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">select</span>(name, species, films)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 87 × 3
+   name               species films    
+   &lt;chr&gt;              &lt;chr&gt;   &lt;list&gt;   
+ 1 Luke Skywalker     Human   &lt;chr [5]&gt;
+ 2 C-3PO              Droid   &lt;chr [6]&gt;
+ 3 R2-D2              Droid   &lt;chr [7]&gt;
+ 4 Darth Vader        Human   &lt;chr [4]&gt;
+ 5 Leia Organa        Human   &lt;chr [5]&gt;
+ 6 Owen Lars          Human   &lt;chr [3]&gt;
+ 7 Beru Whitesun lars Human   &lt;chr [3]&gt;
+ 8 R5-D4              Droid   &lt;chr [1]&gt;
+ 9 Biggs Darklighter  Human   &lt;chr [1]&gt;
+10 Obi-Wan Kenobi     Human   &lt;chr [6]&gt;
+# … with 77 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vi vil ha 1, 3, 5, og 7 kolonne</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 87 × 4
+   name                mass skin_color  birth_year
+   &lt;chr&gt;              &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;
+ 1 Luke Skywalker        77 fair              19  
+ 2 C-3PO                 75 gold             112  
+ 3 R2-D2                 32 white, blue       33  
+ 4 Darth Vader          136 white             41.9
+ 5 Leia Organa           49 light             19  
+ 6 Owen Lars            120 light             52  
+ 7 Beru Whitesun lars    75 light             47  
+ 8 R5-D4                 32 white, red        NA  
+ 9 Biggs Darklighter     84 light             24  
+10 Obi-Wan Kenobi        77 fair              57  
+# … with 77 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Alle kolonner som inneholder en viss tekststreng</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"color"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 87 × 3
+   hair_color    skin_color  eye_color
+   &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;    
+ 1 blond         fair        blue     
+ 2 &lt;NA&gt;          gold        yellow   
+ 3 &lt;NA&gt;          white, blue red      
+ 4 none          white       yellow   
+ 5 brown         light       brown    
+ 6 brown, grey   light       blue     
+ 7 brown         light       blue     
+ 8 &lt;NA&gt;          white, red  red      
+ 9 black         light       brown    
+10 auburn, white fair        blue-gray
+# … with 77 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Alle kolonner som er numeriske</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">where</span>(is.numeric))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 87 × 3
+   height  mass birth_year
+    &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;
+ 1    172    77       19  
+ 2    167    75      112  
+ 3     96    32       33  
+ 4    202   136       41.9
+ 5    150    49       19  
+ 6    178   120       52  
+ 7    165    75       47  
+ 8     97    32       NA  
+ 9    183    84       24  
+10    182    77       57  
+# … with 77 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="glimpse" class="level3" data-number="6.3.2">
+<h3 data-number="6.3.2" class="anchored" data-anchor-id="glimpse"><span class="header-section-number">6.3.2</span> glimpse</h3>
+<p>Tilbake til det opprinnelige formålet, som bare var å ta en kjapp titt på dataene vi har. Til dette er <code>glimpse()</code> utmerka. Den snur rett og slett datasettet 90 grader og skriver ut kolonnenavna <em>nedover</em>. Dermed får du med flere. Du får også en oversikt over hva hver kolonne inneholder, skjønt det er mer utydelig hva som er på samme rad. En fordel med <code>glimpse()</code> er at den viser oss innholdet i lister som er element av datasettet. Her ser vi f.eks. innholdet i kolonna <em>films</em> .</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 87
+Columns: 14
+$ name       &lt;chr&gt; "Luke Skywalker", "C-3PO", "R2-D2", "Darth Vader", "Leia Or…
+$ height     &lt;int&gt; 172, 167, 96, 202, 150, 178, 165, 97, 183, 182, 188, 180, 2…
+$ mass       &lt;dbl&gt; 77.0, 75.0, 32.0, 136.0, 49.0, 120.0, 75.0, 32.0, 84.0, 77.…
+$ hair_color &lt;chr&gt; "blond", NA, NA, "none", "brown", "brown, grey", "brown", N…
+$ skin_color &lt;chr&gt; "fair", "gold", "white, blue", "white", "light", "light", "…
+$ eye_color  &lt;chr&gt; "blue", "yellow", "red", "yellow", "brown", "blue", "blue",…
+$ birth_year &lt;dbl&gt; 19.0, 112.0, 33.0, 41.9, 19.0, 52.0, 47.0, NA, 24.0, 57.0, …
+$ sex        &lt;chr&gt; "male", "none", "none", "male", "female", "male", "female",…
+$ gender     &lt;chr&gt; "masculine", "masculine", "masculine", "masculine", "femini…
+$ homeworld  &lt;chr&gt; "Tatooine", "Tatooine", "Naboo", "Tatooine", "Alderaan", "T…
+$ species    &lt;chr&gt; "Human", "Droid", "Droid", "Human", "Human", "Human", "Huma…
+$ films      &lt;list&gt; &lt;"The Empire Strikes Back", "Revenge of the Sith", "Return…
+$ vehicles   &lt;list&gt; &lt;"Snowspeeder", "Imperial Speeder Bike"&gt;, &lt;&gt;, &lt;&gt;, &lt;&gt;, "Imp…
+$ starships  &lt;list&gt; &lt;"X-wing", "Imperial shuttle"&gt;, &lt;&gt;, &lt;&gt;, "TIE Advanced x1",…</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="oppsummeringer" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="oppsummeringer"><span class="header-section-number">6.4</span> Oppsummeringer</h2>
+<p>Hittil har vi bare prata om måter å set utdrag av data på. Noen ganger er det nyttig å se en <em>oppsummering</em> av dataene. Detaljer som snitt, standardavvik, minimum og maksimum-verdier, for eksempel.</p>
+<p><code>summary()</code> fra <code>base R</code> er nyttig her. Den gir enkelt og greit en oversikt over diverse statistikk for hver numeriske variabel.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>biler <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     rowid           bil                 mpg             cyl       
+ Min.   : 1.00   Length:32          Min.   :10.40   Min.   :4.000  
+ 1st Qu.: 8.75   Class :character   1st Qu.:15.43   1st Qu.:4.000  
+ Median :16.50   Mode  :character   Median :19.20   Median :6.000  
+ Mean   :16.50                      Mean   :20.09   Mean   :6.188  
+ 3rd Qu.:24.25                      3rd Qu.:22.80   3rd Qu.:8.000  
+ Max.   :32.00                      Max.   :33.90   Max.   :8.000  
+      disp             hp             drat             wt       
+ Min.   : 71.1   Min.   : 52.0   Min.   :2.760   Min.   :1.513  
+ 1st Qu.:120.8   1st Qu.: 96.5   1st Qu.:3.080   1st Qu.:2.581  
+ Median :196.3   Median :123.0   Median :3.695   Median :3.325  
+ Mean   :230.7   Mean   :146.7   Mean   :3.597   Mean   :3.217  
+ 3rd Qu.:326.0   3rd Qu.:180.0   3rd Qu.:3.920   3rd Qu.:3.610  
+ Max.   :472.0   Max.   :335.0   Max.   :4.930   Max.   :5.424  
+      qsec             vs               am              gear      
+ Min.   :14.50   Min.   :0.0000   Min.   :0.0000   Min.   :3.000  
+ 1st Qu.:16.89   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:3.000  
+ Median :17.71   Median :0.0000   Median :0.0000   Median :4.000  
+ Mean   :17.85   Mean   :0.4375   Mean   :0.4062   Mean   :3.688  
+ 3rd Qu.:18.90   3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:4.000  
+ Max.   :22.90   Max.   :1.0000   Max.   :1.0000   Max.   :5.000  
+      carb      
+ Min.   :1.000  
+ 1st Qu.:2.000  
+ Median :2.000  
+ Mean   :2.812  
+ 3rd Qu.:4.000  
+ Max.   :8.000  </code></pre>
+</div>
+</div>
+<p>Vi kan også sette sammen vår eget sammendrag med <code>summarise</code> fra <code>dplyr</code>. Her kombinerer vi det med grupperingsfunksjonen <code>group_by()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cyl) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mpg_m =</span> <span class="fu">mean</span>(mpg),</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mpg_sd =</span> <span class="fu">sd</span>(mpg)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+    cyl mpg_m mpg_sd
+  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+1     4  26.7   4.51
+2     6  19.7   1.45
+3     8  15.1   2.56</code></pre>
+</div>
+</div>
+<p><strong>Tips</strong>: Jeg bruker både <code>summary()</code> og <code>summarise()</code> ofte. Og jeg bruker nesten konsekvent den ene når jeg egentlig mener å bruke den andre. Får du feilmelding når du arbeider med disse funksjonene, sjekk først at du ikke egentlig mente å bruke den andre.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./import-export.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Import og eksport av data</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./pivot.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Omstrukturering av data (pivot)</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

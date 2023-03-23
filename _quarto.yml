@@ -12,6 +12,8 @@ book:
     - pakker.qmd
     - grunnleggende.qmd
     - import-export.qmd
+    - inspisere.qmd
+    - pivot.qmd
     - feil.qmd
     - references.qmd
 

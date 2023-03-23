@@ -12,6 +12,7 @@ Swirl
 
 What They Forgot to Teach You About R
 
+Posits cheat sheets
 
 ## Produktiv prokrastinering
 
