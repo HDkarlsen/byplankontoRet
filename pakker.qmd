@@ -104,7 +104,7 @@ cars_filtered_kg_grouped_mean
 Det andre eksemplet er 
 
 1. mer lesbart
-2. mindre stappfult av midlertidige objekter som vi seinere må slette
+2. mindre stappfult av midlertidige objekter som vi seinere må slette eller som uansett overskriver hverandre.
 
 Jeg kommer til å bruke piper en god del både her og i alle skriptene mine. Så det er greit å vite hva det går ut på. Syntaksen `x %>% y` kan leses som `y får x`. Vi tar `x` og sender det til `y` som tar det inn som sitt første *argument*. Tidyverse-funksjonene er bygd rundt ideen om at det første argumentet til funksjonene er et datasett. Legg merke til at det er et datasett som er det første objektet i alle funksjonen jeg bruker i eksemplet uten pipe. 
 
@@ -130,3 +130,6 @@ Da jeg lærte R var det `%>%` fra `magrittr` som var den gjeldende pipa. Den var
 
 Dere velger altså sjøl om dere går for `%>%` eller `|>`. Husk bare at for å bruke `%>%` så må `tidyverse` eller `magrittr` lastes inn først. (`tidyverse` låner noen av funksjonene fra `magrittr`, men laster ikke inn *alle* funksjonene fra den pakka).
 
+### Hva er pipa ikke?
+
+En vanlig intuisjon man får når man begynner med piper er at det er en måte å "arbeide baklengs". Man starter å lese nedenfra og opp. Dette stemmer ikke. Tenk heller at du starter med en ting, sender den videre til en funksjon, og sender *resultatet av dette videre* til neste funksjon, sender resultatet av dette videre til neste funksjon, og så videre. 

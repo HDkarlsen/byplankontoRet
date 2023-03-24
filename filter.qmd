@@ -1,0 +1,185 @@
+# Filtre
+
+
+```{r}
+library(tidyverse)
+```
+
+Filtre bruker vi svært ofte. De lar oss begrense mengden data vi ser på og arbeider på. Vi får filtra våre `dplyr`. Merk at det finnes en filter-funksjon i `stats`-pakka som lastes inn når vi starer R, og dette filteret blir overskrevet av `dplyr`/`tidyverse`. Om du får feilmelding når du bruker filter kan det være at du har glemt å laste inn `dplyr`, og at R forsøker å bruke `stats`' `filter()`.
+
+Filtret velger ut **rader** ved å sjekke ut innholdet i en **kolonne**. Vi kan velge ut alle rader som har en viss verdi på en kolonne. La oss se på at alle menneskene i datasettet `starwars`.
+
+```{r}
+starwars %>% filter(species == "Human")
+```
+Filteret velger alle radene hvor **sammenlikninga** vi oppgir er `TRUE` (sann). Mer robotisk kan vi si at den i tilfellet over velger rader hvor cella under kolonna *species* tilfredsstiller betingelsen "innholdet i cella er lik *Human*". Dermed kan vi oppgi andre uttrykk som evalueres til enten `TRUE` eller `FALSE`. Hva med å hente ut alle som er høyere enn 170 cm?
+
+```{r}
+starwars %>% filter(height > 170)
+```
+Vi kan oppgi flere betingelser. Hva med alle kvinnelige mennesker?
+
+```{r}
+starwars %>% filter(species == "Human" & sex == "female")
+```
+Ikke så veldig mange. Ikke rart Star Wars filer Bechdel-testen. Får vi med flere hvis vi ikke skiller mellom sex og gender? Altså at vi tar med dem er *enten* female *eller* feminine?
+
+```{r}
+starwars %>% filter(species == "Human" & (sex == "female" | gender == "feminine"))
+```
+
+Nei.
+
+Men vi fikk illustrert filteret. Vi bruker noen logiske operatorer for å kombinere ulike ledd i betingelsene våre. 
+
+- `&`: **og**. Både x og y må være tilfredsstilt.
+- `|`: **eller**. Enten x eller y må være tilfredsstilt. 
+- `==`: **er lik**. x må være lik y.
+- `!=`: **er ikke lik**. x må være ulik y.
+- `<` og `>`: **mindre enn** og **større enn**
+- `<=` og `>=`: **mindre enn eller lik** og **større enn eller lik**.
+
+Og vi bruker `()` for å gruppere betingelser sammen. La oss se på hva som skjer med antall rader som blir tatt med når vi fjerner `()`. 
+
+```{r}
+# Med () rundt female og feminine
+starwars %>% 
+  filter(species == "Human" & (sex == "female" | gender == "feminine")) %>% 
+  nrow()
+# Uten ()
+starwars %>% 
+  filter(species == "Human" & sex == "female" | gender == "feminine") %>% 
+  nrow()
+
+```
+I det første eksemplet må du være 1) menneske *og* 2) **enten** female *eller* feminine. I det andre eksemplet må du være 1) menneske **og** female **eller** 2) feminine. Dermed får vi med oss en del roboter og romvesener som er feminine i det andre eksemplet.
+
+Vi bruker ofte filtre for å fjerne deler av et datasett, for eksempel dersom vi bare vil se på Trondheim. Da filtrer vi kanskje med ei kolonne som inneholder
+
+- kommunnummeret til Trondheim (5001), 
+- det gamle kommunenummeret til Trondheim (1601), 
+- en tekststreng med navet til byen ("Trondheim"), 
+- en tekststreng med det gamle navnet på byen ("Trondhjem"), 
+- en tekststreng med navnet på byen uten stor forbokstav ("Trondheim"), eller 
+- en tekststreng med navnet på byen feilstava ("Trodnheim").
+- en tekststreng med navnet på byen og noe tilleggstekst som vi ikke trenger ("Trondheim by")
+
+Antakelig ikke alle på en gang, men det er greit å vite hvordan man gjør en **delvis match**. Spesielt når vi får en liste med navn på ting som må matches med våre egne data er det typisk at de skriver navna noe annerledes enn oss. Dette er gjerne fordi det ikke egentlig er noen standard måte å skrive navna på, eller fordi navna endres. Barnehagedatasett er et typisk eksempel her. 
+
+Å matche på ulike numre handler vanligvis om å sette sammen en serie med *eller* betingelser via `|`. Vi fokuserer derfor på tekststrenger. Til dette finner vi en svært nyttig pakke som heter `stringr`. 
+
+![Pakka handler ikke om å selge dop i Baltimore, men om å håndtere tekststrenger.](img/Stringer_Bell.jpg){width=40%}
+`stringr` har drøssevis av nyttige funksjoner for oss, og vi har så klart ikke tid å gå innom alt. En del av funksjonene baserer seg på noe som kalles regulære uttrykk (*regular expressions*), ofte henvist til som **regex**. Regex er serier med tegn som spesifiserer et spesifikt mønster. Det brukes når vi vil ha treff på flere varianter. 
+
+Under bruker jeg regex for å treffe på to skrivemåter av Trondheim. Vi bruker `str_detect()` for å detektere strenger i en kolonne som matcher et mønster. Mønsteret er altså Trondheim eller Trondhjem. Siden den eneste forskjellen på disse to er om vi bruker *ei* eller *je* i slutten, kan vi skrive dette som `"Trondh(ei|je)m"`. 
+
+```{r}
+# Lager et fiktivt lite datasett
+byer <- tibble(
+  by = c("Trondheim", "Trondhjem", "Drammen"),
+  valuta = c("NOK", "riksdaler", "NOK")
+)
+
+# Filter ved hjelp av regex
+byer %>% 
+  filter(str_detect(by, "Trondh(ei|je)m"))
+
+# En mindre effektiv måte å gjøre dette på ville vært
+byer %>% 
+  filter(by == "Trondheim" | by == "Trondhjem")
+```
+Du kan spørre deg hvorfor det andre eksemplet er mindre effektivt når det bare koster oss noen få ekstra tegn. Fordi jeg må gjenta meg sjøl når jeg skriver `by ==` og `Trondh`. Akkurat i dette tilfellet er det ikke særlig alvorlig. Men når vi utvider og får større datasett og mer avanserte søkemønstre vil det begynne å gjøre seg gjeldende. En ting er at vi sparer tid på skrive mindre. En annen ting er at det blir lettere å gjøre endringer seinere. Fordi vi ikke må endre en serie med *eller*-betingelser, men kun den ene regex-en.
+
+Alle funksjonene i `stringr` starter med `str_`, som gjør dem lett å søke opp. Nyttig, for det er mange av dem! De jeg bruker oftest er 
+
+- `str_sub()` for å hente ut en del av en streng
+- `str_detect()` i kombinasjon med `filter()` for å finne en delvis match i en kolonne
+- `str_replace()` for å erstatte del av en streng med noe annet
+- `str_to_lower()` og `str_to_upper()` for å fjerne feilkilder når jeg søker. Spesielt den første er nyttig. Hvis jeg skal matche på navn vil jeg unngå at jeg får ikke-match bare fordi noen navn har store bokstaver enkelte steder mens andre ikke. Jeg vil at "Byåsen barnehage" skal matche med `Byåsen Barnehage`. Merk at det finnes varianter av disse i `base R` også. 
+
+La oss se noen eksempler på bruk av disse
+
+```{r}
+# Hent ut de fire første bokstavene av en kolonne
+byer %>% 
+  mutate(by4 = str_sub(by, 1, 4))
+
+# Bytt ut deler av en streng
+byer %>% 
+  mutate(nytt_bynavn = str_replace(by, "Trond", "Trønder"))
+
+# Gjøre om en kolonne til små bokstaver. 
+byer %>% 
+  mutate(valuta_lower = str_to_lower(valuta))
+```
+
+`stringr` har mange muligheter i seg. Spesielt bruken av regex er svært nyttig, som nevnt over. Men læringskurva er bratt. Og særlig det å søke etter tall i en tekststreng. Noen nyttige funksjoner her er å kombinere tegntype og kvantitet. Sjekk ut side to av `stringr`-[jukselappen til Posit](https://posit.co/resources/cheatsheets/).
+
+Her lager jeg et rart datasett for å vise hvordan vi kan bruke disse regex-kommandoene. Datasettet blir laga ved å sette sammen tilfeldige serier med tall og bokstaver som vi seinere kan søke på. Her bruker jeg `set.seed()` for å sørge for at de påfølgende randomiserte prosessene blir like hver gang de kjøres. Slik at du og jeg ser de samme talla hver gang. 
+
+```{r}
+set.seed(123)
+
+# En funksjon som lager en serie av tall og bokstaver av ulik lengde.
+lag_streng <- function() {
+  tall <- seq(1:10) %>% as.character()
+  bokstaver <- letters[1:10]
+  tall_bokstaver <- c(tall, bokstaver)
+  
+  paste0(sample(tall_bokstaver, size = runif(1, 3, 5), replace = TRUE), collapse = "")
+}
+
+set.seed(123)
+
+# Setter det sammen i et datasett.  
+utvalg <- tibble(
+  id = seq(1:200), 
+  name = replicate(200, lag_streng())
+)
+
+# Slik ser det ut. 
+utvalg
+
+# La oss finne de navna hvor det er to bokstaver etterfulgt av to nummer
+utvalg %>% 
+  filter(str_detect(name, "[[:alpha:]]{2}[[:digit:]]{2}"))
+```
+
+Dette mønstret ser overveldende ut, så la oss pakke det ut: `"[[:alpha:]]{2}[[:digit:]]{2}"`
+
+- `[[:alpha:]]` treffer alle bokstaver. 
+- `[[:digit:]]` treffer alle tall. 
+- `{2}` betyr nøyaktig to forekomster av det som kom før meg. Vi bruker den både for bokstaver og tall. Alternativet ville vært å skrevet f.eks. `[[:alpha:]][[:alpha:]]`
+
+Det er verdt å tenke litt på tegnkoding igjen. Hvordan lagres informasjon om tall og bokstaver på pc-en? Hvordan behandles tall og bokstaver (og symboler) annerledes av programmeringsspråk som R? En tallserie vil f.eks. sorteres annerledes avhengig av om den er koda som numerisk eller streng.
+
+```{r}
+# En vektor som inneholder en serie fra 1 til 24 i tilfeldig rekkefølge
+tall <- sample(c(1:24), 24)
+
+# Vi sortere den først når den er numerisk og deretter når den er en streng.
+tall %>% sort()
+tall %>% as.character() %>% sort()
+
+```
+Med disse filosofiske tankene i hodet, hva tenker R eller `stringr` på som et "tall" (*digit*) i koden vår fra i sted? La oss kikke nærmere på det. I neste kodeblokk lager jeg to datasett. Det første er likt det vi hadde i sted, foruten at jeg kun henter ut de første ti radene. Det andre datasettet er likt dettte, foruten at jeg har bedt om *kun ett tall (digit)* på slutten. For å vise tydligere hva som skjer binder jeg de to radene sammen.
+
+```{r}
+foo <- utvalg %>% 
+  filter(str_detect(name, "[[:alpha:]]{2}[[:digit:]]{2}")) %>% 
+  slice(1:10)
+
+bar <- utvalg %>% 
+  filter(str_detect(name, "[[:alpha:]]{2}[[:digit:]]{1}")) %>% 
+  slice(1:10)
+
+bind_cols(foo, bar)
+```
+Legg merke til kolonna helt til høyre. Vi ba om kun ett tall, likevel får vi "7be10" og "jd38". Hvorfor? *Fordi 10 og 38 er ett tall hver*! De regnes ikke som 1 og 0, og 3 og 8.
+
+Når vi koder som dette er det alltid smart å stoppe opp og sette spørsmålstegn ved de antakelsene vi gjør. Da jeg starta på dette eksemplet hadde jeg for eksempel ikke tenkt på at filteret vår ville fange opp
+
+<!-- hva er et filter
+hvordan bruke filtre
+brukes sammen med select
+stringr -->
