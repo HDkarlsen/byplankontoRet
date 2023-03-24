@@ -1,0 +1,125 @@
+# Tranformasjoner
+
+```{r}
+library(tidyverse)
+```
+
+
+Når vi tar inn et datasett i SPSS er det vanligvis fordi vi vil transformere det på et vis. Vi gjør også en god del transformasjoner i Excel. Så klart skal vi også transformere verdier i R også. Nå vil vi merke fordelen ved at R er designa for å operere på vektorer. Når du gjør en transformasjon på en kolonne i et datasett (som du kanskje husker kan anses som en vektor i en liste), vil R utføre transformasjonen *på hele lista*. Hva betyr det? Vi lager en enkel kolonne i et datasett. Kolonnas verdi avhenger av en annen kolonne i datasettet. 
+
+```{r}
+starwars %>% 
+  select(name, hair_color, eye_color) %>% 
+  mutate(blond_blue_eyed = if_else(hair_color == "blond" & eye_color == "blue", TRUE, FALSE))
+```
+
+Det vakre her er at vi slipper å iterere over alle radene i hver kolonne og sammenlikne dem med hverandre via f.eks. en loop. R gjør dette av seg sjøl. 
+
+Når vi transformerer tar vi en verdi i et datasett og endrer på den. Dette har vi allerede gjort mange ganger allerede iløpet av denne pamfletten, men la oss nå formelt introdusere arbeidshesten vår: `mutate()`.
+
+## Mutate
+
+`mutate()` kommer fra etc. etc. You know the drill. Den en enkel å bruke. Hvis vi vil lage en ny kolonne bare gir vi den et navn og definerer hvordan den skal se ut. Vi tar inn prognoseeksemplet vårt: 
+
+```{r}
+prognose <- tibble(
+  plansone = rep(seq(5001001, 5001004), each = 2),
+  kjonn = rep(c("M", "K"), 4),
+  aar2023 = round(runif(8, 400, 800)),
+  aar2024 = round(runif(8, 400, 800)),
+  aar2025 = round(runif(8, 400, 800))
+) %>% 
+  rowwise() %>% 
+  tibble(
+    faktisk2023 = round(aar2023 + aar2023 * (rnorm(1, 0, 10)/100)),
+    faktisk2024 = round(aar2024 + aar2024 * (rnorm(1, 0, 10)/100)),
+    faktisk2025 = round(aar2025 + aar2025 * (rnorm(1, 0, 10)/100))
+  )
+prognose
+```
+
+Si at vi vil vite differansen mellom prognosen ("aarXXXX") og faktisk befolkning ("faktiskXXXX"). 
+
+```{r}
+prognose %>% 
+  mutate(diff2023 = aar2023 - faktisk2023,
+         diff2024 = aar2024 - faktisk2024,
+         diff2025 = aar2025 - faktisk2025)
+```
+
+Dersom vi vil oppdatere verdien til en kolonne kan vi overskrive den i mutate ved å gi den nye variabelen samme navn som en eksisterende variabel.
+
+```{r}
+# Vi oppdaterer prognosen for 2025 fordi vi forventer dobbelt så mange som vi 
+# opprinnelig hadde tenkt.
+prognose %>% 
+  mutate(aar2025 = aar2025 * 2)
+```
+
+### Noen nyttige funksjoner til mutate
+
+Her er noen nyttige funksjoner som jeg ofte bruker sammen med `mutate()`.
+
+Varianter av if else: `ifelse()`, `if_else` og `case_when`. 
+
+```{r}
+# Vi lager et datasett med noen personer som vi veit kjønn og alder til.
+set.seed(123)
+folk <- tibble(
+  kjonn = rep(c("M", "K"), 25),
+  alder = round(runif(50, 10, 80))
+)
+folk
+
+# Vi kan lage en ny variabel som forteller oss hvem som er myndig (fylt 18):
+# Til dette bruker vi `if_else()`. 
+folk %>% 
+  mutate(myndig = if_else(alder > 17, TRUE, FALSE))
+
+# Verdiene til `if_else()` kan være noe annet også:
+folk %>% 
+  mutate(myndig = if_else(alder > 17, "myndig", "barn"))
+
+```
+
+Hva er forskjellen på `ifelse()` og `if_else()`? Sistnevnte kommer fra `dplyr` og er en kjappere og strengere versjon av `ifelse()`. Alle argumenta må være av samme type, så du henter du får feilmelding når du bruker denne. 
+
+`case_when()` er en nyttig utvidelse av *if else*-tankegangen når vi har mer enn to muligheter. For eksempel hvis vi skal lage en kjapp alderskategorisering. `case_when()` følger en struktur hvor du definerer *betingelsen* på venstre side av `~` og resultatet på høyre side. Bruken av tilde (`~`) indikerer at dette et et **formel**-objekt. Vi har ikke snakka noe særlig om formel-objekter hittil, og jeg tenker at vi ikke trenger å gå inn på det her heller. Men hvis du noen gang skal gjøre noe fancy med `case_when()` kan det være greit å vite at den bruker formler i koden sin.
+
+```{r}
+folk %>% 
+  mutate(alders_gruppe = case_when(
+    alder < 18 ~ 1, 
+    alder >= 18 & alder < 30 ~ 2,
+    alder >= 30 & alder < 40 ~ 3,
+    alder >= 40 & alder < 50 ~ 4,
+    alder > 50 ~ 5,
+    TRUE ~ NA_real_)
+  )
+```
+Noen ting å merke seg med `case_when()`:
+
+- Logikken arbeider seg nedover og for hver rad velger den ut den første betingelsen som stemmer. 
+- Det er smart å ha en `catch-all` på slutten av `case_when()`. Du ser det i eksemplet mitt over, i form av det siste argumentet som er `TRUE ~ NA_real_`. Dersom ingen av betingelsene over stemmer, vil raden få verdien `NA`. Hvorfor skriver jeg `NA_real_`? `case_when()`, lik `if_else()` er streng med å holde seg til samme type verdier. Derfor lar den meg ikke uten videre bruke `NA` uten å definere om dette er en numerisk `NA` eller en streng-`NA`. Hadde jeg brukt strenger som gruppenavn istedenfor tall ville jeg i siste linje oppgitt `NA_character_` istedenfor.
+- Dersom du arbeider på en `case_when()` som begynner å bli lang og komplisert er det ofte bedre å heller gjøre det om til en funksjon.
+
+## Transmute
+
+Tvillingen til `mutate()` heter `transmute()`. De opererer likt, bortsett fra at `transmute()` kun beholder de variabelene som blir laga. Noen ganger er dette nyttig. Merk at det gjør disse to kodebrokkene lik 
+
+```{r}
+# Dette
+prognose %>% 
+  mutate(aar2025 = aar2025 * 2) %>% 
+  select(aar2025)
+
+# Er det samme som dette
+prognose %>% 
+  transmute(aar2025 = aar2025 * 2)
+```
+
+## Summarise
+
+<!-- lenke til oppsummeringer i inspiserere data -->
+
+Også nært beslekta er `summarise()`. Vi har prata om `summarise()` tidligere, og du vil lett se at disse likner på hverandre. `summarise()` bruker vi når vi vil lage en oversikt over enkelte deler av, eller hele, datasettet. Til forskjell fra `mutate()` summerer den opp alle radene på hver kolonne, eventuelt gruppert etter grupper om man kombinerer den med `group_by()`.

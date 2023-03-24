@@ -188,7 +188,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./feil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
+  <a href="./inspisere.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inspisere data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pivot.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Omstrukturering av data (pivot)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./feil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -210,6 +220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul class="collapse">
   <li><a href="#uten-pipe" id="toc-uten-pipe" class="nav-link" data-scroll-target="#uten-pipe"><span class="toc-section-number">3.2.1</span>  Uten pipa</a></li>
   <li><a href="#med-pipe" id="toc-med-pipe" class="nav-link" data-scroll-target="#med-pipe"><span class="toc-section-number">3.2.2</span>  Med pipa</a></li>
+  <li><a href="#hva-er-pipa-ikke" id="toc-hva-er-pipa-ikke" class="nav-link" data-scroll-target="#hva-er-pipa-ikke"><span class="toc-section-number">3.2.3</span>  Hva er pipa ikke?</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -361,7 +372,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Det andre eksemplet er</p>
 <ol type="1">
 <li>mer lesbart</li>
-<li>mindre stappfult av midlertidige objekter som vi seinere må slette</li>
+<li>mindre stappfult av midlertidige objekter som vi seinere må slette eller som uansett overskriver hverandre.</li>
 </ol>
 <p>Jeg kommer til å bruke piper en god del både her og i alle skriptene mine. Så det er greit å vite hva det går ut på. Syntaksen <code>x %&gt;% y</code> kan leses som <code>y får x</code>. Vi tar <code>x</code> og sender det til <code>y</code> som tar det inn som sitt første <em>argument</em>. Tidyverse-funksjonene er bygd rundt ideen om at det første argumentet til funksjonene er et datasett. Legg merke til at det er et datasett som er det første objektet i alle funksjonen jeg bruker i eksemplet uten pipe.</p>
 <p>Noen funksjoner, som <code>base::sum()</code> har ikke data som sitt første argument, men en vektor. Hvis man sender et datasett til <code>sum()</code> vil man få en feilmelding.</p>
@@ -387,6 +398,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Da jeg lærte R var det <code>%&gt;%</code> fra <code>magrittr</code> som var den gjeldende pipa. Den var så nyttig at ei pipe til slutt blei inkorporert i <code>base R</code>. Dette skjedde i <code>R 4.1.0</code>. <code>Base R</code>s pipe ser slik ut: <code>|&gt;</code>. Den fungerer i hovedsak lik <code>%&gt;%</code>. Når jeg fortsetter å bruke den gamle <code>magrittr</code>-pipa er det bare fordi jeg er gammel og ikke liker å endre på ting som funker. Dessuten har Rstudio en flott snarvei til <code>%&gt;%</code> via <code>ctrl + shift + M</code>.</p>
 <p>Dere velger altså sjøl om dere går for <code>%&gt;%</code> eller <code>|&gt;</code>. Husk bare at for å bruke <code>%&gt;%</code> så må <code>tidyverse</code> eller <code>magrittr</code> lastes inn først. (<code>tidyverse</code> låner noen av funksjonene fra <code>magrittr</code>, men laster ikke inn <em>alle</em> funksjonene fra den pakka).</p>
+</section>
+<section id="hva-er-pipa-ikke" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="hva-er-pipa-ikke"><span class="header-section-number">3.2.3</span> Hva er pipa ikke?</h3>
+<p>En vanlig intuisjon man får når man begynner med piper er at det er en måte å “arbeide baklengs”. Man starter å lese nedenfra og opp. Dette stemmer ikke. Tenk heller at du starter med en ting, sender den videre til en funksjon, og sender <em>resultatet av dette videre</em> til neste funksjon, sender resultatet av dette videre til neste funksjon, og så videre.</p>
 
 
 </section>

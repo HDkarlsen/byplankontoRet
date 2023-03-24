@@ -1,5 +1,3 @@
-
 # Forord {.unnumbered}
 
 Dette er en pamflet skrevet for Byplankontorets statistikere, for å gi en kort introduksjon til R. Teksten er skrevet i [Quarto](https://quarto.org/docs/books).
-

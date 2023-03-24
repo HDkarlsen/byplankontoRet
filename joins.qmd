@@ -1,0 +1,51 @@
+# Sammenslåing av data
+
+```{r}
+library(tidyverse)
+```
+
+
+Vi sammenstiller data fra mange kilder. Vanligvis fordi vi har to sett med data vi er interessert i, men de er fordelt på to datasett. Trikset da blir å finne minst en bit med informasjon de to datasettene deler, slik at vi kan identifisere hvilke observasjoner i datasett `x` som korresponderer med observasjoner i datasett `y`. 
+
+Å slå sammen datasett varierer i vanskelighetsgrad fra enkelt til diabolsk. Vi starter med noen enkle eksempler. Deretter diskuterer vi noen av de kompliserende faktorene.
+
+`dplyr` har en serie med funksjoner som slår sammen datasett. De heter noe med `*_join()`: `left_join()`, `full_join()`, etc. [Posits jukselapp](https://posit.co/resources/cheatsheets/) gjør igjen en formidabel jobb med å enkelt illustrere forskjellen mellom dem, så jeg ~~stjeler~~ låner et bilde fra dem: 
+
+![CC BY SA Posit Software](img/joins.PNG){width=60%}
+
+`left_join()` og `right_join()` er de vi bruker mest, og vi trenger strengt tatt bare én av dem. Fordi `left_join(x, y) == right_join(y, x)`. Det handler bare om retninga du slår sammen (*merge*/*join*). Vanligvis starter vi med det datasettet som inneholder mest informasjon (`x`) og slår sammen et annet datasett (`y`) oppå dette igjen. Det er ikke sikkert vi trenger alle radene fra `y`, derfor gjør vi en `left_join(x, y)` som sørger for at alle rader fra `x` bevares, pluss alle rader fra `y` som korresponderer til rader i `x`.
+
+<!-- vis eksempel på enkle joins -->
+
+## Kompliserende faktorer
+
+### En til mange
+
+Noen ganger har vi en en-til-mange sammenslåing. I dette eksemplet har `datX` en kolonne `colA` med bokstaver fra a til d. De forekommer bare en gang hver. Når vi slår den sammen med `datY`, hvor det er tre rader per bokstav i `colA`, blir det sammenslåtte datasettet å brette ut `colA` slik vi at får med oss alle verdiene i `datY` hvor `colA` har like elementer i begge datasetta.
+
+```{r}
+datX <- tibble(
+  colA = letters[1:5],
+  colB = seq(1:5)
+)
+datY <- tibble(
+  colA = rep(letters[1:10], each = 3), 
+  colC = c(10:39)
+)
+
+datX %>% left_join(datY, by = "colA")
+
+```
+
+### Partial match
+
+Det er ofte enklest å slå sammen basert på et tall, som ID. Dette fordi vi i større grad forventer at ID-er er 1) unike og 2) konsekvente på tvers av datasetta. Men noen ganger ender vi opp med å matche basert på navn. For eksempel når vi har ei liste med barnehagenavn som vi vil bruke til å matche informasjon fra to ulike tabeller. En utfordring som fort oppstår da er at navna ikke er 100 % identisk i de to datasetta. Eksempelvis vil noen skrive barnehagenavnet med "barnehage" i navnet, noen skriver barnehage med stor B, andre med liten, noen feilstaver kanskje barnehagenavnet, eller kanskje barnehagen har endra navn siden det ene datasettet blei oppretta. Det er mange grunner til inkonsekvens. Resultatet er det samme: vi må håndtere det på et vis.
+
+To ulike tilnærminger kan brukes: 
+
+1. endre ett eller begge datasetta programmatisk slik at de blir likere hverandre. Kanskje vi finner ut at "barnehage" ikke er nyttig i et barnehagenavn, så vi fjerner alle forekomster av det. 
+2. fuzzy join: ta ibruk funksjoner som lar oss slå sammen datasett basert på **ueksakte matcher**. En slik pakke er `fuzzy_join()`. 
+
+(Lista er ikke uttømmende. Det er så klart mange andre mulige måter å gjøre dette på.)
+
+Begge tilnærmingene involverer å bruke regex. I arbeidet med barnehagekapasitet har jeg brukt slike matcher en del. Der gikk jeg for tilnærming 1. Det er klare rom for forbedring her, og jeg tror det ville involvert mer regex.

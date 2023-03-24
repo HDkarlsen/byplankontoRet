@@ -1,9 +1,12 @@
-# Filtre
-
+# Velge rader
 
 ```{r}
 library(tidyverse)
 ```
+
+Vi skal diskutere utvelgelse av rader, ofte kjent som filtrering.
+
+## Filter
 
 Filtre bruker vi svært ofte. De lar oss begrense mengden data vi ser på og arbeider på. Vi får filtra våre `dplyr`. Merk at det finnes en filter-funksjon i `stats`-pakka som lastes inn når vi starer R, og dette filteret blir overskrevet av `dplyr`/`tidyverse`. Om du får feilmelding når du bruker filter kan det være at du har glemt å laste inn `dplyr`, og at R forsøker å bruke `stats`' `filter()`.
 
@@ -69,6 +72,9 @@ Antakelig ikke alle på en gang, men det er greit å vite hvordan man gjør en *
 Å matche på ulike numre handler vanligvis om å sette sammen en serie med *eller* betingelser via `|`. Vi fokuserer derfor på tekststrenger. Til dette finner vi en svært nyttig pakke som heter `stringr`. 
 
 ![Pakka handler ikke om å selge dop i Baltimore, men om å håndtere tekststrenger.](img/Stringer_Bell.jpg){width=40%}
+
+## Stringr
+
 `stringr` har drøssevis av nyttige funksjoner for oss, og vi har så klart ikke tid å gå innom alt. En del av funksjonene baserer seg på noe som kalles regulære uttrykk (*regular expressions*), ofte henvist til som **regex**. Regex er serier med tegn som spesifiserer et spesifikt mønster. Det brukes når vi vil ha treff på flere varianter. 
 
 Under bruker jeg regex for å treffe på to skrivemåter av Trondheim. Vi bruker `str_detect()` for å detektere strenger i en kolonne som matcher et mønster. Mønsteret er altså Trondheim eller Trondhjem. Siden den eneste forskjellen på disse to er om vi bruker *ei* eller *je* i slutten, kan vi skrive dette som `"Trondh(ei|je)m"`. 
@@ -120,7 +126,7 @@ Her lager jeg et rart datasett for å vise hvordan vi kan bruke disse regex-komm
 ```{r}
 set.seed(123)
 
-# En funksjon som lager en serie av tall og bokstaver av ulik lengde.
+# En funksjon som lager en serie av siffer og bokstaver av ulik lengde.
 lag_streng <- function() {
   tall <- seq(1:10) %>% as.character()
   bokstaver <- letters[1:10]
@@ -151,6 +157,8 @@ Dette mønstret ser overveldende ut, så la oss pakke det ut: `"[[:alpha:]]{2}[[
 - `[[:digit:]]` treffer alle tall. 
 - `{2}` betyr nøyaktig to forekomster av det som kom før meg. Vi bruker den både for bokstaver og tall. Alternativet ville vært å skrevet f.eks. `[[:alpha:]][[:alpha:]]`
 
+
+<!-- flytt dette til en annen plass. Logikken er god, men ikke utgangspunktet som beror på et misforståelse -->
 Det er verdt å tenke litt på tegnkoding igjen. Hvordan lagres informasjon om tall og bokstaver på pc-en? Hvordan behandles tall og bokstaver (og symboler) annerledes av programmeringsspråk som R? En tallserie vil f.eks. sorteres annerledes avhengig av om den er koda som numerisk eller streng.
 
 ```{r}
@@ -162,7 +170,9 @@ tall %>% sort()
 tall %>% as.character() %>% sort()
 
 ```
-Med disse filosofiske tankene i hodet, hva tenker R eller `stringr` på som et "tall" (*digit*) i koden vår fra i sted? La oss kikke nærmere på det. I neste kodeblokk lager jeg to datasett. Det første er likt det vi hadde i sted, foruten at jeg kun henter ut de første ti radene. Det andre datasettet er likt dettte, foruten at jeg har bedt om *kun ett tall (digit)* på slutten. For å vise tydligere hva som skjer binder jeg de to radene sammen.
+
+
+I neste kodeblokk lager jeg to datasett. Det første er likt det vi hadde i sted, foruten at jeg kun henter ut de første ti radene. Det andre datasettet er likt dettte, foruten at jeg har bedt om *kun ett siffer (digit)* på slutten. For å vise tydeligere hva som skjer binder jeg de to radene sammen.
 
 ```{r}
 foo <- utvalg %>% 
@@ -175,11 +185,60 @@ bar <- utvalg %>%
 
 bind_cols(foo, bar)
 ```
-Legg merke til kolonna helt til høyre. Vi ba om kun ett tall, likevel får vi "7be10" og "jd38". Hvorfor? *Fordi 10 og 38 er ett tall hver*! De regnes ikke som 1 og 0, og 3 og 8.
+Legg merke til kolonna helt til høyre. Vi ba om kun ett siffer, likevel får vi "7be10" og "jd38". Hvorfor? Fordi de inneholder, nettopp "ett siffer". Dette sifferet er tilfeldigvis etterfulgt av et annet siffer, men det sa vi ikke spesifikt at vi skulle unngå. Her gjorde jeg en antakelse som viste seg å ikke stemme. Det var en antakelse jeg ikke var helt bevisst at jeg gjorde, og det var at koden min skulle vise meg rader som inneholder to bokstaver og ett, og kun ett, ikke to eller flere, siffer. 
 
-Når vi koder som dette er det alltid smart å stoppe opp og sette spørsmålstegn ved de antakelsene vi gjør. Da jeg starta på dette eksemplet hadde jeg for eksempel ikke tenkt på at filteret vår ville fange opp
+Vi ser det samme skjer med den første kolonna også: her får vi treff på to bokstaver etterfulgt av tre og fire siffer. Hvis vi skulle fiksa koden til å treffe på "to bokstaver etterfulgt av kun to og ikke flere siffer" kunne vi endra det slik:
 
-<!-- hva er et filter
-hvordan bruke filtre
-brukes sammen med select
-stringr -->
+```{r}
+utvalg %>% 
+  filter(str_detect(name, "[[:alpha:]]{2}[[:digit:]]{2}(?![[:digit:]])"))
+```
+Det jeg håper på å få fram her er at vi må stoppe opp innimellom og teste våre egne antakelser og arbeid. 
+
+## Select
+
+<!-- Lenk til inspisere.qmd hvor vi bruke select() en del. -->
+
+Vi har brukt `select()` før. Den er nyttig å ta opp igjen her. Med `select()` kan vi velge ut kolonner og med `filter()` kan vi velge ut rader. Dermed er det ofte nyttig å bruke begge sammen. Jeg bruker dem spesielt mye når jeg gjør en første gjennomgang av et skript. Da velger jeg ut kun de radene og kolonnene som jeg er interessert i og arbeider på dem. Dette gjør det lettere å se om koden min funker, uten å måtte se for mye urelevant. Når jeg veit at skriptet funker, kan jeg gå tilbake og fjerne `select()` og `filter()` slik at hele datasettet kjøres gjennom skriptet. 
+
+Det er nyttig å vite at vi kan bruke noen liknende streng-teknikker på `select()` som vi brukte på `filter()`. Vi henter inn et nytt, simulert datasett hvor den del av kolonnene våre har navn på samme form. 
+
+```{r}
+prognose <- tibble(
+  plansone = rep(seq(5001001, 5001004), each = 2),
+  kjonn = rep(c("M", "K"), 4),
+  aar2023 = round(runif(8, 400, 800)),
+  aar2024 = round(runif(8, 400, 800)),
+  aar2025 = round(runif(8, 400, 800))
+) %>% 
+  tibble(
+    faktisk2023 = round(aar2023 + aar2023 * (rnorm(1, 0, 10)/100)),
+    faktisk2024 = round(aar2024 + aar2024 * (rnorm(1, 0, 10)/100)),
+    faktisk2025 = round(aar2025 + aar2025 * (rnorm(1, 0, 10)/100))
+  )
+prognose
+```
+
+Her har vi kun tre av hver kolonne, men se for dere at vi hadde hatt tredve. Da ville det vært nyttig å slippe å skrive inn navnet på hver enkelt.
+
+La oss si at vi vil ha tak i kun de faktiske befolkningstalla, altså de kolonnene som har "faktisk" i navnet. Vi kan bruke `contains()` eller `matches()` inni `select()`. 
+
+```{r}
+prognose %>% 
+  select(contains("faktisk"))
+```
+
+Hva er forskjellen på dem? `matches()` lar oss bruke en regex. Si at vi vil ha kolonner med "faktisk" i navnet, etterfulgt av en eller flere siffer, og som slutter på 5.
+
+```{r}
+prognose %>% 
+  select(matches("faktisk[[:digit:]]+5$"))
+```
+
+Jeg bruker ofte `select()` til å endre rekkefølgen på kolonner. Ofte vil jeg ha den kolonna jeg nettopp lagde fremst. Da er det nyttig å huske på noen av triksa fra *tidy evaluation*: `everything()`. Den lar meg slippe å skrive opp alle kolonnene i datasettet:
+
+```{r}
+prognose %>% 
+  select(plansone, faktisk2025, everything())
+```
+

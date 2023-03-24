@@ -4,7 +4,7 @@ project:
 book:
   title: "R for Byplankontoret"
   author: "Håvard Karlsen"
-  date: "20.3.2023"
+  date: 2023-03-24
   chapters:
     - index.qmd
     - intro.qmd
@@ -14,6 +14,9 @@ book:
     - import-export.qmd
     - inspisere.qmd
     - pivot.qmd
+    - filter.qmd
+    - transformasjoner.qmd
+    - joins.qmd
     - feil.qmd
     - references.qmd
 
