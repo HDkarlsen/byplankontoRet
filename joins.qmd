@@ -1,10 +1,5 @@
 # Sammenslåing av data
 
-```{r}
-library(tidyverse)
-```
-
-
 Vi sammenstiller data fra mange kilder. Vanligvis fordi vi har to sett med data vi er interessert i, men de er fordelt på to datasett. Trikset da blir å finne minst en bit med informasjon de to datasettene deler, slik at vi kan identifisere hvilke observasjoner i datasett `x` som korresponderer med observasjoner i datasett `y`. 
 
 Å slå sammen datasett varierer i vanskelighetsgrad fra enkelt til diabolsk. Vi starter med noen enkle eksempler. Deretter diskuterer vi noen av de kompliserende faktorene.
@@ -15,27 +10,106 @@ Vi sammenstiller data fra mange kilder. Vanligvis fordi vi har to sett med data 
 
 `left_join()` og `right_join()` er de vi bruker mest, og vi trenger strengt tatt bare én av dem. Fordi `left_join(x, y) == right_join(y, x)`. Det handler bare om retninga du slår sammen (*merge*/*join*). Vanligvis starter vi med det datasettet som inneholder mest informasjon (`x`) og slår sammen et annet datasett (`y`) oppå dette igjen. Det er ikke sikkert vi trenger alle radene fra `y`, derfor gjør vi en `left_join(x, y)` som sørger for at alle rader fra `x` bevares, pluss alle rader fra `y` som korresponderer til rader i `x`.
 
-<!-- vis eksempel på enkle joins -->
+La oss se på noen enkle joins. Først genererer jeg et noen datasett som vi kan bruke. Datasetta inneholder navn på diverse firmaer, og detaljer rundt disse firmaene.
+
+```{r}
+# Laster inn en pakke som gir oss tilfeldige navn.
+library(randomNames)
+library(tidyverse)
+
+# Definer et frø så vi får samme tilfeldige prosess hver gang.
+set.seed(123)
+
+# streng med firmasuffikser
+suffikser <- c("AS", "og sønner", "AB", "firma", "rørleggere", "elektrikere", "blikkenslager", "ABB", "og co")
+
+# Hvor mange firma vi skal generere
+antall <- 20
+
+# La et datasett som inneholder firmanavn, ved å kombinere tilfeldige etternavn
+# og suffiksene vi definerte over.
+firmanavn <- tibble(
+  navn = randomNames(antall, which.names = "last", ethnicity = 5),
+  suffiks = sample(suffikser, antall, replace = TRUE)
+) %>% 
+  transmute(firma = paste(navn, suffiks))
+
+firmanavn %>% head()
+
+# Et datasett med inntjening i kr.
+inntjening <- firmanavn %>% 
+  mutate(inntekt = round(runif(antall, 0, 1000000)))
+
+inntjening %>% head()
+
+# Et annet datasett med antall ansatte.
+ansatte <- firmanavn %>% 
+  mutate(antall = round(abs(rnorm(antall, 1, 15))))
+
+ansatte %>% head()
+```
+
+Sjølve sammenslåinga er enkel: vi navngir de to datasetta som skal inngå i sammenslåinga, og hvilken eller hvilke variabler som skal inngå i sammenslåinga.
+
+```{r}
+firmaoversikt <- left_join(inntjening, ansatte, by = "firma")
+firmaoversikt %>% head()
+```
+
+
+Hvis du skal matche på variabler som ikke heter det samme i begge datasetta kan du enten 
+
+1. endre navnet på en av variablene på forhånd.
+2. oppgit en **navngitt vektor** i `by`.
+
+La oss se et eksempel på det siste alternativet, for det bruker vi ofte.
+
+```{r}
+# endrer navnet på et av datasettas firma-kolonne.
+names(inntjening) <- c("firmanavn", "grunker")
+
+# Nå har dette datasettet nytt navn 
+colnames(inntjening)
+
+firmaoversikt <- left_join(inntjening, 
+                           ansatte,
+                           by = c("firmanavn" = "firma"))
+firmaoversikt
+```
+
+Vi kan også oppgi flere variabler å matche på ved å simpelthen oppgi flere variabler i `by`-argumentet: `by = c("firmanavn", "avdeling", "fylke")`. Dette funker også som en navngitt vektor dersom man har ulike kolonnenavn i datasetta: `by = c("firmanavn" = "navn", "avdeling" = "branch", "fylke" = "fylke")
+
+<!-- lenke til navngitte vektorer andre steder i boka -->
 
 ## Kompliserende faktorer
+
+Det er ikke alltid like enkelt å slå sammen datasett.
 
 ### En til mange
 
 Noen ganger har vi en en-til-mange sammenslåing. I dette eksemplet har `datX` en kolonne `colA` med bokstaver fra a til d. De forekommer bare en gang hver. Når vi slår den sammen med `datY`, hvor det er tre rader per bokstav i `colA`, blir det sammenslåtte datasettet å brette ut `colA` slik vi at får med oss alle verdiene i `datY` hvor `colA` har like elementer i begge datasetta.
 
 ```{r}
+# Genererer to datasett fulle av tall og bokstaver.
 datX <- tibble(
   colA = letters[1:5],
   colB = seq(1:5)
 )
+
 datY <- tibble(
   colA = rep(letters[1:10], each = 3), 
   colC = c(10:39)
 )
 
+datX 
+datY
+
+# Slår dem sammen via colA.
 datX %>% left_join(datY, by = "colA")
 
 ```
+
+Det observante leser kan observere at vi i dette tilfellet kunne tatt sammenslåinga motsatt vei ved å enten bruke en `right_join()` eller sette `datyY` som `x` og vice versa. Da ville vi lagt på `datY` sine verdier på `datX` istedenfor motsatt, og vi ville ikke tenkt å tenke på *utbrettinga* av `datX`. Noen ganger er det likevel denne veien vi vil gå, f.eks. hvis vi virkelig bare er interessert i observasjoner fra `x`. Her, f.eks., tar vi ikke med alle bokstavene som forekommer i `y`. Hadde vi valgt å slå sammen `y` på `x` ville vi måtte fjerne disse manuelt seinere. Og det kunne vi fint gjort. Igjen, det er mange veier til Rom.
 
 ### Partial match
 
@@ -49,3 +123,72 @@ To ulike tilnærminger kan brukes:
 (Lista er ikke uttømmende. Det er så klart mange andre mulige måter å gjøre dette på.)
 
 Begge tilnærmingene involverer å bruke regex. I arbeidet med barnehagekapasitet har jeg brukt slike matcher en del. Der gikk jeg for tilnærming 1. Det er klare rom for forbedring her, og jeg tror det ville involvert mer regex.
+
+## Den allsidige join
+
+Hovedpoenget med *joins* er å slå sammen datasett fra ulike kilder. I min kode vil dere se at jeg innimellom har funnet andre bruksområder for dem. I enkelte tilfeller finnes det sikkert andre måter å løse problemet på, men den første løsninga jeg fant som virka, var å bruke `join`. Og hvis det funker, er det greit. La oss se et eksempel: Vi har et datasett som viser antall personer i hver alder (fra 0 til 119). Vi har lyst å gjøre om *kontinuerlig* alder til *alderskategorier* med *fem* alderstrinn i hver kategori opp til 80. Alle som er 80 eller eldre havner i sin egen kategori. Vi kan gjøre dette enkelt med en `mutate()` og `case_when()`, men det vil kreve at vi gjentar oss sjøl mer enn tre ganger. Ergo kan vi spare tid ved å gjøre det per programmatisk.[^1]
+
+[^1]: Jeg sier ofte at vi sparer tid, men en annen fordel er at vi framtidssikrer koden vår. Når vi unngår å gjenta oss sjøl blir det lettere å seinere gå tilbake og gjøre endringer uten at alt kollapser. 
+
+```{r}
+# Simulerer folkemengden i et område, i form av antall personer av hver 
+# kjønn og hvert alderstrinn.
+folkemengde <- tibble(
+  alder = c(c(0:119), c(0:119)),
+  kjonn = c(rep("M", 120), rep("K", 120)),
+  antall = round(runif(240, 50, 200))
+)
+folkemengde
+```
+
+Her er den suboptimale løsninga
+
+```{r}
+folkemengde %>% 
+  mutate(
+    aldersgruppe = case_when(
+      alder < 5 ~ 1, 
+      alder >= 5 & alder < 10 ~ 2,
+      alder >= 10 & alder < 15 ~ 3,
+      # ... osv.
+      TRUE ~ NA_real_
+    )
+  )
+```
+Og vår smarte løsning som utnytter en `join`. Vi starter med å lage aldersgruppene via serier med tall. Dette kan vi gjøre fordi de første 16 aldersgruppene er like store, de inneholder fem alderstrinn hver. Vi bruker `rep()` sammen med `seq()` for å repetere hvert ledd i en sekvens fem ganger. Vi legger disse aldersgruppene inn i et datasett ved siden av kontinuerlig alder. Nå har vi et datasett som vi rett og slett kan slå sammen med vår opprinnelig datasett. Nøkkelen blir alder. 
+
+```{r}
+# Legg på alderskategorier ----
+# Vi lager alderskategorier. Deler inn alle aldre i grupper med fem alderstrinn
+# i hver. Dette gjør vi ved å fordele hver alder i en kategori, og lime disse
+# kategoriene inn i datasettet vårt.
+
+# Lager en serie fra 0 til 119.
+alder <- c(0:119)
+
+# Lager en serie fra 17 hvor hver kategori repeteres fem ganger. Siste kategori
+# repeteres til slutten (alle mellom 80 og 119).
+aldersgruppe <- rep(seq(1:16), each = 5) %>% 
+  c(rep(17, 40))
+
+# Putter de to seriene inn i et data.frame slik at vi kan bruke den seinere.
+alder_df <- tibble(
+  alder = alder,
+  aldersgruppe = aldersgruppe
+)
+
+# Logikken er at vi merger folkemengde med aldersdatasettet for å få 
+# overført alderskategoriene våre.
+folkemengde <- folkemengde %>% 
+  left_join(alder_df, 
+            by = "alder")
+folkemengde
+
+# Vi kan summere opp  for å vise at vi fikk det til.
+folkemengde %>% 
+  group_by(kjonn, aldersgruppe) %>% 
+  summarise(antall = sum(antall)) %>% 
+  print(n = 25)
+```
+
+Det finnes helt sikkert enda enklere løsninger enn dette, og litt av gleden av å jobbe i R er å oppdage disse og forbedre gamle syntakser. 

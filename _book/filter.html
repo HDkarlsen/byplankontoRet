@@ -208,7 +208,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./feil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
+  <a href="./joins.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Sammenslåing av data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./feil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -561,7 +566,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 [16] "23" "24" "3"  "4"  "5"  "6"  "7"  "8"  "9" </code></pre>
 </div>
 </div>
-<p>I neste kodeblokk lager jeg to datasett. Det første er likt det vi hadde i sted, foruten at jeg kun henter ut de første ti radene. Det andre datasettet er likt dettte, foruten at jeg har bedt om <em>kun ett siffer (digit)</em> på slutten. For å vise tydeligere hva som skjer binder jeg de to radene sammen.</p>
+<p>I neste kodeblokk lager jeg to datasett. Det første er likt det vi hadde i sted, foruten at jeg kun henter ut de første ti radene. Det andre datasettet er likt dette, foruten at jeg har bedt om <em>kun ett siffer (digit)</em> på slutten. For å vise tydeligere hva som skjer binder jeg de to radene sammen.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>foo <span class="ot">&lt;-</span> utvalg <span class="sc">%&gt;%</span> </span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(name, <span class="st">"[[:alpha:]]{2}[[:digit:]]{2}"</span>)) <span class="sc">%&gt;%</span> </span>

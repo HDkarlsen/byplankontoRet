@@ -172,7 +172,7 @@ tall %>% as.character() %>% sort()
 ```
 
 
-I neste kodeblokk lager jeg to datasett. Det første er likt det vi hadde i sted, foruten at jeg kun henter ut de første ti radene. Det andre datasettet er likt dettte, foruten at jeg har bedt om *kun ett siffer (digit)* på slutten. For å vise tydeligere hva som skjer binder jeg de to radene sammen.
+I neste kodeblokk lager jeg to datasett. Det første er likt det vi hadde i sted, foruten at jeg kun henter ut de første ti radene. Det andre datasettet er likt dette, foruten at jeg har bedt om *kun ett siffer (digit)* på slutten. For å vise tydeligere hva som skjer binder jeg de to radene sammen.
 
 ```{r}
 foo <- utvalg %>% 

@@ -135,7 +135,22 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./feil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
+  <a href="./filter.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Velge rader</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./transformasjoner.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Tranformasjoner</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./joins.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Sammenslåing av data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./feil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -148,7 +163,13 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#tidshorisont" id="toc-tidshorisont" class="nav-link active" data-scroll-target="#tidshorisont"><span class="toc-section-number">1.1</span>  Tidshorisont</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -170,10 +191,24 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Dette er en omfattende dokumentasjon av det jeg har gjort i R på Byplankontoret. I tillegg er det et forsøk på å vise de funksjonene man trenger for å arbeide i R. Det er ufattelig mange muligheter når det kommer til R. Dette er bare et lite utvalg, basert på det jeg har brukt mest.</p>
-<!-- Fyll på mer her -->
+<p>Tanken bak denne dokumentasjonen er å legge best mulig til rette for at dere på Byplankontoret skal fortsette å bruke skriptene jeg utvikla, og kanskje til og med ta i bruk R mer på egen hånd. Derfor har jeg utforma dokumentasjonen slik:</p>
+<p>Første del handler om grunnleggende kunnskaper man trenger om R. Her forsøkte jeg å komprimere alt jeg skulle ønske jeg visste om R da jeg starta ned til dets essens. En del av dette vil dere ikke se igjen seinere, fordi det blir avløst av funksjonalitet fra <code>tidyverse</code>. Likevel er det greit å ha en ide om hvordan <code>base R</code> opererer og funker, siden alt er bygd på dette.</p>
+<p>I andre del av pamfletten går jeg gjennom de funksjonene jeg bruker oftest. Dette er funksjoner som jeg ikke ville forklart grundig i skripta jeg har laga fordi funksjonene er så grunnleggende. En gang må man lære det grunnleggende, og det kan være her. Dere vil se disse funksjonene bli brukt til stadighet i skriptene mine, så det vil finnes mange eksempler rundt omkring.</p>
+<p>Dere vil sikkert oppleve at detaljnivået i teksten varierer fra for inngående til for løst omtalt. Målet mitt var å vise litt av alt. Hvis dere har sett eksempler på noe håper jeg dere kan tenke dere fram til en fortsettelse eller utvidelse av materialet. Her er det viktig å kunne <strong>google</strong> seg fram til svaret sitt, basert på noen antakelser. Formen til teksten er nok prega av at jeg sjøl lærer best av eksempler. Dermed er jeg nok noen ganger for slapp med å forklare nøyaktig hva en funksjon gjør, fordi jeg tenker dere vil skjønne det når dere kjører koden.</p>
+<p>I eksemplene bruker jeg aldri data fra Byplankontoret direkte. Jeg bruker enten data som ligger i R-pakker, eller jeg simulerer data som likner på noe vi kunne ha brukt.</p>
+<p>En erkjenning: dere blir ikke noe god i R om dere bare leser denne pamfletten. For å skjønne R må man ta det i bruk. Forsøk gjerne å kjør samme koder som meg i eksemplene mine.</p>
+<section id="tidshorisont" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="tidshorisont"><span class="header-section-number">1.1</span> Tidshorisont</h2>
+<p>Denne dokumentasjonen blei til i mars 2023. Koden forventes å kunne kjøres uten problemer en stund framover. Som jeg nevner i <em>Versjonering</em> vil kanskje framtidige versjoner av R og <code>tidyverse</code> gjøre endringer som påvirker koden min her. Om dere får tak i samme versjon av R og <code>tidyverse</code> vil dere unngå eventuelle problemer forbundet med dette.</p>
+<!-- LENKE -->
+<hr>
+<p>Lykke til!</p>
+<ul>
+<li>Håvard</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

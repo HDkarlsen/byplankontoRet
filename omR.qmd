@@ -65,10 +65,14 @@ R, Rstudio, og alle pakkene til R kommer i ulike versjoner, f.eks. `R v.4.2.2`, 
 
 Per nå er siste versjon vi har tilgang til på byplankontoret `4.2.3`. Hvilken versjon har jeg?
 
-```{r}
+```{r, cache = TRUE}
 sessionInfo()
 ```
 
-Jeg har forrige versjon, `4.2.2`. Grunnen er at IT installerte den nye R-versjonen i dag, og jeg ikke vil ta sjansen på at det er små endringer i koden som ødelegger noe jeg har gjort før. Mest sannsynlig vil det går bra. Små endringer, som å gå fra `x.x.2` til `x.x.3` vil nok ikke ha noen merkbare endringer.
+Jeg har forrige versjon, `4.2.2`[^1]. Grunnen er at IT installerte den nye R-versjonen i dag, og jeg ikke vil ta sjansen på at det er små endringer i koden som ødelegger noe jeg har gjort før. Mest sannsynlig vil det går bra. Små endringer, som å gå fra `x.x.2` til `x.x.3` vil nok ikke ha noen merkbare endringer.
+
+[^1]: Den observante leser vil legge merke til at teksten er feil her. Outputen forteller oss at jeg faktisk har  `4.2.3`. Da jeg skreiv dette var teksten korrekt. Men noen dager seinere oppdaterte jeg til den nye versjonen av R fordi jeg oppdaga en bug med quatro-dokumenter som jeg tror blei løst i den nye versjonen. Jeg burde ha redigert denne teksten, men jeg syns den er et utmerket eksempel på utfordringa med versjonering. Her: jeg hadde tenkt å holde meg på en versjon, men jeg oppdaterte fordi jeg trengte ny funksjonalitet. Slike avveininger må man ta. 
+
+    Det kan være uvant til oss som er vant til å få en ny versjon av SPSS hvert år og av ArcGis aldri. Nå må vi ta et aktivt valg og vurdere om vi skal oppdatere programvaren. I praksis har dere ikke dette valget da dere kun kan installere den versjonen av R som er tilgjengelig på firmaportalen. Men når en versjon først er installert kan dere når som helst velge hvilken *tidligere* versjon av R dere vil bruke. Se en guide hos [Posit](https://support.posit.co/hc/en-us/articles/200486138-Changing-R-versions-for-the-RStudio-Desktop-IDE).
 
 Tilstedeværelsen av alle disse ulike versjonene av pakker og programvare kan kanskje oppleves som plagsomt. Men det er faktisk en fordel, og en styrke ved R. Det medfører at vi kan garantere at et skript er *future proof*, at det alltids kan kjøre gitt samme data og datamaskin. Se mer om dette hos [Brodrigues](https://www.brodrigues.co/blog/2022-11-16-open_source_repro/). Vi har for eksempel ingen garanti for at Excel i 2030 lar oss åpne og behandle filene våre fra 2020. Eller at alle funksjonene vi har i cellene forstås likt i begge versjonene av Excel. Dette er ikke overdrivelse. Da Excel gikk over fra `.xls` til `.xlsx` medførte det at nye versjoner av Excel ikke alltid greide å åpna de gamle filformatene. I denne situasjonen er du avhengig av at du får tilgang på en eldre versjon av programvaren for å åpna fila di. Det er ikke sikkert man får. 

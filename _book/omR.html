@@ -183,7 +183,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./feil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
+  <a href="./import-export.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Import og eksport av data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./inspisere.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inspisere data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pivot.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Omstrukturering av data (pivot)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./filter.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Velge rader</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./transformasjoner.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Tranformasjoner</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./joins.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Sammenslåing av data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./feil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -289,7 +319,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Du har <strong>alltid tilgang til eldre versjoner av R og Rs pakker</strong>. Dette er et viktig kjennetegn ved FOSS (free, open-source software). Hvis du trenger en funksjon fra en gammel versjon av en pakke, kan du alltids nedgradere R-versjonen og laste inn den versjonen av pakka. Jeg nevner det her, men det er mer for viderekommende, og for Linux-fantaster.</li>
 </ul>
 <p>Per nå er siste versjon vi har tilgang til på byplankontoret <code>4.2.3</code>. Hvilken versjon har jeg?</p>
-<div class="cell">
+<div class="cell" data-hash="omR_cache/html/unnamed-chunk-2_1ee71160bcae956fffc1b1e94af252b3">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.2.3 (2023-03-15 ucrt)
@@ -313,10 +343,17 @@ loaded via a namespace (and not attached):
 [17] evaluate_0.17    </code></pre>
 </div>
 </div>
-<p>Jeg har forrige versjon, <code>4.2.2</code>. Grunnen er at IT installerte den nye R-versjonen i dag, og jeg ikke vil ta sjansen på at det er små endringer i koden som ødelegger noe jeg har gjort før. Mest sannsynlig vil det går bra. Små endringer, som å gå fra <code>x.x.2</code> til <code>x.x.3</code> vil nok ikke ha noen merkbare endringer.</p>
+<p>Jeg har forrige versjon, <code>4.2.2</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Grunnen er at IT installerte den nye R-versjonen i dag, og jeg ikke vil ta sjansen på at det er små endringer i koden som ødelegger noe jeg har gjort før. Mest sannsynlig vil det går bra. Små endringer, som å gå fra <code>x.x.2</code> til <code>x.x.3</code> vil nok ikke ha noen merkbare endringer.</p>
 <p>Tilstedeværelsen av alle disse ulike versjonene av pakker og programvare kan kanskje oppleves som plagsomt. Men det er faktisk en fordel, og en styrke ved R. Det medfører at vi kan garantere at et skript er <em>future proof</em>, at det alltids kan kjøre gitt samme data og datamaskin. Se mer om dette hos <a href="https://www.brodrigues.co/blog/2022-11-16-open_source_repro/">Brodrigues</a>. Vi har for eksempel ingen garanti for at Excel i 2030 lar oss åpne og behandle filene våre fra 2020. Eller at alle funksjonene vi har i cellene forstås likt i begge versjonene av Excel. Dette er ikke overdrivelse. Da Excel gikk over fra <code>.xls</code> til <code>.xlsx</code> medførte det at nye versjoner av Excel ikke alltid greide å åpna de gamle filformatene. I denne situasjonen er du avhengig av at du får tilgang på en eldre versjon av programvaren for å åpna fila di. Det er ikke sikkert man får.</p>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Den observante leser vil legge merke til at teksten er feil her. Outputen forteller oss at jeg faktisk har <code>4.2.3</code>. Da jeg skreiv dette var teksten korrekt. Men noen dager seinere oppdaterte jeg til den nye versjonen av R fordi jeg oppdaga en bug med quatro-dokumenter som jeg tror blei løst i den nye versjonen. Jeg burde ha redigert denne teksten, men jeg syns den er et utmerket eksempel på utfordringa med versjonering. Her: jeg hadde tenkt å holde meg på en versjon, men jeg oppdaterte fordi jeg trengte ny funksjonalitet. Slike avveininger må man ta.</p>
+<p>Det kan være uvant til oss som er vant til å få en ny versjon av SPSS hvert år og av ArcGis aldri. Nå må vi ta et aktivt valg og vurdere om vi skal oppdatere programvaren. I praksis har dere ikke dette valget da dere kun kan installere den versjonen av R som er tilgjengelig på firmaportalen. Men når en versjon først er installert kan dere når som helst velge hvilken <em>tidligere</em> versjon av R dere vil bruke. Se en guide hos <a href="https://support.posit.co/hc/en-us/articles/200486138-Changing-R-versions-for-the-RStudio-Desktop-IDE">Posit</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->

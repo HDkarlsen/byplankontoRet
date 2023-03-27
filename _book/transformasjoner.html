@@ -93,7 +93,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./feil.html" rel="next">
+<link href="./joins.html" rel="next">
 <link href="./filter.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -208,7 +208,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./feil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
+  <a href="./joins.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Sammenslåing av data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./feil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -313,14 +318,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 8
   plansone kjonn aar2023 aar2024 aar2025 faktisk2023 faktisk2024 faktisk2025
      &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-1  5001001 M         635     539     542         595         546         622
-2  5001001 K         419     568     450         392         575         517
-3  5001002 M         608     427     639         569         433         734
-4  5001002 K         719     474     493         673         480         566
-5  5001003 M         455     620     666         426         628         765
-6  5001003 K         430     550     776         403         557         891
-7  5001004 M         425     671     545         398         680         626
-8  5001004 K         773     492     623         724         498         715</code></pre>
+1  5001001 M         781     654     693         827         689         738
+2  5001001 K         448     740     635         474         779         677
+3  5001002 M         657     573     736         696         604         784
+4  5001002 K         462     729     717         489         768         764
+5  5001003 M         599     773     784         634         814         835
+6  5001003 K         460     415     423         487         437         451
+7  5001004 M         712     692     627         754         729         668
+8  5001004 K         517     699     542         547         736         578</code></pre>
 </div>
 </div>
 <p>Si at vi vil vite differansen mellom prognosen (“aarXXXX”) og faktisk befolkning (“faktiskXXXX”).</p>
@@ -333,14 +338,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 11
   plansone kjonn aar2023 aar2024 aar2025 fakti…¹ fakti…² fakti…³ diff2…⁴ diff2…⁵
      &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1  5001001 M         635     539     542     595     546     622      40      -7
-2  5001001 K         419     568     450     392     575     517      27      -7
-3  5001002 M         608     427     639     569     433     734      39      -6
-4  5001002 K         719     474     493     673     480     566      46      -6
-5  5001003 M         455     620     666     426     628     765      29      -8
-6  5001003 K         430     550     776     403     557     891      27      -7
-7  5001004 M         425     671     545     398     680     626      27      -9
-8  5001004 K         773     492     623     724     498     715      49      -6
+1  5001001 M         781     654     693     827     689     738     -46     -35
+2  5001001 K         448     740     635     474     779     677     -26     -39
+3  5001002 M         657     573     736     696     604     784     -39     -31
+4  5001002 K         462     729     717     489     768     764     -27     -39
+5  5001003 M         599     773     784     634     814     835     -35     -41
+6  5001003 K         460     415     423     487     437     451     -27     -22
+7  5001004 M         712     692     627     754     729     668     -42     -37
+8  5001004 K         517     699     542     547     736     578     -30     -37
 # … with 1 more variable: diff2025 &lt;dbl&gt;, and abbreviated variable names
 #   ¹​faktisk2023, ²​faktisk2024, ³​faktisk2025, ⁴​diff2023, ⁵​diff2024</code></pre>
 </div>
@@ -355,14 +360,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 8
   plansone kjonn aar2023 aar2024 aar2025 faktisk2023 faktisk2024 faktisk2025
      &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-1  5001001 M         635     539    1084         595         546         622
-2  5001001 K         419     568     900         392         575         517
-3  5001002 M         608     427    1278         569         433         734
-4  5001002 K         719     474     986         673         480         566
-5  5001003 M         455     620    1332         426         628         765
-6  5001003 K         430     550    1552         403         557         891
-7  5001004 M         425     671    1090         398         680         626
-8  5001004 K         773     492    1246         724         498         715</code></pre>
+1  5001001 M         781     654    1386         827         689         738
+2  5001001 K         448     740    1270         474         779         677
+3  5001002 M         657     573    1472         696         604         784
+4  5001002 K         462     729    1434         489         768         764
+5  5001003 M         599     773    1568         634         814         835
+6  5001003 K         460     415     846         487         437         451
+7  5001004 M         712     692    1254         754         729         668
+8  5001004 K         517     699    1084         547         736         578</code></pre>
 </div>
 </div>
 <section id="noen-nyttige-funksjoner-til-mutate" class="level3" data-number="9.1.1">
@@ -482,14 +487,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 1
   aar2025
     &lt;dbl&gt;
-1    1084
-2     900
-3    1278
-4     986
-5    1332
-6    1552
-7    1090
-8    1246</code></pre>
+1    1386
+2    1270
+3    1472
+4    1434
+5    1568
+6     846
+7    1254
+8    1084</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Er det samme som dette</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>prognose <span class="sc">%&gt;%</span> </span>
@@ -498,14 +503,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 1
   aar2025
     &lt;dbl&gt;
-1    1084
-2     900
-3    1278
-4     986
-5    1332
-6    1552
-7    1090
-8    1246</code></pre>
+1    1386
+2    1270
+3    1472
+4    1434
+5    1568
+6     846
+7    1254
+8    1084</code></pre>
 </div>
 </div>
 </section>
@@ -658,8 +663,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./feil.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./joins.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Sammenslåing av data</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
