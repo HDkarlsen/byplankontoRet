@@ -213,7 +213,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./feil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
+  <a href="./arbeidsprosess.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Arbeidsprosess</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./feil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -241,7 +246,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="filter" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Velge rader</span></span></h1>
+<h1 class="title"><span id="sec-filter" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Velge rader</span></span></h1>
 </div>
 
 
@@ -625,8 +630,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="select" class="level2" data-number="8.3">
 <h2 data-number="8.3" class="anchored" data-anchor-id="select"><span class="header-section-number">8.3</span> Select</h2>
-<!-- Lenk til inspisere.qmd hvor vi bruke select() en del. -->
-<p>Vi har brukt <code>select()</code> før. Den er nyttig å ta opp igjen her. Med <code>select()</code> kan vi velge ut kolonner og med <code>filter()</code> kan vi velge ut rader. Dermed er det ofte nyttig å bruke begge sammen. Jeg bruker dem spesielt mye når jeg gjør en første gjennomgang av et skript. Da velger jeg ut kun de radene og kolonnene som jeg er interessert i og arbeider på dem. Dette gjør det lettere å se om koden min funker, uten å måtte se for mye urelevant. Når jeg veit at skriptet funker, kan jeg gå tilbake og fjerne <code>select()</code> og <code>filter()</code> slik at hele datasettet kjøres gjennom skriptet.</p>
+<p>Vi har brukt <code>select()</code> før, se <a href="inspisere.html#sec-select"><span>Section&nbsp;6.3.1</span></a>. Den er nyttig å ta opp igjen her. Med <code>select()</code> kan vi velge ut kolonner og med <code>filter()</code> kan vi velge ut rader. Dermed er det ofte nyttig å bruke begge sammen. Jeg bruker dem spesielt mye når jeg gjør en første gjennomgang av et skript. Da velger jeg ut kun de radene og kolonnene som jeg er interessert i og arbeider på dem. Dette gjør det lettere å se om koden min funker, uten å måtte se for mye urelevant. Når jeg veit at skriptet funker, kan jeg gå tilbake og fjerne <code>select()</code> og <code>filter()</code> slik at hele datasettet kjøres gjennom skriptet.</p>
 <p>Det er nyttig å vite at vi kan bruke noen liknende streng-teknikker på <code>select()</code> som vi brukte på <code>filter()</code>. Vi henter inn et nytt, simulert datasett hvor den del av kolonnene våre har navn på samme form.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>prognose <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>

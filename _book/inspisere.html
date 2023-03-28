@@ -208,7 +208,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./feil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
+  <a href="./joins.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Sammenslåing av data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arbeidsprosess.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Arbeidsprosess</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./feil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -229,10 +239,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#del-inspisering" id="toc-del-inspisering" class="nav-link" data-scroll-target="#del-inspisering"><span class="toc-section-number">6.2</span>  Del-inspisering</a></li>
   <li><a href="#andre-kolonner" id="toc-andre-kolonner" class="nav-link" data-scroll-target="#andre-kolonner"><span class="toc-section-number">6.3</span>  Andre kolonner</a>
   <ul class="collapse">
-  <li><a href="#select" id="toc-select" class="nav-link" data-scroll-target="#select"><span class="toc-section-number">6.3.1</span>  select</a></li>
+  <li><a href="#sec-select" id="toc-sec-select" class="nav-link" data-scroll-target="#sec-select"><span class="toc-section-number">6.3.1</span>  select</a></li>
   <li><a href="#glimpse" id="toc-glimpse" class="nav-link" data-scroll-target="#glimpse"><span class="toc-section-number">6.3.2</span>  glimpse</a></li>
   </ul></li>
-  <li><a href="#oppsummeringer" id="toc-oppsummeringer" class="nav-link" data-scroll-target="#oppsummeringer"><span class="toc-section-number">6.4</span>  Oppsummeringer</a></li>
+  <li><a href="#oppsummering" id="toc-oppsummering" class="nav-link" data-scroll-target="#oppsummering"><span class="toc-section-number">6.4</span>  Oppsummeringer</a></li>
   </ul>
 </nav>
     </div>
@@ -360,17 +370,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>biler <span class="sc">%&gt;%</span> <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   rowid               bil  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
-1     30      Ferrari Dino 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
-2     23       AMC Javelin 15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
-3     11         Merc 280C 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
-4      7        Duster 360 14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
-5     26         Fiat X1-9 27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
-6     19       Honda Civic 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
-7     14       Merc 450SLC 15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
-8     18          Fiat 128 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
-9     27     Porsche 914-2 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
-10     5 Hornet Sportabout 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2</code></pre>
+<pre><code>   rowid              bil  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+1     32       Volvo 142E 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+2     31    Maserati Bora 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+3     22 Dodge Challenger 15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+4     28     Lotus Europa 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+5      2    Mazda RX4 Wag 21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+6     25 Pontiac Firebird 19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+7      6          Valiant 18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+8      7       Duster 360 14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+9     12       Merc 450SE 16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+10    10         Merc 280 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4</code></pre>
 </div>
 </div>
 <p>Denne funksjonen er en avart av <code>slice()</code> som gir deg <em>spesifikke</em> rader. Hvis du f.eks. vil ha rad 10-20:</p>
@@ -474,8 +484,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>På samme måte som det er begrensende å hele tida kikke på de øverste <em>radene</em> av et datasett er det begrensende å kikke på de fremste <em>kolonnene</em>. Vi kan bruke <code>select()</code> for å velge hvilke rader vi vil se på, eller vi kan bruke den nyttige <code>glimpse()</code>. Greier du å gjette hvor disse funksjonene kommer fra? De kommer fra <code>dplyr</code>!</p>
 <p>…</p>
 <p>som er en del av <code>tidyverse</code>.</p>
-<section id="select" class="level3" data-number="6.3.1">
-<h3 data-number="6.3.1" class="anchored" data-anchor-id="select"><span class="header-section-number">6.3.1</span> select</h3>
+<section id="sec-select" class="level3" data-number="6.3.1">
+<h3 data-number="6.3.1" class="anchored" data-anchor-id="sec-select"><span class="header-section-number">6.3.1</span> select</h3>
 <p><code>select()</code> gir oss muligheten til å diskutere en av de fantastiske innovasjonene i <code>tidyverse</code>: <strong>tidy evaluation</strong>. Vi dykker ikke dypt i det, men det er greit å vite om <strong>data masking</strong> og <strong>tidy select</strong>. De er diskutert mer inngående i <a href="https://dplyr.tidyverse.org/articles/programming.html">Programming with Tidyverse</a>. <em>Tidy select</em> lar oss velge en kolonne i et datasett <em>uten å måtte hermetegn</em>. Tenk på det! Neste gang du velger en kolonne slipper du å strekke lillefingeren til den fjerne shift-tasten og gå i spagat med langefingern til 2-tasten. Faktisk gjør <em>tidy select</em> mye mer enn dette, som vi vil se etter hvert. F.eks. kan du velge kolonner ut fra navn, posisjon, eller <em>type</em>. La oss se noen eksempler</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Slik ser starwars-datasettet ut. </span></span>
@@ -603,8 +613,8 @@ $ starships  &lt;list&gt; &lt;"X-wing", "Imperial shuttle"&gt;, &lt;&gt;, &lt;&g
 </div>
 </section>
 </section>
-<section id="oppsummeringer" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="oppsummeringer"><span class="header-section-number">6.4</span> Oppsummeringer</h2>
+<section id="oppsummering" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="oppsummering"><span class="header-section-number">6.4</span> Oppsummeringer</h2>
 <p>Hittil har vi bare prata om måter å set utdrag av data på. Noen ganger er det nyttig å se en <em>oppsummering</em> av dataene. Detaljer som snitt, standardavvik, minimum og maksimum-verdier, for eksempel.</p>
 <p><code>summary()</code> fra <code>base R</code> er nyttig her. Den gir enkelt og greit en oversikt over diverse statistikk for hver numeriske variabel.</p>
 <div class="cell">

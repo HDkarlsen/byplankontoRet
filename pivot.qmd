@@ -38,7 +38,6 @@ Her har vi et datasett med fire plansoner, to kjønn, og tre variabler som viser
 
 Dermed vil vi gjøre om dette til et tidy format. Dette gjør vi ved å gå fra bredt til langt format. For å gjøre dette tar vi i bruk funksjoner fra `tidyverse`[^longnote].
 
-<!-- lag lenke her -->
 [^longnote]: Jeg skumpa borti dette tidligere da vi prata om versjonering: framtidige versjoner av en pakke kan fjerne funksjoner du er avhengig av. Jeg opplevde dette nettopp med omforming av data slik vi gjør her. Omstruktureringsfunksjonene kommer fra `tidyr`. Da jeg lærte temaet var den siste versjonen `0.8.3`. Ifølge `tidyr()s` [endringslogg](https://tidyr.tidyverse.org/news/index.html#tidyr-083) blei den sluppet i mars 2019. Neste versjon var `1.0.0`, og kom i september 2019. Som du kan gjette av versjonshoppet var dette en stor endring. Bort med de gamle funksjonene `spread()` og `gather()`, inn med de nye `pivot_wider()` og `pivot_longer()`.
   
     Umiddelbart var dette noe ergelig, fordi mine gamle skript ikke lengre funka. Hadde jeg vært noe mer teknisk kompetent hadde jeg funnet en måte å putte R-versjoner og skript i ulike kontainere slik at jeg kunne ha kjørt mine gamle skript under gamle R- og pakke-versjoner. Istedenfor bare oppdaterte jeg skripta mine til å passe de nye funksjonene. Så lærte jeg meg også hvordan de funka.*

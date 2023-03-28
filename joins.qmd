@@ -77,9 +77,7 @@ firmaoversikt <- left_join(inntjening,
 firmaoversikt
 ```
 
-Vi kan også oppgi flere variabler å matche på ved å simpelthen oppgi flere variabler i `by`-argumentet: `by = c("firmanavn", "avdeling", "fylke")`. Dette funker også som en navngitt vektor dersom man har ulike kolonnenavn i datasetta: `by = c("firmanavn" = "navn", "avdeling" = "branch", "fylke" = "fylke")
-
-<!-- lenke til navngitte vektorer andre steder i boka -->
+Vi kan også oppgi flere variabler å matche på ved å simpelthen oppgi flere variabler i `by`-argumentet: `by = c("firmanavn", "avdeling", "fylke")`. Dette funker også som en navngitt vektor dersom man har ulike kolonnenavn i datasetta: `by = c("firmanavn" = "navn", "avdeling" = "branch", "fylke" = "fylke")`. Se mer om navngitte vektorer i @sec-navngitt-vektor.
 
 ## Kompliserende faktorer
 

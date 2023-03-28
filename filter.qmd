@@ -197,9 +197,7 @@ Det jeg håper på å få fram her er at vi må stoppe opp innimellom og teste v
 
 ## Select
 
-<!-- Lenk til inspisere.qmd hvor vi bruke select() en del. -->
-
-Vi har brukt `select()` før. Den er nyttig å ta opp igjen her. Med `select()` kan vi velge ut kolonner og med `filter()` kan vi velge ut rader. Dermed er det ofte nyttig å bruke begge sammen. Jeg bruker dem spesielt mye når jeg gjør en første gjennomgang av et skript. Da velger jeg ut kun de radene og kolonnene som jeg er interessert i og arbeider på dem. Dette gjør det lettere å se om koden min funker, uten å måtte se for mye urelevant. Når jeg veit at skriptet funker, kan jeg gå tilbake og fjerne `select()` og `filter()` slik at hele datasettet kjøres gjennom skriptet. 
+Vi har brukt `select()` før, se @sec-select. Den er nyttig å ta opp igjen her. Med `select()` kan vi velge ut kolonner og med `filter()` kan vi velge ut rader. Dermed er det ofte nyttig å bruke begge sammen. Jeg bruker dem spesielt mye når jeg gjør en første gjennomgang av et skript. Da velger jeg ut kun de radene og kolonnene som jeg er interessert i og arbeider på dem. Dette gjør det lettere å se om koden min funker, uten å måtte se for mye urelevant. Når jeg veit at skriptet funker, kan jeg gå tilbake og fjerne `select()` og `filter()` slik at hele datasettet kjøres gjennom skriptet. 
 
 Det er nyttig å vite at vi kan bruke noen liknende streng-teknikker på `select()` som vi brukte på `filter()`. Vi henter inn et nytt, simulert datasett hvor den del av kolonnene våre har navn på samme form. 
 

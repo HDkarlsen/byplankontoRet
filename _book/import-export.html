@@ -213,7 +213,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./feil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
+  <a href="./arbeidsprosess.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Arbeidsprosess</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./feil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -233,9 +238,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#felles-mønstre" id="toc-felles-mønstre" class="nav-link active" data-scroll-target="#felles-mønstre"><span class="toc-section-number">5.1</span>  Felles mønstre</a>
   <ul class="collapse">
   <li><a href="#filnavn" id="toc-filnavn" class="nav-link" data-scroll-target="#filnavn"><span class="toc-section-number">5.1.1</span>  Filnavn</a></li>
-  <li><a href="#relative-fillokasjoner" id="toc-relative-fillokasjoner" class="nav-link" data-scroll-target="#relative-fillokasjoner"><span class="toc-section-number">5.1.2</span>  Relative fillokasjoner</a></li>
-  <li><a href="#skråstreker-til-besvær" id="toc-skråstreker-til-besvær" class="nav-link" data-scroll-target="#skråstreker-til-besvær"><span class="toc-section-number">5.1.3</span>  Skråstreker til besvær</a></li>
-  <li><a href="#tegnkoding" id="toc-tegnkoding" class="nav-link" data-scroll-target="#tegnkoding"><span class="toc-section-number">5.1.4</span>  Tegnkoding</a></li>
+  <li><a href="#sec-filkolasjon" id="toc-sec-filkolasjon" class="nav-link" data-scroll-target="#sec-filkolasjon"><span class="toc-section-number">5.1.2</span>  Relative fillokasjoner</a></li>
+  <li><a href="#sec-slash" id="toc-sec-slash" class="nav-link" data-scroll-target="#sec-slash"><span class="toc-section-number">5.1.3</span>  Skråstreker til besvær</a></li>
+  <li><a href="#sec-tegnkoding" id="toc-sec-tegnkoding" class="nav-link" data-scroll-target="#sec-tegnkoding"><span class="toc-section-number">5.1.4</span>  Tegnkoding</a></li>
   </ul></li>
   <li><a href="#tekstfiler-csv-med-familie" id="toc-tekstfiler-csv-med-familie" class="nav-link" data-scroll-target="#tekstfiler-csv-med-familie"><span class="toc-section-number">5.2</span>  Tekstfiler (csv med familie)</a></li>
   <li><a href="#spss" id="toc-spss" class="nav-link" data-scroll-target="#spss"><span class="toc-section-number">5.3</span>  SPSS</a></li>
@@ -252,7 +257,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Import og eksport av data</span></h1>
+<h1 class="title"><span id="sec-import-export" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Import og eksport av data</span></span></h1>
 </div>
 
 
@@ -311,21 +316,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>Dette er fordi et filnavn strengt tatt inkludere hele <em>filstien</em> til fila. Den fila jeg arbeider på nå heter f.eks. <code>import-export.qmd</code>. Den ligger på dette filområdet på datamaskina mi: <code>C:/Users/HK2Q/Documents/r/dokumentasjon</code>. Dermed blir det <em>egentlige</em> navnet på fila: <code>C:/Users/HK2Q/Documents/r/dokumentasjon/import-export.qmd</code>. Husk at også filtutvidelsen (det som kommer ettter <code>.</code>) er en del av filnavnet! Når en funksjon ber om <code>file</code> eller <code>path</code> betyr dette ofte at de vil ha hele det fulle filnavnet inkludert filsti.</p>
 </section>
-<section id="relative-fillokasjoner" class="level3" data-number="5.1.2">
-<h3 data-number="5.1.2" class="anchored" data-anchor-id="relative-fillokasjoner"><span class="header-section-number">5.1.2</span> Relative fillokasjoner</h3>
+<section id="sec-filkolasjon" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="sec-filkolasjon"><span class="header-section-number">5.1.2</span> Relative fillokasjoner</h3>
 <p>Man kan alltids henvise til konkrete områder på maskina, men dette er optimalt fordi det gjør at du aldri kan flytte noen filer igjen. Dessuten vil ikke koden funke på en annen persons PC med mindre de har 100 % likt oppsett på deres maskin. Derfor er det nyttig med <strong>relative</strong> filstier. Når du arbeider i Rstudio (og du er ikke en gærning som arbeider i R GUI, er du vel?) forventes det at du arbeider i såkalte <strong>prosjekter</strong>. Alle mine prosjekter ligger kopiert på <code>M:</code>-disken. Et prosjekt er en mappe med visse filer i seg, hvorav den viktige fila er <code>prosjekt_navn.Rproj</code>. Denne opprettes automatisk når du lager et prosjekt via Rstudio. Det er mange flotte ting med prosjekter, og en av dem er at alle filstier defineres ut fra prosjektets <strong>rotmappe</strong>. Rotmappa er den mappa hvor <code>.Rproj</code>-filer ligger, og der du putter alle mapper og filer assosiert med prosjektet. Når du arbeider i prosjekter trenger du ikke definere hele filstien til en fil, bare <em>hvor den ligger i forhold til rotmappa</em>. F.eks. har jeg for denne boka lagt alle bilder i en mappe som heter <code>img</code>. Hvis jeg vil henvise til et bilde skrive jeg bare <code>img/bilde.png</code>. Gjør det til en vane å bruke relative filstier når du kan!</p>
 <p>Det går så klart ikke alltid. Når noe ligger på f.eks. <code>M:</code>-disken må jeg lage en full filsti. Fordelen er at <code>M:</code> er en delt disk, så jeg kan anta at filstien vil se likt ut for andre.</p>
 <p>Merk at i noen tilfeller brytes antakelsen om at filstien alltid er relativt til rotmappa. I disse tilfellene er pakka <code>here</code> svært nyttig. Den er også nyttig på grunn av noe annet, nemlig skråstrekproblematikken</p>
 <!-- gjerne mer kodeeksempler her -->
 </section>
-<section id="skråstreker-til-besvær" class="level3" data-number="5.1.3">
-<h3 data-number="5.1.3" class="anchored" data-anchor-id="skråstreker-til-besvær"><span class="header-section-number">5.1.3</span> Skråstreker til besvær</h3>
+<section id="sec-slash" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="sec-slash"><span class="header-section-number">5.1.3</span> Skråstreker til besvær</h3>
 <p>I Windows brukes denne skråstreket <code>\</code> til å indikere ei mappe. I alle UNIX-baserte operativsystemet og programmer brukes <code>/</code>. Eksempler på sistnevnte er Ubuntu, macOS, og R. Når vi arbeider med R på Windows skjer det dermed en del arbeid i kulissene når vi henviser til en filplassering. Dette blir åpenbart for oss når vi for eksempel forsøker å lime inn en filsti fra Windows explorer (filutforskeren). R godtar ikke uten videre “feil” skråstrek. Det er to løsninger på dette:</p>
 <ol type="1">
 <li>endre skråstrekene så de går andre vei</li>
 <li><em>escape</em> skråstrekene</li>
 </ol>
-<p>Det siste innebærer å bruke det som kalles <em>escape characters</em>. En del tegn har meninger i koden. F.eks. betyr <code>#</code> kommentar i et R-skript. Hvis jeg vil skrive ut emneknaggen, må jeg legge på en escape character så R skjønner at dette tegnet skal ikke skal tolkes slik det vanligvis tolkes. Hva er escape-tegnet? Det er nettopp <code>\</code>. For å escape <code>#</code> skriver vi dermed <code>\#</code>, og for å escape <code>\</code> skriver vi altså <code>\\</code>. <!-- sjekk at # ikke blir til noe annet og må escapes --></p>
+<p>Det siste innebærer å bruke det som kalles <em>escape characters</em>. En del tegn har meninger i koden. F.eks. betyr <code>#</code> kommentar i et R-skript. Hvis jeg vil skrive ut emneknaggen, må jeg legge på en escape character så R skjønner at dette tegnet skal ikke skal tolkes slik det vanligvis tolkes. Hva er escape-tegnet? Det er nettopp <code>\</code>. For å escape <code>#</code> skriver vi dermed <code>\#</code>, og for å escape <code>\</code> skriver vi altså <code>\\</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ok</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="st">"C:/Users/HK2Q/Documents/r/dokumentasjon"</span></span>
@@ -344,8 +349,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Alt dette for å si: <code>here</code> pakka løser en del av problema våre. Les mer om den på <a href="https://github.com/jennybc/here_here">Ode to the here package</a>.</p>
 </section>
-<section id="tegnkoding" class="level3" data-number="5.1.4">
-<h3 data-number="5.1.4" class="anchored" data-anchor-id="tegnkoding"><span class="header-section-number">5.1.4</span> Tegnkoding</h3>
+<section id="sec-tegnkoding" class="level3" data-number="5.1.4">
+<h3 data-number="5.1.4" class="anchored" data-anchor-id="sec-tegnkoding"><span class="header-section-number">5.1.4</span> Tegnkoding</h3>
 <p>Spesielt når det kommer til norske <code>.csv</code>-filer hender det vi får et problem med tegnkodinga (<em>character encoding</em>). En full gjennomgang blir for omfattende. Det holder å si at, igjen, dette er hovedsaklig et Windows-problem. Ideelt sett vil vi ha alt over i unicode (UTF-8). Noen filer er lagra i et annet format. Gjerne ISO8859-1 som er en av standardene som gir oss skandinaviske tegn. En forkludrende faktor er at det tidvis (og inntil ganske nylig, per 2023-03) har vært problemer med R og/eller Rstudio når det kommer til tegnkoding. Disse blir fiksa med tida og er kanskje allerede fiksa. Du ser problemet dukke opp dersom du forventer å se en æ. ø eller å i outputen og istedet får noe sånt som <code>"\xe6\xf8\xe5"</code>, <code>Ã¦Ã¸Ã¥</code> eller <code>&lt;U+00C6&gt;</code>. Der er mange ulike faktorer som kan være årsak til dette problemet. En av dem kan være at du må sette tegnkoden spesifikt når du leser en fil. I noen av eksemplene mine vil du set at jeg har spesifisert <em>encoding</em>, og da er det derfor.</p>
 </section>
 </section>

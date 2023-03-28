@@ -1,4 +1,4 @@
-# Typiske feil vi (jeg) gjør og hvordan fikse dem
+# Typiske feil vi (jeg) gjør og hvordan fikse dem {#sec-feil}
 
 Det er uendelig mange måter å gjøre noe feil på. Dette gjelder egentlig uansett hvilket program du arbeider i. Noe som er fint i R er at du vanligvis får en klar feilmelding når noe går galt. Noe som er mindre fint er at denne feilmeldinga ikke alltid er så enkel å tolke. Likevel, se alltid på meldinga først. Her får du en tydlige pekepinn på hva som gikk galt. Man lærer seg etter hvert hvordan å lese disse meldingene, skjønt de kan virke gresk i starten. 
 
@@ -53,10 +53,11 @@ Denne kompliseringa godtar vi, for det er så mange fordeler med at `tidyverse` 
 
 ## Feil skråstrek
 
-Windows vs. mac <!-- se import-export -->
+Windows vs. mac Se @sec-slash.
 
 ## Tegnkode
-<!-- se import-export -->
+
+Se @sec-tegnkoding.
 
 Ofte hjelper det å restarte R-sesjonen.
 

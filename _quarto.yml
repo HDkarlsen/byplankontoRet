@@ -5,6 +5,7 @@ book:
   title: "R for Byplankontoret"
   author: "Håvard Karlsen"
   date: 2023-03-24
+  cover-image: img/ryoji-iwata-n31JPLu8_Pw-unsplash.jpg
   chapters:
     - index.qmd
     - intro.qmd
@@ -17,8 +18,15 @@ book:
     - filter.qmd
     - transformasjoner.qmd
     - joins.qmd
+    - arbeidsprosess.qmd
     - feil.qmd
     - references.qmd
+
+crossref:
+  fig-prefix: Figur   # (default is "Figure")
+  fig-title: Figur
+  sec-prefix: Kapittel
+
 
 bibliography: references.bib
 

@@ -8,9 +8,7 @@ Hovedenheten i arbeidsprosessen er et prosjekt. Hva et prosjekt er er et spørsm
 
 [Rstudio-prosjekter](https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects) er en nyttig måte å organisere prosjekter i R. Hovednytten kommer i at alle filstier blir *relative til prosjektets rotmappe*. Rotmappa er der `.Rproj`-fila ligger. Hadde jeg måtte definere alle stier ut fra hvor de ligger på *min* PC ville det blitt vanskelgiere for dere å ta over. Pakka `here` er også nyttig for å gjøre stier enda mer robuste.
 
-Når vi prater om `.Rproj`, her er en instilling dere burde endre på: Skru av *Restore .RData into workspace on startup* og velg *never* på *Save workspace to .RData on exit*. Dette er innstillinger som gjør det litt raskere for deg å komme inn i et prosjekt, men som vil gi deg en falsk trygghet, og som inviterer til noen av de feilene om jeg omtaler i *Typiske feil*.
-
-<!-- lenke til feil her -->
+Når vi prater om `.Rproj`, her er en instilling dere burde endre på: Skru av *Restore .RData into workspace on startup* og velg *never* på *Save workspace to .RData on exit*. Dette er innstillinger som gjør det litt raskere for deg å komme inn i et prosjekt, men som vil gi deg en falsk trygghet, og som inviterer til noen av de feilene om jeg omtaler i @sec-feil.
 
 ![Slik skal det se ut](img/settings.png){width=50%}
 

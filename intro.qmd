@@ -14,12 +14,12 @@ En erkjenning: dere blir ikke noe god i R om dere bare leser denne pamfletten. F
 
 ## Tidshorisont
 
-Denne dokumentasjonen blei til i mars 2023. Koden forventes å kunne kjøres uten problemer en stund framover. Som jeg nevner i *Versjonering* vil kanskje framtidige versjoner av R og `tidyverse` gjøre endringer som påvirker koden min her. Om dere får tak i samme versjon av R og `tidyverse` vil dere unngå eventuelle problemer forbundet med dette. 
-
-<!-- LENKE -->
+Denne dokumentasjonen blei til i mars 2023. Koden forventes å kunne kjøres uten problemer en stund framover. Som jeg nevner i @sec-versjering vil kanskje framtidige versjoner av R og `tidyverse` gjøre endringer som påvirker koden min her. Om dere får tak i samme versjon av R og `tidyverse` vil dere unngå eventuelle problemer forbundet med dette. 
 
 ---
 
 Lykke til!
 
-- Håvard
+*Håvard*
+
+`r Sys.Date()`

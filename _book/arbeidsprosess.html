@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R for Byplankontoret - 2&nbsp; Om R</title>
+<title>R for Byplankontoret - 11&nbsp; Arbeidsprosess</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,8 +93,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./pakker.html" rel="next">
-<link href="./intro.html" rel="prev">
+<link href="./feil.html" rel="next">
+<link href="./joins.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -133,7 +133,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Om R</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Arbeidsprosess</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -168,7 +168,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./omR.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Om R</span></a>
+  <a href="./omR.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Om R</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -213,7 +213,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./arbeidsprosess.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Arbeidsprosess</span></a>
+  <a href="./arbeidsprosess.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Arbeidsprosess</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -235,10 +235,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#spss" id="toc-spss" class="nav-link active" data-scroll-target="#spss"><span class="toc-section-number">2.1</span>  SPSS</a></li>
-  <li><a href="#excel" id="toc-excel" class="nav-link" data-scroll-target="#excel"><span class="toc-section-number">2.2</span>  Excel</a></li>
-  <li><a href="#hvorfor-skal-jeg-bruke-r" id="toc-hvorfor-skal-jeg-bruke-r" class="nav-link" data-scroll-target="#hvorfor-skal-jeg-bruke-r"><span class="toc-section-number">2.3</span>  Hvorfor skal jeg bruke R?</a></li>
-  <li><a href="#sec-versjering" id="toc-sec-versjering" class="nav-link" data-scroll-target="#sec-versjering"><span class="toc-section-number">2.4</span>  Versjonering</a></li>
+  <li><a href="#rproj" id="toc-rproj" class="nav-link active" data-scroll-target="#rproj"><span class="toc-section-number">11.1</span>  Rproj</a></li>
+  <li><a href="#main-filer-og-mappestruktur" id="toc-main-filer-og-mappestruktur" class="nav-link" data-scroll-target="#main-filer-og-mappestruktur"><span class="toc-section-number">11.2</span>  main-filer og mappestruktur</a></li>
+  <li><a href="#git" id="toc-git" class="nav-link" data-scroll-target="#git"><span class="toc-section-number">11.3</span>  Git</a></li>
   </ul>
 </nav>
     </div>
@@ -247,7 +246,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Om R</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Arbeidsprosess</span></h1>
 </div>
 
 
@@ -262,101 +261,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>Noen forskjeller på det å jobbe i R vs.&nbsp;Excel og SPSS.</p>
-<p>R et et kodespråk. Det vil si at vi arbeider gjennom skript fulle av kode. Slik som dette:</p>
+<p>Her er noen generelle kommentarer om hvordan prosjektene mine har vært organisert. Det vil gjøre det lettere for andre å ta over. Her er en grov oversikt over arbeidsprosessen min, etterfulgt av nøyere detaljer</p>
+<p>Hovedenheten i arbeidsprosessen er et prosjekt. Hva et prosjekt er er et spørsmål jeg syns blir vanskeligere og vanskeligere å svare på desto lengre jeg holder på med prosjekter. Kort fortalt har de et felles tema, og noen få, relaterte output. Da kan man gjenbruke koder på tvers av relaterte skript. Eksempler på prosjekter er arbeidet med barnehagekapasitet, arbeidet med flyttestatistikk, prognoseevalueringa. Dette er en abstrakte inndelinga av arbeidet mitt, og det sammenfaller med den fysiske inndelinga i mapper og Rstudio-prosjekter. Hvert prosjekt inneholder (vanligvis): et hovedskript og en del støtteskript. De ligger lagra på <em>Mine dokumenter</em> på <code>C:</code>, med oppdaterte sikkerhetskopier på <code>M:\StatTK\R\sikkerhetskopier</code>.</p>
+<section id="rproj" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="rproj"><span class="header-section-number">11.1</span> Rproj</h2>
+<p><a href="https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects">Rstudio-prosjekter</a> er en nyttig måte å organisere prosjekter i R. Hovednytten kommer i at alle filstier blir <em>relative til prosjektets rotmappe</em>. Rotmappa er der <code>.Rproj</code>-fila ligger. Hadde jeg måtte definere alle stier ut fra hvor de ligger på <em>min</em> PC ville det blitt vanskelgiere for dere å ta over. Pakka <code>here</code> er også nyttig for å gjøre stier enda mer robuste.</p>
+<p>Når vi prater om <code>.Rproj</code>, her er en instilling dere burde endre på: Skru av <em>Restore .RData into workspace on startup</em> og velg <em>never</em> på <em>Save workspace to .RData on exit</em>. Dette er innstillinger som gjør det litt raskere for deg å komme inn i et prosjekt, men som vil gi deg en falsk trygghet, og som inviterer til noen av de feilene om jeg omtaler i <a href="feil.html"><span>Chapter&nbsp;12</span></a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/settings.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption class="figure-caption">Slik skal det se ut</figcaption><p></p>
+</figure>
+</div>
+<p>Hvis du lurer på om en mappe er et Rstudio-prosjekt kan se se etter en <code>.Rproj</code>-fil. Legg f.eks. merke til at i mappa <code>apps</code> inneholder tre undermapper og ingen <code>.Rproj</code>. Dette fordi hver <em>app</em> er sitt eget Rstudio-prosjekt.</p>
+</section>
+<section id="main-filer-og-mappestruktur" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="main-filer-og-mappestruktur"><span class="header-section-number">11.2</span> main-filer og mappestruktur</h2>
+<p>Generelt etterstreber jeg en mappestruktur som er omtrent slik ut:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>.</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>└── mitt_prosjekt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    ├── R</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    │   ├── main.R</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    │   └── functions.R</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    ├── output</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    │   ├── <span class="sc">*</span>.xlsx</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    │   └── <span class="sc">*</span>.csv</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    ├── data</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    │   ├── <span class="sc">*</span>.xlsx</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    │   └── <span class="sc">*</span>.csv</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    ├── README.md</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    └── .gitignore</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Hello world"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Hello world"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">64</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 8</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dette er en kommentar og vil ikke leses av kodeleseren.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="spss" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="spss"><span class="header-section-number">2.1</span> SPSS</h2>
-<p>R er mest likt SPSS, og spesielt SPSS’ syntaks. Til forskjell fra SPSS er ikke det grafiske brukergrensesnittet (GUI) noe særlig nyttig i R.</p>
-<p>Man kan kjøre R i et GUI som følger med R når man laster programmet, som heter R <em>hva enn versjonsnummeret er</em>, f.eks. <code>R 4.2.2</code>. Men det er bedre å bruke Rstudio til å arbeide med R i. Her får du et bra GUI som blant annet fullfører kodeforslag og har mange andre støttende funksjoner.</p>
-<p>Vi arbeider vanligvis i skript, som har forkortelsen <code>.R</code>. Dette er likt SPSS’ syntaksfiler (<code>.sps</code>). Du kan kjøre hele skriptet, eller kun deler av skriptet av gangen. Kjør deler av skriptet ved å enten ha markøren i den linja eller marker flere linjer og trykk <code>ctrl + enter</code>.</p>
-<p>Til motsetning fra SPSS er Rs kodespråk lettere å lese og forstå (personlig mening). Man vil så klart aldri huske alle koder i R, men etter hvert vil en del av dem sitte fordi man bruker dem så ofte. Typiske eksempler på dette er <code>%&gt;%</code>, <code>filter()</code> og <code>mutate()</code>.</p>
-</section>
-<section id="excel" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="excel"><span class="header-section-number">2.2</span> Excel</h2>
-<p>Det er større forskjell på R og Excel. Excel er bygd rundt det grafiske grensesnittet. Det du ser er det du får (WYSIWYG). Dette har sine fordeler og bakdeler. Den største bakdelen, slik jeg ser det, er at Excel lar deg gjøre dumme ting. F.eks. hoppe over rader, forflytte en kolonne uten å mene det, glemme å markere alle felter, og det verste av alt: slå sammen celler.</p>
-<p>Likevel, det er mange ganger det er bedre å bruke Excel.</p>
-<p>Vi kan importere excel-filer til R, hvilket er veldig nyttig. Den største utfordringa med dette er at vi må kjempe mot de bakdelene jeg nevnte over. Se mer om dette i <a href="import-export.html"><span>Chapter&nbsp;5</span></a>.</p>
-<p>I motsetning til både Excel og SPSS så lagrer R dataene bare i internt minne mens du arbeider med dem. Dvs. at du ikke er avhengig av å mellomlagre alt som en <code>.sav</code>, <code>.xlsx.</code>, eller <code>.csv</code>-fil. Dette kan bidra til å redusere behovet for mange versjoner av samme fil på ulike tidspunkter.</p>
-</section>
-<section id="hvorfor-skal-jeg-bruke-r" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="hvorfor-skal-jeg-bruke-r"><span class="header-section-number">2.3</span> Hvorfor skal jeg bruke R?</h2>
-<p>En typisk tilbakemelding:</p>
-<blockquote class="blockquote">
-<p>Det tar tid å lære, det er en bratt læringskurve, og jeg får feilmeldinger hele tida.</p>
-</blockquote>
-<p>Det er noen fordeler med R som er attraktive for oss:</p>
+<p>Ingen prosjekter ser akkurat slik ut, men det er et mål. Elementene i mappa:</p>
 <ul>
-<li>Når du har laga et skript kan du, uten særlig mange endringer, kjøre skriptet på nytt gang etter gang. Dette sparer deg for mye tid istedenfor å måtte starte på nytt hver gang.
-<ul>
-<li>Dette er delvis mulig i SPSS-syntaks alt. R oppfordrer i større grad til dette via funksjonene sine, og måten den håndterer data på.</li>
-</ul></li>
-<li>Man kan bruke R til alt. Fra før av kan vi spleise data i SPSS, lage tabeller i Excel, gjøre dem interaktive i Infogram, dele dem via Google sheets, etc. R kan gjøre alt dette i samme programvare/GUI.</li>
-<li>R lese og skrive til de fleste vanlige programmer. Dvs. at vi kan starte en prosess i Excel og så fortsette den i R. Eller vi kan importere en Stata-fil til R, gjøre noen pivots og lagre den som en SPSS-fil. Dermed kan R relativt sømløst puttes inn i arbeidsprosessen. (Enklest blir det så klart å gjøre alt i R.)</li>
+<li>I mappa <code>R</code> ligger alle kodeskriptene.</li>
+<li><code>main.R</code>: dette er et lite skript som laster inn funksjoner fra andre skript, og som kun inneholder de få kodene som trengs for å lage outputen. Vanligvis putter jeg all funksjonalitet inn i funksjoner som jeg putter i ett eller flere egne skript.</li>
+<li><code>functions.R</code>: Om det kun er ett skript, heter dette vanligvis <code>functions.R</code>. Blir det mange funksjoner og uoversiktelig med alle i ett skript, deler jeg dem opp i flere skript med mer eller mindre beskrivende navn som <code>cleaning-functions.R</code>, <code>import-functions.R</code>, etc.</li>
+<li>I mappa <code>output</code> ligger alle de prosesserte filene. Ofte <code>.csv</code> eller <code>.xlsx</code> filer.</li>
+<li>I mapppa <code>data</code> ligger rådatafilene. I noen prosjekter lasta jeg ned data fra nettet og la her. Andre plasser lasta jeg ned data via API, og lagre en kopi av dem her for å ikke beslaglegge API-en unødvendig. I andre kopierte jeg filer fra <code>M:</code>-disken og la her. Hvis jeg arbeida med filer fra <code>M:</code> pleide jeg vanligvis å oppgi filstien til fila direkte i funksjonen som importerte dataene til R.</li>
+<li>Ideelt sett skulle alle prosjekter har en <code>readMe.md</code> (eller <code>lesMeg.md</code> på norsk). Denne fila (som noen gang blei printa som en pdf) forklarer hva prosjektet handler om.</li>
+<li><code>.gitignore</code>: denne fila brukes av Git (se ned), og du kan se bort fra den.</li>
 </ul>
+<p>Shiny-appene har i tillegg en fil som heter <code>app.R</code>, som har samme hovedfunksjon som <code>main.R</code>. Her defineres sjølve appen. Alle skript som ligger i <code>R</code> blir automatisk kjørt når man kjører <code>app.R</code>, i motsetning til <code>main.R</code> hvor man manuelt må kjøre alle skript via <code>source()</code>.</p>
+<p>Mange av prosjekta er en eksentrisk blanding av engelsk og norsk, som kom av at jeg vanligvis koder på engelsk og dokumenterer på norsk. I enkelte prosjekter var jeg flinkere på være konsekvent enn i andre.</p>
 </section>
-<section id="sec-versjering" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="sec-versjering"><span class="header-section-number">2.4</span> Versjonering</h2>
-<p>R, Rstudio, og alle pakkene til R kommer i ulike versjoner, f.eks. <code>R v.4.2.2</code>, <code>Rstudio 2023.03.0</code>, etc. Når man installerer en pakke vil den nyeste versjonen som er kompatibel med din versjon av R installeres. Her er noen ting å være oppmerksom på:</p>
-<ul>
-<li>Noen nye pakker funker ikke på gamle versjoner av R.</li>
-<li>Noen gamle pakker funker ikke eller litt annerledes på nye versjoner av R.</li>
-<li>Når pakker oppdateres vil noen ganger funksjonene deres endres.
-<ul>
-<li>Dette er en av bakdelene i <code>tidyverse</code>. De har endra på syntaksen sin slik at <code>tidyverse</code>-syntaks fra 2018 ikke gjelder i 2023. F.eks. pleide man å bruke <code>mutate_at()</code> før i tida for å mutere kun visse rader. Nå bruker man derimot en kombinasjon av <code>mutate()</code> og <code>across()</code> for å oppnå det samme. Dette er irriterende hvis du var vant til den gamle metoden.</li>
-</ul></li>
-<li>Du har <strong>alltid tilgang til eldre versjoner av R og Rs pakker</strong>. Dette er et viktig kjennetegn ved FOSS (free, open-source software). Hvis du trenger en funksjon fra en gammel versjon av en pakke, kan du alltids nedgradere R-versjonen og laste inn den versjonen av pakka. Jeg nevner det her, men det er mer for viderekommende, og for Linux-fantaster.</li>
-</ul>
-<p>Per nå er siste versjon vi har tilgang til på byplankontoret <code>4.2.3</code>. Hvilken versjon har jeg?</p>
-<div class="cell" data-hash="omR_cache/html/unnamed-chunk-2_1ee71160bcae956fffc1b1e94af252b3">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>R version 4.2.3 (2023-03-15 ucrt)
-Platform: x86_64-w64-mingw32/x64 (64-bit)
-Running under: Windows 10 x64 (build 19045)
-
-Matrix products: default
-
-locale:
-[1] LC_COLLATE=nb-NO.UTF-8  LC_CTYPE=nb-NO.UTF-8    LC_MONETARY=nb-NO.UTF-8
-[4] LC_NUMERIC=C            LC_TIME=nb-NO.UTF-8    
-
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
-
-loaded via a namespace (and not attached):
- [1] htmlwidgets_1.5.4 compiler_4.2.3    magrittr_2.0.3    fastmap_1.1.0    
- [5] cli_3.4.1         tools_4.2.3       htmltools_0.5.4   rstudioapi_0.14  
- [9] stringi_1.7.8     rmarkdown_2.17    knitr_1.40        stringr_1.4.1    
-[13] xfun_0.34         digest_0.6.30     jsonlite_1.8.3    rlang_1.0.6      
-[17] evaluate_0.17    </code></pre>
-</div>
-</div>
-<p>Jeg har forrige versjon, <code>4.2.2</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Grunnen er at IT installerte den nye R-versjonen i dag, og jeg ikke vil ta sjansen på at det er små endringer i koden som ødelegger noe jeg har gjort før. Mest sannsynlig vil det går bra. Små endringer, som å gå fra <code>x.x.2</code> til <code>x.x.3</code> vil nok ikke ha noen merkbare endringer.</p>
-<p>Tilstedeværelsen av alle disse ulike versjonene av pakker og programvare kan kanskje oppleves som plagsomt. Men det er faktisk en fordel, og en styrke ved R. Det medfører at vi kan garantere at et skript er <em>future proof</em>, at det alltids kan kjøre gitt samme data og datamaskin. Se mer om dette hos <a href="https://www.brodrigues.co/blog/2022-11-16-open_source_repro/">Brodrigues</a>. Vi har for eksempel ingen garanti for at Excel i 2030 lar oss åpne og behandle filene våre fra 2020. Eller at alle funksjonene vi har i cellene forstås likt i begge versjonene av Excel. Dette er ikke overdrivelse. Da Excel gikk over fra <code>.xls</code> til <code>.xlsx</code> medførte det at nye versjoner av Excel ikke alltid greide å åpna de gamle filformatene. I denne situasjonen er du avhengig av at du får tilgang på en eldre versjon av programvaren for å åpna fila di. Det er ikke sikkert man får.</p>
+<section id="git" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="git"><span class="header-section-number">11.3</span> Git</h2>
+<p>Hvorfor: Se figur på <a href="https://peerj.com/preprints/3159v2/">side 4 av denne artikkelen</a>.</p>
+<p>Sikkerhetskopier til M:</p>
 
 
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>Den observante leser vil legge merke til at teksten er feil her. Outputen forteller oss at jeg faktisk har <code>4.2.3</code>. Da jeg skreiv dette var teksten korrekt. Men noen dager seinere oppdaterte jeg til den nye versjonen av R fordi jeg oppdaga en bug med quatro-dokumenter som jeg tror blei løst i den nye versjonen. Jeg burde ha redigert denne teksten, men jeg syns den er et utmerket eksempel på utfordringa med versjonering. Her: jeg hadde tenkt å holde meg på en versjon, men jeg oppdaterte fordi jeg trengte ny funksjonalitet. Slike avveininger må man ta.</p>
-<p>Det kan være uvant til oss som er vant til å få en ny versjon av SPSS hvert år og av ArcGis aldri. Nå må vi ta et aktivt valg og vurdere om vi skal oppdatere programvaren. I praksis har dere ikke dette valget da dere kun kan installere den versjonen av R som er tilgjengelig på firmaportalen. Men når en versjon først er installert kan dere når som helst velge hvilken <em>tidligere</em> versjon av R dere vil bruke. Se en guide hos <a href="https://support.posit.co/hc/en-us/articles/200486138-Changing-R-versions-for-the-RStudio-Desktop-IDE">Posit</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
 </section>
 
 </main> <!-- /main -->
@@ -495,13 +450,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./intro.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduksjon</span></span>
+      <a href="./joins.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Sammenslåing av data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./pakker.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pakker</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./feil.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

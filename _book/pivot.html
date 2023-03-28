@@ -208,7 +208,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./feil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
+  <a href="./joins.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Sammenslåing av data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arbeidsprosess.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Arbeidsprosess</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./feil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -291,14 +301,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 5
   plansone kjonn aar2023 aar2024 aar2025
      &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1  5001001 M         750     506     590
-2  5001001 K         556     552     783
-3  5001002 M         781     662     575
-4  5001002 K         643     685     633
-5  5001003 M         798     490     477
-6  5001003 K         496     514     560
-7  5001004 M         632     731     648
-8  5001004 K         758     657     539</code></pre>
+1  5001001 M         445     527     538
+2  5001001 K         442     790     728
+3  5001002 M         467     656     471
+4  5001002 K         454     675     454
+5  5001003 M         587     505     768
+6  5001003 K         569     677     537
+7  5001004 M         580     676     768
+8  5001004 K         788     599     677</code></pre>
 </div>
 </div>
 <p>Her har vi et datasett med fire plansoner, to kjønn, og tre variabler som viser forventa folkemengde fra 2023 til 2025. Vi kan se på de tre punktene og vurdere om dette er tidy data.</p>
@@ -307,7 +317,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Er hver rad en observasjon? Nei. Hver rad er <em>tre</em> observasjoner: en for hvert år.</li>
 </ul>
 <p>Dermed vil vi gjøre om dette til et tidy format. Dette gjør vi ved å gå fra bredt til langt format. For å gjøre dette tar vi i bruk funksjoner fra <code>tidyverse</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
-<!-- lag lenke her -->
 </section>
 <section id="fra-vid-til-lang" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="fra-vid-til-lang"><span class="header-section-number">7.2</span> Fra vid til lang</h2>
@@ -328,16 +337,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 24 × 4
    plansone kjonn aar     befolkning
       &lt;int&gt; &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt;
- 1  5001001 M     aar2023        750
- 2  5001001 M     aar2024        506
- 3  5001001 M     aar2025        590
- 4  5001001 K     aar2023        556
- 5  5001001 K     aar2024        552
- 6  5001001 K     aar2025        783
- 7  5001002 M     aar2023        781
- 8  5001002 M     aar2024        662
- 9  5001002 M     aar2025        575
-10  5001002 K     aar2023        643
+ 1  5001001 M     aar2023        445
+ 2  5001001 M     aar2024        527
+ 3  5001001 M     aar2025        538
+ 4  5001001 K     aar2023        442
+ 5  5001001 K     aar2024        790
+ 6  5001001 K     aar2025        728
+ 7  5001002 M     aar2023        467
+ 8  5001002 M     aar2024        656
+ 9  5001002 M     aar2025        471
+10  5001002 K     aar2023        454
 # … with 14 more rows</code></pre>
 </div>
 </div>
@@ -360,16 +369,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 24 × 4
    plansone kjonn   aar befolkning
       &lt;int&gt; &lt;chr&gt; &lt;dbl&gt;      &lt;dbl&gt;
- 1  5001001 M      2023        750
- 2  5001001 M      2024        506
- 3  5001001 M      2025        590
- 4  5001001 K      2023        556
- 5  5001001 K      2024        552
- 6  5001001 K      2025        783
- 7  5001002 M      2023        781
- 8  5001002 M      2024        662
- 9  5001002 M      2025        575
-10  5001002 K      2023        643
+ 1  5001001 M      2023        445
+ 2  5001001 M      2024        527
+ 3  5001001 M      2025        538
+ 4  5001001 K      2023        442
+ 5  5001001 K      2024        790
+ 6  5001001 K      2025        728
+ 7  5001002 M      2023        467
+ 8  5001002 M      2024        656
+ 9  5001002 M      2025        471
+10  5001002 K      2023        454
 # … with 14 more rows</code></pre>
 </div>
 </div>
@@ -389,14 +398,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 5
   plansone kjonn aar2023 aar2024 aar2025
      &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1  5001001 M         750     506     590
-2  5001001 K         556     552     783
-3  5001002 M         781     662     575
-4  5001002 K         643     685     633
-5  5001003 M         798     490     477
-6  5001003 K         496     514     560
-7  5001004 M         632     731     648
-8  5001004 K         758     657     539</code></pre>
+1  5001001 M         445     527     538
+2  5001001 K         442     790     728
+3  5001002 M         467     656     471
+4  5001002 K         454     675     454
+5  5001003 M         587     505     768
+6  5001003 K         569     677     537
+7  5001004 M         580     676     768
+8  5001004 K         788     599     677</code></pre>
 </div>
 </div>
 

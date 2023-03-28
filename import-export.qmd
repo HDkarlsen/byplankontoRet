@@ -1,4 +1,4 @@
-# Import og eksport av data
+# Import og eksport av data {#sec-import-export}
 
 ```{r}
 library(tidyverse)
@@ -41,7 +41,7 @@ Vi må ofte definere et navn på fila vi skal skrive eller lese. Når vi leser f
 
 Dette er fordi et filnavn strengt tatt inkludere hele *filstien* til fila. Den fila jeg arbeider på nå heter f.eks. `import-export.qmd`. Den ligger på dette filområdet på datamaskina mi: `C:/Users/HK2Q/Documents/r/dokumentasjon`. Dermed blir det *egentlige* navnet på fila: `C:/Users/HK2Q/Documents/r/dokumentasjon/import-export.qmd`. Husk at også filtutvidelsen (det som kommer ettter `.`) er en del av filnavnet! Når en funksjon ber om `file` eller `path` betyr dette ofte at de vil ha hele det fulle filnavnet inkludert filsti. 
 
-### Relative fillokasjoner
+### Relative fillokasjoner {#sec-filkolasjon}
 
 Man kan alltids henvise til konkrete områder på maskina, men dette er optimalt fordi det gjør at du aldri kan flytte noen filer igjen. Dessuten vil ikke koden funke på en annen persons PC med mindre de har 100 % likt oppsett på deres maskin. Derfor er det nyttig med **relative** filstier. Når du arbeider i Rstudio (og du er ikke en gærning som arbeider i R GUI, er du vel?) forventes det at du arbeider i såkalte **prosjekter**. Alle mine prosjekter ligger kopiert på `M:`-disken. Et prosjekt er en mappe med visse filer i seg, hvorav den viktige fila er `prosjekt_navn.Rproj`. Denne opprettes automatisk når du lager et prosjekt via Rstudio. Det er mange flotte ting med prosjekter, og en av dem er at alle filstier defineres ut fra prosjektets **rotmappe**. Rotmappa er den mappa hvor `.Rproj`-filer ligger, og der du putter alle mapper og filer assosiert med prosjektet. Når du arbeider i prosjekter trenger du ikke definere hele filstien til en fil, bare *hvor den ligger i forhold til rotmappa*. F.eks. har jeg for denne boka lagt alle bilder i en mappe som heter `img`. Hvis jeg vil henvise til et bilde skrive jeg bare `img/bilde.png`. Gjør det til en vane å bruke relative filstier når du kan! 
 
@@ -51,7 +51,7 @@ Merk at i noen tilfeller brytes antakelsen om at filstien alltid er relativt til
 
 <!-- gjerne mer kodeeksempler her -->
 
-### Skråstreker til besvær
+### Skråstreker til besvær {#sec-slash}
 
 I Windows brukes denne skråstreket `\` til å indikere ei mappe. I alle UNIX-baserte operativsystemet og programmer brukes `/`. Eksempler på sistnevnte er Ubuntu, macOS, og R. Når vi arbeider med R på Windows skjer det dermed en del arbeid i kulissene når vi henviser til en filplassering. Dette blir åpenbart for oss når vi for eksempel forsøker å lime inn en filsti fra Windows explorer (filutforskeren). R godtar ikke uten videre "feil" skråstrek. Det er to løsninger på dette:
 
@@ -59,7 +59,6 @@ I Windows brukes denne skråstreket `\` til å indikere ei mappe. I alle UNIX-ba
 2. *escape* skråstrekene
 
 Det siste innebærer å bruke det som kalles *escape characters*. En del tegn har meninger i koden. F.eks. betyr `#` kommentar i et R-skript. Hvis jeg vil skrive ut emneknaggen, må jeg legge på en escape character så R skjønner at dette tegnet skal ikke skal tolkes slik det vanligvis tolkes. Hva er escape-tegnet? Det er nettopp `\`. For å escape `#` skriver vi dermed `\#`, og for å escape `\` skriver vi altså `\\`. 
-<!-- sjekk at # ikke blir til noe annet og må escapes -->
 
 ```{r, eval = FALSE}
 # Ok
@@ -83,7 +82,7 @@ paste0(readClipboard())
 Alt dette for å si: `here` pakka løser en del av problema våre. Les mer om den på [Ode to the here package](https://github.com/jennybc/here_here).
 
 
-### Tegnkoding
+### Tegnkoding {#sec-tegnkoding}
 
 Spesielt når det kommer til norske `.csv`-filer hender det vi får et problem med tegnkodinga (*character encoding*). En full gjennomgang blir for omfattende. Det holder å si at, igjen, dette er hovedsaklig et Windows-problem. Ideelt sett vil vi ha alt over i unicode (UTF-8). Noen filer er lagra i et annet format. Gjerne ISO8859-1 som er en av standardene som gir oss skandinaviske tegn. En forkludrende faktor er at det tidvis (og inntil ganske nylig, per 2023-03) har vært problemer med R og/eller Rstudio når det kommer til tegnkoding. Disse blir fiksa med tida og er kanskje allerede fiksa. Du ser problemet dukke opp dersom du forventer å se en æ. ø eller å i outputen og istedet får noe sånt som `"\xe6\xf8\xe5"`, `Ã¦Ã¸Ã¥` eller `<U+00C6>`. Der er mange ulike faktorer som kan være årsak til dette problemet. En av dem kan være at du må sette tegnkoden spesifikt når du leser en fil. I noen av eksemplene mine vil du set at jeg har spesifisert *encoding*, og da er det derfor. 
 

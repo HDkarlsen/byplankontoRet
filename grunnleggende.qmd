@@ -248,7 +248,7 @@ På tampen, noen nyttige digresjoner.
 
 ## Digresjoner
 
-### Navngitte lister/vektorer
+### Navngitte lister/vektorer {#sec-navngitt-vektor}
 
 Vi returnerer til lister og vektorer. Tenk på de vi lagde tidligere:
 

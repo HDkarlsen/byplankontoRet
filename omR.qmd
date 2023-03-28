@@ -26,17 +26,13 @@ Vi arbeider vanligvis i skript, som har forkortelsen `.R`. Dette er likt SPSS' s
 
 Til motsetning fra SPSS er Rs kodespråk lettere å lese og forstå (personlig mening). Man vil så klart aldri huske alle koder i R, men etter hvert vil en del av dem sitte fordi man bruker dem så ofte. Typiske eksempler på dette er `%>%`, `filter()` og `mutate()`.
 
-<!-- lenke -->
-
 ## Excel
 
 Det er større forskjell på R og Excel. Excel er bygd rundt det grafiske grensesnittet. Det du ser er det du får (WYSIWYG). Dette har sine fordeler og bakdeler. Den største bakdelen, slik jeg ser det, er at Excel lar deg gjøre dumme ting. F.eks. hoppe over rader, forflytte en kolonne uten å mene det, glemme å markere alle felter, og det verste av alt: slå sammen celler. 
 
 Likevel, det er mange ganger det er bedre å bruke Excel. 
 
-Vi kan importere excel-filer til R, hvilket er veldig nyttig. Den største utfordringa med dette er at vi må kjempe mot de bakdelene jeg nevnte over. 
-
-<!-- lenke -->
+Vi kan importere excel-filer til R, hvilket er veldig nyttig. Den største utfordringa med dette er at vi må kjempe mot de bakdelene jeg nevnte over. Se mer om dette i @sec-import-export.
 
 I motsetning til både Excel og SPSS så lagrer R dataene bare i internt minne mens du arbeider med dem. Dvs. at du ikke er avhengig av å mellomlagre alt som en `.sav`, `.xlsx.`, eller `.csv`-fil. Dette kan bidra til å redusere behovet for mange versjoner av samme fil på ulike tidspunkter.
 
@@ -53,9 +49,9 @@ Det er noen fordeler med R som er attraktive for oss:
 - Man kan bruke R til alt. Fra før av kan vi spleise data i SPSS, lage tabeller i Excel, gjøre dem interaktive i Infogram, dele dem via Google sheets, etc. R kan gjøre alt dette i samme programvare/GUI. 
 - R lese og skrive til de fleste vanlige programmer. Dvs. at vi kan starte en prosess i Excel og så fortsette den i R. Eller vi kan importere en Stata-fil til R, gjøre noen pivots og lagre den som en SPSS-fil. Dermed kan R relativt sømløst puttes inn i arbeidsprosessen. (Enklest blir det så klart å gjøre alt i R.)
 
-## Versjonering
+## Versjonering {#sec-versjering}
 
-R, Rstudio, og alle pakkene til R kommer i ulike versjoner, f.eks. `R v.4.2.2`, `Rstudio 2023.03.0`, etc. Når man installerer en pakke vil den nyeste versjonen som er kompatibel med din versjon av R installeres. Her er noen ting å være oppmerksom på: <!-- cannot get links to work -->
+R, Rstudio, og alle pakkene til R kommer i ulike versjoner, f.eks. `R v.4.2.2`, `Rstudio 2023.03.0`, etc. Når man installerer en pakke vil den nyeste versjonen som er kompatibel med din versjon av R installeres. Her er noen ting å være oppmerksom på:
 
 - Noen nye pakker funker ikke på gamle versjoner av R.
 - Noen gamle pakker funker ikke eller litt annerledes på nye versjoner av R.

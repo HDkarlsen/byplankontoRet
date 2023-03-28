@@ -80,7 +80,7 @@ På samme måte som det er begrensende å hele tida kikke på de øverste *raden
 
 som er en del av `tidyverse`.
 
-### select
+### select {#sec-select}
 
 `select()` gir oss muligheten til å diskutere en av de fantastiske innovasjonene i `tidyverse`: **tidy evaluation**. Vi dykker ikke dypt i det, men det er greit å vite om **data masking** og **tidy select**. De er diskutert mer inngående i [Programming with Tidyverse](https://dplyr.tidyverse.org/articles/programming.html). *Tidy select*  lar oss velge en kolonne i et datasett *uten å måtte hermetegn*. Tenk på det! Neste gang du velger en kolonne slipper du å strekke lillefingeren til den fjerne shift-tasten og gå i spagat med langefingern til 2-tasten. Faktisk gjør *tidy select*  mye mer enn dette, som vi vil se etter hvert. F.eks. kan du velge kolonner ut fra navn, posisjon, eller *type*. La oss se noen eksempler
 
@@ -113,7 +113,7 @@ Tilbake til det opprinnelige formålet, som bare var å ta en kjapp titt på dat
 ```{r}
 starwars %>% glimpse()
 ```
-## Oppsummeringer
+## Oppsummeringer {#sec-oppsummering}
 
 Hittil har vi bare prata om måter å set utdrag av data på. Noen ganger er det nyttig å se en *oppsummering* av dataene. Detaljer som snitt, standardavvik, minimum og maksimum-verdier, for eksempel.
 
