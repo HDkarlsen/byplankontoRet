@@ -2,6 +2,6 @@
 
 # Forord {.unnumbered}
 
-Dette er en pamflet skrevet for Byplankontorets statistikere, for å gi en kort introduksjon til R, samt dokumentere arbeidet jeg har gjort i R. Teksten er skrevet i [Quarto](https://quarto.org/docs/books) ved hjelp av `bookdown`.
+Dette er en pamflett skrevet for Byplankontorets statistikere, for å gi en kort introduksjon til R, samt dokumentere arbeidet jeg har gjort i R. Teksten er skrevet i [Quarto](https://quarto.org/docs/books) ved hjelp av `bookdown`.
 
 Se intro for mer info om hva pamfletten inneholder. Eller hopp rett til et kapittel, på eget ansvar.

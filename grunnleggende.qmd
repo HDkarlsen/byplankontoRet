@@ -141,8 +141,8 @@ dat1
 # Vi kan lage et data frame via vektorer som er predefinerte,
 # så lenge begge har lik lengde.
 dat2 <- data.frame(
-  colA <- vektor1,
-  colB <- vektor2
+  colA = vektor1,
+  colB = vektor2
 )
 dat2
 ```

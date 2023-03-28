@@ -4,7 +4,9 @@ project:
 book:
   title: "R for Byplankontoret"
   author: "Håvard Karlsen"
-  date: 2023-03-24
+  #date: 2023-03-24
+  date: last-modified
+  date-format: "YYYY-MM-DD"
   cover-image: img/ryoji-iwata-n31JPLu8_Pw-unsplash.jpg
   chapters:
     - index.qmd

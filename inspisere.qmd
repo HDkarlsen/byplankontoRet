@@ -115,7 +115,7 @@ starwars %>% glimpse()
 ```
 ## Oppsummeringer {#sec-oppsummering}
 
-Hittil har vi bare prata om måter å set utdrag av data på. Noen ganger er det nyttig å se en *oppsummering* av dataene. Detaljer som snitt, standardavvik, minimum og maksimum-verdier, for eksempel.
+Hittil har vi bare prata om måter å set utdrag av data på. Noen ganger er det nyttig å se en *oppsummering* av dataene. Detaljer som snitt, standardavvik, minimum og maksimum-verdier, for eksempel. 
 
 `summary()` fra `base R` er nyttig her. Den gir enkelt og greit en oversikt over diverse statistikk for hver numeriske variabel.
 

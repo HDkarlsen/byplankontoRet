@@ -237,7 +237,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#rproj" id="toc-rproj" class="nav-link active" data-scroll-target="#rproj"><span class="toc-section-number">11.1</span>  Rproj</a></li>
   <li><a href="#main-filer-og-mappestruktur" id="toc-main-filer-og-mappestruktur" class="nav-link" data-scroll-target="#main-filer-og-mappestruktur"><span class="toc-section-number">11.2</span>  main-filer og mappestruktur</a></li>
-  <li><a href="#git" id="toc-git" class="nav-link" data-scroll-target="#git"><span class="toc-section-number">11.3</span>  Git</a></li>
+  <li><a href="#git" id="toc-git" class="nav-link" data-scroll-target="#git"><span class="toc-section-number">11.3</span>  Git</a>
+  <ul class="collapse">
+  <li><a href="#hva-må-du-vite-om-git" id="toc-hva-må-du-vite-om-git" class="nav-link" data-scroll-target="#hva-må-du-vite-om-git"><span class="toc-section-number">11.3.1</span>  Hva må du vite om Git</a></li>
+  </ul></li>
+  <li><a href="#lagringslokasjon" id="toc-lagringslokasjon" class="nav-link" data-scroll-target="#lagringslokasjon"><span class="toc-section-number">11.4</span>  Lagringslokasjon</a></li>
+  <li><a href="#functional-programming" id="toc-functional-programming" class="nav-link" data-scroll-target="#functional-programming"><span class="toc-section-number">11.5</span>  Functional programming</a></li>
   </ul>
 </nav>
     </div>
@@ -305,13 +310,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Shiny-appene har i tillegg en fil som heter <code>app.R</code>, som har samme hovedfunksjon som <code>main.R</code>. Her defineres sjølve appen. Alle skript som ligger i <code>R</code> blir automatisk kjørt når man kjører <code>app.R</code>, i motsetning til <code>main.R</code> hvor man manuelt må kjøre alle skript via <code>source()</code>.</p>
 <p>Mange av prosjekta er en eksentrisk blanding av engelsk og norsk, som kom av at jeg vanligvis koder på engelsk og dokumenterer på norsk. I enkelte prosjekter var jeg flinkere på være konsekvent enn i andre.</p>
+<p>I noen main-filer har jeg kommentert vekk linjer som produserer data som blir lagra på disk. Dette fordi man kan komme i skade for å kjøre dem uforvarende og skrive over noe. F.eks. i appen fodte-dode har jeg gjort dette. Der ligger en funksjon som er tenkt å kjøres en gang i måneden for å hente nye dødetall via SSBs API.</p>
 </section>
 <section id="git" class="level2" data-number="11.3">
 <h2 data-number="11.3" class="anchored" data-anchor-id="git"><span class="header-section-number">11.3</span> Git</h2>
-<p>Hvorfor: Se figur på <a href="https://peerj.com/preprints/3159v2/">side 4 av denne artikkelen</a>.</p>
-<p>Sikkerhetskopier til M:</p>
+<p>Jeg har brukt <strong>Git</strong> på alle prosjektene. Git er et <em>version-control system</em>, og nyttig når man koder. Jeg har brukt det for å unngå det vi ser i figuren på <a href="https://peerj.com/preprints/3159v2/">side 4 av denne artikkelen</a>: mange versjoner av samme dokument med ulike navn som indikerer hvilken versjon det er snakk om. Kort fortalt sørger Git for at jeg <em>har</em> alle disse gamle versjonene av dokumentene tilgjengelig, men at de ikke <em>vises</em> og tar opp plass i mappestrukturen min. Dermed holder jeg lettere oversikt.</p>
+<p>Dere trenger ikke vite noe om Git fordi jeg har sørga for at det alltid er siste versjon som ligger klar. Jeg nevner det likevel fordi dere kan lure på hvorfor det ligger noen filer som heter <code>.git</code> og <code>.gitignore</code> i prosjektene. Disse filene brukes av git. Det kan slette dem uten at det vil ødelegge prosjektene. (Men da vil all historikken gå tapt, og det er ikke lengre mulig å se eldre versjoner av skriptene mine).</p>
+<p>Jeg brukte altså Git som en måte å holde orden i filene mine, men også til å sikkerhetskopiere til M-disken. M er som kjent en server vi kobler oss på trådløst. Her lagrer vi alt vi arbeider med (som ikke går på Google disk). Problemet med M er at det er en ekstern server. Dermed kan enkelte prosesser tar mye lengre tid når man arbeider med filer som ligger på M. Dessuten vil en del programmer frike ut dersom tilkoblinga til M blir borte i et mikrosekund, slik den plagsomt nok blir hvis skjermspareren kommer på eller hvis et atom nyser i feil retning. Min løsning blei å jobbe med alt på den lokale C-disken og kopiere over alt til M-disken på slutten av hver dag<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Dette høres tungvint ut, tenker du sikkert. Kopiere over alle filer til et prosjekt hver dag? Huff. Men det var ikke vanskeligere enn å skrive inn dette i en konsoll: <code>git push</code>.</p>
+<section id="hva-må-du-vite-om-git" class="level3" data-number="11.3.1">
+<h3 data-number="11.3.1" class="anchored" data-anchor-id="hva-må-du-vite-om-git"><span class="header-section-number">11.3.1</span> Hva må du vite om Git</h3>
+<p>Ingen ting. Det holder å vite at jeg brukte Git, og det er derfor visse filer eksisterer i prosjektene. Det er smart å la disse ligge der i fall dere en gang får lyst å bruke Git sjøl. Og for å beholde historikken min (som jeg tviler på at dere noen gang vil ha nytte av).</p>
+<p>Det som ligger i mappa <code>R/sikkerhetskopier</code> på M er essensielt det samme som ville ligget der dersom jeg hadde manuelt dratt filene over. Jeg antar at C-disken på pc-en min blir <em>mind wiped</em> snart, og da vil dette være de eneste kopiene av arbeidet mitt, så dere trenger ikke tenke på hva som er kopi av hva.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/mind-wipe.jpg" class="img-fluid figure-img" style="width:40.0%"></p>
+<p></p><figcaption class="figure-caption">Min pc, snart.</figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="lagringslokasjon" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="lagringslokasjon"><span class="header-section-number">11.4</span> Lagringslokasjon</h2>
+<p>Som jeg nevnt over arbeida jeg på den lokale C-disken, og opprettholdt sikkerhetskopier på M. For å utbrodere litt på dette: Noen ganger er det vanskelig å arbeide på filer direkte på en ekstern server. Det er ikke helt kosekvent hvordan dette utarter seg. I arbeidet med flytterater skal jeg skrive en excelfil til M-disken. Dette tar flere minutter. Å skrive den til C-disken tar ett sekund. Og å kopiere fra C til M tar sekunder. Dermed er det kjappere å skrive fila til C og så kopiere den til M. R lar oss manipulere filer direkte. Så i denne koden har jeg lagd en funksjon som kopierer det vi trenger fra M til C, og kopierer det ferdige produktet tilbake til M fra C. Vi kan gjøre dette relativt sømløst, slik at brukeren ikke trenger å tenke på hvor filer er lagra. Så lenge vi sjøl har kontroll, så klart.</p>
+<p>Som nevnt tidligere over her og når pakka <em>here</em> omtales, i et prosjekt er alle filstier relative til prosjektets rotmappe. Dermed vil det ikke oppstå noen problemer når det kommer til filer <em>som ligger i en undermappe av prosjektet</em>. F.eks. legger jeg som nevnt datafiler i mappa <em>data</em>. Uansett hvor du kopierer et prosjekt til, så lenge du åpner prosjektet i Rstudio skal disse lenkene fungere (til og med om du åpner dem på en pc med macOS!). Noen filer vi bruker ligger på M. Her er det viktig at disse filstiene bevares eller oppdateres.</p>
+<p>På statistikkmappene er det en konvensjon at filer med datasett er navngitt etter datoen de blei laga. Det vil si at folkemengdefila jeg henviser til i skriptet fra mars 2023 ikke er den oppdaterte folkemengdefila i mai 2024. Her må man gå inn og oppdatere koden med nytt navn. Hvis man føler seg fancy kan man lage en funksjon som gjetter seg fram til hva som er den nyeste versjonen av en fil.</p>
+</section>
+<section id="functional-programming" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="functional-programming"><span class="header-section-number">11.5</span> Functional programming</h2>
+<p>Jeg har etterstreba et paradigme som kalles <em>functional programming</em>. Dette er en programmeringsstil hvor vi fokuserer på funksjoner som gjør alt av endringer på data. Resultatet er lettere å lese, forstå og debugge. Les mer om det i <a href="http://modern-rstats.eu/functional-programming.html">Modern R with the tidyverse</a>. I praksis vil det si at jeg putter funksjoner sammen i andre funksjoner som jeg gir beskrivende navn. Dette gjør det lettere å gruppere sammen databehandlingsfunksjoner. Og dermed også å putte funksjoner i ulike skriptfiler. Jeg bytta nylig til denne praksisen, etter å tidligere ha arbeida med meterlange skript hvor objekter opprettes, endres, slettes, transformeres og lagres om hverandre. Så langt syns jeg dette er en stor forbedring. Utfordringa er å finne en god balanse mellom hvor mange skript man skal lage, og hvor mange delfunksjoner man trenger. Du vil se at jeg er inkonsekvent i de ulike prosjekta mine. Her finnes heller ingen <em>one size fits all</em>. Små prosjekter trenger ikke mer enn en <code>main.R</code>-fil. Store prosjekter kan ha mange skript fordelt over flere mapper.</p>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Jeg gjorde det ikke hver dag.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->

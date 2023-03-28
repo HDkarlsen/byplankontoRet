@@ -48,8 +48,35 @@ Shiny-appene har i tillegg en fil som heter `app.R`, som har samme hovedfunksjon
 
 Mange av prosjekta er en eksentrisk blanding av engelsk og norsk, som kom av at jeg vanligvis koder på engelsk og dokumenterer på norsk. I enkelte prosjekter var jeg flinkere på være konsekvent enn i andre. 
 
+I noen main-filer har jeg kommentert vekk linjer som produserer data som blir lagra på disk. Dette fordi man kan komme i skade for å kjøre dem uforvarende og skrive over noe. F.eks. i appen fodte-dode har jeg gjort dette. Der ligger en funksjon som er tenkt å kjøres en gang i måneden for å hente nye dødetall via SSBs API.
+ 
 ## Git
 
-Hvorfor: Se figur på [side 4 av denne artikkelen](https://peerj.com/preprints/3159v2/).
+Jeg har brukt **Git** på alle prosjektene. Git er et *version-control system*, og nyttig når man koder. Jeg har brukt det for å unngå det vi ser i figuren på [side 4 av denne artikkelen](https://peerj.com/preprints/3159v2/): mange versjoner av samme dokument med ulike navn som indikerer hvilken versjon det er snakk om. Kort fortalt sørger Git for at jeg *har* alle disse gamle versjonene av dokumentene tilgjengelig, men at de ikke *vises* og tar opp plass i mappestrukturen min. Dermed holder jeg lettere oversikt. 
 
-Sikkerhetskopier til M:
+Dere trenger ikke vite noe om Git fordi jeg har sørga for at det alltid er siste versjon som ligger klar. Jeg nevner det likevel fordi dere kan lure på hvorfor det ligger noen filer som heter `.git` og `.gitignore` i prosjektene. Disse filene brukes av git. Det kan slette dem uten at det vil ødelegge prosjektene. (Men da vil all historikken gå tapt, og det er ikke lengre mulig å se eldre versjoner av skriptene mine). 
+
+Jeg brukte altså Git som en måte å holde orden i filene mine, men også til å sikkerhetskopiere til M-disken. M er som kjent en server vi kobler oss på trådløst. Her lagrer vi alt vi arbeider med (som ikke går på Google disk). Problemet med M er at det er en ekstern server. Dermed kan enkelte prosesser tar mye lengre tid når man arbeider med filer som ligger på M. Dessuten vil en del programmer frike ut dersom tilkoblinga til M blir borte i et mikrosekund, slik den plagsomt nok blir hvis skjermspareren kommer på eller hvis et atom nyser i feil retning. Min løsning blei å jobbe med alt på den lokale C-disken og kopiere over alt til M-disken på slutten av hver dag[^1]. Dette høres tungvint ut, tenker du sikkert. Kopiere over alle filer til et prosjekt hver dag? Huff. Men det var ikke vanskeligere enn å skrive inn dette i en konsoll: `git push`.
+
+[^1]: Jeg gjorde det ikke hver dag.
+
+### Hva må du vite om Git
+
+Ingen ting. Det holder å vite at jeg brukte Git, og det er derfor visse filer eksisterer i prosjektene. Det er smart å la disse ligge der i fall dere en gang får lyst å bruke Git sjøl. Og for å beholde historikken min (som jeg tviler på at dere noen gang vil ha nytte av). 
+
+Det som ligger i mappa `R/sikkerhetskopier` på M er essensielt det samme som ville ligget der dersom jeg hadde manuelt dratt filene over. Jeg antar at C-disken på pc-en min blir *mind wiped* snart, og da vil dette være de eneste kopiene av arbeidet mitt, så dere trenger ikke tenke på hva som er kopi av hva. 
+
+![Min pc, snart.](img/mind-wipe.jpg){width=40%}
+
+## Lagringslokasjon
+
+Som jeg nevnt over arbeida jeg på den lokale C-disken, og opprettholdt sikkerhetskopier på M. For å utbrodere litt på dette: Noen ganger er det vanskelig å arbeide på filer direkte på en ekstern server. Det er ikke helt kosekvent hvordan dette utarter seg. I arbeidet med flytterater skal jeg skrive en excelfil til M-disken. Dette tar flere minutter. Å skrive den til C-disken tar ett sekund. Og å kopiere fra C til M tar sekunder. Dermed er det kjappere å skrive fila til C og så kopiere den til M. R lar oss manipulere filer direkte. Så i denne koden har jeg lagd en funksjon som kopierer det vi trenger fra M til C, og kopierer det ferdige produktet tilbake til M fra C. Vi kan gjøre dette relativt sømløst, slik at brukeren ikke trenger å tenke på hvor filer er lagra. Så lenge vi sjøl har kontroll, så klart. 
+
+Som nevnt tidligere over her og når pakka *here* omtales, i et prosjekt er alle filstier relative til prosjektets rotmappe. Dermed vil det ikke oppstå noen problemer når det kommer til filer *som ligger i en undermappe av prosjektet*. F.eks. legger jeg som nevnt datafiler i mappa *data*. Uansett hvor du kopierer et prosjekt til, så lenge du åpner prosjektet i Rstudio skal disse lenkene fungere (til og med om du åpner dem på en pc med macOS!). Noen filer vi bruker ligger på M. Her er det viktig at disse filstiene bevares eller oppdateres. 
+
+På statistikkmappene er det en konvensjon at filer med datasett er navngitt etter datoen de blei laga. Det vil si at folkemengdefila jeg henviser til i skriptet fra mars 2023 ikke er den oppdaterte folkemengdefila i mai 2024. Her må man gå inn og oppdatere koden med nytt navn. Hvis man føler seg fancy kan man lage en funksjon som gjetter seg fram til hva som er den nyeste versjonen av en fil. 
+
+## Functional programming
+
+Jeg har etterstreba et paradigme som kalles *functional programming*. Dette er en programmeringsstil hvor vi fokuserer på funksjoner som gjør alt av endringer på data. Resultatet er lettere å lese, forstå og debugge. Les mer om det i [Modern R with the tidyverse](http://modern-rstats.eu/functional-programming.html). I praksis vil det si at jeg putter funksjoner sammen i andre funksjoner som jeg gir beskrivende navn. Dette gjør det lettere å gruppere sammen databehandlingsfunksjoner. Og dermed også å putte funksjoner i ulike skriptfiler. Jeg bytta nylig til denne praksisen, etter å tidligere ha arbeida med meterlange skript hvor objekter opprettes, endres, slettes, transformeres og lagres om hverandre. Så langt syns jeg dette er en stor forbedring. Utfordringa er å finne en god balanse mellom hvor mange skript man skal lage, og hvor mange delfunksjoner man trenger. Du vil se at jeg er inkonsekvent i de ulike prosjekta mine. Her finnes heller ingen *one size fits all*. Små prosjekter trenger ikke mer enn en `main.R`-fil. Store prosjekter kan ha mange skript fordelt over flere mapper.
+

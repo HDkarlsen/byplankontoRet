@@ -120,4 +120,4 @@ prognose %>%
 
 ## Summarise
 
-Også nært beslekta er `summarise()`. Vi har prata om `summarise()` tidligere (@sec-oppsummering), og du vil lett se at disse likner på hverandre. `summarise()` bruker vi når vi vil lage en oversikt over enkelte deler av, eller hele, datasettet. Til forskjell fra `mutate()` summerer den opp alle radene på hver kolonne, eventuelt gruppert etter grupper om man kombinerer den med `group_by()`.
+Også nært beslekta er `summarise()`. Vi har prata om `summarise()` tidligere (@sec-oppsummering), og du vil lett se at disse likner på hverandre. `summarise()` bruker vi når vi vil lage en oversikt over enkelte deler av, eller hele, datasettet. Til forskjell fra `mutate()` summerer den opp alle radene på hver kolonne, eventuelt gruppert etter grupper om man kombinerer den med `group_by()`. 
