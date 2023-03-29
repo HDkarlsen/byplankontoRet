@@ -36,7 +36,7 @@ En måte å forebygge dette på er ved å ta i bruke *functional programming*. D
 
 Her varierer det nok ut ifra hvor god man er på å forstå strukturer. Jeg gjør denne feilen stadig. Har ikke noe bedre råd enn å alltid prøve begge veier. Det er så klart smart å finne ut av *hvorfor* man noen ganger bruker hermetegn rundt noe og andre ganger ikke. Essensielt handler det om: Når du bruker hermetegn rundt noe viser du at det er en tekststreng. Når du ikke bruker hermetegn rundt tekst viser du at et er et objekt. Da må objektet finnes i miljøet for at det skal kunne tas i bruk. `tidyverse` kompliserer dette litt ved at de lar oss henvise til f.eks. kolonnenavn som om de er objekter, f.eks. i:
 
-```{r, error = TRUE}
+```{r, error = TRUE, eval = FALSE}
 library(tidyverse)
 
 # Ok

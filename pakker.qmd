@@ -78,7 +78,6 @@ Hvorfor er piper så nyttig? De lar oss flette sammen en serie operasjoner uten 
 ### Uten pipa {#uten-pipe}
 
 ```{r}
-library(tidyverse)
 mtcars <- mtcars
 cars_filtered <- filter(mtcars, cyl >= 6)
 cars_filtered_kg <- mutate(cars_filtered, wt = wt * 0.45359237)

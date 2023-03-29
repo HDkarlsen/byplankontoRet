@@ -1,4 +1,4 @@
-# Arbeidsprosess
+# Arbeidsprosess {#arbeidsprosess}
 
 Her er noen generelle kommentarer om hvordan prosjektene mine har vært organisert. Det vil gjøre det lettere for andre å ta over. Her er en grov oversikt over arbeidsprosessen min, etterfulgt av nøyere detaljer
 
@@ -16,7 +16,7 @@ Hvis du lurer på om en mappe er et Rstudio-prosjekt kan se se etter en `.Rproj`
 
 Generelt etterstreber jeg en mappestruktur som er omtrent slik ut:
 
-```{r eval = FALSE}
+```
 .
 └── mitt_prosjekt
     ├── R

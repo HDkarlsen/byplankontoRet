@@ -187,7 +187,8 @@ addWorksheet(wb, sheetName = "Motor Trend Car Road Tests", gridLines = FALSE)
 addWorksheet(wb, sheetName = "Iris", gridLines = FALSE)
 
 # Skriv data til disse arkfanene. `mtcars` og `iris` er datasett som ligger i R.
-writeDataTable(wb, sheet = 1, x = mtcars, colNames = TRUE, rowNames = TRUE, tableStyle = "TableStyleLight9")
+writeDataTable(wb, sheet = 1, x = mtcars, colNames = TRUE, rowNames = TRUE, 
+               tableStyle = "TableStyleLight9")
 writeDataTable(wb, sheet = 2, iris, startCol = "K", startRow = 2)
 
 # Lagre fila som excel-fil.
