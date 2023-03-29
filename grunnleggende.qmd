@@ -7,6 +7,66 @@ Vi starter gradvis på bunnen og arbeider oss kjapt opp til den avanserte arbeid
 library(tidyverse)
 ```
 
+## Rstudio {#sec-rstudio}
+
+Men først av alt bør vi ta en titt på Rstudio. Dette er som nevnt det grafiske brukergrensesnittet som vi arbeider i når vi jobber med R. Et typisk Rstudio-vindu kan se slik ut:
+
+![Rstudio in action, med tema *Tomorrow Night 80s*](img/rstudio_annotated.PNG)
+
+Hvis du har kjedeligere farger er det nok fordi du ikke har oppdaga de flotte temaene som du kan velge mellom i Rstudio. Kikk på *Tools/Global options/Appearance* og endre *Editor theme* til noe som faller deg i smak. Min favoritt for tida er *Tomorrow Night 80s*. Grensesnittet består av fire ruter (*panes*), som hver kan ha flere faner (*tabs*). 
+
+Når du først er i innstillinger: Skru av *Restore .RData into workspace on startup* og velg *never* på *Save workspace to .RData on exit*. Dette er innstillinger som gjør det litt raskere for deg å komme inn i et prosjekt, men som vil gi deg en falsk trygghet, og som inviterer til noen av de feilene om jeg omtaler i @sec-feil. Derfor skrur vi dem av.[^3]
+
+![Slik skal det se ut](img/settings.png){width=50%}
+
+[^3]: Hvorfor skrur vi av dette? Innstillinga er på *by default* og vil lagre alt som ligger i miljøet ditt mellom hver gang du jobber i Rstudio, sjøl om du lukker programmet og skrur av maskina. Dette gjør det som nevnt lettere å starte opp igjen. Samtidig fører det til at miljøet ditt blir overfylt av gamle objekter og pakker du har lasta inn. Du kommer til å på et tidspunkt få en feil fordi du har lasta inn en gammel pakke du hadde glemt, eller fordi det ligger et objekt i miljøet du hadde glemt av. Det er god hygiene å restarte sesjonen ofte (flere ganger i løpet av et prosjekt), og denne innstillinga er med på å hindre deg i å gjøre det. 
+
+### Rute 1: Kilde (*source*)
+
+I denne ruta havner alle skriptene våre. Vi skriver alle kommandoene våre i skript som vi deretter kjører. Dette er likt hvordan syntaks/skript kan brukes i Stata og SPSS. Disse skripta blir en oppskrift for oss seinere som forteller oss hva som blei gjort. Du kan kjøre ei og ei linje ved å trykke `ctrl + enter`[^2], eller du kan markere det du vil kjøre og trykke det samme. Du kan kjøre hele skriptet ved å trykke `ctrl + alt + enter`. Skript lar deg enkelt dele arbeidet ditt med andre. Du bør være flink på å *dokumentere* det du gjør ved å bruke kommentarer. Dette er linjer som starter med `#`. Disse linjene vil ignoreres av R når du kjører skriptet. 
+
+[^2]: For macOS-brukere: erstatt `ctrl` med `cmd` i disse snarveiene.
+
+Du kan se at jeg har skrevet noe kode i skriptet mitt. Jeg lager en vektor som heter *noen_tall*  og et datasett som heter *et_datasett*.
+
+### Rute 2: Konsollen (*console*)
+
+Man kan også skrive kommandoer rett til konsollen. Da blir de kjørt med en gang man trykker `enter`. De kodene du skriver til konsollen vil ikke bli lagra noe sted, så hvis du jobber mye her vil du ikke dokumentere arbeidet ditt. Så ikke gjør det til en vane å bruke konsollen mye. Den er nyttig hvis du veit at du ikke trenger å ta vare på akkurat det du gjør nå. F.eks. hvis du skal regne ut noe fort, eller printe et objekt for å inspisere det.
+
+Når du kjører skript vil koden skrives ut til konsollen. Du kan se at jeg har kjørt kodene i skriptet fordi de er blitt skrevet til konsollen.
+
+### Rute 3: Miljøet (*environment*) med mer
+
+De to siste rutene kan inneholde diverse faner, avhengig av hva du krysser av for i *Pane layout* i *global options*. Vanligvis viser det oss miljøet vårt. Her finner du en oversikt over alle objektene du har laga hittil i **sesjonen** (*session*) din. En sesjon starter når du starter R (som starter når du starter Rstudio). Den varer til du skrur av R eller restarter den manuelt. Du restarter den manuelt ved å gå til *Session/Restart R* eller trykke `ctrl + shift + F10`.
+
+Du kan se at det ligger en vektor, et datasett og en funksjon (*stilim()*) i mijøet mitt. De to første er det jeg lagde i skriptet. Da koden blei kjørt lagde de to **objekter** (et datasett og en vektor), og alle objekter legges i miljøet. Funksjonen ligger der fordi den er definert i min *.Rprofile*. Dette går jeg ikke inn på her, for det er et mer avansert tema. Det holder å si at denne funksjonen blir lasta inn i miljøet mitt hver gang jeg starter en R-sesjon.
+
+Det er andre faner i denne ruta som kan være nyttig, men vi trenger ikke bry oss om dem nå. Kort fortalt viser *History* oss hvilke koder vi nettopp har kjørt, og Git kan brukes hvis vi bruker Git som et *version control system.* 
+
+### Rute 4: Filer, plott, visning, hjelp med mer
+
+Her ligger det flere faner som er interessant for oss.
+
+#### Files 
+
+Vanligvis ser vi filene i den mappa vi befinner oss her, hvis fana *Files* er valgt. Her ligger alle filene jeg har i min mappe for øyeblikket. Det er noe rotete. Herfra kan du enkelt åpne andre skript.
+
+#### Plots
+
+Hvis du lager en figur eller graf vil plottet kunne vises her.
+
+#### Help
+
+Lær å like *Help*. Her kan du søke opp funksjoner for å få hjelp til å bruke dem. Du kan enten bruke søkefeltet i høyre hjørne av fana, eller kjøre denne koden `?funksjonsnavn`. F.eks. 
+```{r, eval = FALSE}
+?mutate
+```
+Da vil hjelpevinduet dukke opp.
+
+#### Viewer
+
+*Viewer* lar oss forhåndsvise f.eks. html-sider, Shiny-apps og andre dokumenter vi produserer. 
+
 
 ## Vektor
 
@@ -28,12 +88,14 @@ vektor1 <- c(1, 2, 3)
 vektor1
 ```
 
+:::{.callout-note}
 Når man gir en verdi bruker man en av to operatorer: enten `<-` eller `=`. Det er generelt ansett at man bør bruke pila istedenfor likhetstegn. Årsakene er 
 
 1. `=` (*assignment*) er lett å forveksle med `==` (*comparison*). Det er enklere å unngå dette med pila
 2. pila er anvendelig. Du kan faktisk skrive den motsatt vei, slik: `c(1, 2, 3) -> vektor1`. Når det er sagt, lov meg at du aldri gjør dette med mindre du har en utrolig god grunn. Enkelte konvensjoner er smart å beholde. 
 
 Derfor bruker jeg alltid `<-`, og anbefaler deg det også.
+:::
 
 Tall kan man, som vi ser, bare skrive rett ut. Bokstaver, derimot, må deklareres som en **streng**. Dette gjøres ved å omkranse dem i hermetegn:
 
@@ -45,6 +107,12 @@ vektor2
 En vektor som består av bokstaver eller ord kalles en *character vector* eller en *string*.
 
 Vi kommer oss langt med numeriske vektorer og strengvektorer. Her er det verdt å merke at det er forskjellige varianter av numeriske vektorer: De kan være `Int`, `double`, eller `float`. Forskjellen er sjelden viktig for oss, så jeg går ikke inn på det. 
+
+Mer inngående info om vektorer og klasser [kan finnes her](https://r02pro.github.io/vector.html). 
+
+En vektor kan bestå av alt fra ett til mange elementer. **Men den kan bare bestå av elementer av samme klasse**
+
+La oss se kjapt på andre typer dataverdier vi kan arbeide med.
 
 ### Datoer
 
@@ -74,15 +142,9 @@ Når vi importerer filer fra andre programmer hender det vi får med oss deres d
 
 Faktorer (*factors*) må også nevnes. Disse er nyttige for grupperinger, og noen funksjoner kan merke seg hvilke variabler som er faktorer og utføre heuristikker basert på det. Sjøl syns jeg faktorer er knotete å forholde seg til, så jeg foretrekker å bare bruke strengvektorer. 
 
-### Tilbake til vektorer
-
-Mer inngående info om vektorer og klasser [kan finnes her](https://r02pro.github.io/vector.html). 
-
-En vektor kan bestå av alt fra ett til mange elementer. **Men den kan bare bestå av elementer av samme klasse**
-
 ## Liste
 
-En liste er som en vektor på stereoider. Den kan består av elementer av *ulik klasse*. I tillegg kan en liste bestå av *andre lister*. Det gjør dem kraftig, og anvendbar.
+En liste er som en vektor på steroider. Den kan består av elementer av *ulik klasse*. I tillegg kan en liste bestå av *andre lister*. Det gjør dem kraftig, og anvendbar.
 
 ```{r}
 # En liste bestående av fem tall. Dette kunne like gjerne vært en vektor
@@ -124,7 +186,7 @@ liste2[[2]] %>% class() # character (alstå en tekstvektor)
 Vi bruker ikke så ofte lister direkte, men de er viktige av årsaker som straks blir klart. Det siste jeg vil påpeke om lister er at de er rekursive, det vil si at du kan ha ei liste som et element av ei liste. Dermed følger det at vi kan ha ei liste som er et element av ei liste som er et element av ei liste som ... 
 
 
-![Og så videre](img/spiral-robin-schreiner-d8OiIdAdKNA-unsplash.jpg){width=60%}
+![Og så videre](img/spiral-robin-schreiner-d8OiIdAdKNA-unsplash.jpg){width=40%}
 
 # Data frame
 
