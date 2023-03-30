@@ -6,4 +6,6 @@ Dette er en pamflett skrevet for Byplankontorets statistikere, for å gi en kort
 
 Se intro for mer info om hva pamfletten inneholder. Eller hopp rett til et kapittel, på eget ansvar.
 
-Lykke til!
+## Status
+
+Dette er strengt et et pågående arbeidsprosjekt. Det er mange ting jeg ikke har rukket. Dette vil vises tydeligst i mengden skrivefeil som florerer blant disse digitale sider. Se på det som en tålmodighetsprøve. Det har helt sikkert greid å snike seg inn andre feil også her og der. 

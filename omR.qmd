@@ -1,4 +1,3 @@
-
 # Om R
 
 Noen forskjeller på det å jobbe i R vs. Excel og SPSS.

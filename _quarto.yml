@@ -8,12 +8,15 @@ book:
   date: last-modified
   date-format: "YYYY-MM-DD"
   cover-image: img/ryoji-iwata-n31JPLu8_Pw-unsplash.jpg
+  page-navigation: true
   chapters:
     - index.qmd
     - intro.qmd
-    - omR.qmd
-    - pakker.qmd
-    - grunnleggende.qmd
+    - part: "Fundamentale konsepter"
+      chapters:
+        - omR.qmd
+        - pakker.qmd
+        - grunnleggende.qmd
     - import-export.qmd
     - inspisere.qmd
     - pivot.qmd
