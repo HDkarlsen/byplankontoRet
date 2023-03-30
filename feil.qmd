@@ -30,7 +30,23 @@ Dette skjer typisk dersom du har arbeida lenga i en sesjon uten å restarte R. F
 
 En måte å forebygge dette på er ved å ta i bruke *functional programming*. Det vil si at vi bruker funksjoner i stor grad og sjelden lagrer objekter direkte i miljøet. [Brodrigues](https://www.brodrigues.co/blog/2022-05-26-safer_programs/) forklarer det bedre.
 
+En annen måte å forebygge det på er å restarte R-sesjonen *ofte*. Da unngår du at du arbeider på et gammelt objekt som ikke lenger er fundert i det nåværende skriptet. Jeg pleier alltid restarte R-sesjonen når jeg har fullført et delmål i skriptet. Ofte finner jeg en feil da, f.eks. har jeg gitt nytt navn til en funksjon eller objekt og glemt å endre det i skriptet. Se mer om dette i @sec-rstudio.
+
 ## Sender et objekt via pipe til en funksjon som ikke er pipevennlig
+
+Pipa (`%>%`) er nyttig. Så nyttig at jeg bruker den hele tida for å gjøre koden min mer leselig. Vanligvis sender jeg et datasett videre til neste funksjon, for å gjøre noe med datasettet. Det er slik tidyverse-funksjonene funker. Noen ganger sender jeg datasettet til en funksjon som ikke forventer et datasett, og som ikke funker med `tidyselect`. F.eks. slik vi så i @med-pipe. 
+
+```{r, eval = FALSE}
+# Dette funker ikke
+mtcars %>% sum(wt)
+
+# Dette funker
+sum(mtcars$wt)
+
+# Eller dette
+mtcars %>% sum(.$wt)
+```
+
 
 ## Glemmer å bruke hermetegn / bruker hermetegn når vi ikke trenger hermetegn
 
@@ -39,7 +55,7 @@ Her varierer det nok ut ifra hvor god man er på å forstå strukturer. Jeg gjø
 ```{r, error = TRUE, eval = FALSE}
 library(tidyverse)
 
-# Ok
+# OK
 starwars %>% 
   select(name)
 
@@ -48,17 +64,58 @@ starwars[name]
 
 # OK
 starwars["name"]
+
+# OK
+starwars$name
+
+# Også OK
+starwars$"name"
 ```
 Denne kompliseringa godtar vi, for det er så mange fordeler med at `tidyverse` lar oss henvise direkte til kolonner i datasett som om de var objekter.
 
-## Feil skråstrek
+## Har brukt feil skråstrek
 
-Windows vs. mac Se @sec-slash.
+Skjer oftest på maskiner med Windows som operativsystem og når du leser eller skriver filer. Husk at vi i R må bruke `/`, ikke `\`. Se mer om dette i @sec-slash.
+
+## Forveksler = og ==
+
+`==` brukes når du skal sammenlikne to betingelser. `=` brukes enten til *assignment* hvis du ikke bruker `<-`, eller i argumenter. Eksempel:
+
+```{r, eval = FALSE}
+trondelag %>% 
+  filter(kommune == "Trondheim")
+
+befolkning %>% 
+  mutate(er_tronder = if_else("skinnvest" == TRUE & "bart" == TRUE, 
+                           "tronder", 
+                           "ikke_tronder"))
+```
+
 
 ## Tegnkode
 
-Se @sec-tegnkoding.
+Tegnkoding er dessverre noe besværlig. Det er flere ting som kan skje her:
 
-Ofte hjelper det å restarte R-sesjonen.
+- Fila vi laster inn har en spesifikk tegnkode og vi må definere denne når vi laster inn
+- R eller Rstudio sin standardtegnkode er ikke den vi vil ha.
+- R eller Rstudio skifte uforvarende tegnkode uten at vi veit hvorfor.
 
+Jeg tror noe av dette skyldes bugs i R og Rstudio, for endringsloggen har nevnt at de har fiksa problemer knytta til *character encoding*. 
 
+Se @sec-tegnkoding for mer om dette.
+
+Ellers er min erfaring at det ofte hjelper å restarte R-sesjonen dersom filene du laster inn plutselig mangler æ, ø og å når de tidligere hadde dem. I arbeidet med SSBs API opplevde jeg at filer som tidligere blei lasta inn med norske bokstaver rett som det var dukka opp med andre tegn istedenfor. Her fant jeg aldri ut hva som forårsaka det, men det funka alltid å restarte R-sesjonen. Kanskje var det noen pakker som når de blei lasta inn overskreiv noe annet. Dette gir oss en R-aforisme:
+
+> Det er bedre å fikse et problem enn å forstå problemet.
+
+## Jeg har prøvd alt, men ingenting løser problemet mitt
+
+Her er en generell sti du kan gå ned når du skal løse et problem i R:
+
+1. Restart R-sesjonen
+2. Restart Rstudio
+3. Restart datamaskina
+4. Oppdater R (valgfri, noen gang skummelt)
+5. Oppdater Rstudio
+6. Spør en kollega
+7. Spør på StackOverflow eller CrossValidated (husk å gi det et reproduserbart eksempel!)
