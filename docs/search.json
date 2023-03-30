@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "R for Byplankontoret",
     "section": "",
-    "text": "Forord\nDette er en pamflett skrevet for Byplankontorets statistikere, for å gi en kort introduksjon til R, samt dokumentere arbeidet jeg har gjort i R. Teksten er skrevet i Quarto ved hjelp av bookdown.\nSe intro for mer info om hva pamfletten inneholder. Eller hopp rett til et kapittel, på eget ansvar."
+    "text": "Forord\nDette er en pamflett skrevet for Byplankontorets statistikere, for å gi en kort introduksjon til R, samt dokumentere arbeidet jeg har gjort i R. Teksten er skrevet i Quarto ved hjelp av bookdown.\nSe intro for mer info om hva pamfletten inneholder. Eller hopp rett til et kapittel, på eget ansvar.\nLykke til!"
   },
   {
     "objectID": "intro.html#tidshorisont",
