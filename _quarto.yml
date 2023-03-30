@@ -25,7 +25,7 @@ book:
     - praktisk-eksempel.qmd
 
 crossref:
-  fig-prefix: Figur   # (default is "Figure")
+  fig-prefix: Figur   
   fig-title: Figur
   sec-prefix: Kapittel
 
@@ -35,8 +35,8 @@ bibliography: references.bib
 format:
   html:
     theme: cosmo
-  # pdf:
-  #   documentclass: scrreprt
+  pdf:
+    documentclass: scrreprt
 
 editor: source
 
