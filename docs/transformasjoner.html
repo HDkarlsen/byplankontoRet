@@ -347,14 +347,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 8
   plansone kjonn aar2023 aar2024 aar2025 faktisk2023 faktisk2024 faktisk2025
      &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-1  5001001 M         519     549     777         569         507         738
-2  5001001 K         611     679     546         670         627         519
-3  5001002 M         402     455     585         441         420         556
-4  5001002 K         774     501     443         849         462         421
-5  5001003 M         591     568     454         648         524         431
-6  5001003 K         762     658     527         836         607         501
-7  5001004 M         492     711     540         540         656         513
-8  5001004 K         608     648     484         667         598         460</code></pre>
+1  5001001 M         681     660     587         618         654         558
+2  5001001 K         723     462     456         656         458         433
+3  5001002 M         405     531     454         367         526         431
+4  5001002 K         664     716     617         602         709         586
+5  5001003 M         796     403     668         722         399         635
+6  5001003 K         527     579     770         478         573         732
+7  5001004 M         742     532     656         673         527         623
+8  5001004 K         575     603     674         522         597         640</code></pre>
 </div>
 </div>
 <p>Si at vi vil vite differansen mellom prognosen (“aarXXXX”) og faktisk befolkning (“faktiskXXXX”).</p>
@@ -367,14 +367,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 11
   plansone kjonn aar2023 aar2024 aar2025 fakti…¹ fakti…² fakti…³ diff2…⁴ diff2…⁵
      &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1  5001001 M         519     549     777     569     507     738     -50      42
-2  5001001 K         611     679     546     670     627     519     -59      52
-3  5001002 M         402     455     585     441     420     556     -39      35
-4  5001002 K         774     501     443     849     462     421     -75      39
-5  5001003 M         591     568     454     648     524     431     -57      44
-6  5001003 K         762     658     527     836     607     501     -74      51
-7  5001004 M         492     711     540     540     656     513     -48      55
-8  5001004 K         608     648     484     667     598     460     -59      50
+1  5001001 M         681     660     587     618     654     558      63       6
+2  5001001 K         723     462     456     656     458     433      67       4
+3  5001002 M         405     531     454     367     526     431      38       5
+4  5001002 K         664     716     617     602     709     586      62       7
+5  5001003 M         796     403     668     722     399     635      74       4
+6  5001003 K         527     579     770     478     573     732      49       6
+7  5001004 M         742     532     656     673     527     623      69       5
+8  5001004 K         575     603     674     522     597     640      53       6
 # … with 1 more variable: diff2025 &lt;dbl&gt;, and abbreviated variable names
 #   ¹​faktisk2023, ²​faktisk2024, ³​faktisk2025, ⁴​diff2023, ⁵​diff2024</code></pre>
 </div>
@@ -389,14 +389,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 8
   plansone kjonn aar2023 aar2024 aar2025 faktisk2023 faktisk2024 faktisk2025
      &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-1  5001001 M         519     549    1554         569         507         738
-2  5001001 K         611     679    1092         670         627         519
-3  5001002 M         402     455    1170         441         420         556
-4  5001002 K         774     501     886         849         462         421
-5  5001003 M         591     568     908         648         524         431
-6  5001003 K         762     658    1054         836         607         501
-7  5001004 M         492     711    1080         540         656         513
-8  5001004 K         608     648     968         667         598         460</code></pre>
+1  5001001 M         681     660    1174         618         654         558
+2  5001001 K         723     462     912         656         458         433
+3  5001002 M         405     531     908         367         526         431
+4  5001002 K         664     716    1234         602         709         586
+5  5001003 M         796     403    1336         722         399         635
+6  5001003 K         527     579    1540         478         573         732
+7  5001004 M         742     532    1312         673         527         623
+8  5001004 K         575     603    1348         522         597         640</code></pre>
 </div>
 </div>
 <section id="noen-nyttige-funksjoner-til-mutate" class="level3" data-number="9.1.1">
@@ -516,14 +516,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 1
   aar2025
     &lt;dbl&gt;
-1    1554
-2    1092
-3    1170
-4     886
-5     908
-6    1054
-7    1080
-8     968</code></pre>
+1    1174
+2     912
+3     908
+4    1234
+5    1336
+6    1540
+7    1312
+8    1348</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Er det samme som dette</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>prognose <span class="sc">%&gt;%</span> </span>
@@ -532,14 +532,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 1
   aar2025
     &lt;dbl&gt;
-1    1554
-2    1092
-3    1170
-4     886
-5     908
-6    1054
-7    1080
-8     968</code></pre>
+1    1174
+2     912
+3     908
+4    1234
+5    1336
+6    1540
+7    1312
+8    1348</code></pre>
 </div>
 </div>
 </section>

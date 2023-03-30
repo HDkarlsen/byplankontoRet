@@ -4,20 +4,34 @@ En serie med nyttig ressurser og sider å drive produktiv prokrastinering.
 
 ## Ressurser for å lære R
 
-R for data science
+[R for data science](https://r4ds.hadley.nz/): En bok med nyttige tips for bruk av *tidyverse* på arbeidsmåter som er lik våre egne. Forfatter Hadley Wickham er den viktigste personen bak *tidyverse*, og skriver **gode** lærebøker. 
 
-Advanced R
+[Advanced R](https://adv-r.hadley.nz/): Oppfølgeren til forrige bok, av samme forfatter. Mer R, mer avansert, samme pedagogiske stil. Jeg nevner den her fordi det er en bok jeg ofte blir henvist til når jeg søker opp hvordan jeg skal gjøre et eller annet i R.
 
-Swirl
+[Posits jukselapper](https://posit.co/resources/cheatsheets/): Uvurderlige dokumenter! Posit er selskapet bak Rstudio, og er forøvrig hvor stjernen Hadley Wickham jobber. De har laga disse to-siders pdf-ene som oppsummerer på en kompakt og visuell måte hvordan hovedfunksjonene fra tidyverse-pakkene fungerer. Dette er de dokumentene jeg bruker mest når jeg arbeider med R. 
 
-What They Forgot to Teach You About R
+[Swirl](https://swirlstats.com/): *Swirl* er en pakke som lærer deg R, *inni R*. Dermed blir det et interaktivt kurs. Har ikke prøvd det sjøl, men har hørt andre anbefale det. 
 
-Posits cheat sheets
+[What They Forgot to Teach You About R](https://rstats.wtf/): En kort bok som ikke er helt ferdig. Den inneholder likevel nyttig informasjon for den som begynner å bli litt vant med R.
+
+[The tidyverse style guide](https://style.tidyverse.org/index.html): Når du har begynt å skrive kode vil du etter hvert merke at du ikke er konsekvent. R som kodespråk gir deg frie tøyler til en viss grad - du kan f.eks. sjøl velge om du vil ha mellomrom mellom operatorer (`4+9*3%2` vs. `4 + 9 * 3 % 2`). Så vil du også skjønne at det lønner seg å være konsekvent, og at man kan skrive pen kode og stygg kode. Denne stilguiden er en kjapp og grei guide til å skrive pent og konsekvent, noe som vil gjøre det enklere for deg sjøl og andre å lese koden din. En bonus til å lese denne er at den vil gi dere evnen til å oppdage alle gangene jeg synder mot stilguiden i denne pamfletten. Så kan dere le rått og være overbærende. 
+
+[Regular expressions](https://www.regular-expressions.info/tutorial.html): Det er overraskende vanskelig å finne en god guide til regular expression, som vi bruker i blant annet *stringr*-pakka. Dette er en av de mindre dårlige. Advarsel: Det kan virke overveldende.
+
+[Geocomputation in R](https://geocompr.robinlovelace.net/index.html): Noen har (selvfølgelig) laga (mange) pakker for å arbeide med kart og geografiske elementer i R. Denne boka gir en **grundig** introduksjon til det. Jeg sier ikke at vi skal bytte ut ArcGIS og QGIS med R ... jeg bare impliserer at det går an. 
 
 ## Produktiv prokrastinering
 
-Brodrigues
+Noen ganger har man ikke konsentrasjon eller energi til å gjøre det man hadde planlagt. Man kan avspasere, eller ... lese om R. Eller forsåvidt en hel del andre ting, men la oss fokusere på R-delen.
 
-Rweekly
+[Brodrigues](https://www.brodrigues.co/): En statistiker fra Luxembourg med en ph.d. i økonomi som blogger om R og arbeidet i det offentlige. Han er enda mer fanatisk opptatt av åpen kildekode og programmering enn meg, og har mange interessante anvendelser av R på f.eks. Word- og Exceldokumenter. Mye av min skepsis mot Excel kan gjenkjennes hos ham. 
 
-Rbloggers
+[Rweekly](https://rweekly.org/): En bloggaggregator. Hver uke samles en serie med interessante bloggposter om R. Jeg har oppdaga mange nyttige blogger og funksjoner via slike aggregatorer (blant annet Brodrigues over).
+
+[R-bloggers](Why should I use R: The Excel R Data Wrangling comparison): Samme som Rweekly, bare at den oppdateres hver dag. Jeg syns kvaliteten på postene i Rweekly er noe høyere, men dersom du har et stort prokrastineringsbehov er denne sida grei å vite om også.
+
+## Enkeltartikler
+
+[Why should I use R: The Excel R Data Wrangling comparison](https://www.jumpingrivers.com/blog/comparing-r-excel-data-wrangling/): En sammenlikning av R og Excel. Gjett hva som anbefales. Nyttig for å få en forståelse av hvordan man gjør ting i R som man allerede kan i Excel. 
+
+[Graphical User Interfaces were a mistake but you can still make things right](https://www.brodrigues.co/blog/2020-11-21-guis_mistake/): En av mine favorittartikler hos Brodrigues. 

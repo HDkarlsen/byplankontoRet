@@ -242,6 +242,7 @@ ul.task-list li input[type="checkbox"] {
 └── mitt_prosjekt
     ├── R
     │   ├── main.R
+    │   ├── scratchpad.R
     │   └── functions.R
     ├── output
     │   ├── *.xlsx
@@ -255,6 +256,7 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>I mappa <code>R</code> ligger alle kodeskriptene.</li>
 <li><code>main.R</code>: dette er et lite skript som laster inn funksjoner fra andre skript, og som kun inneholder de få kodene som trengs for å lage outputen. Vanligvis putter jeg all funksjonalitet inn i funksjoner som jeg putter i ett eller flere egne skript.</li>
+<li><code>scratchpad.R</code>: jeg har ofte en slik fil hvor jeg skrive alle koder før jeg kopierer dem til rett skript. Dette dokumentet blir dermed gravplass for ikke-fungerende koder. Det er en nyttig måte å arbeide på, fordi jeg i ettertid kan ignorere alt som ligger her. Noen ganger er jeg flink til å slette inneholdet slik at jeg ikke forvirrer meg sjøl seinere. Noen gang blir det liggende. Dere kan alltid ignorere denne fila.</li>
 <li><code>functions.R</code>: Om det kun er ett skript, heter dette vanligvis <code>functions.R</code>. Blir det mange funksjoner og uoversiktelig med alle i ett skript, deler jeg dem opp i flere skript med mer eller mindre beskrivende navn som <code>cleaning-functions.R</code>, <code>import-functions.R</code>, etc.</li>
 <li>I mappa <code>output</code> ligger alle de prosesserte filene. Ofte <code>.csv</code> eller <code>.xlsx</code> filer.</li>
 <li>I mapppa <code>data</code> ligger rådatafilene. I noen prosjekter lasta jeg ned data fra nettet og la her. Andre plasser lasta jeg ned data via API, og lagre en kopi av dem her for å ikke beslaglegge API-en unødvendig. I andre kopierte jeg filer fra <code>M:</code>-disken og la her. Hvis jeg arbeida med filer fra <code>M:</code> pleide jeg vanligvis å oppgi filstien til fila direkte i funksjonen som importerte dataene til R.</li>

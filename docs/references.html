@@ -198,6 +198,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#ressurser-for-å-lære-r" id="toc-ressurser-for-å-lære-r" class="nav-link active" data-scroll-target="#ressurser-for-å-lære-r">Ressurser for å lære R</a></li>
   <li><a href="#produktiv-prokrastinering" id="toc-produktiv-prokrastinering" class="nav-link" data-scroll-target="#produktiv-prokrastinering">Produktiv prokrastinering</a></li>
+  <li><a href="#enkeltartikler" id="toc-enkeltartikler" class="nav-link" data-scroll-target="#enkeltartikler">Enkeltartikler</a></li>
   </ul>
 </nav>
     </div>
@@ -224,17 +225,26 @@ ul.task-list li input[type="checkbox"] {
 <p>En serie med nyttig ressurser og sider å drive produktiv prokrastinering.</p>
 <section id="ressurser-for-å-lære-r" class="level2">
 <h2 class="anchored" data-anchor-id="ressurser-for-å-lære-r">Ressurser for å lære R</h2>
-<p>R for data science</p>
-<p>Advanced R</p>
-<p>Swirl</p>
-<p>What They Forgot to Teach You About R</p>
-<p>Posits cheat sheets</p>
+<p><a href="https://r4ds.hadley.nz/">R for data science</a>: En bok med nyttige tips for bruk av <em>tidyverse</em> på arbeidsmåter som er lik våre egne. Forfatter Hadley Wickham er den viktigste personen bak <em>tidyverse</em>, og skriver <strong>gode</strong> lærebøker.</p>
+<p><a href="https://adv-r.hadley.nz/">Advanced R</a>: Oppfølgeren til forrige bok, av samme forfatter. Mer R, mer avansert, samme pedagogiske stil. Jeg nevner den her fordi det er en bok jeg ofte blir henvist til når jeg søker opp hvordan jeg skal gjøre et eller annet i R.</p>
+<p><a href="https://posit.co/resources/cheatsheets/">Posits jukselapper</a>: Uvurderlige dokumenter! Posit er selskapet bak Rstudio, og er forøvrig hvor stjernen Hadley Wickham jobber. De har laga disse to-siders pdf-ene som oppsummerer på en kompakt og visuell måte hvordan hovedfunksjonene fra tidyverse-pakkene fungerer. Dette er de dokumentene jeg bruker mest når jeg arbeider med R.</p>
+<p><a href="https://swirlstats.com/">Swirl</a>: <em>Swirl</em> er en pakke som lærer deg R, <em>inni R</em>. Dermed blir det et interaktivt kurs. Har ikke prøvd det sjøl, men har hørt andre anbefale det.</p>
+<p><a href="https://rstats.wtf/">What They Forgot to Teach You About R</a>: En kort bok som ikke er helt ferdig. Den inneholder likevel nyttig informasjon for den som begynner å bli litt vant med R.</p>
+<p><a href="https://style.tidyverse.org/index.html">The tidyverse style guide</a>: Når du har begynt å skrive kode vil du etter hvert merke at du ikke er konsekvent. R som kodespråk gir deg frie tøyler til en viss grad - du kan f.eks. sjøl velge om du vil ha mellomrom mellom operatorer (<code>4+9*3%2</code> vs.&nbsp;<code>4 + 9 * 3 % 2</code>). Så vil du også skjønne at det lønner seg å være konsekvent, og at man kan skrive pen kode og stygg kode. Denne stilguiden er en kjapp og grei guide til å skrive pent og konsekvent, noe som vil gjøre det enklere for deg sjøl og andre å lese koden din. En bonus til å lese denne er at den vil gi dere evnen til å oppdage alle gangene jeg synder mot stilguiden i denne pamfletten. Så kan dere le rått og være overbærende.</p>
+<p><a href="https://www.regular-expressions.info/tutorial.html">Regular expressions</a>: Det er overraskende vanskelig å finne en god guide til regular expression, som vi bruker i blant annet <em>stringr</em>-pakka. Dette er en av de mindre dårlige. Advarsel: Det kan virke overveldende.</p>
+<p><a href="https://geocompr.robinlovelace.net/index.html">Geocomputation in R</a>: Noen har (selvfølgelig) laga (mange) pakker for å arbeide med kart og geografiske elementer i R. Denne boka gir en <strong>grundig</strong> introduksjon til det. Jeg sier ikke at vi skal bytte ut ArcGIS og QGIS med R … jeg bare impliserer at det går an.</p>
 </section>
 <section id="produktiv-prokrastinering" class="level2">
 <h2 class="anchored" data-anchor-id="produktiv-prokrastinering">Produktiv prokrastinering</h2>
-<p>Brodrigues</p>
-<p>Rweekly</p>
-<p>Rbloggers</p>
+<p>Noen ganger har man ikke konsentrasjon eller energi til å gjøre det man hadde planlagt. Man kan avspasere, eller … lese om R. Eller forsåvidt en hel del andre ting, men la oss fokusere på R-delen.</p>
+<p><a href="https://www.brodrigues.co/">Brodrigues</a>: En statistiker fra Luxembourg med en ph.d. i økonomi som blogger om R og arbeidet i det offentlige. Han er enda mer fanatisk opptatt av åpen kildekode og programmering enn meg, og har mange interessante anvendelser av R på f.eks. Word- og Exceldokumenter. Mye av min skepsis mot Excel kan gjenkjennes hos ham.</p>
+<p><a href="https://rweekly.org/">Rweekly</a>: En bloggaggregator. Hver uke samles en serie med interessante bloggposter om R. Jeg har oppdaga mange nyttige blogger og funksjoner via slike aggregatorer (blant annet Brodrigues over).</p>
+<p><a href="Why should I use R: The Excel R Data Wrangling comparison">R-bloggers</a>: Samme som Rweekly, bare at den oppdateres hver dag. Jeg syns kvaliteten på postene i Rweekly er noe høyere, men dersom du har et stort prokrastineringsbehov er denne sida grei å vite om også.</p>
+</section>
+<section id="enkeltartikler" class="level2">
+<h2 class="anchored" data-anchor-id="enkeltartikler">Enkeltartikler</h2>
+<p><a href="https://www.jumpingrivers.com/blog/comparing-r-excel-data-wrangling/">Why should I use R: The Excel R Data Wrangling comparison</a>: En sammenlikning av R og Excel. Gjett hva som anbefales. Nyttig for å få en forståelse av hvordan man gjør ting i R som man allerede kan i Excel.</p>
+<p><a href="https://www.brodrigues.co/blog/2020-11-21-guis_mistake/">Graphical User Interfaces were a mistake but you can still make things right</a>: En av mine favorittartikler hos Brodrigues.</p>
 
 
 </section>

@@ -264,8 +264,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#jeg-har-ikke-gjort-noen-endringer-men-plutselig-funker-ikke-koden-min" id="toc-jeg-har-ikke-gjort-noen-endringer-men-plutselig-funker-ikke-koden-min" class="nav-link" data-scroll-target="#jeg-har-ikke-gjort-noen-endringer-men-plutselig-funker-ikke-koden-min"><span class="toc-section-number">12.3</span>  “Jeg har ikke gjort noen endringer, men plutselig funker ikke koden min!”</a></li>
   <li><a href="#sender-et-objekt-via-pipe-til-en-funksjon-som-ikke-er-pipevennlig" id="toc-sender-et-objekt-via-pipe-til-en-funksjon-som-ikke-er-pipevennlig" class="nav-link" data-scroll-target="#sender-et-objekt-via-pipe-til-en-funksjon-som-ikke-er-pipevennlig"><span class="toc-section-number">12.4</span>  Sender et objekt via pipe til en funksjon som ikke er pipevennlig</a></li>
   <li><a href="#glemmer-å-bruke-hermetegn-bruker-hermetegn-når-vi-ikke-trenger-hermetegn" id="toc-glemmer-å-bruke-hermetegn-bruker-hermetegn-når-vi-ikke-trenger-hermetegn" class="nav-link" data-scroll-target="#glemmer-å-bruke-hermetegn-bruker-hermetegn-når-vi-ikke-trenger-hermetegn"><span class="toc-section-number">12.5</span>  Glemmer å bruke hermetegn / bruker hermetegn når vi ikke trenger hermetegn</a></li>
-  <li><a href="#feil-skråstrek" id="toc-feil-skråstrek" class="nav-link" data-scroll-target="#feil-skråstrek"><span class="toc-section-number">12.6</span>  Feil skråstrek</a></li>
-  <li><a href="#tegnkode" id="toc-tegnkode" class="nav-link" data-scroll-target="#tegnkode"><span class="toc-section-number">12.7</span>  Tegnkode</a></li>
+  <li><a href="#har-brukt-feil-skråstrek" id="toc-har-brukt-feil-skråstrek" class="nav-link" data-scroll-target="#har-brukt-feil-skråstrek"><span class="toc-section-number">12.6</span>  Har brukt feil skråstrek</a></li>
+  <li><a href="#forveksler-og" id="toc-forveksler-og" class="nav-link" data-scroll-target="#forveksler-og"><span class="toc-section-number">12.7</span>  Forveksler = og ==</a></li>
+  <li><a href="#tegnkode" id="toc-tegnkode" class="nav-link" data-scroll-target="#tegnkode"><span class="toc-section-number">12.8</span>  Tegnkode</a></li>
+  <li><a href="#jeg-har-prøvd-alt-men-ingenting-løser-problemet-mitt" id="toc-jeg-har-prøvd-alt-men-ingenting-løser-problemet-mitt" class="nav-link" data-scroll-target="#jeg-har-prøvd-alt-men-ingenting-løser-problemet-mitt"><span class="toc-section-number">12.9</span>  Jeg har prøvd alt, men ingenting løser problemet mitt</a></li>
   </ul>
 </nav>
     </div>
@@ -312,36 +314,90 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Dette er i prinsippet umulig å feilsøke. Heldigvis kan vi benytte oss av et smertelig nyttig prinsipp: Årsaken er alltid at du har gjort en feil.</p>
 <p>Dette skjer typisk dersom du har arbeida lenga i en sesjon uten å restarte R. Første gang du restarter R og kjører koden på nytt får du feilmelding. Da er ofte problemet at du på et tidspunkt har lagra noe i miljøet (<em>environment</em>), som ikke lengre er tilstede i koden. Hvis andre deler av koden er avhengig av dette objektet, vil de feile nå som objektet ikke lengre er tilstede. Du må rett og slett finne ut hvor bruddet skjer, og fikse det.</p>
 <p>En måte å forebygge dette på er ved å ta i bruke <em>functional programming</em>. Det vil si at vi bruker funksjoner i stor grad og sjelden lagrer objekter direkte i miljøet. <a href="https://www.brodrigues.co/blog/2022-05-26-safer_programs/">Brodrigues</a> forklarer det bedre.</p>
+<p>En annen måte å forebygge det på er å restarte R-sesjonen <em>ofte</em>. Da unngår du at du arbeider på et gammelt objekt som ikke lenger er fundert i det nåværende skriptet. Jeg pleier alltid restarte R-sesjonen når jeg har fullført et delmål i skriptet. Ofte finner jeg en feil da, f.eks. har jeg gitt nytt navn til en funksjon eller objekt og glemt å endre det i skriptet. Se mer om dette i <a href="grunnleggende.html#sec-rstudio"><span>Section&nbsp;4.1</span></a>.</p>
 </section>
 <section id="sender-et-objekt-via-pipe-til-en-funksjon-som-ikke-er-pipevennlig" class="level2" data-number="12.4">
 <h2 data-number="12.4" class="anchored" data-anchor-id="sender-et-objekt-via-pipe-til-en-funksjon-som-ikke-er-pipevennlig"><span class="header-section-number">12.4</span> Sender et objekt via pipe til en funksjon som ikke er pipevennlig</h2>
+<p>Pipa (<code>%&gt;%</code>) er nyttig. Så nyttig at jeg bruker den hele tida for å gjøre koden min mer leselig. Vanligvis sender jeg et datasett videre til neste funksjon, for å gjøre noe med datasettet. Det er slik tidyverse-funksjonene funker. Noen ganger sender jeg datasettet til en funksjon som ikke forventer et datasett, og som ikke funker med <code>tidyselect</code>. F.eks. slik vi så i <span class="citation" data-cites="med-pipe">(<a href="#ref-med-pipe" role="doc-biblioref"><strong>med-pipe?</strong></a>)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dette funker ikke</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">sum</span>(wt)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Dette funker</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(mtcars<span class="sc">$</span>wt)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Eller dette</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">sum</span>(.<span class="sc">$</span>wt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="glemmer-å-bruke-hermetegn-bruker-hermetegn-når-vi-ikke-trenger-hermetegn" class="level2" data-number="12.5">
 <h2 data-number="12.5" class="anchored" data-anchor-id="glemmer-å-bruke-hermetegn-bruker-hermetegn-når-vi-ikke-trenger-hermetegn"><span class="header-section-number">12.5</span> Glemmer å bruke hermetegn / bruker hermetegn når vi ikke trenger hermetegn</h2>
 <p>Her varierer det nok ut ifra hvor god man er på å forstå strukturer. Jeg gjør denne feilen stadig. Har ikke noe bedre råd enn å alltid prøve begge veier. Det er så klart smart å finne ut av <em>hvorfor</em> man noen ganger bruker hermetegn rundt noe og andre ganger ikke. Essensielt handler det om: Når du bruker hermetegn rundt noe viser du at det er en tekststreng. Når du ikke bruker hermetegn rundt tekst viser du at et er et objekt. Da må objektet finnes i miljøet for at det skal kunne tas i bruk. <code>tidyverse</code> kompliserer dette litt ved at de lar oss henvise til f.eks. kolonnenavn som om de er objekter, f.eks. i:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Ok</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Feilmelding</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>starwars[name]</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># OK</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>starwars[<span class="st">"name"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># OK</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Feilmelding</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>starwars[name]</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># OK</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>starwars[<span class="st">"name"</span>]</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># OK</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>starwars<span class="sc">$</span>name</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Også OK</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>starwars<span class="sc">$</span><span class="st">"name"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Denne kompliseringa godtar vi, for det er så mange fordeler med at <code>tidyverse</code> lar oss henvise direkte til kolonner i datasett som om de var objekter.</p>
 </section>
-<section id="feil-skråstrek" class="level2" data-number="12.6">
-<h2 data-number="12.6" class="anchored" data-anchor-id="feil-skråstrek"><span class="header-section-number">12.6</span> Feil skråstrek</h2>
-<p>Windows vs.&nbsp;mac Se <a href="import-export.html#sec-slash"><span>Section&nbsp;5.1.3</span></a>.</p>
+<section id="har-brukt-feil-skråstrek" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="har-brukt-feil-skråstrek"><span class="header-section-number">12.6</span> Har brukt feil skråstrek</h2>
+<p>Skjer oftest på maskiner med Windows som operativsystem og når du leser eller skriver filer. Husk at vi i R må bruke <code>/</code>, ikke <code>\</code>. Se mer om dette i <a href="import-export.html#sec-slash"><span>Section&nbsp;5.1.3</span></a>.</p>
 </section>
-<section id="tegnkode" class="level2" data-number="12.7">
-<h2 data-number="12.7" class="anchored" data-anchor-id="tegnkode"><span class="header-section-number">12.7</span> Tegnkode</h2>
-<p>Se <a href="import-export.html#sec-tegnkoding"><span>Section&nbsp;5.1.4</span></a>.</p>
-<p>Ofte hjelper det å restarte R-sesjonen.</p>
+<section id="forveksler-og" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="forveksler-og"><span class="header-section-number">12.7</span> Forveksler = og ==</h2>
+<p><code>==</code> brukes når du skal sammenlikne to betingelser. <code>=</code> brukes enten til <em>assignment</em> hvis du ikke bruker <code>&lt;-</code>, eller i argumenter. Eksempel:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>trondelag <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(kommune <span class="sc">==</span> <span class="st">"Trondheim"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>befolkning <span class="sc">%&gt;%</span> </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">er_tronder =</span> <span class="fu">if_else</span>(<span class="st">"skinnvest"</span> <span class="sc">==</span> <span class="cn">TRUE</span> <span class="sc">&amp;</span> <span class="st">"bart"</span> <span class="sc">==</span> <span class="cn">TRUE</span>, </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"tronder"</span>, </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"ikke_tronder"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="tegnkode" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="tegnkode"><span class="header-section-number">12.8</span> Tegnkode</h2>
+<p>Tegnkoding er dessverre noe besværlig. Det er flere ting som kan skje her:</p>
+<ul>
+<li>Fila vi laster inn har en spesifikk tegnkode og vi må definere denne når vi laster inn</li>
+<li>R eller Rstudio sin standardtegnkode er ikke den vi vil ha.</li>
+<li>R eller Rstudio skifte uforvarende tegnkode uten at vi veit hvorfor.</li>
+</ul>
+<p>Jeg tror noe av dette skyldes bugs i R og Rstudio, for endringsloggen har nevnt at de har fiksa problemer knytta til <em>character encoding</em>.</p>
+<p>Se <a href="import-export.html#sec-tegnkoding"><span>Section&nbsp;5.1.4</span></a> for mer om dette.</p>
+<p>Ellers er min erfaring at det ofte hjelper å restarte R-sesjonen dersom filene du laster inn plutselig mangler æ, ø og å når de tidligere hadde dem. I arbeidet med SSBs API opplevde jeg at filer som tidligere blei lasta inn med norske bokstaver rett som det var dukka opp med andre tegn istedenfor. Her fant jeg aldri ut hva som forårsaka det, men det funka alltid å restarte R-sesjonen. Kanskje var det noen pakker som når de blei lasta inn overskreiv noe annet. Dette gir oss en R-aforisme:</p>
+<blockquote class="blockquote">
+<p>Det er bedre å fikse et problem enn å forstå problemet.</p>
+</blockquote>
+</section>
+<section id="jeg-har-prøvd-alt-men-ingenting-løser-problemet-mitt" class="level2" data-number="12.9">
+<h2 data-number="12.9" class="anchored" data-anchor-id="jeg-har-prøvd-alt-men-ingenting-løser-problemet-mitt"><span class="header-section-number">12.9</span> Jeg har prøvd alt, men ingenting løser problemet mitt</h2>
+<p>Her er en generell sti du kan gå ned når du skal løse et problem i R:</p>
+<ol type="1">
+<li>Restart R-sesjonen</li>
+<li>Restart Rstudio</li>
+<li>Restart datamaskina</li>
+<li>Oppdater R (valgfri, noen gang skummelt)</li>
+<li>Oppdater Rstudio</li>
+<li>Spør en kollega</li>
+<li>Spør på StackOverflow eller CrossValidated (husk å gi det et reproduserbart eksempel!)</li>
+</ol>
 
 
 </section>
