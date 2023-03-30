@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R for Byplankontoret - 4&nbsp; Det grunnleggende</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./import-export.html" rel="next">
+<link href="./pakker.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Det grunnleggende</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R for Byplankontoret</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Forord</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduksjon</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./omR.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Om R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pakker.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pakker</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./grunnleggende.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Det grunnleggende</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./import-export.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Import og eksport av data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./inspisere.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inspisere data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pivot.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Omstrukturering av data (pivot)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./filter.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Velge rader</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./transformasjoner.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Tranformasjoner</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./joins.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Sammenslåing av data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arbeidsprosess.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Arbeidsprosess</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./feil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">Referanser</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./praktisk-eksempel.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Et praktisk eksempel</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-rstudio" id="toc-sec-rstudio" class="nav-link active" data-scroll-target="#sec-rstudio"><span class="toc-section-number">4.1</span>  Rstudio</a>
+  <ul class="collapse">
+  <li><a href="#rute-1-kilde-source" id="toc-rute-1-kilde-source" class="nav-link" data-scroll-target="#rute-1-kilde-source"><span class="toc-section-number">4.1.1</span>  Rute 1: Kilde (<em>source</em>)</a></li>
+  <li><a href="#rute-2-konsollen-console" id="toc-rute-2-konsollen-console" class="nav-link" data-scroll-target="#rute-2-konsollen-console"><span class="toc-section-number">4.1.2</span>  Rute 2: Konsollen (<em>console</em>)</a></li>
+  <li><a href="#rute-3-miljøet-environment-med-mer" id="toc-rute-3-miljøet-environment-med-mer" class="nav-link" data-scroll-target="#rute-3-miljøet-environment-med-mer"><span class="toc-section-number">4.1.3</span>  Rute 3: Miljøet (<em>environment</em>) med mer</a></li>
+  <li><a href="#rute-4-filer-plott-visning-hjelp-med-mer" id="toc-rute-4-filer-plott-visning-hjelp-med-mer" class="nav-link" data-scroll-target="#rute-4-filer-plott-visning-hjelp-med-mer"><span class="toc-section-number">4.1.4</span>  Rute 4: Filer, plott, visning, hjelp med mer</a></li>
+  </ul></li>
+  <li><a href="#filer-vi-bruker-i-r" id="toc-filer-vi-bruker-i-r" class="nav-link" data-scroll-target="#filer-vi-bruker-i-r"><span class="toc-section-number">4.2</span>  Filer vi bruker i R</a>
+  <ul class="collapse">
+  <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r"><span class="toc-section-number">4.2.1</span>  .R</a></li>
+  <li><a href="#rmd" id="toc-rmd" class="nav-link" data-scroll-target="#rmd"><span class="toc-section-number">4.2.2</span>  .rmd</a></li>
+  <li><a href="#qmd" id="toc-qmd" class="nav-link" data-scroll-target="#qmd"><span class="toc-section-number">4.2.3</span>  .qmd</a></li>
+  </ul></li>
+  <li><a href="#vektor" id="toc-vektor" class="nav-link" data-scroll-target="#vektor"><span class="toc-section-number">4.3</span>  Vektor</a>
+  <ul class="collapse">
+  <li><a href="#datoer" id="toc-datoer" class="nav-link" data-scroll-target="#datoer"><span class="toc-section-number">4.3.1</span>  Datoer</a></li>
+  <li><a href="#logiske-verdier" id="toc-logiske-verdier" class="nav-link" data-scroll-target="#logiske-verdier"><span class="toc-section-number">4.3.2</span>  Logiske verdier</a></li>
+  <li><a href="#missing-na" id="toc-missing-na" class="nav-link" data-scroll-target="#missing-na"><span class="toc-section-number">4.3.3</span>  Missing (NA)</a></li>
+  <li><a href="#faktor" id="toc-faktor" class="nav-link" data-scroll-target="#faktor"><span class="toc-section-number">4.3.4</span>  Faktor</a></li>
+  </ul></li>
+  <li><a href="#liste" id="toc-liste" class="nav-link" data-scroll-target="#liste"><span class="toc-section-number">4.4</span>  Liste</a></li>
+  <li><a href="#data-frame" id="toc-data-frame" class="nav-link" data-scroll-target="#data-frame"><span class="toc-section-number">5</span>  Data frame</a>
+  <ul class="collapse">
+  <li><a href="#tibble" id="toc-tibble" class="nav-link" data-scroll-target="#tibble"><span class="toc-section-number">5.0.1</span>  Tibble</a></li>
+  <li><a href="#tilbake-til-elementer" id="toc-tilbake-til-elementer" class="nav-link" data-scroll-target="#tilbake-til-elementer"><span class="toc-section-number">5.1</span>  Tilbake til elementer</a></li>
+  <li><a href="#digresjoner" id="toc-digresjoner" class="nav-link" data-scroll-target="#digresjoner"><span class="toc-section-number">5.2</span>  Digresjoner</a>
+  <ul class="collapse">
+  <li><a href="#sec-navngitt-vektor" id="toc-sec-navngitt-vektor" class="nav-link" data-scroll-target="#sec-navngitt-vektor"><span class="toc-section-number">5.2.1</span>  Navngitte lister/vektorer</a></li>
+  <li><a href="#assignment-og--" id="toc-assignment-og--" class="nav-link" data-scroll-target="#assignment-og--"><span class="toc-section-number">5.2.2</span>  Assignment (<code>=</code> og <code>&lt;-</code>)</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="grunnleggende" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Det grunnleggende</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Vi starter gradvis på bunnen og arbeider oss kjapt opp til den avanserte arbeidsflyten vi er vant med. Det vil si at vi starter med enkle lister og datasett. Så forlater vi dette og jobber kun med datasett.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Laster inn tidyverse, som vi alltid bruker</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
+✔ ggplot2 3.3.6      ✔ purrr   0.3.5 
+✔ tibble  3.1.8      ✔ dplyr   1.0.10
+✔ tidyr   1.2.1      ✔ stringr 1.4.1 
+✔ readr   2.1.3      ✔ forcats 0.5.2 
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()</code></pre>
+</div>
+</div>
+<section id="sec-rstudio" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="sec-rstudio"><span class="header-section-number">4.1</span> Rstudio</h2>
+<p>Men først av alt bør vi ta en titt på Rstudio. Dette er som nevnt det grafiske brukergrensesnittet som vi arbeider i når vi jobber med R. Et typisk Rstudio-vindu kan se slik ut:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/rstudio_annotated.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Rstudio in action, med tema <em>Tomorrow Night 80s</em></figcaption><p></p>
+</figure>
+</div>
+<p>Hvis du har kjedeligere farger er det nok fordi du ikke har oppdaga de flotte temaene som du kan velge mellom i Rstudio. Kikk på <em>Tools/Global options/Appearance</em> og endre <em>Editor theme</em> til noe som faller deg i smak. Min favoritt for tida er <em>Tomorrow Night 80s</em>. Grensesnittet består av fire ruter (<em>panes</em>), som hver kan ha flere faner (<em>tabs</em>).</p>
+<p>Når du først er i innstillinger: Skru av <em>Restore .RData into workspace on startup</em> og velg <em>never</em> på <em>Save workspace to .RData on exit</em>. Dette er innstillinger som gjør det litt raskere for deg å komme inn i et prosjekt, men som vil gi deg en falsk trygghet, og som inviterer til noen av de feilene om jeg omtaler i <a href="feil.html"><span>Chapter&nbsp;12</span></a>. Derfor skrur vi dem av.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/settings.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption class="figure-caption">Slik skal det se ut</figcaption><p></p>
+</figure>
+</div>
+<section id="rute-1-kilde-source" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="rute-1-kilde-source"><span class="header-section-number">4.1.1</span> Rute 1: Kilde (<em>source</em>)</h3>
+<p>I denne ruta havner alle skriptene våre. Vi skriver alle kommandoene våre i skript som vi deretter kjører. Dette er likt hvordan syntaks/skript kan brukes i Stata og SPSS. Disse skripta blir en oppskrift for oss seinere som forteller oss hva som blei gjort. Du kan kjøre ei og ei linje ved å trykke <code>ctrl + enter</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, eller du kan markere det du vil kjøre og trykke det samme. Du kan kjøre hele skriptet ved å trykke <code>ctrl + alt + enter</code>. Skript lar deg enkelt dele arbeidet ditt med andre. Du bør være flink på å <em>dokumentere</em> det du gjør ved å bruke kommentarer. Dette er linjer som starter med <code>#</code>. Disse linjene vil ignoreres av R når du kjører skriptet.</p>
+<p>Du kan se at jeg har skrevet noe kode i skriptet mitt. Jeg lager en vektor som heter <em>noen_tall</em> og et datasett som heter <em>et_datasett</em>.</p>
+</section>
+<section id="rute-2-konsollen-console" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="rute-2-konsollen-console"><span class="header-section-number">4.1.2</span> Rute 2: Konsollen (<em>console</em>)</h3>
+<p>Man kan også skrive kommandoer rett til konsollen. Da blir de kjørt med en gang man trykker <code>enter</code>. De kodene du skriver til konsollen vil ikke bli lagra noe sted, så hvis du jobber mye her vil du ikke dokumentere arbeidet ditt. Så ikke gjør det til en vane å bruke konsollen mye. Den er nyttig hvis du veit at du ikke trenger å ta vare på akkurat det du gjør nå. F.eks. hvis du skal regne ut noe fort, eller printe et objekt for å inspisere det.</p>
+<p>Når du kjører skript vil koden skrives ut til konsollen. Du kan se at jeg har kjørt kodene i skriptet fordi de er blitt skrevet til konsollen.</p>
+</section>
+<section id="rute-3-miljøet-environment-med-mer" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="rute-3-miljøet-environment-med-mer"><span class="header-section-number">4.1.3</span> Rute 3: Miljøet (<em>environment</em>) med mer</h3>
+<p>De to siste rutene kan inneholde diverse faner, avhengig av hva du krysser av for i <em>Pane layout</em> i <em>global options</em>. Vanligvis viser det oss miljøet vårt. Her finner du en oversikt over alle objektene du har laga hittil i <strong>sesjonen</strong> (<em>session</em>) din. En sesjon starter når du starter R (som starter når du starter Rstudio). Den varer til du skrur av R eller restarter den manuelt. Du restarter den manuelt ved å gå til <em>Session/Restart R</em> eller trykke <code>ctrl + shift + F10</code>.</p>
+<p>Du kan se at det ligger en vektor, et datasett og en funksjon (<em>stilim()</em>) i mijøet mitt. De to første er det jeg lagde i skriptet. Da koden blei kjørt lagde de to <strong>objekter</strong> (et datasett og en vektor), og alle objekter legges i miljøet. Funksjonen ligger der fordi den er definert i min <em>.Rprofile</em>. Dette går jeg ikke inn på her, for det er et mer avansert tema. Det holder å si at denne funksjonen blir lasta inn i miljøet mitt hver gang jeg starter en R-sesjon.</p>
+<p>Det er andre faner i denne ruta som kan være nyttig, men vi trenger ikke bry oss om dem nå. Kort fortalt viser <em>History</em> oss hvilke koder vi nettopp har kjørt, og Git kan brukes hvis vi bruker Git som et <em>version control system.</em></p>
+</section>
+<section id="rute-4-filer-plott-visning-hjelp-med-mer" class="level3" data-number="4.1.4">
+<h3 data-number="4.1.4" class="anchored" data-anchor-id="rute-4-filer-plott-visning-hjelp-med-mer"><span class="header-section-number">4.1.4</span> Rute 4: Filer, plott, visning, hjelp med mer</h3>
+<p>Her ligger det flere faner som er interessant for oss.</p>
+<section id="files" class="level4" data-number="4.1.4.1">
+<h4 data-number="4.1.4.1" class="anchored" data-anchor-id="files"><span class="header-section-number">4.1.4.1</span> Files</h4>
+<p>Vanligvis ser vi filene i den mappa vi befinner oss her, hvis fana <em>Files</em> er valgt. Her ligger alle filene jeg har i min mappe for øyeblikket. Det er noe rotete. Herfra kan du enkelt åpne andre skript.</p>
+</section>
+<section id="plots" class="level4" data-number="4.1.4.2">
+<h4 data-number="4.1.4.2" class="anchored" data-anchor-id="plots"><span class="header-section-number">4.1.4.2</span> Plots</h4>
+<p>Hvis du lager en figur eller graf vil plottet kunne vises her.</p>
+</section>
+<section id="help" class="level4" data-number="4.1.4.3">
+<h4 data-number="4.1.4.3" class="anchored" data-anchor-id="help"><span class="header-section-number">4.1.4.3</span> Help</h4>
+<p>Lær å like <em>Help</em>. Her kan du søke opp funksjoner for å få hjelp til å bruke dem. Du kan enten bruke søkefeltet i høyre hjørne av fana, eller kjøre denne koden <code>?funksjonsnavn</code>. F.eks.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>?mutate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Da vil hjelpevinduet dukke opp.</p>
+</section>
+<section id="viewer" class="level4" data-number="4.1.4.4">
+<h4 data-number="4.1.4.4" class="anchored" data-anchor-id="viewer"><span class="header-section-number">4.1.4.4</span> Viewer</h4>
+<p><em>Viewer</em> lar oss forhåndsvise f.eks. html-sider, Shiny-apps og andre dokumenter vi produserer.</p>
+</section>
+</section>
+</section>
+<section id="filer-vi-bruker-i-r" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="filer-vi-bruker-i-r"><span class="header-section-number">4.2</span> Filer vi bruker i R</h2>
+<section id="r" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="r"><span class="header-section-number">4.2.1</span> .R</h3>
+<p>Den viktigste filtypen å vite om er R-skript. Disse filene ender i .R. Når du arbeider, arbeider du hovedsaklig i .R. Du skriver koder, og kan kjøre hele eller deler av skriptet. Du kan legge inn kommentarer ved bruk av <code>#</code>. Hold skripta dine ryddig og du vil takke deg sjøl seinere.</p>
+</section>
+<section id="rmd" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="rmd"><span class="header-section-number">4.2.2</span> .rmd</h3>
+<p>Noen ganger vil du skrive mye, og legge inn koder her og der. F.eks. hvis du vil lage en lærebok, unnskyld, en lærepamflett, i R. Siden du skal skrive så mye er det strevsomt å skulle legge inn kommentarer overalt. Da bruker vi istedenfor et Rmarkdown-dokument. Disse har forkortelsen .Rmd. Rmarkdown er en avvart av vanlig markdown-dokumenter. Markdown er en genial oppfinnelse, som lar deg skrive enkle dokumenter med enkle formateringer kjapt. Her er en grei <a href="https://www.markdownguide.org/getting-started/">intro til markdown</a>. Rmarkdown baserer seg på de samme prinsippene, men har noe utvida funksjonalitet til å fungere med R og Rstudio. Når du vil kjøre kode lager du en <em>kodeblokk</em>, og skriver koden inn der. Dette lar deg kombinere tekst, kode, figurer og tabeller på en kraftig måte. Du slipper den evige dansen mellom et statistikkprogram, klipp og lim, og Word. Alt skrives samtidig, og du <em>strikker</em> sammen dokumentet med pakka <em>knitr</em>. Outputen blir enten en <em>.html</em>-fil som kan leses i nettleseren eller en <em>.pdf</em>-fil.</p>
+</section>
+<section id="qmd" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="qmd"><span class="header-section-number">4.2.3</span> .qmd</h3>
+<p>Selskapet <em>formerly known as Rstudio</em>, Posit gjorde nylig en rebranding fra å fokusere på hovedsaklig R til å fokusere på flere programmeringsspråk. I den anledning lagde de en “ny versjon” av Rmarkdown som var mer kompatibel med disse språka. Resultatet blei en “oppdatert” versjon av rmarkdown som heter quarto. Alt jeg har sagt om Rmarkdown gjelder for quarto også. Ærlig talt er det ikke så lett å få tak i hva som er annerledes med de to. I arbeidet med denne pamfletten begynte jeg å bruke quarto istedenfor rmarkdown. Her er en <a href="https://quarto.org/docs/get-started/hello/rstudio.html">intro til quarto</a>.</p>
+<p><img src="img/quarto.png" class="img-fluid" alt="Et vindu som viser hvordan det ser ut når du skriver (venstre) og printer de tut (høyre). Bilde fra Posit.">{width = 70%} ### .Rporj</p>
+<p>Dette er et R-prosjekt. Du bør organisere arbeidet ditt i prosjekter. Vi prater mer om dette i <span class="citation" data-cites="arbeidsprosess">(<a href="#ref-arbeidsprosess" role="doc-biblioref"><strong>arbeidsprosess?</strong></a>)</span>.</p>
+</section>
+</section>
+<section id="vektor" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="vektor"><span class="header-section-number">4.3</span> Vektor</h2>
+<p>Det grunnleggende elementet i R er en <strong>vektor</strong>. En vektor kan forstås som en liste av elementer med samme type. Vi kan ha vektorer av tall, bokstaver, faktorer. De tre siste er eksempler på klasser. Det er noen forskjellige klasser, men vi bryr oss mest om disse tre.</p>
+<p>La oss lage en vektor</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3</code></pre>
+</div>
+</div>
+<p>Funksjonen <code>c()</code> kombinerer verdier til en vektor.</p>
+<p>Når vi skriver en kommando vil R alltid returnere noe til oss. Det blir vanligvis printa til skjermen. Hvis vi heller vi lagre det som et objekt som vi kan henvise til seinere, bruker vi <code>assignment</code> for å <strong>gi</strong> verdien(e) til et objekt vi navngir.</p>
+<p>Slik:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>vektor1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>vektor1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3</code></pre>
+</div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Når man gir en verdi bruker man en av to operatorer: enten <code>&lt;-</code> eller <code>=</code>. Det er generelt ansett at man bør bruke pila istedenfor likhetstegn. Årsakene er</p>
+<ol type="1">
+<li><code>=</code> (<em>assignment</em>) er lett å forveksle med <code>==</code> (<em>comparison</em>). Det er enklere å unngå dette med pila</li>
+<li>pila er anvendelig. Du kan faktisk skrive den motsatt vei, slik: <code>c(1, 2, 3) -&gt; vektor1</code>. Når det er sagt, lov meg at du aldri gjør dette med mindre du har en utrolig god grunn. Enkelte konvensjoner er smart å beholde.</li>
+</ol>
+<p>Derfor bruker jeg alltid <code>&lt;-</code>, og anbefaler deg det også.</p>
+</div>
+</div>
+<p>Tall kan man, som vi ser, bare skrive rett ut. Bokstaver, derimot, må deklareres som en <strong>streng</strong>. Dette gjøres ved å omkranse dem i hermetegn:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>vektor2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>vektor2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "A" "B" "C"</code></pre>
+</div>
+</div>
+<p>En vektor som består av bokstaver eller ord kalles en <em>character vector</em> eller en <em>string</em>.</p>
+<p>Vi kommer oss langt med numeriske vektorer og strengvektorer. Her er det verdt å merke at det er forskjellige varianter av numeriske vektorer: De kan være <code>Int</code>, <code>double</code>, eller <code>float</code>. Forskjellen er sjelden viktig for oss, så jeg går ikke inn på det.</p>
+<p>Mer inngående info om vektorer og klasser <a href="https://r02pro.github.io/vector.html">kan finnes her</a>.</p>
+<p>En vektor kan bestå av alt fra ett til mange elementer. <strong>Men den kan bare bestå av elementer av samme klasse</strong></p>
+<p>La oss se kjapt på andre typer dataverdier vi kan arbeide med.</p>
+<section id="datoer" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="datoer"><span class="header-section-number">4.3.1</span> Datoer</h3>
+<p>Datoer er spesielle verdier i R. Dette lar oss gjøre spesielle ting som å regne ut tidsdifferansen mellom to datoer i dager, måneder eller år, og mange andre nyttige ting. Pakka <code>lubridate</code> inneholder mange nyttige funksjoner som utvider de som ligger i <code>base R</code>. Er <code>lubridate</code> en del av <code>tidyverse</code>? Så klart.</p>
+</section>
+<section id="logiske-verdier" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="logiske-verdier"><span class="header-section-number">4.3.2</span> Logiske verdier</h3>
+<p>Det er også verdt å være oppmerksom på logiske vektorer. Elementer i disse vektorene kan kun være <em>enten</em> <code>TRUE</code> (sann) eller <code>FALSE</code> (usann). De brukes mye i filtrering og testing.</p>
+</section>
+<section id="missing-na" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="missing-na"><span class="header-section-number">4.3.3</span> Missing (NA)</h3>
+<p>Det siste typen element vi må huske på er missing. Alle dataprogrammer har ulik måte å lagre såkalte <em>missing data</em> på. I R vises de som <code>NA</code>. Det er masse vi kunne sagt om <code>NA</code>, mer enn jeg rekker her. Jeg nevner kjapt: En del funksjoner, spesielt i <code>base R</code> liker ikke missing. Blant annet <code>sum()</code>. Den vil gi <code>NA</code> som svar dersom det er missing tilstede i datasettet, hvilket aldri er det vi forventer oss. Disse funksjonene har alltid mulighet til å <em>ignorere</em> missing ved å sette et spesielt argument. F.eks. <code>na.rm = TRUE</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># En tilfeldig vektor med missing</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>foo <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NA</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Forventer 6, får NA.</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(foo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Slik ber vi sum ignorere missing.</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(foo, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+</div>
+<p>Når vi importerer filer fra andre programmer hender det vi får med oss deres definisjon av missing. F.eks. er missing noen ganger koda som <code>-999</code> i SPSS-filer. Her kan det skje feil slik at disse verdiene blir til <code>999</code> i R. Det skjer sjelden, men det er verdt å være oppmerksom på muligheten for at det skjer.</p>
+</section>
+<section id="faktor" class="level3" data-number="4.3.4">
+<h3 data-number="4.3.4" class="anchored" data-anchor-id="faktor"><span class="header-section-number">4.3.4</span> Faktor</h3>
+<p>Faktorer (<em>factors</em>) må også nevnes. Disse er nyttige for grupperinger, og noen funksjoner kan merke seg hvilke variabler som er faktorer og utføre heuristikker basert på det. Sjøl syns jeg faktorer er knotete å forholde seg til, så jeg foretrekker å bare bruke strengvektorer.</p>
+</section>
+</section>
+<section id="liste" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="liste"><span class="header-section-number">4.4</span> Liste</h2>
+<p>En liste er som en vektor på steroider. Den kan består av elementer av <em>ulik klasse</em>. I tillegg kan en liste bestå av <em>andre lister</em>. Det gjør dem kraftig, og anvendbar.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># En liste bestående av fem tall. Dette kunne like gjerne vært en vektor</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>liste1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>liste1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] 1
+
+[[2]]
+[1] 2
+
+[[3]]
+[1] 3
+
+[[4]]
+[1] 4
+
+[[5]]
+[1] 5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Denne lista har elementer av ulik klasse.</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>liste1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span>, <span class="st">"B"</span>, <span class="dv">3</span>, <span class="st">"D"</span>, <span class="dv">5</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>liste1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] 1
+
+[[2]]
+[1] "B"
+
+[[3]]
+[1] 3
+
+[[4]]
+[1] "D"
+
+[[5]]
+[1] 5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># En liste bestående av flere vektorer og lister. </span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>liste2 <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">vektorA =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">vektorB =</span> <span class="fu">c</span>(<span class="st">"ET"</span>, <span class="st">"IJ"</span>, <span class="st">"SW"</span>), </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">liste1 =</span> <span class="fu">list</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>liste2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$vektorA
+[1] 1 2 3 4
+
+$vektorB
+[1] "ET" "IJ" "SW"
+
+$liste1
+$liste1[[1]]
+[1] 3
+
+$liste1[[2]]
+[1] 4
+
+$liste1[[3]]
+[1] 5</code></pre>
+</div>
+</div>
+<p>Vi får direkte tilgang på elementene av objekter ved å bruke firkantklammer (<code>[]</code>, a.k.a. hakeparentes, <em>square brackets</em>, <em>box brackets</em>). Da bruker vi <em>indeksen</em> til elementet for å henvise til det. Indeksen er rekkefølga til elementet. R er 1-indeksert. Det vil si at indeksen starter på 1. Andre programmeringsspråk, slik som Python, starter på 0. Seinere skal vi se at det går an å henvise til elementer ut fra <em>navna</em> deres, men det tar vi når vi kommer til det.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hva er det første elementet i vektor1?</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>vektor1[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hva er det andre elementet i liste2?</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>liste2[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$vektorB
+[1] "ET" "IJ" "SW"</code></pre>
+</div>
+</div>
+<p>Spesielt når vi holder på med lister er det verdt å vite om dobbel firkantklammer (<code>[[]]</code>). Vanlige firkantklammer gir deg <em>ei liste med element(ene) på denne indeksen</em>. Doble firkantklammer gir deg <em>sjølve element(ene) på denne indeksen</em>. Du kan se forskjellen her:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sjølve det som blir returnert.</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>liste2[<span class="dv">2</span>] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$vektorB
+[1] "ET" "IJ" "SW"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>liste2[[<span class="dv">2</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "ET" "IJ" "SW"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Det blir tydeligere om vi undersøker klassen til objektene som blir returnert</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>liste2[<span class="dv">2</span>] <span class="sc">%&gt;%</span> <span class="fu">class</span>() <span class="co"># liste</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "list"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>liste2[[<span class="dv">2</span>]] <span class="sc">%&gt;%</span> <span class="fu">class</span>() <span class="co"># character (alstå en tekstvektor)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+<p>Vi bruker ikke så ofte lister direkte, men de er viktige av årsaker som straks blir klart. Det siste jeg vil påpeke om lister er at de er rekursive, det vil si at du kan ha ei liste som et element av ei liste. Dermed følger det at vi kan ha ei liste som er et element av ei liste som er et element av ei liste som …</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/spiral-robin-schreiner-d8OiIdAdKNA-unsplash.jpg" class="img-fluid figure-img" style="width:40.0%"></p>
+<p></p><figcaption class="figure-caption">Og så videre</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="data-frame" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Data frame</h1>
+<p>Vi arbeider mest med datasett, og disse har en egen klasse i R, nemlig <em>data frame</em>. Jeg kommer ikke på noen god norsk oversettelse av <em>data frame</em>, så jeg bruker det engelske ordet. Dette fordi jeg på engelsk ville skilt mellom <em>datasets</em>, altså et datasett som kunne finnes i ulike dataformater (<code>.sav</code>, <code>.csv</code>, <code>.xlsx</code>) og <em>data frames</em>, altså en datastruktur i R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># En enkel data frame.</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>dat1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">personer =</span> <span class="fu">c</span>(<span class="st">"Luke"</span>, <span class="st">"Han"</span>, <span class="st">"Darth"</span>),</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">moral =</span> <span class="fu">c</span>(<span class="st">"Bra"</span>, <span class="st">"Nja"</span>, <span class="st">"Dårlig"</span>)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>dat1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  personer  moral
+1     Luke    Bra
+2      Han    Nja
+3    Darth Dårlig</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vi kan lage et data frame via vektorer som er predefinerte,</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># så lenge begge har lik lengde.</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>dat2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">colA =</span> vektor1,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">colB =</span> vektor2</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>dat2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  colA colB
+1    1    A
+2    2    B
+3    3    C</code></pre>
+</div>
+</div>
+<p>Det interessante med data frames er at de faktisk bare er <strong>lister</strong>. Det vil si at mye av det vi veit om lister kan brukes på data frames. Et data frame er strengt tatt bare ei liste med vektorer. Hver vektor blir en <em>kolonne</em> i data framen. Hva representerer hver <strong>rad</strong>? Det er ikke gitt, men vi kan vanligvis tenke på hver rad som en observasjon. Når vi prater om <em>tidy data</em> vil dette bli utdypa.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sjekk ut første element av dat1</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>dat1[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  personer
+1     Luke
+2      Han
+3    Darth</code></pre>
+</div>
+</div>
+<p>Det er noen begrensninger eller krav ved datasett: hver kolonne må ha lik lengde. Hvis ikke får du feilmelding.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">colA =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">colB =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in data.frame(colA = c(1, 2, 3, 4), colB = c(5, 6, 7)): arguments imply differing number of rows: 4, 3</code></pre>
+</div>
+</div>
+<p>R er snill og gir oss tydelig beskjed om hva som er galt i feilmeldinga.</p>
+<p>En ting som er fint med alle disse R-pakkene, er at de ofte inkluderer datasett som vi kan bruke for å illustrere pakkens funksjoner. Disse datasetta ligger tilgjengelig på samme måte som funksjonene: man bare skriver navnet dens for å påkalle den. La oss hente et datasett som kommer fra <code>dplyr</code> (som er en del av <code>tidyverse</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>starwars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 87 × 14
+   name        height  mass hair_…¹ skin_…² eye_c…³ birth…⁴ sex   gender homew…⁵
+   &lt;chr&gt;        &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  
+ 1 Luke Skywa…    172    77 blond   fair    blue       19   male  mascu… Tatooi…
+ 2 C-3PO          167    75 &lt;NA&gt;    gold    yellow    112   none  mascu… Tatooi…
+ 3 R2-D2           96    32 &lt;NA&gt;    white,… red        33   none  mascu… Naboo  
+ 4 Darth Vader    202   136 none    white   yellow     41.9 male  mascu… Tatooi…
+ 5 Leia Organa    150    49 brown   light   brown      19   fema… femin… Aldera…
+ 6 Owen Lars      178   120 brown,… light   blue       52   male  mascu… Tatooi…
+ 7 Beru White…    165    75 brown   light   blue       47   fema… femin… Tatooi…
+ 8 R5-D4           97    32 &lt;NA&gt;    white,… red        NA   none  mascu… Tatooi…
+ 9 Biggs Dark…    183    84 black   light   brown      24   male  mascu… Tatooi…
+10 Obi-Wan Ke…    182    77 auburn… fair    blue-g…    57   male  mascu… Stewjon
+# … with 77 more rows, 4 more variables: species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;, and abbreviated variable names
+#   ¹​hair_color, ²​skin_color, ³​eye_color, ⁴​birth_year, ⁵​homeworld</code></pre>
+</div>
+</div>
+<p>Det kan føles rart å jobbe med data som vi ikke veit hvor ligger. Så jeg kan plassere det explisitt i <strong>miljøet</strong> vårt (<em>environment</em>), ved å <em>assigne</em> det.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hvis du kjører denne koden vil du se at et objekt ved navn `starwars` dukker </span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># opp i det globale miljøet i vinduet til høyre.</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>starwars <span class="ot">&lt;-</span> starwars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>La oss bruke dette datasettet for å vise noen flere egenskaper ved R. Men vent, er dette et <em>data frame</em>?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">class</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
+</div>
+</div>
+<section id="tibble" class="level3" data-number="5.0.1">
+<h3 data-number="5.0.1" class="anchored" data-anchor-id="tibble"><span class="header-section-number">5.0.1</span> Tibble</h3>
+<p>Som vi ser av sjekken over, har starwars tre klasser, hvor én av dem er en <code>data.frame</code>. Til sammenlikning har de data framene vi lagde tidligere bare én klasse:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>dat1 <span class="sc">%&gt;%</span> <span class="fu">class</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.frame"</code></pre>
+</div>
+</div>
+<p>Så hva er en <code>tibble</code>? Kort fortalt er en tibble en forbedra versjon av et data frame. Tibbles kommer fra pakka <code>tibble</code> som, du gjetta riktig, er en del av <code>tidyverse</code>. En fordel med tibbles er at de <em>printer bedre til konsollen</em>. Spesielt store datasett (vår spesialitet) blir mer leselig i tibbles. Når vi arbeider med <code>tidyverse</code> vil mange av data framene våre bli til tibbles via funksjonene deres. Vi trenger altså sjelden tenke mye på dette. Tibbles arver også klassen <code>data.frame</code> som vi så over, så de fleste funksjoner som ikke har hørt om tibbles vil også funke på dem. Flere fordeler forklares i <a href="https://tibble.tidyverse.org/">dokumentasjonen til pakka</a>.</p>
+<p>For å oppsummere: du trenger sjelden bry deg om du jobber med tibbles eller data frames. Jeg nevner det her fordi du kanskje vil lure på hvorfor vi noen får <code>tibble</code>-objekter.</p>
+</section>
+<section id="tilbake-til-elementer" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="tilbake-til-elementer"><span class="header-section-number">5.1</span> Tilbake til elementer</h2>
+<p>Nå som vi har tilgang til et større datasett kan vi utforske litt mer hvordan vi arbeider med, nettopp, større datasett. Datasettet <code>starwars</code> inneholder informasjon om dokumentarserien <em>Star Wars</em>, som omhandla livet i gamle dager, i en galakse langt, langt vekk.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>starwars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 87 × 14
+   name        height  mass hair_…¹ skin_…² eye_c…³ birth…⁴ sex   gender homew…⁵
+   &lt;chr&gt;        &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  
+ 1 Luke Skywa…    172    77 blond   fair    blue       19   male  mascu… Tatooi…
+ 2 C-3PO          167    75 &lt;NA&gt;    gold    yellow    112   none  mascu… Tatooi…
+ 3 R2-D2           96    32 &lt;NA&gt;    white,… red        33   none  mascu… Naboo  
+ 4 Darth Vader    202   136 none    white   yellow     41.9 male  mascu… Tatooi…
+ 5 Leia Organa    150    49 brown   light   brown      19   fema… femin… Aldera…
+ 6 Owen Lars      178   120 brown,… light   blue       52   male  mascu… Tatooi…
+ 7 Beru White…    165    75 brown   light   blue       47   fema… femin… Tatooi…
+ 8 R5-D4           97    32 &lt;NA&gt;    white,… red        NA   none  mascu… Tatooi…
+ 9 Biggs Dark…    183    84 black   light   brown      24   male  mascu… Tatooi…
+10 Obi-Wan Ke…    182    77 auburn… fair    blue-g…    57   male  mascu… Stewjon
+# … with 77 more rows, 4 more variables: species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;, and abbreviated variable names
+#   ¹​hair_color, ²​skin_color, ³​eye_color, ⁴​birth_year, ⁵​homeworld</code></pre>
+</div>
+</div>
+<p>På tide å utforske. Vi kan henvise til spesifikke celler via x- og y-koordinater.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vi kan finne en nøyaktig celle ved å henvise til x- og y-koordinatene</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>starwars[<span class="dv">2</span>, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  name 
+  &lt;chr&gt;
+1 C-3PO</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>starwars[<span class="dv">5</span>, <span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  hair_color
+  &lt;chr&gt;     
+1 brown     </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vi kan få tak i en serie med elementer via `:`</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>starwars[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 87 × 3
+   name               height  mass
+   &lt;chr&gt;               &lt;int&gt; &lt;dbl&gt;
+ 1 Luke Skywalker        172    77
+ 2 C-3PO                 167    75
+ 3 R2-D2                  96    32
+ 4 Darth Vader           202   136
+ 5 Leia Organa           150    49
+ 6 Owen Lars             178   120
+ 7 Beru Whitesun lars    165    75
+ 8 R5-D4                  97    32
+ 9 Biggs Darklighter     183    84
+10 Obi-Wan Kenobi        182    77
+# … with 77 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vi kan gjøre et utvalg av celler ved å definere både x og y som en serie</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>starwars[<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">6</span><span class="sc">:</span><span class="dv">9</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 4
+  eye_color birth_year sex    gender   
+  &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    
+1 yellow         112   none   masculine
+2 red             33   none   masculine
+3 yellow          41.9 male   masculine
+4 brown           19   female feminine </code></pre>
+</div>
+</div>
+<p>Det er upraktisk å skulle huske indekser til alt. Heldigvis kan vi henvise til kolonner dersom de er navngitt, slik som her:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>starwars[<span class="st">"eye_color"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 87 × 1
+   eye_color
+   &lt;chr&gt;    
+ 1 blue     
+ 2 yellow   
+ 3 red      
+ 4 yellow   
+ 5 brown    
+ 6 blue     
+ 7 blue     
+ 8 red      
+ 9 brown    
+10 blue-gray
+# … with 77 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># En nyttig funksjon for å finne navna til alle kolonnene (variablene) er:</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(starwars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "name"       "height"     "mass"       "hair_color" "skin_color"
+ [6] "eye_color"  "birth_year" "sex"        "gender"     "homeworld" 
+[11] "species"    "films"      "vehicles"   "starships" </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>starwars[<span class="st">"species"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 87 × 1
+   species
+   &lt;chr&gt;  
+ 1 Human  
+ 2 Droid  
+ 3 Droid  
+ 4 Human  
+ 5 Human  
+ 6 Human  
+ 7 Human  
+ 8 Droid  
+ 9 Human  
+10 Human  
+# … with 77 more rows</code></pre>
+</div>
+</div>
+<p>Et alterntiv til klammeparantesen er å bruke operatoren `$´.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Her trenger man ikke hermetegn, med mindre kolonna har mellomrom.</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>starwars<span class="sc">$</span>name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Luke Skywalker"        "C-3PO"                 "R2-D2"                
+ [4] "Darth Vader"           "Leia Organa"           "Owen Lars"            
+ [7] "Beru Whitesun lars"    "R5-D4"                 "Biggs Darklighter"    
+[10] "Obi-Wan Kenobi"        "Anakin Skywalker"      "Wilhuff Tarkin"       
+[13] "Chewbacca"             "Han Solo"              "Greedo"               
+[16] "Jabba Desilijic Tiure" "Wedge Antilles"        "Jek Tono Porkins"     
+[19] "Yoda"                  "Palpatine"             "Boba Fett"            
+[22] "IG-88"                 "Bossk"                 "Lando Calrissian"     
+[25] "Lobot"                 "Ackbar"                "Mon Mothma"           
+[28] "Arvel Crynyd"          "Wicket Systri Warrick" "Nien Nunb"            
+[31] "Qui-Gon Jinn"          "Nute Gunray"           "Finis Valorum"        
+[34] "Jar Jar Binks"         "Roos Tarpals"          "Rugor Nass"           
+[37] "Ric Olié"              "Watto"                 "Sebulba"              
+[40] "Quarsh Panaka"         "Shmi Skywalker"        "Darth Maul"           
+[43] "Bib Fortuna"           "Ayla Secura"           "Dud Bolt"             
+[46] "Gasgano"               "Ben Quadinaros"        "Mace Windu"           
+[49] "Ki-Adi-Mundi"          "Kit Fisto"             "Eeth Koth"            
+[52] "Adi Gallia"            "Saesee Tiin"           "Yarael Poof"          
+[55] "Plo Koon"              "Mas Amedda"            "Gregar Typho"         
+[58] "Cordé"                 "Cliegg Lars"           "Poggle the Lesser"    
+[61] "Luminara Unduli"       "Barriss Offee"         "Dormé"                
+[64] "Dooku"                 "Bail Prestor Organa"   "Jango Fett"           
+[67] "Zam Wesell"            "Dexter Jettster"       "Lama Su"              
+[70] "Taun We"               "Jocasta Nu"            "Ratts Tyerell"        
+[73] "R4-P17"                "Wat Tambor"            "San Hill"             
+[76] "Shaak Ti"              "Grievous"              "Tarfful"              
+[79] "Raymus Antilles"       "Sly Moore"             "Tion Medon"           
+[82] "Finn"                  "Rey"                   "Poe Dameron"          
+[85] "BB8"                   "Captain Phasma"        "Padmé Amidala"        </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>starwars<span class="sc">$</span><span class="st">"name"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Luke Skywalker"        "C-3PO"                 "R2-D2"                
+ [4] "Darth Vader"           "Leia Organa"           "Owen Lars"            
+ [7] "Beru Whitesun lars"    "R5-D4"                 "Biggs Darklighter"    
+[10] "Obi-Wan Kenobi"        "Anakin Skywalker"      "Wilhuff Tarkin"       
+[13] "Chewbacca"             "Han Solo"              "Greedo"               
+[16] "Jabba Desilijic Tiure" "Wedge Antilles"        "Jek Tono Porkins"     
+[19] "Yoda"                  "Palpatine"             "Boba Fett"            
+[22] "IG-88"                 "Bossk"                 "Lando Calrissian"     
+[25] "Lobot"                 "Ackbar"                "Mon Mothma"           
+[28] "Arvel Crynyd"          "Wicket Systri Warrick" "Nien Nunb"            
+[31] "Qui-Gon Jinn"          "Nute Gunray"           "Finis Valorum"        
+[34] "Jar Jar Binks"         "Roos Tarpals"          "Rugor Nass"           
+[37] "Ric Olié"              "Watto"                 "Sebulba"              
+[40] "Quarsh Panaka"         "Shmi Skywalker"        "Darth Maul"           
+[43] "Bib Fortuna"           "Ayla Secura"           "Dud Bolt"             
+[46] "Gasgano"               "Ben Quadinaros"        "Mace Windu"           
+[49] "Ki-Adi-Mundi"          "Kit Fisto"             "Eeth Koth"            
+[52] "Adi Gallia"            "Saesee Tiin"           "Yarael Poof"          
+[55] "Plo Koon"              "Mas Amedda"            "Gregar Typho"         
+[58] "Cordé"                 "Cliegg Lars"           "Poggle the Lesser"    
+[61] "Luminara Unduli"       "Barriss Offee"         "Dormé"                
+[64] "Dooku"                 "Bail Prestor Organa"   "Jango Fett"           
+[67] "Zam Wesell"            "Dexter Jettster"       "Lama Su"              
+[70] "Taun We"               "Jocasta Nu"            "Ratts Tyerell"        
+[73] "R4-P17"                "Wat Tambor"            "San Hill"             
+[76] "Shaak Ti"              "Grievous"              "Tarfful"              
+[79] "Raymus Antilles"       "Sly Moore"             "Tion Medon"           
+[82] "Finn"                  "Rey"                   "Poe Dameron"          
+[85] "BB8"                   "Captain Phasma"        "Padmé Amidala"        </code></pre>
+</div>
+</div>
+<p>Som du begynner å skjønne er det flere veier til Rom. Klammeparantesen og <code>$</code> har tildels overlappende funksjoner. De har likevel sine unike bruksområder. De vil vi lære å anerkjenne etter hvert som vi arbeider med dem. En nyttig ting med <code>[]</code> er at vi kan bruke det som et enkelt filter.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Velg kun de karakterene som er menneske</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>starwars[starwars<span class="sc">$</span>species <span class="sc">==</span> <span class="st">"Human"</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 39 × 14
+   name        height  mass hair_…¹ skin_…² eye_c…³ birth…⁴ sex   gender homew…⁵
+   &lt;chr&gt;        &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  
+ 1 Luke Skywa…    172    77 blond   fair    blue       19   male  mascu… Tatooi…
+ 2 Darth Vader    202   136 none    white   yellow     41.9 male  mascu… Tatooi…
+ 3 Leia Organa    150    49 brown   light   brown      19   fema… femin… Aldera…
+ 4 Owen Lars      178   120 brown,… light   blue       52   male  mascu… Tatooi…
+ 5 Beru White…    165    75 brown   light   blue       47   fema… femin… Tatooi…
+ 6 Biggs Dark…    183    84 black   light   brown      24   male  mascu… Tatooi…
+ 7 Obi-Wan Ke…    182    77 auburn… fair    blue-g…    57   male  mascu… Stewjon
+ 8 Anakin Sky…    188    84 blond   fair    blue       41.9 male  mascu… Tatooi…
+ 9 Wilhuff Ta…    180    NA auburn… fair    blue       64   male  mascu… Eriadu 
+10 Han Solo       180    80 brown   fair    brown      29   male  mascu… Corell…
+# … with 29 more rows, 4 more variables: species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;, and abbreviated variable names
+#   ¹​hair_color, ²​skin_color, ³​eye_color, ⁴​birth_year, ⁵​homeworld</code></pre>
+</div>
+</div>
+<p>Dette er noe knotete: Du må gjengi datasettnavnet inni klamma, og du må huske på kommaet for å implisitt velge alle rader. Dessuten vil du bare få treff på nøyaktig det samme. Hvis noen har en <code>species</code> som er skrevet f.eks. <code>human</code> eller <code>human/alien</code> vil vi ikke få treff. Hvis det bare hadde fantes en smartere implementering av dette filteret …</p>
+<p>Og det gjør det! I, nettopp, <code>tidyverse</code>! <img src="img/tidyverse-logo.png" class="img-fluid" style="width:30.0%"></p>
+<p>På tampen, noen nyttige digresjoner.</p>
+</section>
+<section id="digresjoner" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="digresjoner"><span class="header-section-number">5.2</span> Digresjoner</h2>
+<section id="sec-navngitt-vektor" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="sec-navngitt-vektor"><span class="header-section-number">5.2.1</span> Navngitte lister/vektorer</h3>
+<p>Vi returnerer til lister og vektorer. Tenk på de vi lagde tidligere:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>vektor1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>liste1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] 1
+
+[[2]]
+[1] "B"
+
+[[3]]
+[1] 3
+
+[[4]]
+[1] "D"
+
+[[5]]
+[1] 5</code></pre>
+</div>
+</div>
+<p>De er enkle. Kan vi gjøre dem … mer komplisert? Så klart. Noe som ofte vil være nyttig for oss er det å bruke <strong>navngitte vektorer eller lister</strong> (<em>named vector/named list</em>). Hva er det? Det er en vektor eller liste hvor <em>hvert element har et navn</em>. La oss se noen eksempler. (Jeg viser bare for vektorer, men det samme gjelder for lister.)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>navngitt_vektor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"navn"</span> <span class="ot">=</span> <span class="st">"Arnold"</span>,</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"hilsen"</span> <span class="ot">=</span> <span class="st">"hey"</span>,</span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"venn"</span> <span class="ot">=</span> <span class="st">"Gerald"</span>)</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Nå har hvert element i vektoren et navn</span></span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>navngitt_vektor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    navn   hilsen     venn 
+"Arnold"    "hey" "Gerald" </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sammenlikn med den tidligere, navnløse vektoren. </span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>vektor2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "A" "B" "C"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vi kan også bruke funksjonen `setNames()` til å gi navn. Nyttig hvis vi har</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="co"># navna lagra i en annen vektor/liste</span></span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>navn <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Første"</span>, <span class="st">"Andre"</span>, <span class="st">"Tredje"</span>)</span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a><span class="fu">setNames</span>(vektor2, navn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Første  Andre Tredje 
+   "A"    "B"    "C" </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Men --- hvor har navna våre blitt av??</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>vektor2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "A" "B" "C"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vi må huske å bruke *assignment* for å large det vi gjør</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>vektor2 <span class="ot">&lt;-</span> <span class="fu">setNames</span>(vektor2, navn)</span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>vektor2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Første  Andre Tredje 
+   "A"    "B"    "C" </code></pre>
+</div>
+</div>
+<p>Hvorfor er det nyttig? Navngitte vektorer og lister er nyttig fordi det er mange funskjoner i spesielt <code>tidyverse</code> som nyttiggjør seg av dem. Når man for eksempel bruker <code>rename()</code> til å endre navn på variabler kan man sende en navngitt vektor for å endre mange navn på en gang. Dette gjør at vi mer programmatisk kan endre navn istedenfor å skrive hvert ledd. Når vi har mange ledd, slik som i navn på plansoner og kommunenummer, blir dette svært nyttig.</p>
+<p>Forresten, her er en ting jeg ofte brenner meg på: Når du bruker <code>setNames()</code> kommer elementnavna <em>etter</em> elementene. Når du navngir elementene mens du lager vektoren/lista, kommer elemtnnavna <em>først</em>. Du ser det i eksemplene over.</p>
+</section>
+<section id="assignment-og--" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="assignment-og--"><span class="header-section-number">5.2.2</span> Assignment (<code>=</code> og <code>&lt;-</code>)</h3>
+<p>Kanskje dere føler dere lurt av noe jeg så tidligere.</p>
+<blockquote class="blockquote">
+<p>Derfor bruker jeg alltid <code>&lt;-</code>, og anbefaler deg det også.</p>
+</blockquote>
+<p>Og litt lengre ned viser</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co"># En enkel data frame.</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>dat1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">personer =</span> <span class="fu">c</span>(<span class="st">"Luke"</span>, <span class="st">"Han"</span>, <span class="st">"Darth"</span>),</span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">moral =</span> <span class="fu">c</span>(<span class="st">"Bra"</span>, <span class="st">"Nja"</span>, <span class="st">"Dårlig"</span>)</span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a>dat1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  personer  moral
+1     Luke    Bra
+2      Han    Nja
+3    Darth Dårlig</code></pre>
+</div>
+</div>
+<p>Men her bruker jeg jo <code>=</code> som assignment. Hva skjer?</p>
+<p>Poenget her er at jeg bruker <code>=</code> inni funksjonens argumenter. <code>data.frame()</code> er en funksjon, og jeg definerer her hva som skal være kolonnene i datasettet mitt. Så bruker jeg <code>&lt;-</code> til å <em>assigne</em> det som funksjonen <code>data.frame()</code> returnerer. Forvirra? På generelt grunnlag kan vi si at vi bruker <code>=</code> inni funksjoner, og <code>&lt;-</code> utafor<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
+<p>Forresten, hvorfor prøver vi ikke bare å bruke <code>&lt;-</code> inni funksjonen og ser hva som skjer?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Funker ikke</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>dat1x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>  personer <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Luke"</span>, <span class="st">"Han"</span>, <span class="st">"Darth"</span>),</span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>  moral <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Bra"</span>, <span class="st">"Nja"</span>, <span class="st">"Dårlig"</span>)</span>
+<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-7"><a href="#cb85-7" aria-hidden="true" tabindex="-1"></a>dat1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  personer  moral
+1     Luke    Bra
+2      Han    Nja
+3    Darth Dårlig</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>dat1x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  personer....c..Luke....Han....Darth.. moral....c..Bra....Nja....Dårlig..
+1                                  Luke                                Bra
+2                                   Han                                Nja
+3                                 Darth                             Dårlig</code></pre>
+</div>
+</div>
+<p>Hvis vi sammenlikner de to datasetta ser vi at det funker … på en måte. Oppsettet blir likt, men vi mister navnet på kolonnene.</p>
+
+
+</section>
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Hvorfor skrur vi av dette? Innstillinga er på <em>by default</em> og vil lagre alt som ligger i miljøet ditt mellom hver gang du jobber i Rstudio, sjøl om du lukker programmet og skrur av maskina. Dette gjør det som nevnt lettere å starte opp igjen. Samtidig fører det til at miljøet ditt blir overfylt av gamle objekter og pakker du har lasta inn. Du kommer til å på et tidspunkt få en feil fordi du har lasta inn en gammel pakke du hadde glemt, eller fordi det ligger et objekt i miljøet du hadde glemt av. Det er god hygiene å restarte sesjonen ofte (flere ganger i løpet av et prosjekt), og denne innstillinga er med på å hindre deg i å gjøre det.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>For macOS-brukere: erstatt <code>ctrl</code> med <code>cmd</code> i disse snarveiene.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Når vi seinere definerer våre egne funksjoner vil du se at det jeg sier her ikke er helt korrekt, men det er en grei heuristikk fram til da.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./pakker.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pakker</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./import-export.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Import og eksport av data</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

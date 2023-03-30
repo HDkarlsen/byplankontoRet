@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R for Byplankontoret - 11&nbsp; Arbeidsprosess</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./feil.html" rel="next">
+<link href="./joins.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Arbeidsprosess</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R for Byplankontoret</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Forord</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduksjon</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./omR.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Om R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pakker.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pakker</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./grunnleggende.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Det grunnleggende</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./import-export.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Import og eksport av data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./inspisere.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inspisere data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pivot.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Omstrukturering av data (pivot)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./filter.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Velge rader</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./transformasjoner.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Tranformasjoner</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./joins.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Sammenslåing av data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arbeidsprosess.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Arbeidsprosess</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./feil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">Referanser</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./praktisk-eksempel.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Et praktisk eksempel</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#rproj" id="toc-rproj" class="nav-link active" data-scroll-target="#rproj"><span class="toc-section-number">11.1</span>  Rproj</a></li>
+  <li><a href="#main-filer-og-mappestruktur" id="toc-main-filer-og-mappestruktur" class="nav-link" data-scroll-target="#main-filer-og-mappestruktur"><span class="toc-section-number">11.2</span>  main-filer og mappestruktur</a></li>
+  <li><a href="#git" id="toc-git" class="nav-link" data-scroll-target="#git"><span class="toc-section-number">11.3</span>  Git</a>
+  <ul class="collapse">
+  <li><a href="#hva-må-du-vite-om-git" id="toc-hva-må-du-vite-om-git" class="nav-link" data-scroll-target="#hva-må-du-vite-om-git"><span class="toc-section-number">11.3.1</span>  Hva må du vite om Git</a></li>
+  </ul></li>
+  <li><a href="#lagringslokasjon" id="toc-lagringslokasjon" class="nav-link" data-scroll-target="#lagringslokasjon"><span class="toc-section-number">11.4</span>  Lagringslokasjon</a></li>
+  <li><a href="#functional-programming" id="toc-functional-programming" class="nav-link" data-scroll-target="#functional-programming"><span class="toc-section-number">11.5</span>  Functional programming</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="arbeidsprosess" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Arbeidsprosess</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Her er noen generelle kommentarer om hvordan prosjektene mine har vært organisert. Det vil gjøre det lettere for andre å ta over. Her er en grov oversikt over arbeidsprosessen min, etterfulgt av nøyere detaljer</p>
+<p>Hovedenheten i arbeidsprosessen er et prosjekt. Hva et prosjekt er er et spørsmål jeg syns blir vanskeligere og vanskeligere å svare på desto lengre jeg holder på med prosjekter. Kort fortalt har de et felles tema, og noen få, relaterte output. Da kan man gjenbruke koder på tvers av relaterte skript. Eksempler på prosjekter er arbeidet med barnehagekapasitet, arbeidet med flyttestatistikk, prognoseevalueringa. Dette er en abstrakte inndelinga av arbeidet mitt, og det sammenfaller med den fysiske inndelinga i mapper og Rstudio-prosjekter. Hvert prosjekt inneholder (vanligvis): et hovedskript og en del støtteskript. De ligger lagra på <em>Mine dokumenter</em> på <code>C:</code>, med oppdaterte sikkerhetskopier på <code>M:\StatTK\R\sikkerhetskopier</code>.</p>
+<section id="rproj" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="rproj"><span class="header-section-number">11.1</span> Rproj</h2>
+<p><a href="https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects">Rstudio-prosjekter</a> er en nyttig måte å organisere prosjekter i R. Hovednytten kommer i at alle filstier blir <em>relative til prosjektets rotmappe</em>. Rotmappa er der <code>.Rproj</code>-fila ligger. Hadde jeg måtte definere alle stier ut fra hvor de ligger på <em>min</em> PC ville det blitt vanskelgiere for dere å ta over. Pakka <code>here</code> er også nyttig for å gjøre stier enda mer robuste.</p>
+<p>Når vi prater om <code>.Rproj</code>, her er en instilling dere burde endre på hvis du ikke alt har gjort det: Skru av lagring av workspace mellom sesjoner. Se beskrivelse i <a href="grunnleggende.html#sec-rstudio"><span>Section&nbsp;4.1</span></a>.</p>
+<p>Hvis du lurer på om en mappe er et Rstudio-prosjekt kan se se etter en <code>.Rproj</code>-fil. Legg f.eks. merke til at i mappa <code>apps</code> inneholder tre undermapper og ingen <code>.Rproj</code>. Dette fordi hver <em>app</em> er sitt eget Rstudio-prosjekt.</p>
+</section>
+<section id="main-filer-og-mappestruktur" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="main-filer-og-mappestruktur"><span class="header-section-number">11.2</span> main-filer og mappestruktur</h2>
+<p>Generelt etterstreber jeg en mappestruktur som er omtrent slik ut:</p>
+<pre><code>.
+└── mitt_prosjekt
+    ├── R
+    │   ├── main.R
+    │   └── functions.R
+    ├── output
+    │   ├── *.xlsx
+    │   └── *.csv
+    ├── data
+    │   ├── *.xlsx
+    │   └── *.csv
+    ├── README.md
+    └── .gitignore</code></pre>
+<p>Ingen prosjekter ser akkurat slik ut, men det er et mål. Elementene i mappa:</p>
+<ul>
+<li>I mappa <code>R</code> ligger alle kodeskriptene.</li>
+<li><code>main.R</code>: dette er et lite skript som laster inn funksjoner fra andre skript, og som kun inneholder de få kodene som trengs for å lage outputen. Vanligvis putter jeg all funksjonalitet inn i funksjoner som jeg putter i ett eller flere egne skript.</li>
+<li><code>functions.R</code>: Om det kun er ett skript, heter dette vanligvis <code>functions.R</code>. Blir det mange funksjoner og uoversiktelig med alle i ett skript, deler jeg dem opp i flere skript med mer eller mindre beskrivende navn som <code>cleaning-functions.R</code>, <code>import-functions.R</code>, etc.</li>
+<li>I mappa <code>output</code> ligger alle de prosesserte filene. Ofte <code>.csv</code> eller <code>.xlsx</code> filer.</li>
+<li>I mapppa <code>data</code> ligger rådatafilene. I noen prosjekter lasta jeg ned data fra nettet og la her. Andre plasser lasta jeg ned data via API, og lagre en kopi av dem her for å ikke beslaglegge API-en unødvendig. I andre kopierte jeg filer fra <code>M:</code>-disken og la her. Hvis jeg arbeida med filer fra <code>M:</code> pleide jeg vanligvis å oppgi filstien til fila direkte i funksjonen som importerte dataene til R.</li>
+<li>Ideelt sett skulle alle prosjekter har en <code>readMe.md</code> (eller <code>lesMeg.md</code> på norsk). Denne fila (som noen gang blei printa som en pdf) forklarer hva prosjektet handler om.</li>
+<li><code>.gitignore</code>: denne fila brukes av Git (se ned), og du kan se bort fra den.</li>
+</ul>
+<p>Shiny-appene har i tillegg en fil som heter <code>app.R</code>, som har samme hovedfunksjon som <code>main.R</code>. Her defineres sjølve appen. Alle skript som ligger i <code>R</code> blir automatisk kjørt når man kjører <code>app.R</code>, i motsetning til <code>main.R</code> hvor man manuelt må kjøre alle skript via <code>source()</code>.</p>
+<p>Mange av prosjekta er en eksentrisk blanding av engelsk og norsk, som kom av at jeg vanligvis koder på engelsk og dokumenterer på norsk. I enkelte prosjekter var jeg flinkere på være konsekvent enn i andre.</p>
+<p>I noen main-filer har jeg kommentert vekk linjer som produserer data som blir lagra på disk. Dette fordi man kan komme i skade for å kjøre dem uforvarende og skrive over noe. F.eks. i appen fodte-dode har jeg gjort dette. Der ligger en funksjon som er tenkt å kjøres en gang i måneden for å hente nye dødetall via SSBs API.</p>
+</section>
+<section id="git" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="git"><span class="header-section-number">11.3</span> Git</h2>
+<p>Jeg har brukt <strong>Git</strong> på alle prosjektene. Git er et <em>version-control system</em>, og nyttig når man koder. Jeg har brukt det for å unngå det vi ser i figuren på <a href="https://peerj.com/preprints/3159v2/">side 4 av denne artikkelen</a>: mange versjoner av samme dokument med ulike navn som indikerer hvilken versjon det er snakk om. Kort fortalt sørger Git for at jeg <em>har</em> alle disse gamle versjonene av dokumentene tilgjengelig, men at de ikke <em>vises</em> og tar opp plass i mappestrukturen min. Dermed holder jeg lettere oversikt.</p>
+<p>Dere trenger ikke vite noe om Git fordi jeg har sørga for at det alltid er siste versjon som ligger klar. Jeg nevner det likevel fordi dere kan lure på hvorfor det ligger noen filer som heter <code>.git</code> og <code>.gitignore</code> i prosjektene. Disse filene brukes av git. Det kan slette dem uten at det vil ødelegge prosjektene. (Men da vil all historikken gå tapt, og det er ikke lengre mulig å se eldre versjoner av skriptene mine).</p>
+<p>Jeg brukte altså Git som en måte å holde orden i filene mine, men også til å sikkerhetskopiere til M-disken. M er som kjent en server vi kobler oss på trådløst. Her lagrer vi alt vi arbeider med (som ikke går på Google disk). Problemet med M er at det er en ekstern server. Dermed kan enkelte prosesser tar mye lengre tid når man arbeider med filer som ligger på M. Dessuten vil en del programmer frike ut dersom tilkoblinga til M blir borte i et mikrosekund, slik den plagsomt nok blir hvis skjermspareren kommer på eller hvis et atom nyser i feil retning. Min løsning blei å jobbe med alt på den lokale C-disken og kopiere over alt til M-disken på slutten av hver dag<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Dette høres tungvint ut, tenker du sikkert. Kopiere over alle filer til et prosjekt hver dag? Huff. Men det var ikke vanskeligere enn å skrive inn dette i en konsoll: <code>git push</code>.</p>
+<section id="hva-må-du-vite-om-git" class="level3" data-number="11.3.1">
+<h3 data-number="11.3.1" class="anchored" data-anchor-id="hva-må-du-vite-om-git"><span class="header-section-number">11.3.1</span> Hva må du vite om Git</h3>
+<p>Ingen ting. Det holder å vite at jeg brukte Git, og det er derfor visse filer eksisterer i prosjektene. Det er smart å la disse ligge der i fall dere en gang får lyst å bruke Git sjøl. Og for å beholde historikken min (som jeg tviler på at dere noen gang vil ha nytte av).</p>
+<p>Det som ligger i mappa <code>R/sikkerhetskopier</code> på M er essensielt det samme som ville ligget der dersom jeg hadde manuelt dratt filene over. Jeg antar at C-disken på pc-en min blir <em>mind wiped</em> snart, og da vil dette være de eneste kopiene av arbeidet mitt, så dere trenger ikke tenke på hva som er kopi av hva.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/mind-wipe.jpg" class="img-fluid figure-img" style="width:40.0%"></p>
+<p></p><figcaption class="figure-caption">Min pc, snart.</figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="lagringslokasjon" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="lagringslokasjon"><span class="header-section-number">11.4</span> Lagringslokasjon</h2>
+<p>Som jeg nevnt over arbeida jeg på den lokale C-disken, og opprettholdt sikkerhetskopier på M. For å utbrodere litt på dette: Noen ganger er det vanskelig å arbeide på filer direkte på en ekstern server. Det er ikke helt kosekvent hvordan dette utarter seg. I arbeidet med flytterater skal jeg skrive en excelfil til M-disken. Dette tar flere minutter. Å skrive den til C-disken tar ett sekund. Og å kopiere fra C til M tar sekunder. Dermed er det kjappere å skrive fila til C og så kopiere den til M. R lar oss manipulere filer direkte. Så i denne koden har jeg lagd en funksjon som kopierer det vi trenger fra M til C, og kopierer det ferdige produktet tilbake til M fra C. Vi kan gjøre dette relativt sømløst, slik at brukeren ikke trenger å tenke på hvor filer er lagra. Så lenge vi sjøl har kontroll, så klart.</p>
+<p>Som nevnt tidligere over her og når pakka <em>here</em> omtales, i et prosjekt er alle filstier relative til prosjektets rotmappe. Dermed vil det ikke oppstå noen problemer når det kommer til filer <em>som ligger i en undermappe av prosjektet</em>. F.eks. legger jeg som nevnt datafiler i mappa <em>data</em>. Uansett hvor du kopierer et prosjekt til, så lenge du åpner prosjektet i Rstudio skal disse lenkene fungere (til og med om du åpner dem på en pc med macOS!). Noen filer vi bruker ligger på M. Her er det viktig at disse filstiene bevares eller oppdateres.</p>
+<p>På statistikkmappene er det en konvensjon at filer med datasett er navngitt etter datoen de blei laga. Det vil si at folkemengdefila jeg henviser til i skriptet fra mars 2023 ikke er den oppdaterte folkemengdefila i mai 2024. Her må man gå inn og oppdatere koden med nytt navn. Hvis man føler seg fancy kan man lage en funksjon som gjetter seg fram til hva som er den nyeste versjonen av en fil.</p>
+</section>
+<section id="functional-programming" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="functional-programming"><span class="header-section-number">11.5</span> Functional programming</h2>
+<p>Jeg har etterstreba et paradigme som kalles <em>functional programming</em>. Dette er en programmeringsstil hvor vi fokuserer på funksjoner som gjør alt av endringer på data. Resultatet er lettere å lese, forstå og debugge. Les mer om det i <a href="http://modern-rstats.eu/functional-programming.html">Modern R with the tidyverse</a>. I praksis vil det si at jeg putter funksjoner sammen i andre funksjoner som jeg gir beskrivende navn. Dette gjør det lettere å gruppere sammen databehandlingsfunksjoner. Og dermed også å putte funksjoner i ulike skriptfiler. Jeg bytta nylig til denne praksisen, etter å tidligere ha arbeida med meterlange skript hvor objekter opprettes, endres, slettes, transformeres og lagres om hverandre. Så langt syns jeg dette er en stor forbedring. Utfordringa er å finne en god balanse mellom hvor mange skript man skal lage, og hvor mange delfunksjoner man trenger. Du vil se at jeg er inkonsekvent i de ulike prosjekta mine. Her finnes heller ingen <em>one size fits all</em>. Små prosjekter trenger ikke mer enn en <code>main.R</code>-fil. Store prosjekter kan ha mange skript fordelt over flere mapper.</p>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Jeg gjorde det ikke hver dag.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./joins.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Sammenslåing av data</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./feil.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Typiske feil vi (jeg) gjør og hvordan fikse dem</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
