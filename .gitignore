@@ -6,3 +6,4 @@
 *.xlsx
 nul
 /.quarto/
+/_book/
