@@ -12,20 +12,22 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
-    - part: "Fundamentale konsepter"
-      chapters:
-        - omR.qmd
-        - pakker.qmd
-        - grunnleggende.qmd
+    - part: "Del 1: Fundamentale konsepter"
+    - omR.qmd
+    - pakker.qmd
+    - grunnleggende.qmd
+    - part: "Del 2: Praktisk R"
     - import-export.qmd
     - inspisere.qmd
     - pivot.qmd
     - filter.qmd
     - transformasjoner.qmd
     - joins.qmd
+    - part: "Del 3: Å arbeide i R"
     - arbeidsprosess.qmd
     - feil.qmd
     - references.qmd
+  appendices:
     - praktisk-eksempel.qmd
 
 crossref:

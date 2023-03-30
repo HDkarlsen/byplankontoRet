@@ -20,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -103,6 +166,9 @@ ul.task-list li input[type="checkbox"] {
   <a href="./intro.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduksjon</span></a>
   </div>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">Del 1: Fundamentale konsepter</span>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./omR.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Om R</span></a>
@@ -118,6 +184,9 @@ ul.task-list li input[type="checkbox"] {
   <a href="./grunnleggende.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Det grunnleggende</span></a>
   </div>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">Del 2: Praktisk R</span>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./import-export.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Import og eksport av data</span></a>
@@ -148,6 +217,9 @@ ul.task-list li input[type="checkbox"] {
   <a href="./joins.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Sammenslåing av data</span></a>
   </div>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">Del 3: Å arbeide i R</span>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./arbeidsprosess.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Arbeidsprosess</span></a>
@@ -163,11 +235,21 @@ ul.task-list li input[type="checkbox"] {
   <a href="./references.html" class="sidebar-item-text sidebar-link">Referanser</a>
   </div>
 </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Appendices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./praktisk-eksempel.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Et praktisk eksempel</span></a>
+  <a href="./praktisk-eksempel.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Et praktisk eksempel</span></a>
   </div>
 </li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -177,7 +259,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#tidshorisont" id="toc-tidshorisont" class="nav-link active" data-scroll-target="#tidshorisont"><span class="toc-section-number">1.1</span>  Tidshorisont</a></li>
+  <li><a href="#hvordan-bruke-denne-pamfletten" id="toc-hvordan-bruke-denne-pamfletten" class="nav-link active" data-scroll-target="#hvordan-bruke-denne-pamfletten"><span class="toc-section-number">1.1</span>  Hvordan bruke denne pamfletten</a></li>
+  <li><a href="#tidshorisont" id="toc-tidshorisont" class="nav-link" data-scroll-target="#tidshorisont"><span class="toc-section-number">1.2</span>  Tidshorisont</a></li>
   </ul>
 </nav>
     </div>
@@ -207,13 +290,21 @@ ul.task-list li input[type="checkbox"] {
 <p>Dere vil sikkert oppleve at detaljnivået i teksten varierer fra for inngående til for løst omtalt. Målet mitt var å vise litt av alt. Hvis dere har sett eksempler på noe håper jeg dere kan tenke dere fram til en fortsettelse eller utvidelse av materialet. Her er det viktig å kunne <strong>google</strong> seg fram til svaret sitt, basert på noen antakelser. Formen til teksten er nok prega av at jeg sjøl lærer best av eksempler. Dermed er jeg nok noen ganger for slapp med å forklare nøyaktig hva en funksjon gjør, fordi jeg tenker dere vil skjønne det når dere kjører koden.</p>
 <p>I eksemplene bruker jeg aldri data fra Byplankontoret direkte. Jeg bruker enten data som ligger i R-pakker, eller jeg simulerer data som likner på noe vi kunne ha brukt.</p>
 <p>En erkjenning: dere blir ikke noe god i R om dere bare leser denne pamfletten. For å skjønne R må man ta det i bruk. Forsøk gjerne å kjør samme koder som meg i eksemplene mine.</p>
-<section id="tidshorisont" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="tidshorisont"><span class="header-section-number">1.1</span> Tidshorisont</h2>
+<section id="hvordan-bruke-denne-pamfletten" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="hvordan-bruke-denne-pamfletten"><span class="header-section-number">1.1</span> Hvordan bruke denne pamfletten</h2>
+<p>Du kan lese om programmering, men vit at forståelsen ikke kommer før du <em>gjør</em> programmering. Slik er det med R også. Derfor anbefaler jeg deg å kjøre koden som jeg oppgir i kodeblokkene. Da blir det enklere å følge med på hva som skjer.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dette er en kodeblokk.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Du trenger ikke lese fra “perm til perm”, og kan hoppe rundt slik du føler for. Bare vit at jeg har skrevet dette hovedsaklig i kronologisk rekkefølge, så funksjoner blir vanligvis introdusert første gang de nevnes. Likevel er det en del repetisjon her og der.</p>
+</section>
+<section id="tidshorisont" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="tidshorisont"><span class="header-section-number">1.2</span> Tidshorisont</h2>
 <p>Denne dokumentasjonen blei til i mars 2023. Koden forventes å kunne kjøres uten problemer en stund framover. Som jeg nevner i <a href="omR.html#sec-versjering"><span>Section&nbsp;2.4</span></a> vil kanskje framtidige versjoner av R og <code>tidyverse</code> gjøre endringer som påvirker koden min her. Om dere får tak i samme versjon av R og <code>tidyverse</code> vil dere unngå eventuelle problemer forbundet med dette.</p>
 <hr>
 <p>Lykke til!</p>
 <p><em>Håvard</em></p>
-<p>2023-03-28</p>
+<p>2023-03-30</p>
 
 
 </section>

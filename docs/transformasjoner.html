@@ -166,6 +166,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduksjon</span></a>
   </div>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">Del 1: Fundamentale konsepter</span>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./omR.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Om R</span></a>
@@ -181,6 +184,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="./grunnleggende.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Det grunnleggende</span></a>
   </div>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">Del 2: Praktisk R</span>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./import-export.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Import og eksport av data</span></a>
@@ -211,6 +217,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="./joins.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Sammenslåing av data</span></a>
   </div>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">Del 3: Å arbeide i R</span>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./arbeidsprosess.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Arbeidsprosess</span></a>
@@ -226,11 +235,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="./references.html" class="sidebar-item-text sidebar-link">Referanser</a>
   </div>
 </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Appendices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./praktisk-eksempel.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Et praktisk eksempel</span></a>
+  <a href="./praktisk-eksempel.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Et praktisk eksempel</span></a>
   </div>
 </li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -328,14 +347,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 8
   plansone kjonn aar2023 aar2024 aar2025 faktisk2023 faktisk2024 faktisk2025
      &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-1  5001001 M         574     642     534         648         775         484
-2  5001001 K         586     731     680         661         882         617
-3  5001002 M         680     630     615         767         761         558
-4  5001002 K         645     629     614         728         759         557
-5  5001003 M         452     582     629         510         703         570
-6  5001003 K         593     563     425         669         680         385
-7  5001004 M         513     608     753         579         734         683
-8  5001004 K         711     745     580         802         899         526</code></pre>
+1  5001001 M         519     549     777         569         507         738
+2  5001001 K         611     679     546         670         627         519
+3  5001002 M         402     455     585         441         420         556
+4  5001002 K         774     501     443         849         462         421
+5  5001003 M         591     568     454         648         524         431
+6  5001003 K         762     658     527         836         607         501
+7  5001004 M         492     711     540         540         656         513
+8  5001004 K         608     648     484         667         598         460</code></pre>
 </div>
 </div>
 <p>Si at vi vil vite differansen mellom prognosen (“aarXXXX”) og faktisk befolkning (“faktiskXXXX”).</p>
@@ -348,14 +367,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 11
   plansone kjonn aar2023 aar2024 aar2025 fakti…¹ fakti…² fakti…³ diff2…⁴ diff2…⁵
      &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1  5001001 M         574     642     534     648     775     484     -74    -133
-2  5001001 K         586     731     680     661     882     617     -75    -151
-3  5001002 M         680     630     615     767     761     558     -87    -131
-4  5001002 K         645     629     614     728     759     557     -83    -130
-5  5001003 M         452     582     629     510     703     570     -58    -121
-6  5001003 K         593     563     425     669     680     385     -76    -117
-7  5001004 M         513     608     753     579     734     683     -66    -126
-8  5001004 K         711     745     580     802     899     526     -91    -154
+1  5001001 M         519     549     777     569     507     738     -50      42
+2  5001001 K         611     679     546     670     627     519     -59      52
+3  5001002 M         402     455     585     441     420     556     -39      35
+4  5001002 K         774     501     443     849     462     421     -75      39
+5  5001003 M         591     568     454     648     524     431     -57      44
+6  5001003 K         762     658     527     836     607     501     -74      51
+7  5001004 M         492     711     540     540     656     513     -48      55
+8  5001004 K         608     648     484     667     598     460     -59      50
 # … with 1 more variable: diff2025 &lt;dbl&gt;, and abbreviated variable names
 #   ¹​faktisk2023, ²​faktisk2024, ³​faktisk2025, ⁴​diff2023, ⁵​diff2024</code></pre>
 </div>
@@ -370,14 +389,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 8
   plansone kjonn aar2023 aar2024 aar2025 faktisk2023 faktisk2024 faktisk2025
      &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-1  5001001 M         574     642    1068         648         775         484
-2  5001001 K         586     731    1360         661         882         617
-3  5001002 M         680     630    1230         767         761         558
-4  5001002 K         645     629    1228         728         759         557
-5  5001003 M         452     582    1258         510         703         570
-6  5001003 K         593     563     850         669         680         385
-7  5001004 M         513     608    1506         579         734         683
-8  5001004 K         711     745    1160         802         899         526</code></pre>
+1  5001001 M         519     549    1554         569         507         738
+2  5001001 K         611     679    1092         670         627         519
+3  5001002 M         402     455    1170         441         420         556
+4  5001002 K         774     501     886         849         462         421
+5  5001003 M         591     568     908         648         524         431
+6  5001003 K         762     658    1054         836         607         501
+7  5001004 M         492     711    1080         540         656         513
+8  5001004 K         608     648     968         667         598         460</code></pre>
 </div>
 </div>
 <section id="noen-nyttige-funksjoner-til-mutate" class="level3" data-number="9.1.1">
@@ -497,14 +516,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 1
   aar2025
     &lt;dbl&gt;
-1    1068
-2    1360
-3    1230
-4    1228
-5    1258
-6     850
-7    1506
-8    1160</code></pre>
+1    1554
+2    1092
+3    1170
+4     886
+5     908
+6    1054
+7    1080
+8     968</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Er det samme som dette</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>prognose <span class="sc">%&gt;%</span> </span>
@@ -513,14 +532,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 1
   aar2025
     &lt;dbl&gt;
-1    1068
-2    1360
-3    1230
-4    1228
-5    1258
-6     850
-7    1506
-8    1160</code></pre>
+1    1554
+2    1092
+3    1170
+4     886
+5     908
+6    1054
+7    1080
+8     968</code></pre>
 </div>
 </div>
 </section>

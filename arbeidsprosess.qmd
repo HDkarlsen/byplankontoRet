@@ -21,6 +21,7 @@ Generelt etterstreber jeg en mappestruktur som er omtrent slik ut:
 └── mitt_prosjekt
     ├── R
     │   ├── main.R
+    │   ├── scratchpad.R
     │   └── functions.R
     ├── output
     │   ├── *.xlsx
@@ -36,11 +37,13 @@ Ingen prosjekter ser akkurat slik ut, men det er et mål. Elementene i mappa:
 
 - I mappa `R` ligger alle kodeskriptene.
 - `main.R`: dette er et lite skript som laster inn funksjoner fra andre skript, og som kun inneholder de få kodene som trengs for å lage outputen. Vanligvis putter jeg all funksjonalitet inn i funksjoner som jeg putter i ett eller flere egne skript. 
+- `scratchpad.R`: jeg har ofte en slik fil hvor jeg skrive alle koder før jeg kopierer dem til rett skript. Dette dokumentet blir dermed gravplass for ikke-fungerende koder. Det er en nyttig måte å arbeide på, fordi jeg i ettertid kan ignorere alt som ligger her. Noen ganger er jeg flink til å slette inneholdet slik at jeg ikke forvirrer meg sjøl seinere. Noen gang blir det liggende. Dere kan alltid ignorere denne fila. 
 - `functions.R`: Om det kun er ett skript, heter dette vanligvis `functions.R`.  Blir det mange funksjoner og uoversiktelig med alle i ett skript, deler jeg dem opp i flere skript med mer eller mindre beskrivende navn som `cleaning-functions.R`, `import-functions.R`, etc.
 - I mappa `output` ligger alle de prosesserte filene. Ofte `.csv` eller `.xlsx` filer. 
 - I mapppa `data` ligger rådatafilene. I noen prosjekter lasta jeg ned data fra nettet og la her. Andre plasser lasta jeg ned data via API, og lagre en kopi av dem her for å ikke beslaglegge API-en unødvendig. I andre kopierte jeg filer fra `M:`-disken og la her. Hvis jeg arbeida med filer fra `M:` pleide jeg vanligvis å oppgi filstien til fila direkte i funksjonen som importerte dataene til R.
 - Ideelt sett skulle alle prosjekter har en `readMe.md` (eller `lesMeg.md` på norsk). Denne fila (som noen gang blei printa som en pdf) forklarer hva prosjektet handler om. 
 - `.gitignore`: denne fila brukes av Git (se ned), og du kan se bort fra den.
+
 
 Shiny-appene har i tillegg en fil som heter `app.R`, som har samme hovedfunksjon som `main.R`. Her defineres sjølve appen. Alle skript som ligger i `R` blir automatisk kjørt når man kjører `app.R`, i motsetning til `main.R` hvor man manuelt må kjøre alle skript via `source()`.
 

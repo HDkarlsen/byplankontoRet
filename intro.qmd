@@ -9,8 +9,16 @@ I andre del av pamfletten går jeg gjennom de funksjonene jeg bruker oftest. Det
 Dere vil sikkert oppleve at detaljnivået i teksten varierer fra for inngående til for løst omtalt. Målet mitt var å vise litt av alt. Hvis dere har sett eksempler på noe håper jeg dere kan tenke dere fram til en fortsettelse eller utvidelse av materialet. Her er det viktig å kunne **google** seg fram til svaret sitt, basert på noen antakelser. Formen til teksten er nok prega av at jeg sjøl lærer best av eksempler. Dermed er jeg nok noen ganger for slapp med å forklare nøyaktig hva en funksjon gjør, fordi jeg tenker dere vil skjønne det når dere kjører koden. 
 
 I eksemplene bruker jeg aldri data fra Byplankontoret direkte. Jeg bruker enten data som ligger i R-pakker, eller jeg simulerer data som likner på noe vi kunne ha brukt. 
+## Hvordan bruke denne pamfletten
 
-En erkjenning: dere blir ikke noe god i R om dere bare leser denne pamfletten. For å skjønne R må man ta det i bruk. Forsøk gjerne å kjør samme koder som meg i eksemplene mine. 
+Du kan lese om programmering, men vit at forståelsen ikke kommer før du *gjør* programmering. Slik er det med R også. Derfor anbefaler jeg deg å kjøre koden som jeg oppgir i kodeblokkene. Da blir det enklere å følge med på hva som skjer.
+
+```{r}
+# Dette er en kodeblokk.
+```
+
+Du trenger ikke lese fra "perm til perm", og kan hoppe rundt slik du føler for. Bare vit at jeg har skrevet dette hovedsaklig i kronologisk rekkefølge, så funksjoner blir vanligvis introdusert første gang de nevnes. Likevel er det en del repetisjon her og der. 
+
 
 ## Tidshorisont
 
