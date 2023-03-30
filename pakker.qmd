@@ -75,6 +75,12 @@ Hvorfor er piper så nyttig? De lar oss flette sammen en serie operasjoner uten 
 - gruppere etter antall gir
 - vise snitt av miles/gallon (mpg).
 
+
+```{r}
+library(tidyverse)
+```
+
+
 ### Uten pipa {#uten-pipe}
 
 ```{r}
@@ -90,7 +96,6 @@ cars_filtered_kg_grouped_mean
 ### Med pipa {#med-pipe}
 
 ```{r}
-library(tidyverse)
 cars_filtered_kg_group_mean <- mtcars %>% 
   filter(cyl >= 6) %>% 
   mutate(wt = wt * 0.45359237) %>% 
