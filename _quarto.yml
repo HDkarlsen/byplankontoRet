@@ -28,6 +28,7 @@ book:
     - feil.qmd
     - references.qmd
   appendices:
+    - assortert.qmd
     - praktisk-eksempel.qmd
 
 crossref:

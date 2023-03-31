@@ -1,6 +1,6 @@
 # Referanser {.unnumbered}
 
-En serie med nyttig ressurser og sider å drive produktiv prokrastinering.
+En serie med nyttig ressurser og sider å drive produktiv prokrastinering. Dessverre er det ikke skrevet mye om R på norsk som jeg veit om, så dette er på engelsk. 
 
 ## Ressurser for å lære R
 
@@ -34,4 +34,10 @@ Noen ganger har man ikke konsentrasjon eller energi til å gjøre det man hadde 
 
 [Why should I use R: The Excel R Data Wrangling comparison](https://www.jumpingrivers.com/blog/comparing-r-excel-data-wrangling/): En sammenlikning av R og Excel. Gjett hva som anbefales. Nyttig for å få en forståelse av hvordan man gjør ting i R som man allerede kan i Excel. 
 
-[Graphical User Interfaces were a mistake but you can still make things right](https://www.brodrigues.co/blog/2020-11-21-guis_mistake/): En av mine favorittartikler hos Brodrigues. 
+[Graphical User Interfaces were a mistake but you can still make things right](https://www.brodrigues.co/blog/2020-11-21-guis_mistake/): En av mine favorittartikler hos Brodrigues, med en herlig provoserende tittel.
+
+[Data in government: RAPpers delight](https://dataingovernment.blog.gov.uk/2020/03/24/rappers-delight/): En artikkel fra en gruppe statistikere som brukte en reproduserbar analyse pipeline (RAP). Dette er en teknikk som R muliggjør, og som er interessant for alle som jobber med statistikk i det offentlige. 
+
+[Data processing in Sas, Spss, Stata, R and Python. A comparison](https://www.ssb.no/teknologi-og-innovasjon/informasjons-og-kommunikasjonsteknologi-ikt/artikler/data-processing-in-sas-spss-stata-r-and-python.a-comparison): SSBs sammenlikning av de ulike, vanlige statistikkprogramma og hvordan man gjør samme operasjon i dem. Nyttig dersom man har en SPSS-syntaks man vil gjenskape i R (eller motsatt!). 
+
+[SPSS syntax to R](https://www.isdscotland.org/About-ISD/Methodologies/_docs/SPSS-syntax-to-R_v1-1.pdf): I samme gate, NHS i Skottland har laga en nyttig oversikt over noen av SPSSs mest vanlige kommandoer og hva det tilsvarende er i R. 
