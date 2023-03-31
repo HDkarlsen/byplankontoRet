@@ -1,2 +1,15 @@
 # Assorterte notater jeg ikke greide å presse inn andre steder
 
+## Avruding i R
+
+R følger visst en annen avrundingsregel enn SPSS, hvor 0.5 blir runda ned til 0 istedenfor opp til 1 slik vi nok er vant til. Dette er matematisk innafor å gjøre, men kan føre til at R gir andre tall enn vi får fra SPSS, sjøl om utgangspunktet er likt. Om det har noe å si avhenger av hvor mange desimalposisjoner man har i utgangspunktet. I arbeidet med boligflytterater fant jeg kun forskjeller hvis jeg hadde med 14 desimaltall. Det var nok ikke en viktig forskjell. Du kan lese mer om dette i [skotske NHS' artikkel om temaet](https://www.isdscotland.org/About-ISD/Methodologies/_docs/Rounding-Methods-in-Different-Software_v1-0.pdf).
+
+## Iterering og funksjonsfamilien map
+
+Noe av det kraftigste og nyttigste med kodespråk er muligheten til å lage løkker (*loops*). Hvis du veit dette er du kanskje overraska over at vi nesten ikke bruker løkker i R. Årsaken er at løkker er mindre effektive i R siden vi har implementert dette vektorbaserte perspektivet på objekter, som nevnt i starten av pamfletten. Istedenfor tilbyr R en serie med funksjoner kalt `apply()` eller liknende. Andre funksjoner i denne familien er `lapply()`, `tapply()`, etc.
+
+Tidyverse har (så klart) implementert sin egen variant at disse funksjonene som heter `map()`. Å lære seg `map()` er definitivt verdt det fordi det lar oss iterere over datasett og gjøre transformasjoner på mange objekter samtidig. Se for deg at vi kjører én kode for å lage befolkningsframskrivninger for alle kommunene i Trondheimsregionen samtidig, istedenfor å gjøre det en etter en. Det er (i teorien) mulig via `map()`. 
+
+Når det er sagt, `map()` er definitivt et viderekommende tema for en R-bruker. Jeg har så vidt begynt å bruke det, og du kan se det i noen av prosjektene mine. Jeg gjør ikke noe forsøk på å forklare det her, men jeg ville nevne det fordi det er nyttig å være klar over.
+
+`map()`-funksjonene kommer fra pakka *purrr*, og har kanskje den beste pakkelogoen av alle R-pakker. [Dokumentasjonen](https://purrr.tidyverse.org/) gir en introduksjon til paradigmet. ![purrr](img/purrr.png){width=10%}

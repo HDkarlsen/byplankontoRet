@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Håvard Karlsen">
-<meta name="dcterms.date" content="2023-03-31">
 
-<title>R for Byplankontoret</title>
+<title>R for Byplankontoret - Appendix A — Assorterte notater jeg ikke greide å presse inn andre steder</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./intro.html" rel="next">
+<link href="./praktisk-eksempel.html" rel="next">
+<link href="./references.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -71,7 +70,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">R for Byplankontoret</h1>
+      <h1 class="quarto-secondary-nav-title">Appendix A — Assorterte notater jeg ikke greide å presse inn andre steder</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -96,7 +95,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">Forord</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Forord</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -183,7 +182,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./assortert.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Assorterte notater jeg ikke greide å presse inn andre steder</span></a>
+  <a href="./assortert.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Assorterte notater jeg ikke greide å presse inn andre steder</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -202,10 +201,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#forord" id="toc-forord" class="nav-link active" data-scroll-target="#forord">Forord</a>
-  <ul class="collapse">
-  <li><a href="#status" id="toc-status" class="nav-link" data-scroll-target="#status">Status</a></li>
-  </ul></li>
+  <li><a href="#avruding-i-r" id="toc-avruding-i-r" class="nav-link active" data-scroll-target="#avruding-i-r"><span class="toc-section-number">A.1</span>  Avruding i R</a></li>
+  <li><a href="#iterering-og-funksjonsfamilien-map" id="toc-iterering-og-funksjonsfamilien-map" class="nav-link" data-scroll-target="#iterering-og-funksjonsfamilien-map"><span class="toc-section-number">A.2</span>  Iterering og funksjonsfamilien map</a></li>
   </ul>
 </nav>
     </div>
@@ -214,26 +211,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">R for Byplankontoret</h1>
+<h1 class="title d-none d-lg-block">Appendix A — Assorterte notater jeg ikke greide å presse inn andre steder</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Håvard Karlsen </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">2023-03-31</p>
-    </div>
-  </div>
   
     
   </div>
@@ -241,17 +226,18 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-
-<section id="forord" class="level1 unnumbered">
-<p><img src="img/ryoji-iwata-n31JPLu8_Pw-unsplash.jpg" title="R for Byplankontoret" class="quarto-cover-image img-fluid"></p><h1 class="unnumbered">Forord</h1>
-<p>Dette er en pamflett skrevet for Byplankontorets statistikere, for å gi en kort introduksjon til R, samt dokumentere arbeidet jeg har gjort i R. Teksten er skrevet i <a href="https://quarto.org/docs/books">Quarto</a> ved hjelp av <code>bookdown</code>.</p>
-<p>Se intro for mer info om hva pamfletten inneholder. Eller hopp rett til et kapittel, på eget ansvar.</p>
-<section id="status" class="level2">
-<h2 class="anchored" data-anchor-id="status">Status</h2>
-<p>Dette er strengt et et pågående arbeidsprosjekt. Det er mange ting jeg ikke har rukket. Dette vil vises tydeligst i mengden skrivefeil som florerer blant disse digitale sider. Se på det som en tålmodighetsprøve. Det har helt sikkert greid å snike seg inn andre feil også her og der.</p>
-
-
+<section id="avruding-i-r" class="level2" data-number="A.1">
+<h2 data-number="A.1" class="anchored" data-anchor-id="avruding-i-r"><span class="header-section-number">A.1</span> Avruding i R</h2>
+<p>R følger visst en annen avrundingsregel enn SPSS, hvor 0.5 blir runda ned til 0 istedenfor opp til 1 slik vi nok er vant til. Dette er matematisk innafor å gjøre, men kan føre til at R gir andre tall enn vi får fra SPSS, sjøl om utgangspunktet er likt. Om det har noe å si avhenger av hvor mange desimalposisjoner man har i utgangspunktet. I arbeidet med boligflytterater fant jeg kun forskjeller hvis jeg hadde med 14 desimaltall. Det var nok ikke en viktig forskjell. Du kan lese mer om dette i <a href="https://www.isdscotland.org/About-ISD/Methodologies/_docs/Rounding-Methods-in-Different-Software_v1-0.pdf">skotske NHS’ artikkel om temaet</a>.</p>
 </section>
+<section id="iterering-og-funksjonsfamilien-map" class="level2" data-number="A.2">
+<h2 data-number="A.2" class="anchored" data-anchor-id="iterering-og-funksjonsfamilien-map"><span class="header-section-number">A.2</span> Iterering og funksjonsfamilien map</h2>
+<p>Noe av det kraftigste og nyttigste med kodespråk er muligheten til å lage løkker (<em>loops</em>). Hvis du veit dette er du kanskje overraska over at vi nesten ikke bruker løkker i R. Årsaken er at løkker er mindre effektive i R siden vi har implementert dette vektorbaserte perspektivet på objekter, som nevnt i starten av pamfletten. Istedenfor tilbyr R en serie med funksjoner kalt <code>apply()</code> eller liknende. Andre funksjoner i denne familien er <code>lapply()</code>, <code>tapply()</code>, etc.</p>
+<p>Tidyverse har (så klart) implementert sin egen variant at disse funksjonene som heter <code>map()</code>. Å lære seg <code>map()</code> er definitivt verdt det fordi det lar oss iterere over datasett og gjøre transformasjoner på mange objekter samtidig. Se for deg at vi kjører én kode for å lage befolkningsframskrivninger for alle kommunene i Trondheimsregionen samtidig, istedenfor å gjøre det en etter en. Det er (i teorien) mulig via <code>map()</code>.</p>
+<p>Når det er sagt, <code>map()</code> er definitivt et viderekommende tema for en R-bruker. Jeg har så vidt begynt å bruke det, og du kan se det i noen av prosjektene mine. Jeg gjør ikke noe forsøk på å forklare det her, men jeg ville nevne det fordi det er nyttig å være klar over.</p>
+<p><code>map()</code>-funksjonene kommer fra pakka <em>purrr</em>, og har kanskje den beste pakkelogoen av alle R-pakker. <a href="https://purrr.tidyverse.org/">Dokumentasjonen</a> gir en introduksjon til paradigmet. <img src="img/purrr.png" class="img-fluid" style="width:10.0%" alt="purrr"></p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -390,10 +376,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./references.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Referanser</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./intro.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduksjon</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./praktisk-eksempel.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Et praktisk eksempel</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
