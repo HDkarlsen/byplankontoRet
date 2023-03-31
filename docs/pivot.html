@@ -245,7 +245,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./praktisk-eksempel.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Et praktisk eksempel</span></a>
+  <a href="./assortert.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Assorterte notater jeg ikke greide å presse inn andre steder</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./praktisk-eksempel.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Et praktisk eksempel</span></a>
   </div>
 </li>
       </ul>
@@ -325,14 +330,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 5
   plansone kjonn aar2023 aar2024 aar2025
      &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1  5001001 M         541     708     412
-2  5001001 K         719     662     755
-3  5001002 M         458     553     791
-4  5001002 K         441     762     613
-5  5001003 M         518     667     428
-6  5001003 K         428     614     472
-7  5001004 M         555     467     776
-8  5001004 K         524     652     740</code></pre>
+1  5001001 M         661     444     430
+2  5001001 K         768     763     754
+3  5001002 M         481     496     468
+4  5001002 K         690     535     651
+5  5001003 M         712     500     434
+6  5001003 K         725     505     499
+7  5001004 M         671     737     486
+8  5001004 K         650     436     669</code></pre>
 </div>
 </div>
 <p>Her har vi et datasett med fire plansoner, to kjønn, og tre variabler som viser forventa folkemengde fra 2023 til 2025. Vi kan se på de tre punktene og vurdere om dette er tidy data.</p>
@@ -361,16 +366,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 24 × 4
    plansone kjonn aar     befolkning
       &lt;int&gt; &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt;
- 1  5001001 M     aar2023        541
- 2  5001001 M     aar2024        708
- 3  5001001 M     aar2025        412
- 4  5001001 K     aar2023        719
- 5  5001001 K     aar2024        662
- 6  5001001 K     aar2025        755
- 7  5001002 M     aar2023        458
- 8  5001002 M     aar2024        553
- 9  5001002 M     aar2025        791
-10  5001002 K     aar2023        441
+ 1  5001001 M     aar2023        661
+ 2  5001001 M     aar2024        444
+ 3  5001001 M     aar2025        430
+ 4  5001001 K     aar2023        768
+ 5  5001001 K     aar2024        763
+ 6  5001001 K     aar2025        754
+ 7  5001002 M     aar2023        481
+ 8  5001002 M     aar2024        496
+ 9  5001002 M     aar2025        468
+10  5001002 K     aar2023        690
 # … with 14 more rows</code></pre>
 </div>
 </div>
@@ -393,16 +398,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 24 × 4
    plansone kjonn   aar befolkning
       &lt;int&gt; &lt;chr&gt; &lt;dbl&gt;      &lt;dbl&gt;
- 1  5001001 M      2023        541
- 2  5001001 M      2024        708
- 3  5001001 M      2025        412
- 4  5001001 K      2023        719
- 5  5001001 K      2024        662
- 6  5001001 K      2025        755
- 7  5001002 M      2023        458
- 8  5001002 M      2024        553
- 9  5001002 M      2025        791
-10  5001002 K      2023        441
+ 1  5001001 M      2023        661
+ 2  5001001 M      2024        444
+ 3  5001001 M      2025        430
+ 4  5001001 K      2023        768
+ 5  5001001 K      2024        763
+ 6  5001001 K      2025        754
+ 7  5001002 M      2023        481
+ 8  5001002 M      2024        496
+ 9  5001002 M      2025        468
+10  5001002 K      2023        690
 # … with 14 more rows</code></pre>
 </div>
 </div>
@@ -422,14 +427,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 5
   plansone kjonn aar2023 aar2024 aar2025
      &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1  5001001 M         541     708     412
-2  5001001 K         719     662     755
-3  5001002 M         458     553     791
-4  5001002 K         441     762     613
-5  5001003 M         518     667     428
-6  5001003 K         428     614     472
-7  5001004 M         555     467     776
-8  5001004 K         524     652     740</code></pre>
+1  5001001 M         661     444     430
+2  5001001 K         768     763     754
+3  5001002 M         481     496     468
+4  5001002 K         690     535     651
+5  5001003 M         712     500     434
+6  5001003 K         725     505     499
+7  5001004 M         671     737     486
+8  5001004 K         650     436     669</code></pre>
 </div>
 </div>
 

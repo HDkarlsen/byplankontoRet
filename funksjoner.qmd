@@ -4,9 +4,9 @@ Det er først når du lærer deg å ta i bruk funksjoner skikkelig at muligheten
 
 Vi har faktisk allerede brukt masse funksjoner! Det meste i R er enten en funksjon eller et objekt. Eksempler på funksjoner vi har brukt er `sum()`, `data.frame()` og til og med `c()`. Funksjoner tar imot *argumenter*, og disse argumentene plasseres mellom de to parentesene. Dermed kan vi kjenne igjen en funksjon ved at den har parenteser etter navnet.[^1] **Merk likevel at en funksjon ikke trenger å ta inn noen argumenter**. Mange av import-funksjonene jeg har skrevet tar ingen argumenter, de bare returnerer objekter.
 
-[^1]: Man kan henvise til en funksjon uten å bruke parenteser når man ikke trenger å spesifisere noen av argumentene. For eksempel i dette tilfellet: `vektor1 %>% sum`. Jeg anbefaler likevel at du er konsekvent og alltid har med parentesene. Dette er også anbefalt i [stilguiden](https://style.tidyverse.org/functions.html) til `tidyverse`.
+[^1]: Man kan henvise til en funksjon uten å bruke parenteser når man ikke trenger å spesifisere noen av argumentene. For eksempel i dette tilfellet: `vektor1 %>% sum`. Jeg anbefaler likevel at du er konsekvent og alltid har med parentesene. Dette er også anbefalt i [stilguiden](https://style.tidyverse.org/functions.html) til `tidyverse`. Parentesene gjør det lettere å gjenkjenne funksjoner.
 
-En viktig ting som funksjoner lar oss gjøre er å abstrahere oppgaver. Vi sparer tid ved å slippe å gjenta oss. Det er et uttrykk som sier at dersom du oppdager at du skriver det samme tre ganger bør du putte det i en funksjon. `tidyverse` gir oss mange funksjoner som er tidbesparende, men ~~noen ganger~~ ofte kan vi gjøre ting lettere ved å lage egne funksjoner. 
+En viktig ting som funksjoner lar oss gjøre er å abstrahere oppgaver. Vi sparer tid ved å slippe å gjenta oss. Det er et uttrykk som sier at dersom du oppdager at du skriver det samme tre ganger bør du putte det i en funksjon. `tidyverse` gir oss mange funksjoner som er tidsbesparende, men ~~noen ganger~~ ofte kan vi gjøre ting lettere ved å lage egne funksjoner. 
 
 <!-- gjerne et eksempel på det her -->
 
@@ -39,7 +39,7 @@ Alle disse funksjonene har jeg skrevet sjøl, og når de står sammen slik får 
 > Vask sammenstilinga
 > Lag differanseskårer
 
-Det er en kunst å lage bra funksjonsnavn og strukturer, og jeg skal ikke late som jeg er en kløpper i det ennå. Men hvis dette sammenliknes med et tidligere skript jeg lagde, som boligflytterate, er det en klar forbedring. Sistnevnte er et svært langt skript bestående av mange objekter og funksjoner histen og pisten. 
+Det er en kunst å lage bra funksjonsnavn og strukturer, og jeg skal ikke late som jeg er en kløpper i det sjøl. 
 
 ## Anatomien til en funksjon
 
@@ -143,4 +143,52 @@ en_funksjon <- function() {
 }
 en_funksjon()
 ```
+## Inspirasjon fra tidyverse
 
+Når jeg lager funksjoner tar jeg inspirasjon fra tidyverse og sørger for at det første argumentet som tas inn er et datasett. Dermed kan vi bruke pipa til å sende datasett fra funksjon til funksjon. Derfor får vi ofte funksjoner som ser slik ut:
+
+```{r, eval = TRUE}
+vask_datasett <- function(dat = folkemengde, multiplisering) {
+  dat %>% 
+    rename(nytt_bra_navn = dårlig_gammelt_navn) %>% 
+    mutate(kul_ny_variabel = gammel_variabel * multiplisering) %>% 
+    select(nytt_bra_navn, kul_ny_variabel)
+}
+```
+
+La oss se litt nøyere på hva som skjer her. Funksjonen vi heter lager `vask_datasett()`. Den tar inn et argument `dat`, og et argument `multiplisering`. `dat` har jeg forhåndsdefinert, jeg antar at datasettet jeg vil sende til funksjonen heter folkemengde. Hvorfor gjør jeg dette? Hvis jeg veit hva datasettet heter, hvorfor lar jeg meg bruke et annet datasett istedenfor? Fordi jeg ofte ender opp med å bruke funksjonen på *flere* datasett. Med denne tilnærminga gjør jeg det lettere i framtida. Eller hvis datasettet en gang skifter navn fra `folkemengde` til *folkemengde-2023*, for eksempel. Legg merke til innholdet (*body*) til funksjonen. Det starter med at vi tar datasettet, generisk definert som `dat`, og sender videre via ei pipe (`%>%`). 
+
+Funksjonen tar også inn et annet argument som jeg *ikke* har forhåndsdefinert, `multiplisering`. Dette argumentet må defineres. Jeg forventer at det er tall, for det brukes seinere til å multiplisere en gammel_variabel med.
+
+Slik bruker vi funksjonen vår:
+
+```{r, eval = FALSE}
+vask_datasett(folkemengde, 3)
+
+# Eller, med pipe
+folkemengde %>% vask_datasett(3)
+
+# Hvis vi skal bruke folkemengde som datasett, og siden det er forhåndsdefinert,
+# trenger vi strengt tatt ikke en gang å nevne det. Vi kan gjøre slik:
+vask_datasett(3)
+
+# Men det er smart å være spesifikk i argumentene man sender, så jeg anbefaler
+# at du bruker en av de to første metodene. Det er lett å returnere til dette
+# etter noen måneder og glemme at folkemengde er nevnt i funksjonen på det 
+# siste eksemplet.
+```
+
+La oss dykke dypere i dette, med fare for å være overtydelig. Hvordan ville en *dårligere* funksjon sett ut? Dårligere, fordi den er *mindre generisk*. Den ville sett slik ut:
+
+```{r, eval = FALSE}
+vask_datasett_daarlig <- function() {
+  folkemengde %>% 
+    rename(nytt_bra_navn = dårlig_gammelt_navn) %>% 
+    mutate(kul_ny_variabel = gammel_variabel * 2) %>% 
+    select(nytt_bra_navn, kul_ny_variabel)
+}
+```
+
+Hovedforskjellen her er er at jeg har fjerna de to argumentene fra funksjonen. Dermed trenger vi ikke legge ved noen argumenter når vi kjører funksjonen. I funksjonens kropp henvises det nå direkte til `folkemengde`, ikke til noe generisk `dat`. Og vi multipliserer alltid med 2. Hvis vi vil multiplisere med noe annet må vi gå inn i funksjonen og skrive den om. Hvis vi vil vaske et annet datasett må vi gå inn og endre navnet på det i funksjonen. Det blir mer jobb for oss i framtida og *sannsynligheten for at vi gjør noe galt øker*. Kanskje ikke så mye, men alle monner drar. 
+
+Kanskje har vi ikke bruk for å endre multipliseringsfaktoren eller datasettnavnet *akkurat nå*. Men det koster oss lite å legge inn denne funksjonaliteten, og det vil potensielt spare oss arbeid i framtida.
