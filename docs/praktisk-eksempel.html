@@ -326,71 +326,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Nå har vi fått de to datasetta våre. Hvordan ser de ut?</span></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(atferd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     ROWID           Run             Talk            Kiss           Write      
- Min.   : 1.0   Min.   :1.060   Min.   :0.420   Min.   :0.270   Min.   :0.710  
- 1st Qu.: 4.5   1st Qu.:4.300   1st Qu.:0.560   1st Qu.:2.625   1st Qu.:2.810  
- Median : 8.0   Median :6.440   Median :0.920   Median :4.080   Median :4.440  
- Mean   : 8.0   Mean   :5.539   Mean   :1.523   Mean   :3.996   Mean   :4.166  
- 3rd Qu.:11.5   3rd Qu.:7.050   3rd Qu.:1.675   3rd Qu.:5.460   3rd Qu.:5.790  
- Max.   :15.0   Max.   :7.620   Max.   :5.710   Max.   :7.920   Max.   :6.420  
-      Eat            Sleep           Mumble           Read      
- Min.   :0.560   Min.   :0.150   Min.   :1.330   Min.   :0.420  
- 1st Qu.:1.135   1st Qu.:4.145   1st Qu.:3.685   1st Qu.:1.780  
- Median :1.810   Median :6.020   Median :3.960   Median :4.290  
- Mean   :3.148   Mean   :5.311   Mean   :4.431   Mean   :3.905  
- 3rd Qu.:4.470   3rd Qu.:6.970   3rd Qu.:5.430   3rd Qu.:5.365  
- Max.   :7.620   Max.   :8.250   Max.   :7.690   Max.   :7.270  
-     Fight           Belch           Argue            Jump      
- Min.   :4.750   Min.   :2.190   Min.   :1.480   Min.   :1.580  
- 1st Qu.:6.780   1st Qu.:4.500   1st Qu.:4.070   1st Qu.:4.500  
- Median :7.330   Median :6.420   Median :4.830   Median :5.460  
- Mean   :7.035   Mean   :5.731   Mean   :5.027   Mean   :5.265  
- 3rd Qu.:7.585   3rd Qu.:6.810   3rd Qu.:6.085   3rd Qu.:6.795  
- Max.   :8.380   Max.   :7.790   Max.   :7.290   Max.   :7.520  
-      Cry            Laugh           Shout      
- Min.   :1.000   Min.   :0.770   Min.   :1.060  
- 1st Qu.:4.450   1st Qu.:1.030   1st Qu.:4.495  
- Median :5.520   Median :1.600   Median :5.480  
- Mean   :4.999   Mean   :1.993   Mean   :5.317  
- 3rd Qu.:5.895   3rd Qu.:2.500   3rd Qu.:7.050  
- Max.   :7.630   Max.   :6.400   Max.   :7.670  </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ulykker)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     agecat         gender        accid            pop        
- Min.   :1.00   Min.   :0.0   Min.   :54123   Min.   :187791  
- 1st Qu.:1.25   1st Qu.:0.0   1st Qu.:57334   1st Qu.:196416  
- Median :2.00   Median :0.5   Median :60967   Median :199633  
- Mean   :2.00   Mean   :0.5   Mean   :60801   Mean   :199035  
- 3rd Qu.:2.75   3rd Qu.:1.0   3rd Qu.:64610   3rd Qu.:202586  
- Max.   :3.00   Max.   :1.0   Max.   :66804   Max.   :208239  </code></pre>
-</div>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(atferd)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ulykker)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Datasetta er forøvrig <a href="https://www.ibm.com/docs/en/spss-statistics/saas?topic=tutorial-sample-files">lånt fra SPSS</a>. Du trenger ikke bruke disse datasetta i din egen gjennomgang, bare finn to andre. Putt dem gjerne på forskjellige plasser for å øve på å laste dem inn fra ulik lokasjon. Hvis du putter filstien i en vektor slik jeg gjorde i det ene eksemplet, husk at du enten må putte begge filstiene i ulike objekter, eller at du må laste inn den <em>første</em> fila før du overskriver filstia med den <em>andre</em> filas filsti.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dette funker</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>filsti_atferd <span class="ot">&lt;-</span> <span class="st">"data/behavior.sav"</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>filsti_ulykker <span class="ot">&lt;-</span> <span class="st">"C:</span><span class="sc">\\</span><span class="st">Program Files</span><span class="sc">\\</span><span class="st">IBM</span><span class="sc">\\</span><span class="st">SPSS</span><span class="sc">\\</span><span class="st">Statistics</span><span class="sc">\\</span><span class="st">26</span><span class="sc">\\</span><span class="st">Samples</span><span class="sc">\\</span><span class="st">English</span><span class="sc">\\</span><span class="st">accidents.sav"</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>atferd <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="at">file =</span> filsti_atferd)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>atferd <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="at">file =</span> filsti_ulykker)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Dette funker også, men du må huske på å aldri endre rekkefølgen.</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>filsti <span class="ot">&lt;-</span> <span class="st">"data/behavior.sav"</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>atferd <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="at">file =</span> filsti)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>filsti <span class="ot">&lt;-</span> <span class="st">"C:</span><span class="sc">\\</span><span class="st">Program Files</span><span class="sc">\\</span><span class="st">IBM</span><span class="sc">\\</span><span class="st">SPSS</span><span class="sc">\\</span><span class="st">Statistics</span><span class="sc">\\</span><span class="st">26</span><span class="sc">\\</span><span class="st">Samples</span><span class="sc">\\</span><span class="st">English</span><span class="sc">\\</span><span class="st">accidents.sav"</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>ulykker <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="at">file =</span> filsti)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Dette vil laste inn det samme datasettet to ganger, og dem ulike navn.</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Begge vil være ulykker, hvis filsti blei definert sist.</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>filsti <span class="ot">&lt;-</span> <span class="st">"data/behavior.sav"</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>filsti <span class="ot">&lt;-</span> <span class="st">"C:</span><span class="sc">\\</span><span class="st">Program Files</span><span class="sc">\\</span><span class="st">IBM</span><span class="sc">\\</span><span class="st">SPSS</span><span class="sc">\\</span><span class="st">Statistics</span><span class="sc">\\</span><span class="st">26</span><span class="sc">\\</span><span class="st">Samples</span><span class="sc">\\</span><span class="st">English</span><span class="sc">\\</span><span class="st">accidents.sav"</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>atferd <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="at">file =</span> filsti)</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>ulykker <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="at">file =</span> filsti)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dette funker</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>filsti_atferd <span class="ot">&lt;-</span> <span class="st">"data/behavior.sav"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>filsti_ulykker <span class="ot">&lt;-</span> <span class="st">"C:</span><span class="sc">\\</span><span class="st">Program Files</span><span class="sc">\\</span><span class="st">IBM</span><span class="sc">\\</span><span class="st">SPSS</span><span class="sc">\\</span><span class="st">Statistics</span><span class="sc">\\</span><span class="st">26</span><span class="sc">\\</span><span class="st">Samples</span><span class="sc">\\</span><span class="st">English</span><span class="sc">\\</span><span class="st">accidents.sav"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>atferd <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="at">file =</span> filsti_atferd)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>atferd <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="at">file =</span> filsti_ulykker)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Dette funker også, men du må huske på å aldri endre rekkefølgen.</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>filsti <span class="ot">&lt;-</span> <span class="st">"data/behavior.sav"</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>atferd <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="at">file =</span> filsti)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>filsti <span class="ot">&lt;-</span> <span class="st">"C:</span><span class="sc">\\</span><span class="st">Program Files</span><span class="sc">\\</span><span class="st">IBM</span><span class="sc">\\</span><span class="st">SPSS</span><span class="sc">\\</span><span class="st">Statistics</span><span class="sc">\\</span><span class="st">26</span><span class="sc">\\</span><span class="st">Samples</span><span class="sc">\\</span><span class="st">English</span><span class="sc">\\</span><span class="st">accidents.sav"</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>ulykker <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="at">file =</span> filsti)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Dette vil laste inn det samme datasettet to ganger, og dem ulike navn.</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Begge vil være ulykker, hvis filsti blei definert sist.</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>filsti <span class="ot">&lt;-</span> <span class="st">"data/behavior.sav"</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>filsti <span class="ot">&lt;-</span> <span class="st">"C:</span><span class="sc">\\</span><span class="st">Program Files</span><span class="sc">\\</span><span class="st">IBM</span><span class="sc">\\</span><span class="st">SPSS</span><span class="sc">\\</span><span class="st">Statistics</span><span class="sc">\\</span><span class="st">26</span><span class="sc">\\</span><span class="st">Samples</span><span class="sc">\\</span><span class="st">English</span><span class="sc">\\</span><span class="st">accidents.sav"</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>atferd <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="at">file =</span> filsti)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>ulykker <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="at">file =</span> filsti)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

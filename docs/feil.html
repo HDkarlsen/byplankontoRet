@@ -319,7 +319,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Dette er i prinsippet umulig å feilsøke. Heldigvis kan vi benytte oss av et smertelig nyttig prinsipp: Årsaken er alltid at du har gjort en feil.</p>
 <p>Dette skjer typisk dersom du har arbeida lenga i en sesjon uten å restarte R. Første gang du restarter R og kjører koden på nytt får du feilmelding. Da er ofte problemet at du på et tidspunkt har lagra noe i miljøet (<em>environment</em>), som ikke lengre er tilstede i koden. Hvis andre deler av koden er avhengig av dette objektet, vil de feile nå som objektet ikke lengre er tilstede. Du må rett og slett finne ut hvor bruddet skjer, og fikse det.</p>
 <p>En måte å forebygge dette på er ved å ta i bruke <em>functional programming</em>. Det vil si at vi bruker funksjoner i stor grad og sjelden lagrer objekter direkte i miljøet. <a href="https://www.brodrigues.co/blog/2022-05-26-safer_programs/">Brodrigues</a> forklarer det bedre.</p>
-<p>En annen måte å forebygge det på er å restarte R-sesjonen <em>ofte</em>. Da unngår du at du arbeider på et gammelt objekt som ikke lenger er fundert i det nåværende skriptet. Jeg pleier alltid restarte R-sesjonen når jeg har fullført et delmål i skriptet. Ofte finner jeg en feil da, f.eks. har jeg gitt nytt navn til en funksjon eller objekt og glemt å endre det i skriptet. Se mer om dette i <a href="grunnleggende.html#sec-rstudio"><span>Section&nbsp;4.1</span></a>.</p>
+<p>En annen måte å forebygge det på er å restarte R-sesjonen <em>ofte</em>. Da unngår du at du arbeider på et gammelt objekt som ikke lenger er fundert i det nåværende skriptet. Jeg pleier alltid restarte R-sesjonen når jeg har fullført et delmål i skriptet. Ofte finner jeg en feil da, f.eks. har jeg gitt nytt navn til en funksjon eller objekt og glemt å endre det i skriptet. Se mer om dette i <a href="#sec-rstudio"><span class="quarto-unresolved-ref">sec-rstudio</span></a>.</p>
 </section>
 <section id="sender-et-objekt-via-pipe-til-en-funksjon-som-ikke-er-pipevennlig" class="level2" data-number="12.4">
 <h2 data-number="12.4" class="anchored" data-anchor-id="sender-et-objekt-via-pipe-til-en-funksjon-som-ikke-er-pipevennlig"><span class="header-section-number">12.4</span> Sender et objekt via pipe til en funksjon som ikke er pipevennlig</h2>
@@ -361,7 +361,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="har-brukt-feil-skråstrek" class="level2" data-number="12.6">
 <h2 data-number="12.6" class="anchored" data-anchor-id="har-brukt-feil-skråstrek"><span class="header-section-number">12.6</span> Har brukt feil skråstrek</h2>
-<p>Skjer oftest på maskiner med Windows som operativsystem og når du leser eller skriver filer. Husk at vi i R må bruke <code>/</code>, ikke <code>\</code>. Se mer om dette i <a href="import-export.html#sec-slash"><span>Section&nbsp;5.1.3</span></a>.</p>
+<p>Skjer oftest på maskiner med Windows som operativsystem og når du leser eller skriver filer. Husk at vi i R må bruke <code>/</code>, ikke <code>\</code>. Se mer om dette i <a href="#sec-slash"><span class="quarto-unresolved-ref">sec-slash</span></a>.</p>
 </section>
 <section id="forveksler-og" class="level2" data-number="12.7">
 <h2 data-number="12.7" class="anchored" data-anchor-id="forveksler-og"><span class="header-section-number">12.7</span> Forveksler = og ==</h2>
@@ -385,7 +385,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>R eller Rstudio skifte uforvarende tegnkode uten at vi veit hvorfor.</li>
 </ul>
 <p>Jeg tror noe av dette skyldes bugs i R og Rstudio, for endringsloggen har nevnt at de har fiksa problemer knytta til <em>character encoding</em>.</p>
-<p>Se <a href="import-export.html#sec-tegnkoding"><span>Section&nbsp;5.1.4</span></a> for mer om dette.</p>
+<p>Se <a href="#sec-tegnkoding"><span class="quarto-unresolved-ref">sec-tegnkoding</span></a> for mer om dette.</p>
 <p>Ellers er min erfaring at det ofte hjelper å restarte R-sesjonen dersom filene du laster inn plutselig mangler æ, ø og å når de tidligere hadde dem. I arbeidet med SSBs API opplevde jeg at filer som tidligere blei lasta inn med norske bokstaver rett som det var dukka opp med andre tegn istedenfor. Her fant jeg aldri ut hva som forårsaka det, men det funka alltid å restarte R-sesjonen. Kanskje var det noen pakker som når de blei lasta inn overskreiv noe annet. Dette gir oss en R-aforisme:</p>
 <blockquote class="blockquote">
 <p>Det er bedre å fikse et problem enn å forstå problemet.</p>

@@ -293,14 +293,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-✔ ggplot2 3.3.6      ✔ purrr   0.3.5 
-✔ tibble  3.1.8      ✔ dplyr   1.0.10
-✔ tidyr   1.2.1      ✔ stringr 1.4.1 
-✔ readr   2.1.3      ✔ forcats 0.5.2 
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()</code></pre>
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 </div>
 <p>Har vi prata om <strong>tidy data</strong> før? Hvis ikke er tida nå.</p>
@@ -330,14 +332,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 5
   plansone kjonn aar2023 aar2024 aar2025
      &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1  5001001 M         661     444     430
-2  5001001 K         768     763     754
-3  5001002 M         481     496     468
-4  5001002 K         690     535     651
-5  5001003 M         712     500     434
-6  5001003 K         725     505     499
-7  5001004 M         671     737     486
-8  5001004 K         650     436     669</code></pre>
+1  5001001 M         632     662     522
+2  5001001 K         588     626     598
+3  5001002 M         471     715     768
+4  5001002 K         774     566     487
+5  5001003 M         797     656     709
+6  5001003 K         627     740     455
+7  5001004 M         711     412     792
+8  5001004 K         782     525     752</code></pre>
 </div>
 </div>
 <p>Her har vi et datasett med fire plansoner, to kjønn, og tre variabler som viser forventa folkemengde fra 2023 til 2025. Vi kan se på de tre punktene og vurdere om dette er tidy data.</p>
@@ -366,17 +368,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 24 × 4
    plansone kjonn aar     befolkning
       &lt;int&gt; &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt;
- 1  5001001 M     aar2023        661
- 2  5001001 M     aar2024        444
- 3  5001001 M     aar2025        430
- 4  5001001 K     aar2023        768
- 5  5001001 K     aar2024        763
- 6  5001001 K     aar2025        754
- 7  5001002 M     aar2023        481
- 8  5001002 M     aar2024        496
- 9  5001002 M     aar2025        468
-10  5001002 K     aar2023        690
-# … with 14 more rows</code></pre>
+ 1  5001001 M     aar2023        632
+ 2  5001001 M     aar2024        662
+ 3  5001001 M     aar2025        522
+ 4  5001001 K     aar2023        588
+ 5  5001001 K     aar2024        626
+ 6  5001001 K     aar2025        598
+ 7  5001002 M     aar2023        471
+ 8  5001002 M     aar2024        715
+ 9  5001002 M     aar2025        768
+10  5001002 K     aar2023        774
+# ℹ 14 more rows</code></pre>
 </div>
 </div>
 <p>Nå er datasettet <em>tidy</em>: hver rad representerer bare én observasjon. Vi oppnådde dette ved å gå fra vidt til langt format. Når det er sagt, har vi en del vi kunne ha utsatt på datasettet. Vi kan bruke det som eksempel på hvordan vi arbeider iterativt, ved å bygge videre på det vi starter med. Det jeg ikke liker med koden vår over er:</p>
@@ -398,17 +400,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 24 × 4
    plansone kjonn   aar befolkning
       &lt;int&gt; &lt;chr&gt; &lt;dbl&gt;      &lt;dbl&gt;
- 1  5001001 M      2023        661
- 2  5001001 M      2024        444
- 3  5001001 M      2025        430
- 4  5001001 K      2023        768
- 5  5001001 K      2024        763
- 6  5001001 K      2025        754
- 7  5001002 M      2023        481
- 8  5001002 M      2024        496
- 9  5001002 M      2025        468
-10  5001002 K      2023        690
-# … with 14 more rows</code></pre>
+ 1  5001001 M      2023        632
+ 2  5001001 M      2024        662
+ 3  5001001 M      2025        522
+ 4  5001001 K      2023        588
+ 5  5001001 K      2024        626
+ 6  5001001 K      2025        598
+ 7  5001002 M      2023        471
+ 8  5001002 M      2024        715
+ 9  5001002 M      2025        768
+10  5001002 K      2023        774
+# ℹ 14 more rows</code></pre>
 </div>
 </div>
 <p>Hva gjorde vi her? Vi brukte <code>contains()</code> i utvelginga av kolonner for å treffe alle kolonner som inneholdt en viss tekststreng, her “aar”. Vi fikk fjerna tekststrengen “aar” fra kolonnas <em>elementer</em> ved å si fra til <code>pivot_longer()</code> at alle kolonnene vi valgte ut hadde dette prefikset. Til dette brukte vi <code>names_prefix = "aar"</code>. Så gjorde vi om denne kolonna til numerisk ved å legge på en transformasjon via den enkle <code>as.numeric()</code>-funksjonen. Dette gjorde vi ved <code>names_transform = as.numeric</code>.</p>
@@ -427,14 +429,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 5
   plansone kjonn aar2023 aar2024 aar2025
      &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1  5001001 M         661     444     430
-2  5001001 K         768     763     754
-3  5001002 M         481     496     468
-4  5001002 K         690     535     651
-5  5001003 M         712     500     434
-6  5001003 K         725     505     499
-7  5001004 M         671     737     486
-8  5001004 K         650     436     669</code></pre>
+1  5001001 M         632     662     522
+2  5001001 K         588     626     598
+3  5001002 M         471     715     768
+4  5001002 K         774     566     487
+5  5001003 M         797     656     709
+6  5001003 K         627     740     455
+7  5001004 M         711     412     792
+8  5001004 K         782     525     752</code></pre>
 </div>
 </div>
 

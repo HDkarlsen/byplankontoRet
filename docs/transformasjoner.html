@@ -296,14 +296,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-✔ ggplot2 3.3.6      ✔ purrr   0.3.5 
-✔ tibble  3.1.8      ✔ dplyr   1.0.10
-✔ tidyr   1.2.1      ✔ stringr 1.4.1 
-✔ readr   2.1.3      ✔ forcats 0.5.2 
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()</code></pre>
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 </div>
 <p>Når vi tar inn et datasett i SPSS er det vanligvis fordi vi vil transformere det på et vis. Vi gjør også en god del transformasjoner i Excel. Så klart skal vi også transformere verdier i R også. Nå vil vi merke fordelen ved at R er designa for å operere på vektorer. Når du gjør en transformasjon på en kolonne i et datasett (som du kanskje husker kan anses som en vektor i en liste), vil R utføre transformasjonen <em>på hele lista</em>. Hva betyr det? Vi lager en enkel kolonne i et datasett. Kolonnas verdi avhenger av en annen kolonne i datasettet.</p>
@@ -325,7 +327,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  8 R5-D4              &lt;NA&gt;          red       FALSE          
  9 Biggs Darklighter  black         brown     FALSE          
 10 Obi-Wan Kenobi     auburn, white blue-gray FALSE          
-# … with 77 more rows</code></pre>
+# ℹ 77 more rows</code></pre>
 </div>
 </div>
 <p>Det vakre her er at vi slipper å iterere over alle radene i hver kolonne og sammenlikne dem med hverandre via f.eks. en loop. R gjør dette av seg sjøl.</p>
@@ -352,14 +354,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 8
   plansone kjonn aar2023 aar2024 aar2025 faktisk2023 faktisk2024 faktisk2025
      &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-1  5001001 M         463     511     699         522         535         636
-2  5001001 K         625     590     734         704         618         668
-3  5001002 M         728     557     769         820         583         700
-4  5001002 K         400     637     748         451         667         681
-5  5001003 M         653     427     528         736         447         481
-6  5001003 K         655     668     631         738         699         574
-7  5001004 M         464     746     740         523         781         673
-8  5001004 K         506     745     403         570         780         367</code></pre>
+1  5001001 M         592     534     663         610         509         602
+2  5001001 K         786     538     631         810         512         573
+3  5001002 M         589     769     755         607         732         685
+4  5001002 K         699     529     714         720         504         648
+5  5001003 M         734     547     411         756         521         373
+6  5001003 K         519     685     466         535         652         423
+7  5001004 M         464     722     491         478         688         446
+8  5001004 K         727     630     654         749         600         594</code></pre>
 </div>
 </div>
 <p>Si at vi vil vite differansen mellom prognosen (“aarXXXX”) og faktisk befolkning (“faktiskXXXX”).</p>
@@ -370,18 +372,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">diff2025 =</span> aar2025 <span class="sc">-</span> faktisk2025)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 11
-  plansone kjonn aar2023 aar2024 aar2025 fakti…¹ fakti…² fakti…³ diff2…⁴ diff2…⁵
-     &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1  5001001 M         463     511     699     522     535     636     -59     -24
-2  5001001 K         625     590     734     704     618     668     -79     -28
-3  5001002 M         728     557     769     820     583     700     -92     -26
-4  5001002 K         400     637     748     451     667     681     -51     -30
-5  5001003 M         653     427     528     736     447     481     -83     -20
-6  5001003 K         655     668     631     738     699     574     -83     -31
-7  5001004 M         464     746     740     523     781     673     -59     -35
-8  5001004 K         506     745     403     570     780     367     -64     -35
-# … with 1 more variable: diff2025 &lt;dbl&gt;, and abbreviated variable names
-#   ¹​faktisk2023, ²​faktisk2024, ³​faktisk2025, ⁴​diff2023, ⁵​diff2024</code></pre>
+  plansone kjonn aar2023 aar2024 aar2025 faktisk2023 faktisk2024 faktisk2025
+     &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+1  5001001 M         592     534     663         610         509         602
+2  5001001 K         786     538     631         810         512         573
+3  5001002 M         589     769     755         607         732         685
+4  5001002 K         699     529     714         720         504         648
+5  5001003 M         734     547     411         756         521         373
+6  5001003 K         519     685     466         535         652         423
+7  5001004 M         464     722     491         478         688         446
+8  5001004 K         727     630     654         749         600         594
+# ℹ 3 more variables: diff2023 &lt;dbl&gt;, diff2024 &lt;dbl&gt;, diff2025 &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>Dersom vi vil oppdatere verdien til en kolonne kan vi overskrive den i mutate ved å gi den nye variabelen samme navn som en eksisterende variabel.</p>
@@ -394,14 +395,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 8
   plansone kjonn aar2023 aar2024 aar2025 faktisk2023 faktisk2024 faktisk2025
      &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-1  5001001 M         463     511    1398         522         535         636
-2  5001001 K         625     590    1468         704         618         668
-3  5001002 M         728     557    1538         820         583         700
-4  5001002 K         400     637    1496         451         667         681
-5  5001003 M         653     427    1056         736         447         481
-6  5001003 K         655     668    1262         738         699         574
-7  5001004 M         464     746    1480         523         781         673
-8  5001004 K         506     745     806         570         780         367</code></pre>
+1  5001001 M         592     534    1326         610         509         602
+2  5001001 K         786     538    1262         810         512         573
+3  5001002 M         589     769    1510         607         732         685
+4  5001002 K         699     529    1428         720         504         648
+5  5001003 M         734     547     822         756         521         373
+6  5001003 K         519     685     932         535         652         423
+7  5001004 M         464     722     982         478         688         446
+8  5001004 K         727     630    1308         749         600         594</code></pre>
 </div>
 </div>
 <section id="noen-nyttige-funksjoner-til-mutate" class="level3" data-number="9.1.1">
@@ -430,7 +431,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  8 K        72
  9 M        49
 10 K        42
-# … with 40 more rows</code></pre>
+# ℹ 40 more rows</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vi kan lage en ny variabel som forteller oss hvem som er myndig (fylt 18):</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Til dette bruker vi `if_else()`. </span></span>
@@ -450,7 +451,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  8 K        72 TRUE  
  9 M        49 TRUE  
 10 K        42 TRUE  
-# … with 40 more rows</code></pre>
+# ℹ 40 more rows</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verdiene til `if_else()` kan være noe annet også:</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>folk <span class="sc">%&gt;%</span> </span>
@@ -469,7 +470,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  8 K        72 myndig
  9 M        49 myndig
 10 K        42 myndig
-# … with 40 more rows</code></pre>
+# ℹ 40 more rows</code></pre>
 </div>
 </div>
 <p>Hva er forskjellen på <code>ifelse()</code> og <code>if_else()</code>? Sistnevnte kommer fra <code>dplyr</code> og er en kjappere og strengere versjon av <code>ifelse()</code>. Alle argumenta må være av samme type, så du henter du får feilmelding når du bruker denne.</p>
@@ -498,7 +499,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  8 K        72             5
  9 M        49             4
 10 K        42             4
-# … with 40 more rows</code></pre>
+# ℹ 40 more rows</code></pre>
 </div>
 </div>
 <p>Noen ting å merke seg med <code>case_when()</code>:</p>
@@ -521,14 +522,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 1
   aar2025
     &lt;dbl&gt;
-1    1398
-2    1468
-3    1538
-4    1496
-5    1056
-6    1262
-7    1480
-8     806</code></pre>
+1    1326
+2    1262
+3    1510
+4    1428
+5     822
+6     932
+7     982
+8    1308</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Er det samme som dette</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>prognose <span class="sc">%&gt;%</span> </span>
@@ -537,20 +538,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 8 × 1
   aar2025
     &lt;dbl&gt;
-1    1398
-2    1468
-3    1538
-4    1496
-5    1056
-6    1262
-7    1480
-8     806</code></pre>
+1    1326
+2    1262
+3    1510
+4    1428
+5     822
+6     932
+7     982
+8    1308</code></pre>
 </div>
 </div>
 </section>
 <section id="summarise" class="level2" data-number="9.3">
 <h2 data-number="9.3" class="anchored" data-anchor-id="summarise"><span class="header-section-number">9.3</span> Summarise</h2>
-<p>Også nært beslekta er <code>summarise()</code>. Vi har prata om <code>summarise()</code> tidligere (<a href="inspisere.html#sec-oppsummering"><span>Section&nbsp;6.4</span></a>), og du vil lett se at disse likner på hverandre. <code>summarise()</code> bruker vi når vi vil lage en oversikt over enkelte deler av, eller hele, datasettet. Til forskjell fra <code>mutate()</code> summerer den opp alle radene på hver kolonne, eventuelt gruppert etter grupper om man kombinerer den med <code>group_by()</code>.</p>
+<p>Også nært beslekta er <code>summarise()</code>. Vi har prata om <code>summarise()</code> tidligere (<a href="#sec-oppsummering"><span class="quarto-unresolved-ref">sec-oppsummering</span></a>), og du vil lett se at disse likner på hverandre. <code>summarise()</code> bruker vi når vi vil lage en oversikt over enkelte deler av, eller hele, datasettet. Til forskjell fra <code>mutate()</code> summerer den opp alle radene på hver kolonne, eventuelt gruppert etter grupper om man kombinerer den med <code>group_by()</code>.</p>
 
 
 </section>

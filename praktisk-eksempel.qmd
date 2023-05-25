@@ -6,7 +6,7 @@ En ting er å lese om R, men en annen ting er å gjøre det i praksis. La oss jo
 
 Vi vil laste inn to SPSS-datasett. Det ene ligger i en undermappe (relativt til skriptet) kalt *data*. Det andre ligger godt hjem langt, langt vekk et sted på *C*-disken min. Vi vil laste inn begge to og se hvordan det de ser ut. 
 
-```{r}
+```{r, eval = FALSE}
 # For å laste inn SPSS-filer trenger vi en pakke som gjør det. Haven er bra.
 # Dersom du ikke har haven fra før må den installeres. En pakke trenger bare 
 # installeres  én gang. Siden jeg har pakka fra før har

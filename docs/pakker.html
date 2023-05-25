@@ -298,9 +298,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()[<span class="dv">6</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>$basePkgs
-[1] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "methods"  
-[7] "base"     </code></pre>
+<pre><code>$running
+[1] "macOS Ventura 13.3.1"</code></pre>
 </div>
 </div>
 <p>Legg merke til at <code>base</code> er inkludert i denne lista. Dette er kjernen av <code>R</code>. Vi kommer til å supplere med masse andre pakker etter hvert som vi arbeider med ting. Pakkene er stort sett sentrert rundt å løse et eller annet problem. Her er noen eksempler:</p>
@@ -370,14 +369,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-✔ ggplot2 3.3.6      ✔ purrr   0.3.5 
-✔ tibble  3.1.8      ✔ dplyr   1.0.10
-✔ tidyr   1.2.1      ✔ stringr 1.4.1 
-✔ readr   2.1.3      ✔ forcats 0.5.2 
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()</code></pre>
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 </div>
 <section id="uten-pipe" class="level3" data-number="3.2.1">
@@ -429,25 +430,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">sum</span>(wt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in mtcars %&gt;% sum(wt): object 'wt' not found</code></pre>
+<pre><code>Error: object 'wt' not found</code></pre>
 </div>
 </div>
-<p>For å få slike funksjoner til å funkere med ei pipe, kan man ofte bruke en funksjon fra <code>magrittr</code>:</p>
+<p>Hvis man vil at disse skal fungere med ei pipe må man jobbe litt ekstra. Man kan ta i bruk det som kalles <em>dot notation</em>, hvor en <code>.</code> henviser til objektet du har sendt gjennom pipa. Dette er også nyttig når vi vil at det vi sender gjennom pipa ikke skal være det <em>første</em> argumentet, men det andre. La oss se noen eksempler på det før vi viser <code>sum()</code>-eksemplet. Her bruker vi en enkel funksjon fra <em>magrittr</em> som deler et tall på et annet:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">sum</span>(.<span class="sc">$</span>wt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>magrittr<span class="sc">::</span><span class="fu">divide_by</span>(<span class="dv">5</span>,<span class="dv">10</span>)         <span class="co"># 5/10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 14045.15</code></pre>
+<pre><code>[1] 0.5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">%&gt;%</span> magrittr<span class="sc">::</span><span class="fu">divide_by</span>(<span class="dv">10</span>)    <span class="co"># 5/10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">%&gt;%</span> magrittr<span class="sc">::</span><span class="fu">divide_by</span>(<span class="dv">10</span>, .) <span class="co"># 10/5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
 </div>
 </div>
-<p><code>.</code> blir her et alias for det aktuelle datasett, og dette er det samme som å skrive:</p>
+<p>Dette er nyttig fordi enkelte funksjoner har visse forventninger om hva som er det første argumentet. Og det er ikke alltid dette samsvarer med hva du sender videre til funksjonen.</p>
+<p>For å få til å bruke ei pipe med <code>sum()</code> må vi faktisk bruke to piper. Pipa funker nemlig ikke sammen med operatorer som <code>$</code> eller <code>[[</code>. Vi gjør det dermed i to omganger.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(mtcars<span class="sc">$</span>wt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> .<span class="sc">$</span>wt <span class="sc">%&gt;%</span> <span class="fu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 102.952</code></pre>
 </div>
 </div>
-<p>Da jeg lærte R var det <code>%&gt;%</code> fra <code>magrittr</code> som var den gjeldende pipa. Den var så nyttig at ei pipe til slutt blei inkorporert i <code>base R</code>. Dette skjedde i <code>R 4.1.0</code>. <code>Base R</code>s pipe ser slik ut: <code>|&gt;</code>. Den fungerer i hovedsak lik <code>%&gt;%</code>. Når jeg fortsetter å bruke den gamle <code>magrittr</code>-pipa er det bare fordi jeg er gammel og ikke liker å endre på ting som funker. Dessuten har Rstudio en flott snarvei til <code>%&gt;%</code> via <code>ctrl + shift + M</code>.</p>
-<p>Dere velger altså sjøl om dere går for <code>%&gt;%</code> eller <code>|&gt;</code>. Husk bare at for å bruke <code>%&gt;%</code> så må <code>tidyverse</code> eller <code>magrittr</code> lastes inn først. (<code>tidyverse</code> låner noen av funksjonene fra <code>magrittr</code>, men laster ikke inn <em>alle</em> funksjonene fra den pakka).</p>
+<p><code>.</code> blir her et alias for det aktuelle datasett. Hvis vi leser det fra venstre til høyre blir det: ta datasettet <em>mtcars</em>, hent ut variabelen/kolonna <em>wt</em>, regn ut summen av denne variabelen. Dette er det samme som å skrive:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(mtcars<span class="sc">$</span>wt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 102.952</code></pre>
+</div>
+</div>
+<p>Og i dette tilfellet er det kanskje mer leselig å unngå pipa og heller bruke <code>$</code>.</p>
+<p>Da jeg lærte R var det <code>%&gt;%</code> fra <code>magrittr</code> som var den gjeldende pipa. Den var så nyttig at ei pipe til slutt blei inkorporert i <code>base R</code>. Dette skjedde i <code>R 4.1.0</code>. <code>Base R</code>s pipe ser slik ut: <code>|&gt;</code>. Den fungerer i hovedsak lik <code>%&gt;%</code>. Når jeg fortsetter å bruke den gamle <code>magrittr</code>-pipa er det bare fordi jeg er gammel og ikke liker å endre på ting som funker. I framtida vil jeg nok måtte gå over til å bruke <code>base</code>-pipa.</p>
+<p>Dere velger altså sjøl om dere går for <code>%&gt;%</code> eller <code>|&gt;</code>. Husk bare at for å bruke <code>%&gt;%</code> så må <code>tidyverse</code> eller <code>magrittr</code> lastes inn først. (<code>tidyverse</code> låner noen av funksjonene fra <code>magrittr</code>, men laster ikke inn <em>alle</em> funksjonene fra den pakka). Bruker du base-pipa må du bruke <code>_</code> istedenfor <code>.</code> som placeholder.</p>
 </section>
 <section id="hva-er-pipa-ikke" class="level3" data-number="3.2.3">
 <h3 data-number="3.2.3" class="anchored" data-anchor-id="hva-er-pipa-ikke"><span class="header-section-number">3.2.3</span> Hva er pipa ikke?</h3>
